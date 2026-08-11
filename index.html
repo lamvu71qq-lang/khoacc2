@@ -1,630 +1,1444 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Order Manager</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin • Quản lý đơn & doanh thu</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-    font-family:Arial,Helvetica,sans-serif;
-}
-
+*{box-sizing:border-box}
 body{
-    background:#0b0d10;
-    color:#fff;
-    min-height:100vh;
+  margin:0;
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:#0b0d10;
+  color:#f3f4f6
+}
+button,input,select{font:inherit}
+button{cursor:pointer}
+
+.wrap{min-height:100vh}
+
+.login{
+  min-height:100vh;
+  display:grid;
+  place-items:center;
+  padding:20px
 }
 
-button,input{
-    font:inherit;
-}
-
-.hidden{
-    display:none!important;
-}
-
-/* LOGIN */
-
-.login-page{
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-}
-
-.login-box{
-    width:100%;
-    max-width:390px;
-    background:#14171c;
-    border:1px solid #272c34;
-    border-radius:20px;
-    padding:30px 24px;
-    box-shadow:0 20px 60px rgba(0,0,0,.45);
+.card{
+  background:#13171c;
+  border:1px solid #252b33;
+  border-radius:18px;
+  padding:24px;
+  width:min(420px,100%);
+  box-shadow:0 20px 70px #0008
 }
 
 .logo{
-    width:58px;
-    height:58px;
-    margin:0 auto 18px;
-    border-radius:16px;
-    background:#20252d;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:28px;
+  font-size:28px;
+  font-weight:800;
+  margin-bottom:6px
 }
 
-.login-box h1{
-    text-align:center;
-    font-size:25px;
-    margin-bottom:7px;
+.muted{color:#929aa6}
+
+.field{margin:14px 0}
+
+.field label{
+  display:block;
+  font-size:13px;
+  color:#aab2bd;
+  margin-bottom:7px
 }
 
-.subtitle{
-    text-align:center;
-    color:#8d949e;
-    font-size:14px;
-    margin-bottom:28px;
+.field input,
+.field select{
+  width:100%;
+  background:#0d1014;
+  border:1px solid #303741;
+  color:#fff;
+  border-radius:10px;
+  padding:12px;
+  outline:none
 }
 
-.input-group{
-    margin-bottom:16px;
+.field input:focus,
+.field select:focus{
+  border-color:#6ee7b7
 }
 
-.input-group label{
-    display:block;
-    font-size:13px;
-    color:#aeb4bd;
-    margin-bottom:7px;
+.btn{
+  border:0;
+  border-radius:10px;
+  padding:11px 15px;
+  background:#20c77a;
+  color:#04150d;
+  font-weight:700
 }
 
-.input-group input{
-    width:100%;
-    height:48px;
-    padding:0 14px;
-    border-radius:11px;
-    border:1px solid #303640;
-    background:#0d1014;
-    color:white;
-    outline:none;
+.btn.secondary{
+  background:#242b34;
+  color:#fff
 }
 
-.input-group input:focus{
-    border-color:#6c7480;
+.btn.danger{
+  background:#ef4444;
+  color:#fff
 }
 
-.login-btn{
-    width:100%;
-    height:48px;
-    border:0;
-    border-radius:11px;
-    background:#fff;
-    color:#111;
-    font-weight:bold;
-    cursor:pointer;
-    margin-top:5px;
-}
-
-.login-btn:active{
-    transform:scale(.98);
+.btn.full{
+  width:100%;
+  margin-top:8px
 }
 
 .error{
-    background:#321b20;
-    color:#ff8795;
-    border:1px solid #63313a;
-    padding:11px;
-    border-radius:10px;
-    font-size:13px;
-    margin-bottom:15px;
-    display:none;
+  color:#ff7d7d;
+  margin-top:10px;
+  font-size:14px
 }
 
-/* DASHBOARD */
+.app{display:none}
 
-.dashboard{
-    min-height:100vh;
+.top{
+  position:sticky;
+  top:0;
+  z-index:5;
+  background:#0d1014ee;
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid #252b33;
+  padding:14px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between
 }
 
-.topbar{
-    height:68px;
-    border-bottom:1px solid #242931;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 22px;
-    background:#101318;
-    position:sticky;
-    top:0;
-    z-index:10;
+.top b{font-size:18px}
+
+.top .right{
+  display:flex;
+  gap:10px;
+  align-items:center
 }
 
-.brand{
-    font-weight:bold;
-    font-size:18px;
+.layout{
+  display:flex;
+  min-height:calc(100vh - 64px)
 }
 
-.admin-name{
-    color:#9da4ae;
-    font-size:13px;
+.side{
+  width:230px;
+  border-right:1px solid #252b33;
+  padding:14px;
+  background:#0e1115
 }
 
-.logout{
-    margin-left:14px;
-    border:1px solid #343a43;
-    background:#181c22;
-    color:#fff;
-    border-radius:9px;
-    padding:8px 12px;
-    cursor:pointer;
+.nav{
+  display:block;
+  width:100%;
+  text-align:left;
+  border:0;
+  background:transparent;
+  color:#aeb6c2;
+  padding:12px;
+  border-radius:9px;
+  margin:3px 0
 }
 
-.content{
-    padding:25px;
-    max-width:1200px;
-    margin:auto;
+.nav.active,
+.nav:hover{
+  background:#1a2027;
+  color:#fff
 }
 
-.page-title{
-    margin-bottom:22px;
+.main{
+  flex:1;
+  padding:20px;
+  min-width:0
 }
 
-.page-title h2{
-    font-size:25px;
-    margin-bottom:6px;
-}
+.page{display:none}
+.page.active{display:block}
 
-.page-title p{
-    color:#8f969f;
-    font-size:14px;
-}
-
-/* CARDS */
-
-.stats{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:15px;
-    margin-bottom:25px;
+.grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:12px
 }
 
 .stat{
-    background:#14171c;
-    border:1px solid #272c34;
-    border-radius:15px;
-    padding:20px;
+  background:#13171c;
+  border:1px solid #252b33;
+  border-radius:14px;
+  padding:16px
 }
 
-.stat-title{
-    color:#8d949e;
-    font-size:13px;
-    margin-bottom:12px;
+.stat .v{
+  font-size:25px;
+  font-weight:800;
+  margin-top:8px
 }
 
-.stat-value{
-    font-size:25px;
-    font-weight:bold;
+.panel{
+  background:#13171c;
+  border:1px solid #252b33;
+  border-radius:14px;
+  padding:16px;
+  margin-top:14px
 }
 
-/* MENU */
-
-.menu{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:15px;
+.panel h3{
+  margin:0 0 14px
 }
 
-.menu-card{
-    background:#14171c;
-    border:1px solid #272c34;
-    border-radius:15px;
-    padding:22px;
-    cursor:pointer;
-    transition:.15s;
+.actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap
 }
 
-.menu-card:hover{
-    border-color:#555d68;
-    transform:translateY(-2px);
+.table-wrap{
+  overflow:auto;
+  border:1px solid #252b33;
+  border-radius:12px
 }
 
-.menu-icon{
-    font-size:25px;
-    margin-bottom:12px;
+.table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:650px
 }
 
-.menu-card h3{
-    font-size:16px;
-    margin-bottom:6px;
+.table th,
+.table td{
+  text-align:left;
+  padding:11px;
+  border-bottom:1px solid #252b33;
+  font-size:13px;
+  white-space:nowrap
 }
 
-.menu-card p{
-    color:#8d949e;
-    font-size:13px;
+.table th{
+  color:#9da6b2;
+  background:#101419
 }
 
-/* MOBILE */
+.badge{
+  padding:4px 8px;
+  border-radius:99px;
+  background:#25302b;
+  color:#75e2ac;
+  font-size:12px
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px
+}
+
+.empty{
+  padding:25px;
+  text-align:center;
+  color:#8e97a3
+}
+
+.small{font-size:12px}
+
+.toast{
+  position:fixed;
+  right:15px;
+  bottom:15px;
+  background:#1d242c;
+  color:#fff;
+  padding:12px 15px;
+  border-radius:10px;
+  border:1px solid #343d47;
+  display:none;
+  z-index:20
+}
 
 @media(max-width:800px){
-    .stats{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .menu{
-        grid-template-columns:1fr;
-    }
+  .side{width:68px}
+  .nav span{display:none}
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .main{padding:12px}
+  .form-grid{grid-template-columns:1fr}
+  .top{padding:12px}
+  .top .sub{display:none}
 }
 
-@media(max-width:450px){
-    .content{
-        padding:18px;
-    }
-
-    .stats{
-        gap:10px;
-    }
-
-    .stat{
-        padding:15px;
-    }
-
-    .stat-value{
-        font-size:20px;
-    }
-
-    .topbar{
-        padding:0 15px;
-    }
-
-    .admin-name{
-        display:none;
-    }
+@media(max-width:480px){
+  .grid{grid-template-columns:1fr 1fr}
+  .stat .v{font-size:20px}
 }
 </style>
 </head>
 
 <body>
 
-<!-- ================= LOGIN ================= -->
+<!-- LOGIN -->
+<div id="login" class="login">
 
-<div id="loginPage" class="login-page">
+  <div class="card">
 
-    <div class="login-box">
+    <div class="logo">⚡ Admin Panel</div>
 
-        <div class="logo">⚡</div>
+    <div class="muted">
+      Quản lý đơn, nhân viên & doanh thu
+    </div>
 
-        <h1>Order Manager</h1>
+    <div class="field">
+      <label>Tài khoản</label>
+      <input
+        id="username"
+        autocomplete="username"
+        placeholder="admin"
+      >
+    </div>
 
-        <div class="subtitle">
-            Đăng nhập hệ thống quản lý
-        </div>
+    <div class="field">
+      <label>Mật khẩu</label>
+      <input
+        id="password"
+        type="password"
+        autocomplete="current-password"
+        placeholder="••••••••"
+      >
+    </div>
 
-        <div id="loginError" class="error">
-            Sai tài khoản hoặc mật khẩu
-        </div>
+    <button id="loginBtn" class="btn full">
+      Đăng nhập
+    </button>
 
-        <div class="input-group">
-            <label>Tài khoản</label>
-            <input
-                id="username"
-                type="text"
-                placeholder="Nhập tài khoản"
-                autocomplete="username"
-            >
-        </div>
+    <div id="loginError" class="error"></div>
 
-        <div class="input-group">
-            <label>Mật khẩu</label>
-            <input
-                id="password"
-                type="password"
-                placeholder="Nhập mật khẩu"
-                autocomplete="current-password"
-            >
-        </div>
+  </div>
 
-        <button class="login-btn" onclick="login()">
-            Đăng nhập
-        </button>
+</div>
+
+
+<!-- APP -->
+<div id="app" class="app">
+
+  <header class="top">
+
+    <div>
+      <b>⚡ Admin Panel</b>
+      <div class="muted small sub" id="who"></div>
+    </div>
+
+    <div class="right">
+
+      <span id="ratioTop" class="badge">
+        70/30
+      </span>
+
+      <button class="btn secondary" id="logout">
+        Đăng xuất
+      </button>
 
     </div>
 
-</div>
+  </header>
 
 
-<!-- ================= DASHBOARD ================= -->
+  <div class="layout">
 
-<div id="dashboard" class="dashboard hidden">
+    <!-- SIDEBAR -->
+    <aside class="side">
 
-    <header class="topbar">
+      <button class="nav active" data-page="dashboard">
+        📊 <span>Tổng quan</span>
+      </button>
 
-        <div class="brand">
-            ⚡ Order Manager
+      <button class="nav" data-page="orders">
+        📦 <span>Đơn hàng</span>
+      </button>
+
+      <button class="nav" data-page="users">
+        👥 <span>Nhân viên / User</span>
+      </button>
+
+      <button class="nav" data-page="revenue">
+        💰 <span>Doanh thu</span>
+      </button>
+
+      <button class="nav" data-page="settings">
+        ⚙️ <span>Cài đặt</span>
+      </button>
+
+    </aside>
+
+
+    <!-- MAIN -->
+    <main class="main">
+
+
+      <!-- DASHBOARD -->
+      <section id="dashboard" class="page active">
+
+        <h2>Tổng quan</h2>
+
+        <div class="grid">
+
+          <div class="stat">
+            <div class="muted">Users</div>
+            <div id="sUsers" class="v">—</div>
+          </div>
+
+          <div class="stat">
+            <div class="muted">Đơn hàng</div>
+            <div id="sOrders" class="v">—</div>
+          </div>
+
+          <div class="stat">
+            <div class="muted">Giao dịch</div>
+            <div id="sTrans" class="v">—</div>
+          </div>
+
+          <div class="stat">
+            <div class="muted">Tỷ lệ</div>
+            <div id="sRatio" class="v">70/30</div>
+          </div>
+
         </div>
 
-        <div>
-            <span class="admin-name">
-                Administrator
-            </span>
 
-            <button class="logout" onclick="logout()">
-                Đăng xuất
+        <div class="panel">
+
+          <h3>Đơn gần đây</h3>
+
+          <div id="recentOrders" class="empty">
+            Đang tải...
+          </div>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- ORDERS -->
+      <section id="orders" class="page">
+
+        <h2>Đơn hàng</h2>
+
+        <div class="panel">
+
+          <div class="actions">
+
+            <button
+              class="btn secondary"
+              id="reloadOrders"
+            >
+              ↻ Tải lại
             </button>
+
+          </div>
+
+          <div
+            id="ordersBox"
+            style="margin-top:12px"
+          ></div>
+
         </div>
 
-    </header>
+      </section>
 
 
-    <main class="content">
 
-        <div class="page-title">
-            <h2>Admin Dashboard</h2>
-            <p>
-                Quản lý đơn hàng, nhân viên và doanh thu
-            </p>
+      <!-- USERS -->
+      <section id="users" class="page">
+
+        <h2>Nhân viên / User</h2>
+
+        <div class="panel">
+
+          <h3>Tạo user</h3>
+
+          <div class="form-grid">
+
+            <div class="field">
+
+              <label>Username</label>
+
+              <input id="newUsername">
+
+            </div>
+
+
+            <div class="field">
+
+              <label>Mật khẩu</label>
+
+              <input
+                id="newPassword"
+                type="password"
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label>Tên hiển thị</label>
+
+              <input id="newName">
+
+            </div>
+
+
+            <div class="field">
+
+              <label>Role</label>
+
+              <select id="newRole">
+
+                <option value="user">
+                  user
+                </option>
+
+                <option value="admin">
+                  admin
+                </option>
+
+              </select>
+
+            </div>
+
+          </div>
+
+
+          <button
+            class="btn"
+            id="createUser"
+          >
+            Tạo user
+          </button>
+
         </div>
 
 
-        <!-- THỐNG KÊ -->
+        <div class="panel">
 
-        <section class="stats">
+          <h3>Danh sách user</h3>
 
-            <div class="stat">
-                <div class="stat-title">
-                    Tổng doanh thu
-                </div>
+          <div id="usersBox"></div>
 
-                <div class="stat-value">
-                    0đ
-                </div>
+        </div>
+
+      </section>
+
+
+
+      <!-- REVENUE -->
+      <section id="revenue" class="page">
+
+        <h2>Doanh thu</h2>
+
+        <div class="grid">
+
+          <div class="stat">
+
+            <div class="muted">
+              Tổng giao dịch
             </div>
 
-
-            <div class="stat">
-                <div class="stat-title">
-                    Đơn đang xử lý
-                </div>
-
-                <div class="stat-value">
-                    0
-                </div>
+            <div id="rCount" class="v">
+              —
             </div>
 
+          </div>
 
-            <div class="stat">
-                <div class="stat-title">
-                    Đơn hoàn thành
-                </div>
 
-                <div class="stat-value">
-                    0
-                </div>
+          <div class="stat">
+
+            <div class="muted">
+              Tổng tiền
             </div>
 
-
-            <div class="stat">
-                <div class="stat-title">
-                    Nhân viên
-                </div>
-
-                <div class="stat-value">
-                    0
-                </div>
+            <div id="rTotal" class="v">
+              —
             </div>
 
-        </section>
+          </div>
 
 
-        <!-- CHỨC NĂNG -->
+          <div class="stat">
 
-        <section class="menu">
-
-            <div class="menu-card" onclick="comingSoon('Quản lý đơn hàng')">
-                <div class="menu-icon">📦</div>
-
-                <h3>Quản lý đơn hàng</h3>
-
-                <p>
-                    Xem và quản lý toàn bộ đơn
-                </p>
+            <div class="muted">
+              Phần admin
             </div>
 
-
-            <div class="menu-card" onclick="comingSoon('Nhân viên')">
-                <div class="menu-icon">👥</div>
-
-                <h3>Nhân viên</h3>
-
-                <p>
-                    Tạo, khóa và quản lý nhân viên
-                </p>
+            <div id="rAdmin" class="v">
+              —
             </div>
 
+          </div>
 
-            <div class="menu-card" onclick="comingSoon('Doanh thu')">
-                <div class="menu-icon">💰</div>
 
-                <h3>Doanh thu</h3>
+          <div class="stat">
 
-                <p>
-                    Theo dõi doanh thu và lịch sử
-                </p>
+            <div class="muted">
+              Phần nhân viên
             </div>
 
-
-            <div class="menu-card" onclick="comingSoon('Hoa hồng')">
-                <div class="menu-icon">📊</div>
-
-                <h3>Hoa hồng</h3>
-
-                <p>
-                    Thiết lập tỷ lệ 7/3 hoặc 6/4
-                </p>
+            <div id="rUser" class="v">
+              —
             </div>
 
+          </div>
 
-            <div class="menu-card" onclick="comingSoon('Telegram')">
-                <div class="menu-icon">📨</div>
-
-                <h3>Telegram</h3>
-
-                <p>
-                    Cấu hình thông báo nhận đơn
-                </p>
-            </div>
+        </div>
 
 
-            <div class="menu-card" onclick="comingSoon('Cài đặt')">
-                <div class="menu-icon">⚙️</div>
+        <div class="panel">
 
-                <h3>Cài đặt</h3>
+          <h3>Transactions</h3>
 
-                <p>
-                    Thời gian DONE và hệ thống
-                </p>
-            </div>
+          <div id="transBox"></div>
 
-        </section>
+        </div>
+
+      </section>
+
+
+
+      <!-- SETTINGS -->
+      <section id="settings" class="page">
+
+        <h2>Cài đặt chia hoa hồng</h2>
+
+        <div class="panel">
+
+          <div class="field">
+
+            <label>Tỷ lệ chia</label>
+
+            <select id="ratioSelect">
+
+              <option value="70">
+                7/3 — Admin 70%, User 30%
+              </option>
+
+              <option value="60">
+                6/4 — Admin 60%, User 40%
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <button
+            class="btn"
+            id="saveRatio"
+          >
+            Lưu tỷ lệ
+          </button>
+
+
+          <p class="muted small">
+
+            Tỷ lệ được lưu vào bảng
+            <b>settings</b>
+            nếu bảng có cột key/value tương ứng.
+
+            Nếu schema hiện tại khác,
+            nút sẽ báo lỗi để chỉnh đúng theo schema.
+
+          </p>
+
+        </div>
+
+      </section>
+
 
     </main>
 
+  </div>
+
 </div>
+
+
+<div id="toast" class="toast"></div>
+
 
 
 <script>
 
-/*
-    TẠM THỜI CHỈ LÀ GIAO DIỆN TEST.
+/* =========================
+   SUPABASE
+========================= */
 
-    Sau khi giao diện chạy ổn,
-    bước tiếp theo sẽ nối với Supabase.
+const SUPABASE_URL =
+"https://jatrtdrwmmtlcncrpzek.supabase.co";
 
-    Không dùng đoạn username/password này
-    làm hệ thống thật.
-*/
+const SUPABASE_KEY =
+"sb_publishable_NA5LNdCng3nUfzgtlXJwYg_FtteJnYN";
 
-const TEST_USERNAME = "admin";
-const TEST_PASSWORD = "123456";
-
-
-function login(){
-
-    const username =
-        document.getElementById("username").value.trim();
-
-    const password =
-        document.getElementById("password").value;
-
-    const error =
-        document.getElementById("loginError");
+const db =
+window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
 
 
-    if(
-        username === TEST_USERNAME &&
-        password === TEST_PASSWORD
-    ){
+/* =========================
+   VARIABLES
+========================= */
 
-        sessionStorage.setItem(
-            "loggedIn",
-            "true"
-        );
+let currentUser = null;
 
-        showDashboard();
+let ratio = 70;
 
-    }else{
 
-        error.style.display = "block";
+/* =========================
+   HELPER
+========================= */
 
+const $ = id =>
+document.getElementById(id);
+
+
+function toast(msg){
+
+  $("toast").textContent = msg;
+
+  $("toast").style.display = "block";
+
+  setTimeout(() => {
+
+    $("toast").style.display = "none";
+
+  },2500);
+
+}
+
+
+function money(v){
+
+  return Number(v || 0)
+    .toLocaleString("vi-VN") + " đ";
+
+}
+
+
+
+/* =========================
+   LOGIN
+========================= */
+
+async function login(){
+
+  $("loginError").textContent = "";
+
+  const u =
+    $("username").value.trim();
+
+  const p =
+    $("password").value;
+
+
+  if(!u || !p){
+
+    $("loginError").textContent =
+      "Nhập đủ tài khoản và mật khẩu.";
+
+    return;
+
+  }
+
+
+  $("loginBtn").disabled = true;
+
+
+  const {
+    data,
+    error
+  } = await db.rpc(
+    "login_user",
+    {
+      p_username:u,
+      p_password:p
     }
+  );
+
+
+  $("loginBtn").disabled = false;
+
+
+  if(error){
+
+    $("loginError").textContent =
+      error.message;
+
+    return;
+
+  }
+
+
+  if(!data || !data.length){
+
+    $("loginError").textContent =
+      "Sai tài khoản, mật khẩu hoặc tài khoản bị khóa.";
+
+    return;
+
+  }
+
+
+  currentUser = data[0];
+
+
+  if(currentUser.role !== "admin"){
+
+    $("loginError").textContent =
+      "Tài khoản này không có quyền admin.";
+
+    return;
+
+  }
+
+
+  sessionStorage.setItem(
+    "admin_user",
+    JSON.stringify(currentUser)
+  );
+
+
+  showApp();
 
 }
 
 
-function showDashboard(){
 
-    document
-        .getElementById("loginPage")
-        .classList.add("hidden");
+/* =========================
+   SHOW APP
+========================= */
 
-    document
-        .getElementById("dashboard")
-        .classList.remove("hidden");
+function showApp(){
 
-}
+  $("login").style.display = "none";
+
+  $("app").style.display = "block";
 
 
-function logout(){
+  $("who").textContent =
+    currentUser.username +
+    " • " +
+    currentUser.full_name;
 
-    sessionStorage.removeItem("loggedIn");
 
-    document
-        .getElementById("dashboard")
-        .classList.add("hidden");
-
-    document
-        .getElementById("loginPage")
-        .classList.remove("hidden");
-
-    document
-        .getElementById("username")
-        .value = "";
-
-    document
-        .getElementById("password")
-        .value = "";
+  loadAll();
 
 }
 
 
-function comingSoon(name){
 
-    alert(
-        name +
-        "\n\nChức năng này sẽ được kết nối database ở bước tiếp theo."
+/* =========================
+   LOGIN EVENTS
+========================= */
+
+$("loginBtn").onclick = login;
+
+
+$("password").addEventListener(
+  "keydown",
+  e => {
+
+    if(e.key === "Enter")
+      login();
+
+  }
+);
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+$("logout").onclick = () => {
+
+  sessionStorage.removeItem(
+    "admin_user"
+  );
+
+  location.reload();
+
+};
+
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+document
+.querySelectorAll(".nav")
+.forEach(b => {
+
+  b.onclick = () => {
+
+    document
+    .querySelectorAll(".nav")
+    .forEach(x =>
+      x.classList.remove("active")
+    );
+
+
+    b.classList.add("active");
+
+
+    document
+    .querySelectorAll(".page")
+    .forEach(x =>
+      x.classList.remove("active")
+    );
+
+
+    $(b.dataset.page)
+      .classList.add("active");
+
+  };
+
+});
+
+
+
+/* =========================
+   TABLE
+========================= */
+
+function renderTable(
+  rows,
+  box,
+  max = 8
+){
+
+  if(!rows || !rows.length){
+
+    $(box).innerHTML =
+      '<div class="empty">Chưa có dữ liệu.</div>';
+
+    return;
+
+  }
+
+
+  const data =
+    rows.slice(0,max);
+
+
+  const cols =
+    [
+      ...new Set(
+        data.flatMap(
+          r => Object.keys(r)
+        )
+      )
+    ];
+
+
+  let h =
+    '<div class="table-wrap">' +
+    '<table class="table">' +
+    '<thead><tr>';
+
+
+  h += cols
+    .map(
+      c => `<th>${esc(c)}</th>`
+    )
+    .join("");
+
+
+  h +=
+    "</tr></thead><tbody>";
+
+
+  for(const r of data){
+
+    h += "<tr>";
+
+    h += cols
+      .map(
+        c =>
+          `<td>${formatCell(r[c])}</td>`
+      )
+      .join("");
+
+    h += "</tr>";
+
+  }
+
+
+  h +=
+    "</tbody></table></div>";
+
+
+  $(box).innerHTML = h;
+
+}
+
+
+
+/* =========================
+   ESCAPE
+========================= */
+
+function esc(v){
+
+  return String(v ?? "")
+    .replace(
+      /[&<>"']/g,
+      m =>
+      ({
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#39;"
+      }[m])
     );
 
 }
 
 
-/* Giữ đăng nhập khi reload */
+function formatCell(v){
 
-if(
-    sessionStorage.getItem("loggedIn") === "true"
-){
+  if(
+    v === null ||
+    v === undefined
+  )
+    return "";
 
-    showDashboard();
+  if(typeof v === "object")
+    return esc(
+      JSON.stringify(v)
+    );
+
+  return esc(v);
 
 }
 
 
-/* Enter để đăng nhập */
 
-document.addEventListener(
-    "keydown",
-    function(e){
+/* =========================
+   SELECT TABLE
+========================= */
 
-        if(e.key === "Enter"){
+async function safeSelect(table){
 
-            const loginPage =
-                document.getElementById("loginPage");
-
-            if(
-                !loginPage.classList.contains("hidden")
-            ){
-
-                login();
-
-            }
-
+  const {
+    data,
+    error
+  } =
+    await db
+      .from(table)
+      .select("*")
+      .order(
+        "created_at",
+        {
+          ascending:false
         }
+      )
+      .limit(100);
+
+
+  if(error){
+
+    const q =
+      await db
+        .from(table)
+        .select("*")
+        .limit(100);
+
+    return q;
+
+  }
+
+
+  return {
+    data,
+    error
+  };
+
+}
+
+
+
+/* =========================
+   LOAD ALL
+========================= */
+
+async function loadAll(){
+
+  const [
+    u,
+    o,
+    t
+  ] =
+    await Promise.all([
+
+      safeSelect("users"),
+
+      safeSelect("orders"),
+
+      safeSelect("transactions")
+
+    ]);
+
+
+  $("sUsers").textContent =
+    u.data?.length ?? "—";
+
+
+  $("sOrders").textContent =
+    o.data?.length ?? "—";
+
+
+  $("sTrans").textContent =
+    t.data?.length ?? "—";
+
+
+  renderTable(
+    o.data || [],
+    "recentOrders",
+    5
+  );
+
+
+  renderTable(
+    o.data || [],
+    "ordersBox",
+    100
+  );
+
+
+  renderTable(
+    u.data || [],
+    "usersBox",
+    100
+  );
+
+
+  renderTable(
+    t.data || [],
+    "transBox",
+    100
+  );
+
+
+  calcRevenue(
+    t.data || []
+  );
+
+}
+
+
+
+/* =========================
+   REVENUE
+========================= */
+
+function calcRevenue(rows){
+
+  let total = 0;
+
+
+  for(const r of rows){
+
+    const n =
+      Number(
+        r.amount ??
+        r.total ??
+        r.price ??
+        r.value ??
+        0
+      );
+
+
+    if(Number.isFinite(n))
+      total += n;
+
+  }
+
+
+  const a =
+    total * ratio / 100;
+
+
+  const us =
+    total - a;
+
+
+  $("rCount").textContent =
+    rows.length;
+
+
+  $("rTotal").textContent =
+    money(total);
+
+
+  $("rAdmin").textContent =
+    money(a);
+
+
+  $("rUser").textContent =
+    money(us);
+
+
+  $("sRatio").textContent =
+    ratio === 70
+      ? "70/30"
+      : "60/40";
+
+
+  $("ratioTop").textContent =
+    ratio === 70
+      ? "70/30"
+      : "60/40";
+
+}
+
+
+
+/* =========================
+   RELOAD ORDERS
+========================= */
+
+$("reloadOrders").onclick =
+  loadAll;
+
+
+
+/* =========================
+   CREATE USER
+========================= */
+
+$("createUser").onclick =
+async () => {
+
+  const username =
+    $("newUsername")
+      .value
+      .trim();
+
+
+  const password =
+    $("newPassword").value;
+
+
+  const name =
+    $("newName")
+      .value
+      .trim();
+
+
+  const role =
+    $("newRole").value;
+
+
+  if(!username || !password){
+
+    toast(
+      "Thiếu username hoặc mật khẩu"
+    );
+
+    return;
+
+  }
+
+
+  /*
+    Schema users hiện tại:
+    password_hash
+    user_ratio
+    admin_ratio
+  */
+
+
+  const hash =
+    await sha256(password);
+
+
+  const row = {
+
+    username,
+
+    full_name:
+      name || username,
+
+    role,
+
+    status:"active",
+
+    password_hash:hash,
+
+    user_ratio:
+      100 - ratio,
+
+    admin_ratio:
+      ratio
+
+  };
+
+
+  const {
+    error
+  } =
+    await db
+      .from("users")
+      .insert(row);
+
+
+  if(error){
+
+    toast(
+      "Tạo user lỗi: " +
+      error.message
+    );
+
+    return;
+
+  }
+
+
+  toast(
+    "Đã tạo user"
+  );
+
+
+  $("newUsername").value = "";
+
+  $("newPassword").value = "";
+
+  $("newName").value = "";
+
+
+  loadAll();
+
+};
+
+
+
+/* =========================
+   SHA256
+========================= */
+
+async function sha256(text){
+
+  const buf =
+    await crypto.subtle.digest(
+      "SHA-256",
+      new TextEncoder().encode(text)
+    );
+
+
+  return (
+    "$sha256$" +
+    [...new Uint8Array(buf)]
+      .map(
+        x =>
+          x
+            .toString(16)
+            .padStart(2,"0")
+      )
+      .join("")
+  );
+
+}
+
+
+
+/* =========================
+   SAVE RATIO
+========================= */
+
+$("saveRatio").onclick =
+async () => {
+
+  ratio =
+    Number(
+      $("ratioSelect").value
+    );
+
+
+  $("sRatio").textContent =
+    ratio === 70
+      ? "70/30"
+      : "60/40";
+
+
+  $("ratioTop").textContent =
+    ratio === 70
+      ? "70/30"
+      : "60/40";
+
+
+  toast(
+    "Đã đổi tỷ lệ trên giao diện. Phần lưu DB cần khớp schema settings."
+  );
+
+
+  /*
+    Chưa tự ghi settings vì
+    schema settings hiện tại
+    chưa được xác nhận.
+  */
+
+
+  const t =
+    await safeSelect(
+      "transactions"
+    );
+
+
+  calcRevenue(
+    t.data || []
+  );
+
+};
+
+
+
+/* =========================
+   RESTORE SESSION
+========================= */
+
+try{
+
+  const saved =
+    sessionStorage.getItem(
+      "admin_user"
+    );
+
+
+  if(saved){
+
+    currentUser =
+      JSON.parse(saved);
+
+
+    if(
+      currentUser?.role === "admin"
+    ){
+
+      showApp();
 
     }
-);
+
+  }
+
+}catch(e){
+
+  sessionStorage.removeItem(
+    "admin_user"
+  );
+
+}
 
 </script>
 
