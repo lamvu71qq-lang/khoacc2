@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order Manager</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:#0b0d10;
+    color:#fff;
+    min-height:100vh;
+}
+
+button,input{
+    font:inherit;
+}
+
+.hidden{
+    display:none!important;
+}
+
+/* LOGIN */
+
+.login-page{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.login-box{
+    width:100%;
+    max-width:390px;
+    background:#14171c;
+    border:1px solid #272c34;
+    border-radius:20px;
+    padding:30px 24px;
+    box-shadow:0 20px 60px rgba(0,0,0,.45);
+}
+
+.logo{
+    width:58px;
+    height:58px;
+    margin:0 auto 18px;
+    border-radius:16px;
+    background:#20252d;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+}
+
+.login-box h1{
+    text-align:center;
+    font-size:25px;
+    margin-bottom:7px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#8d949e;
+    font-size:14px;
+    margin-bottom:28px;
+}
+
+.input-group{
+    margin-bottom:16px;
+}
+
+.input-group label{
+    display:block;
+    font-size:13px;
+    color:#aeb4bd;
+    margin-bottom:7px;
+}
+
+.input-group input{
+    width:100%;
+    height:48px;
+    padding:0 14px;
+    border-radius:11px;
+    border:1px solid #303640;
+    background:#0d1014;
+    color:white;
+    outline:none;
+}
+
+.input-group input:focus{
+    border-color:#6c7480;
+}
+
+.login-btn{
+    width:100%;
+    height:48px;
+    border:0;
+    border-radius:11px;
+    background:#fff;
+    color:#111;
+    font-weight:bold;
+    cursor:pointer;
+    margin-top:5px;
+}
+
+.login-btn:active{
+    transform:scale(.98);
+}
+
+.error{
+    background:#321b20;
+    color:#ff8795;
+    border:1px solid #63313a;
+    padding:11px;
+    border-radius:10px;
+    font-size:13px;
+    margin-bottom:15px;
+    display:none;
+}
+
+/* DASHBOARD */
+
+.dashboard{
+    min-height:100vh;
+}
+
+.topbar{
+    height:68px;
+    border-bottom:1px solid #242931;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 22px;
+    background:#101318;
+    position:sticky;
+    top:0;
+    z-index:10;
+}
+
+.brand{
+    font-weight:bold;
+    font-size:18px;
+}
+
+.admin-name{
+    color:#9da4ae;
+    font-size:13px;
+}
+
+.logout{
+    margin-left:14px;
+    border:1px solid #343a43;
+    background:#181c22;
+    color:#fff;
+    border-radius:9px;
+    padding:8px 12px;
+    cursor:pointer;
+}
+
+.content{
+    padding:25px;
+    max-width:1200px;
+    margin:auto;
+}
+
+.page-title{
+    margin-bottom:22px;
+}
+
+.page-title h2{
+    font-size:25px;
+    margin-bottom:6px;
+}
+
+.page-title p{
+    color:#8f969f;
+    font-size:14px;
+}
+
+/* CARDS */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.stat{
+    background:#14171c;
+    border:1px solid #272c34;
+    border-radius:15px;
+    padding:20px;
+}
+
+.stat-title{
+    color:#8d949e;
+    font-size:13px;
+    margin-bottom:12px;
+}
+
+.stat-value{
+    font-size:25px;
+    font-weight:bold;
+}
+
+/* MENU */
+
+.menu{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.menu-card{
+    background:#14171c;
+    border:1px solid #272c34;
+    border-radius:15px;
+    padding:22px;
+    cursor:pointer;
+    transition:.15s;
+}
+
+.menu-card:hover{
+    border-color:#555d68;
+    transform:translateY(-2px);
+}
+
+.menu-icon{
+    font-size:25px;
+    margin-bottom:12px;
+}
+
+.menu-card h3{
+    font-size:16px;
+    margin-bottom:6px;
+}
+
+.menu-card p{
+    color:#8d949e;
+    font-size:13px;
+}
+
+/* MOBILE */
+
+@media(max-width:800px){
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .menu{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:450px){
+    .content{
+        padding:18px;
+    }
+
+    .stats{
+        gap:10px;
+    }
+
+    .stat{
+        padding:15px;
+    }
+
+    .stat-value{
+        font-size:20px;
+    }
+
+    .topbar{
+        padding:0 15px;
+    }
+
+    .admin-name{
+        display:none;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= LOGIN ================= -->
+
+<div id="loginPage" class="login-page">
+
+    <div class="login-box">
+
+        <div class="logo">⚡</div>
+
+        <h1>Order Manager</h1>
+
+        <div class="subtitle">
+            Đăng nhập hệ thống quản lý
+        </div>
+
+        <div id="loginError" class="error">
+            Sai tài khoản hoặc mật khẩu
+        </div>
+
+        <div class="input-group">
+            <label>Tài khoản</label>
+            <input
+                id="username"
+                type="text"
+                placeholder="Nhập tài khoản"
+                autocomplete="username"
+            >
+        </div>
+
+        <div class="input-group">
+            <label>Mật khẩu</label>
+            <input
+                id="password"
+                type="password"
+                placeholder="Nhập mật khẩu"
+                autocomplete="current-password"
+            >
+        </div>
+
+        <button class="login-btn" onclick="login()">
+            Đăng nhập
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ================= DASHBOARD ================= -->
+
+<div id="dashboard" class="dashboard hidden">
+
+    <header class="topbar">
+
+        <div class="brand">
+            ⚡ Order Manager
+        </div>
+
+        <div>
+            <span class="admin-name">
+                Administrator
+            </span>
+
+            <button class="logout" onclick="logout()">
+                Đăng xuất
+            </button>
+        </div>
+
+    </header>
+
+
+    <main class="content">
+
+        <div class="page-title">
+            <h2>Admin Dashboard</h2>
+            <p>
+                Quản lý đơn hàng, nhân viên và doanh thu
+            </p>
+        </div>
+
+
+        <!-- THỐNG KÊ -->
+
+        <section class="stats">
+
+            <div class="stat">
+                <div class="stat-title">
+                    Tổng doanh thu
+                </div>
+
+                <div class="stat-value">
+                    0đ
+                </div>
+            </div>
+
+
+            <div class="stat">
+                <div class="stat-title">
+                    Đơn đang xử lý
+                </div>
+
+                <div class="stat-value">
+                    0
+                </div>
+            </div>
+
+
+            <div class="stat">
+                <div class="stat-title">
+                    Đơn hoàn thành
+                </div>
+
+                <div class="stat-value">
+                    0
+                </div>
+            </div>
+
+
+            <div class="stat">
+                <div class="stat-title">
+                    Nhân viên
+                </div>
+
+                <div class="stat-value">
+                    0
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- CHỨC NĂNG -->
+
+        <section class="menu">
+
+            <div class="menu-card" onclick="comingSoon('Quản lý đơn hàng')">
+                <div class="menu-icon">📦</div>
+
+                <h3>Quản lý đơn hàng</h3>
+
+                <p>
+                    Xem và quản lý toàn bộ đơn
+                </p>
+            </div>
+
+
+            <div class="menu-card" onclick="comingSoon('Nhân viên')">
+                <div class="menu-icon">👥</div>
+
+                <h3>Nhân viên</h3>
+
+                <p>
+                    Tạo, khóa và quản lý nhân viên
+                </p>
+            </div>
+
+
+            <div class="menu-card" onclick="comingSoon('Doanh thu')">
+                <div class="menu-icon">💰</div>
+
+                <h3>Doanh thu</h3>
+
+                <p>
+                    Theo dõi doanh thu và lịch sử
+                </p>
+            </div>
+
+
+            <div class="menu-card" onclick="comingSoon('Hoa hồng')">
+                <div class="menu-icon">📊</div>
+
+                <h3>Hoa hồng</h3>
+
+                <p>
+                    Thiết lập tỷ lệ 7/3 hoặc 6/4
+                </p>
+            </div>
+
+
+            <div class="menu-card" onclick="comingSoon('Telegram')">
+                <div class="menu-icon">📨</div>
+
+                <h3>Telegram</h3>
+
+                <p>
+                    Cấu hình thông báo nhận đơn
+                </p>
+            </div>
+
+
+            <div class="menu-card" onclick="comingSoon('Cài đặt')">
+                <div class="menu-icon">⚙️</div>
+
+                <h3>Cài đặt</h3>
+
+                <p>
+                    Thời gian DONE và hệ thống
+                </p>
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script>
+
+/*
+    TẠM THỜI CHỈ LÀ GIAO DIỆN TEST.
+
+    Sau khi giao diện chạy ổn,
+    bước tiếp theo sẽ nối với Supabase.
+
+    Không dùng đoạn username/password này
+    làm hệ thống thật.
+*/
+
+const TEST_USERNAME = "admin";
+const TEST_PASSWORD = "123456";
+
+
+function login(){
+
+    const username =
+        document.getElementById("username").value.trim();
+
+    const password =
+        document.getElementById("password").value;
+
+    const error =
+        document.getElementById("loginError");
+
+
+    if(
+        username === TEST_USERNAME &&
+        password === TEST_PASSWORD
+    ){
+
+        sessionStorage.setItem(
+            "loggedIn",
+            "true"
+        );
+
+        showDashboard();
+
+    }else{
+
+        error.style.display = "block";
+
+    }
+
+}
+
+
+function showDashboard(){
+
+    document
+        .getElementById("loginPage")
+        .classList.add("hidden");
+
+    document
+        .getElementById("dashboard")
+        .classList.remove("hidden");
+
+}
+
+
+function logout(){
+
+    sessionStorage.removeItem("loggedIn");
+
+    document
+        .getElementById("dashboard")
+        .classList.add("hidden");
+
+    document
+        .getElementById("loginPage")
+        .classList.remove("hidden");
+
+    document
+        .getElementById("username")
+        .value = "";
+
+    document
+        .getElementById("password")
+        .value = "";
+
+}
+
+
+function comingSoon(name){
+
+    alert(
+        name +
+        "\n\nChức năng này sẽ được kết nối database ở bước tiếp theo."
+    );
+
+}
+
+
+/* Giữ đăng nhập khi reload */
+
+if(
+    sessionStorage.getItem("loggedIn") === "true"
+){
+
+    showDashboard();
+
+}
+
+
+/* Enter để đăng nhập */
+
+document.addEventListener(
+    "keydown",
+    function(e){
+
+        if(e.key === "Enter"){
+
+            const loginPage =
+                document.getElementById("loginPage");
+
+            if(
+                !loginPage.classList.contains("hidden")
+            ){
+
+                login();
+
+            }
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
