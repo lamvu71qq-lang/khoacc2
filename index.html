@@ -1,4 +1,4 @@
-<!doctype html>
+<<!doctype html>
 <html lang="vi">
 <head>
 <meta charset="utf-8">
@@ -1218,81 +1218,39 @@ $("reloadOrders").onclick =
    CREATE USER
 ========================= */
 
-$("createUser").onclick =
-async () => {
+$("createUser").onclick = async () => {
 
   const username =
-    $("newUsername")
-      .value
-      .trim();
-
+    $("newUsername").value.trim();
 
   const password =
     $("newPassword").value;
 
-
   const name =
-    $("newName")
-      .value
-      .trim();
-
-
-  const role =
-    $("newRole").value;
-
+    $("newName").value.trim();
 
   if(!username || !password){
 
-    toast(
-      "Thiếu username hoặc mật khẩu"
-    );
+    toast("Thiếu username hoặc mật khẩu");
 
     return;
-
   }
-
-
-  /*
-    Schema users hiện tại:
-    password_hash
-    user_ratio
-    admin_ratio
-  */
-
 
   const hash =
     await sha256(password);
 
-
-  const row = {
-
-    username,
-
-    full_name:
-      name || username,
-
-    role,
-
-    status:"active",
-
-    password_hash:hash,
-
-    user_ratio:
-      100 - ratio,
-
-    admin_ratio:
-      ratio
-
-  };
-
-
   const {
+    data,
     error
-  } =
-    await db
-      .from("users")
-      .insert(row);
-
+  } = await db.rpc(
+    "create_user_by_admin",
+    {
+      p_username: username,
+      p_password_hash: hash,
+      p_full_name: name || username,
+      p_role: "user"
+    }
+  );
 
   if(error){
 
@@ -1302,26 +1260,16 @@ async () => {
     );
 
     return;
-
   }
 
-
-  toast(
-    "Đã tạo user"
-  );
-
+  toast("Đã tạo user con");
 
   $("newUsername").value = "";
-
   $("newPassword").value = "";
-
   $("newName").value = "";
 
-
   loadAll();
-
 };
-
 
 
 /* =========================
