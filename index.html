@@ -4,16 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Admin • Quản lý đơn & doanh thu</title>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 *{box-sizing:border-box}
+
 body{
   margin:0;
   font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   background:#0b0d10;
   color:#f3f4f6
 }
+
 button,input,select{font:inherit}
 button{cursor:pointer}
 
@@ -374,7 +377,6 @@ button{cursor:pointer}
     <!-- MAIN -->
     <main class="main">
 
-
       <!-- DASHBOARD -->
       <section id="dashboard" class="page active">
 
@@ -418,7 +420,6 @@ button{cursor:pointer}
       </section>
 
 
-
       <!-- ORDERS -->
       <section id="orders" class="page">
 
@@ -447,15 +448,14 @@ button{cursor:pointer}
       </section>
 
 
-
       <!-- USERS -->
       <section id="users" class="page">
 
-        <h2>Nhân viên / User</h2>
+        <h2>Nhân viên / User con</h2>
 
         <div class="panel">
 
-          <h3>Tạo user</h3>
+          <h3>Tạo user con</h3>
 
           <div class="form-grid">
 
@@ -463,7 +463,10 @@ button{cursor:pointer}
 
               <label>Username</label>
 
-              <input id="newUsername">
+              <input
+                id="newUsername"
+                placeholder="Username"
+              >
 
             </div>
 
@@ -475,6 +478,7 @@ button{cursor:pointer}
               <input
                 id="newPassword"
                 type="password"
+                placeholder="Mật khẩu"
               >
 
             </div>
@@ -484,26 +488,10 @@ button{cursor:pointer}
 
               <label>Tên hiển thị</label>
 
-              <input id="newName">
-
-            </div>
-
-
-            <div class="field">
-
-              <label>Role</label>
-
-              <select id="newRole">
-
-                <option value="user">
-                  user
-                </option>
-
-                <option value="admin">
-                  admin
-                </option>
-
-              </select>
+              <input
+                id="newName"
+                placeholder="Tên nhân viên"
+              >
 
             </div>
 
@@ -514,7 +502,7 @@ button{cursor:pointer}
             class="btn"
             id="createUser"
           >
-            Tạo user
+            + Tạo user con
           </button>
 
         </div>
@@ -522,14 +510,17 @@ button{cursor:pointer}
 
         <div class="panel">
 
-          <h3>Danh sách user</h3>
+          <h3>Danh sách user con</h3>
 
-          <div id="usersBox"></div>
+          <div id="usersBox">
+            <div class="empty">
+              Đang tải...
+            </div>
+          </div>
 
         </div>
 
       </section>
-
 
 
       <!-- REVENUE -->
@@ -604,7 +595,6 @@ button{cursor:pointer}
       </section>
 
 
-
       <!-- SETTINGS -->
       <section id="settings" class="page">
 
@@ -641,19 +631,13 @@ button{cursor:pointer}
 
           <p class="muted small">
 
-            Tỷ lệ được lưu vào bảng
-            <b>settings</b>
-            nếu bảng có cột key/value tương ứng.
-
-            Nếu schema hiện tại khác,
-            nút sẽ báo lỗi để chỉnh đúng theo schema.
+            Tỷ lệ được áp dụng cho user con.
 
           </p>
 
         </div>
 
       </section>
-
 
     </main>
 
@@ -663,7 +647,6 @@ button{cursor:pointer}
 
 
 <div id="toast" class="toast"></div>
-
 
 
 <script>
@@ -723,7 +706,6 @@ function money(v){
     .toLocaleString("vi-VN") + " đ";
 
 }
-
 
 
 /* =========================
@@ -813,7 +795,6 @@ async function login(){
 }
 
 
-
 /* =========================
    SHOW APP
 ========================= */
@@ -834,7 +815,6 @@ function showApp(){
   loadAll();
 
 }
-
 
 
 /* =========================
@@ -870,7 +850,6 @@ $("logout").onclick = () => {
 };
 
 
-
 /* =========================
    NAVIGATION
 ========================= */
@@ -904,7 +883,6 @@ document
   };
 
 });
-
 
 
 /* =========================
@@ -983,7 +961,6 @@ function renderTable(
 }
 
 
-
 /* =========================
    ESCAPE
 ========================= */
@@ -1022,7 +999,6 @@ function formatCell(v){
   return esc(v);
 
 }
-
 
 
 /* =========================
@@ -1068,6 +1044,131 @@ async function safeSelect(table){
 }
 
 
+/* =========================
+   RENDER USERS
+========================= */
+
+function renderUsers(rows){
+
+  const box = $("usersBox");
+
+  /*
+    User con trong DB có role = staff
+  */
+
+  const users =
+    (rows || []).filter(
+      u => u.role === "staff"
+    );
+
+
+  if(!users.length){
+
+    box.innerHTML =
+      '<div class="empty">Chưa có user con.</div>';
+
+    return;
+
+  }
+
+
+  let html = `
+    <div class="table-wrap">
+      <table class="table">
+
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Tên</th>
+            <th>Role</th>
+            <th>Trạng thái</th>
+            <th>Tỷ lệ</th>
+            <th>Thao tác</th>
+          </tr>
+        </thead>
+
+        <tbody>
+  `;
+
+
+  for(const u of users){
+
+    const active =
+      (u.status || "active") === "active";
+
+
+    html += `
+      <tr>
+
+        <td>${esc(u.username)}</td>
+
+        <td>${esc(
+          u.full_name || u.username
+        )}</td>
+
+        <td>
+          <span class="badge">
+            staff
+          </span>
+        </td>
+
+        <td>
+          <span
+            class="badge"
+            style="
+              background:${active ? "#25302b" : "#3a2020"};
+              color:${active ? "#75e2ac" : "#ff8585"};
+            "
+          >
+            ${active ? "Đang hoạt động" : "Đã khóa"}
+          </span>
+        </td>
+
+        <td>
+          ${Number(
+            u.user_ratio ?? (100-ratio)
+          )}%
+        </td>
+
+        <td>
+
+          <div class="actions">
+
+            <button
+              class="btn secondary"
+              onclick="toggleUser('${String(u.id).replace(/'/g,"\\'")}', ${active})"
+            >
+              ${active ? "Khóa" : "Mở khóa"}
+            </button>
+
+            <button
+              class="btn danger"
+              onclick="deleteUser('${String(u.id).replace(/'/g,"\\'")}')"
+            >
+              Xóa
+            </button>
+
+          </div>
+
+        </td>
+
+      </tr>
+    `;
+
+  }
+
+
+  html += `
+        </tbody>
+      </table>
+    </div>
+  `;
+
+
+  box.innerHTML = html;
+
+}
+
 
 /* =========================
    LOAD ALL
@@ -1091,52 +1192,69 @@ async function loadAll(){
     ]);
 
 
+  const users =
+    u.data || [];
+
+  const orders =
+    o.data || [];
+
+  const transactions =
+    t.data || [];
+
+
+  /*
+    CHỈ ĐẾM USER CON = STAFF
+  */
+
+  const staffUsers =
+    users.filter(
+      x => x.role === "staff"
+    );
+
+
   $("sUsers").textContent =
-    u.data?.length ?? "—";
+    staffUsers.length;
 
 
   $("sOrders").textContent =
-    o.data?.length ?? "—";
+    orders.length;
 
 
   $("sTrans").textContent =
-    t.data?.length ?? "—";
+    transactions.length;
 
 
   renderTable(
-    o.data || [],
+    orders,
     "recentOrders",
     5
   );
 
 
   renderTable(
-    o.data || [],
+    orders,
     "ordersBox",
     100
   );
 
 
-  renderTable(
-    u.data || [],
-    "usersBox",
-    100
+  renderUsers(
+    users
   );
 
 
   renderTable(
-    t.data || [],
+    transactions,
     "transBox",
     100
   );
 
 
   calcRevenue(
-    t.data || []
+    transactions
   );
 
 }
-
 
 
 /* =========================
@@ -1204,7 +1322,6 @@ function calcRevenue(rows){
 }
 
 
-
 /* =========================
    RELOAD ORDERS
 ========================= */
@@ -1213,46 +1330,76 @@ $("reloadOrders").onclick =
   loadAll;
 
 
-
 /* =========================
-   CREATE USER
+   CREATE USER CON
 ========================= */
 
 $("createUser").onclick = async () => {
 
   const username =
-    $("newUsername").value.trim();
+    $("newUsername")
+      .value
+      .trim();
+
 
   const password =
-    $("newPassword").value;
+    $("newPassword")
+      .value;
+
 
   const name =
-    $("newName").value.trim();
+    $("newName")
+      .value
+      .trim();
+
 
   if(!username || !password){
 
-    toast("Thiếu username hoặc mật khẩu");
+    toast(
+      "Thiếu username hoặc mật khẩu"
+    );
 
     return;
+
   }
+
 
   const hash =
     await sha256(password);
 
+
   const {
     data,
     error
-  } = await db.rpc(
-    "create_user_by_admin",
-    {
-      p_username: username,
-      p_password_hash: hash,
-      p_full_name: name || username,
-      p_role: "staff"
-    }
-  );
+  } =
+    await db.rpc(
+      "create_user_by_admin",
+      {
+        p_username: username,
+        p_password_hash: hash,
+        p_full_name: name || username,
+        p_role: "staff"
+      }
+    );
+
 
   if(error){
+
+    if(
+      error.message &&
+      error.message.includes(
+        "users_username_key"
+      )
+    ){
+
+      toast(
+        "Username đã tồn tại"
+      );
+
+      return;
+
+    }
+
 
     toast(
       "Tạo user lỗi: " +
@@ -1260,16 +1407,125 @@ $("createUser").onclick = async () => {
     );
 
     return;
+
   }
 
-  toast("Đã tạo user con");
+
+  toast(
+    "Đã tạo user con"
+  );
+
 
   $("newUsername").value = "";
+
   $("newPassword").value = "";
+
   $("newName").value = "";
 
+
   loadAll();
+
 };
+
+
+/* =========================
+   TOGGLE USER
+========================= */
+
+async function toggleUser(
+  id,
+  active
+){
+
+  const newStatus =
+    active
+      ? "locked"
+      : "active";
+
+
+  const {
+    error
+  } =
+    await db
+      .from("users")
+      .update({
+        status:newStatus
+      })
+      .eq("id",id)
+      .eq("role","staff");
+
+
+  if(error){
+
+    toast(
+      "Lỗi: " +
+      error.message
+    );
+
+    return;
+
+  }
+
+
+  toast(
+    active
+      ? "Đã khóa user"
+      : "Đã mở khóa user"
+  );
+
+
+  loadAll();
+
+}
+
+
+/* =========================
+   DELETE USER
+========================= */
+
+async function deleteUser(id){
+
+  if(
+    !confirm(
+      "Bạn chắc chắn muốn xóa user này?"
+    )
+  ){
+
+    return;
+
+  }
+
+
+  const {
+    error
+  } =
+    await db
+      .from("users")
+      .delete()
+      .eq("id",id)
+      .eq("role","staff");
+
+
+  if(error){
+
+    toast(
+      "Xóa lỗi: " +
+      error.message
+    );
+
+    return;
+
+  }
+
+
+  toast(
+    "Đã xóa user"
+  );
+
+
+  loadAll();
+
+}
 
 
 /* =========================
@@ -1300,7 +1556,6 @@ async function sha256(text){
 }
 
 
-
 /* =========================
    SAVE RATIO
 ========================= */
@@ -1327,15 +1582,8 @@ async () => {
 
 
   toast(
-    "Đã đổi tỷ lệ trên giao diện. Phần lưu DB cần khớp schema settings."
+    "Đã đổi tỷ lệ trên giao diện."
   );
-
-
-  /*
-    Chưa tự ghi settings vì
-    schema settings hiện tại
-    chưa được xác nhận.
-  */
 
 
   const t =
@@ -1349,7 +1597,6 @@ async () => {
   );
 
 };
-
 
 
 /* =========================
