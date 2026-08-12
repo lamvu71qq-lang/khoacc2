@@ -1,5 +1,5 @@
-```html
 <!doctype html>
+
 <html lang="vi">
 <head>
 <meta charset="utf-8">
@@ -10,12 +10,14 @@
 
 <style>
 *{box-sizing:border-box}
+
 body{
   margin:0;
   font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   background:#0b0d10;
   color:#f3f4f6;
 }
+
 button,input,select{font:inherit}
 button{cursor:pointer}
 
@@ -25,6 +27,7 @@ button{cursor:pointer}
   place-items:center;
   padding:20px;
 }
+
 .card{
   background:#13171c;
   border:1px solid #252b33;
@@ -33,21 +36,25 @@ button{cursor:pointer}
   width:min(420px,100%);
   box-shadow:0 20px 70px #0008;
 }
+
 .logo{
   font-size:28px;
   font-weight:800;
   margin-bottom:6px;
 }
+
 .muted{color:#929aa6}
 .small{font-size:12px}
 
 .field{margin:14px 0}
+
 .field label{
   display:block;
   font-size:13px;
   color:#aab2bd;
   margin-bottom:7px;
 }
+
 .field input,
 .field select{
   width:100%;
@@ -58,6 +65,7 @@ button{cursor:pointer}
   padding:12px;
   outline:none;
 }
+
 .field input:focus,
 .field select:focus{
   border-color:#6ee7b7;
@@ -71,14 +79,17 @@ button{cursor:pointer}
   color:#04150d;
   font-weight:700;
 }
+
 .btn.secondary{
   background:#242b34;
   color:#fff;
 }
+
 .btn.danger{
   background:#ef4444;
   color:#fff;
 }
+
 .btn.full{
   width:100%;
   margin-top:8px;
@@ -104,7 +115,9 @@ button{cursor:pointer}
   align-items:center;
   justify-content:space-between;
 }
+
 .top b{font-size:18px}
+
 .top .right{
   display:flex;
   gap:10px;
@@ -134,6 +147,7 @@ button{cursor:pointer}
   border-radius:9px;
   margin:3px 0;
 }
+
 .nav.active,
 .nav:hover{
   background:#1a2027;
@@ -161,6 +175,7 @@ button{cursor:pointer}
   border-radius:14px;
   padding:16px;
 }
+
 .stat .v{
   font-size:25px;
   font-weight:800;
@@ -174,6 +189,7 @@ button{cursor:pointer}
   padding:16px;
   margin-top:14px;
 }
+
 .panel h3{
   margin:0 0 14px;
 }
@@ -193,7 +209,7 @@ button{cursor:pointer}
 .table{
   width:100%;
   border-collapse:collapse;
-  min-width:850px;
+  min-width:900px;
 }
 
 .table th,
@@ -241,6 +257,7 @@ button{cursor:pointer}
   border:1px solid #343d47;
   display:none;
   z-index:20;
+  max-width:90%;
 }
 
 .order-code{
@@ -263,56 +280,69 @@ button{cursor:pointer}
   .stat .v{font-size:20px}
 }
 </style>
+
 </head>
 
 <body>
 
-<!-- LOGIN -->
 <div id="login" class="login">
   <div class="card">
-    <div class="logo">⚡ Admin Panel</div>
 
-    <div class="muted">
-      Quản lý đơn, user & doanh thu
-    </div>
+```
+<div class="logo">⚡ Admin Panel</div>
 
-    <div class="field">
-      <label>Tài khoản</label>
-      <input id="username" autocomplete="username" placeholder="Username">
-    </div>
+<div class="muted">
+  Quản lý đơn, user & doanh thu
+</div>
 
-    <div class="field">
-      <label>Mật khẩu</label>
-      <input id="password" type="password" autocomplete="current-password">
-    </div>
+<div class="field">
+  <label>Tài khoản</label>
+  <input id="username"
+         autocomplete="username"
+         placeholder="Username">
+</div>
 
-    <button id="loginBtn" class="btn full">
-      Đăng nhập
-    </button>
+<div class="field">
+  <label>Mật khẩu</label>
+  <input id="password"
+         type="password"
+         autocomplete="current-password">
+</div>
 
-    <div id="loginError" class="error"></div>
+<button id="loginBtn" class="btn full">
+  Đăng nhập
+</button>
+
+<div id="loginError" class="error"></div>
+```
+
   </div>
 </div>
 
-
-<!-- APP -->
 <div id="app" class="app">
 
 <header class="top">
+
   <div>
     <b>⚡ Admin Panel</b>
     <div class="muted small sub" id="who"></div>
   </div>
 
   <div class="right">
-    <span id="ratioTop" class="badge">70/30</span>
 
-    <button class="btn secondary" id="logout">
-      Đăng xuất
-    </button>
+```
+<span id="ratioTop" class="badge">
+  70/30
+</span>
+
+<button class="btn secondary" id="logout">
+  Đăng xuất
+</button>
+```
+
   </div>
-</header>
 
+</header>
 
 <div class="layout">
 
@@ -344,311 +374,333 @@ button{cursor:pointer}
 
 </aside>
 
-
 <main class="main">
 
-<!-- DASHBOARD -->
 <section id="dashboard" class="page active">
 
   <h2>Tổng quan</h2>
 
   <div class="grid">
 
-    <div class="stat">
-      <div class="muted">Tổng user con</div>
-      <div id="sUsers" class="v">—</div>
-    </div>
+```
+<div class="stat">
+  <div class="muted">Tổng user con</div>
+  <div id="sUsers" class="v">—</div>
+</div>
 
-    <div class="stat">
-      <div class="muted">Đơn hàng</div>
-      <div id="sOrders" class="v">—</div>
-    </div>
+<div class="stat">
+  <div class="muted">Đơn hàng</div>
+  <div id="sOrders" class="v">—</div>
+</div>
 
-    <div class="stat">
-      <div class="muted">Giao dịch</div>
-      <div id="sTrans" class="v">—</div>
-    </div>
+<div class="stat">
+  <div class="muted">Giao dịch</div>
+  <div id="sTrans" class="v">—</div>
+</div>
 
-    <div class="stat">
-      <div class="muted">Tỷ lệ</div>
-      <div id="sRatio" class="v">70/30</div>
-    </div>
+<div class="stat">
+  <div class="muted">Tỷ lệ</div>
+  <div id="sRatio" class="v">70/30</div>
+</div>
+```
 
   </div>
 
   <div class="panel">
-    <h3>Đơn gần đây</h3>
-    <div id="recentOrders" class="empty">
-      Đang tải...
-    </div>
+
+```
+<h3>Đơn gần đây</h3>
+
+<div id="recentOrders" class="empty">
+  Đang tải...
+</div>
+```
+
   </div>
 
 </section>
 
-
-<!-- ORDERS -->
 <section id="orders" class="page">
 
   <h2>Đơn hàng</h2>
 
   <div class="panel">
 
-    <div class="actions">
+```
+<div class="actions">
 
-      <button class="btn" id="newOrderBtn">
-        + Tạo đơn
-      </button>
+  <button class="btn" id="newOrderBtn">
+    + Tạo đơn
+  </button>
 
-      <button class="btn secondary" id="reloadOrders">
-        ↻ Tải lại
-      </button>
+  <button class="btn secondary" id="reloadOrders">
+    ↻ Tải lại
+  </button>
 
-    </div>
+</div>
 
-    <div id="ordersInfo"
-         class="muted small"
-         style="margin-top:10px">
-    </div>
+<div id="ordersInfo"
+     class="muted small"
+     style="margin-top:10px">
+</div>
 
-    <div id="ordersBox" style="margin-top:12px"></div>
+<div id="ordersBox" style="margin-top:12px">
+</div>
+```
 
   </div>
 
-
-  <!-- CREATE ORDER -->
   <div id="createOrderPanel"
        class="panel"
        style="display:none">
 
-    <h3>Tạo đơn hàng</h3>
+```
+<h3>Tạo đơn hàng</h3>
 
-    <div class="field">
-      <label>Mã đơn</label>
-      <input id="orderCode" readonly>
-    </div>
+<div class="field">
+  <label>Mã đơn</label>
+  <input id="orderCode" readonly>
+</div>
 
-    <div class="field">
-      <label>MPIN</label>
-      <input
-        id="orderMpin"
-        type="number"
-        inputmode="numeric"
-        placeholder="Nhập MPIN">
-    </div>
+<div class="field">
+  <label>MPIN</label>
+  <input id="orderMpin"
+         type="number"
+         placeholder="Nhập MPIN">
+</div>
 
-    <div class="field">
-      <label>Số lượng MP</label>
-      <input
-        id="quantityMp"
-        type="number"
-        min="1"
-        step="1"
-        value="1"
-        placeholder="Nhập số lượng MP">
-    </div>
+<div class="field">
+  <label>Số lượng MP</label>
+  <input id="orderQuantity"
+         type="number"
+         min="1"
+         step="1"
+         value="1"
+         placeholder="Nhập số lượng">
+</div>
 
-    <div class="field">
-      <label>Người nhận user con</label>
-      <select id="assignedUser">
-        <option value="">-- Chọn user --</option>
-      </select>
-    </div>
+<div class="field">
+  <label>Người nhận user con</label>
 
-    <div class="field">
-      <label>Tổng tiền</label>
-      <input
-        id="orderAmount"
-        type="number"
-        min="0"
-        step="1"
-        placeholder="Nhập số tiền">
-    </div>
+  <select id="assignedUser">
+    <option value="">
+      -- Chọn user --
+    </option>
+  </select>
+</div>
 
-    <div class="actions">
+<div class="field">
+  <label>Tổng tiền</label>
 
-      <button class="btn" id="createOrder">
-        Tạo đơn
-      </button>
+  <input id="orderAmount"
+         type="number"
+         min="0"
+         step="1"
+         placeholder="Nhập số tiền">
+</div>
 
-      <button class="btn secondary" id="cancelOrder">
-        Hủy
-      </button>
+<div class="actions">
 
-    </div>
+  <button class="btn" id="createOrder">
+    Tạo đơn
+  </button>
+
+  <button class="btn secondary" id="cancelOrder">
+    Hủy
+  </button>
+
+</div>
+```
 
   </div>
 
 </section>
 
-
-<!-- USERS -->
 <section id="users" class="page admin-page">
 
   <h2>Nhân viên / User con</h2>
 
   <div class="panel">
 
-    <h3>Tạo user con</h3>
+```
+<h3>Tạo user con</h3>
 
-    <div class="form-grid">
+<div class="form-grid">
 
-      <div class="field">
-        <label>Username</label>
-        <input id="newUsername" placeholder="Username">
-      </div>
+  <div class="field">
+    <label>Username</label>
+    <input id="newUsername"
+           placeholder="Username">
+  </div>
 
-      <div class="field">
-        <label>Mật khẩu</label>
-        <input id="newPassword"
-               type="password"
-               placeholder="Mật khẩu">
-      </div>
+  <div class="field">
+    <label>Mật khẩu</label>
+    <input id="newPassword"
+           type="password"
+           placeholder="Mật khẩu">
+  </div>
 
-      <div class="field">
-        <label>Tên hiển thị</label>
-        <input id="newName"
-               placeholder="Tên nhân viên">
-      </div>
+  <div class="field">
+    <label>Tên hiển thị</label>
+    <input id="newName"
+           placeholder="Tên nhân viên">
+  </div>
 
-    </div>
+</div>
 
-    <button class="btn" id="createUser">
-      + Tạo user con
-    </button>
+<button class="btn" id="createUser">
+  + Tạo user con
+</button>
+```
 
   </div>
 
-
   <div class="panel">
 
-    <h3>
-      Danh sách user con
-      <span id="userCountText"
-            class="muted small"></span>
-    </h3>
+```
+<h3>
+  Danh sách user con
+  <span id="userCountText"
+        class="muted small">
+  </span>
+</h3>
 
-    <div id="usersBox">
-      <div class="empty">Đang tải...</div>
-    </div>
+<div id="usersBox">
+  <div class="empty">
+    Đang tải...
+  </div>
+</div>
+```
 
   </div>
 
 </section>
 
-
-<!-- REVENUE -->
 <section id="revenue" class="page admin-page">
 
   <h2>Doanh thu</h2>
 
   <div class="grid">
 
-    <div class="stat">
-      <div class="muted">Tổng giao dịch</div>
-      <div id="rCount" class="v">—</div>
-    </div>
+```
+<div class="stat">
+  <div class="muted">Tổng giao dịch</div>
+  <div id="rCount" class="v">—</div>
+</div>
 
-    <div class="stat">
-      <div class="muted">Tổng tiền</div>
-      <div id="rTotal" class="v">—</div>
-    </div>
+<div class="stat">
+  <div class="muted">Tổng tiền</div>
+  <div id="rTotal" class="v">—</div>
+</div>
 
-    <div class="stat">
-      <div class="muted">Phần admin</div>
-      <div id="rAdmin" class="v">—</div>
-    </div>
+<div class="stat">
+  <div class="muted">Phần admin</div>
+  <div id="rAdmin" class="v">—</div>
+</div>
 
-    <div class="stat">
-      <div class="muted">Phần user</div>
-      <div id="rUser" class="v">—</div>
-    </div>
+<div class="stat">
+  <div class="muted">Phần user</div>
+  <div id="rUser" class="v">—</div>
+</div>
+```
 
   </div>
 
   <div class="panel">
 
-    <h3>Transactions</h3>
+```
+<h3>Transactions</h3>
 
-    <div id="transBox"></div>
+<div id="transBox"></div>
+```
 
   </div>
 
 </section>
 
-
-<!-- SETTINGS -->
 <section id="settings" class="page admin-page">
 
   <h2>Cài đặt</h2>
 
   <div class="panel">
 
-    <div class="field">
+```
+<div class="field">
 
-      <label>Tỷ lệ</label>
+  <label>Tỷ lệ</label>
 
-      <select id="ratioSelect">
+  <select id="ratioSelect">
 
-        <option value="70">70/30</option>
-        <option value="60">60/40</option>
+    <option value="70">
+      70/30
+    </option>
 
-      </select>
+    <option value="60">
+      60/40
+    </option>
 
-    </div>
+  </select>
 
-    <button class="btn" id="saveRatio">
-      Lưu tỷ lệ
-    </button>
+</div>
+
+<button class="btn" id="saveRatio">
+  Lưu tỷ lệ
+</button>
+```
 
   </div>
 
 </section>
 
-
-<!-- ACCOUNT -->
 <section id="account" class="page">
 
   <h2>Tài khoản</h2>
 
   <div class="panel">
 
-    <h3>Thông tin</h3>
+```
+<h3>Thông tin</h3>
 
-    <div class="muted">
-      Username:
-      <b id="accountUsername"></b>
-    </div>
+<div class="muted">
+  Username:
+  <b id="accountUsername"></b>
+</div>
 
-    <div class="muted" style="margin-top:7px">
-      Quyền:
-      <b id="accountRole"></b>
-    </div>
+<div class="muted" style="margin-top:7px">
+  Quyền:
+  <b id="accountRole"></b>
+</div>
+```
 
   </div>
 
-
   <div class="panel">
 
-    <h3>Đổi mật khẩu</h3>
+```
+<h3>Đổi mật khẩu</h3>
 
-    <div class="field">
-      <label>Mật khẩu hiện tại</label>
-      <input id="oldPassword" type="password">
-    </div>
+<div class="field">
+  <label>Mật khẩu hiện tại</label>
+  <input id="oldPassword"
+         type="password">
+</div>
 
-    <div class="field">
-      <label>Mật khẩu mới</label>
-      <input id="newPasswordChange" type="password">
-    </div>
+<div class="field">
+  <label>Mật khẩu mới</label>
+  <input id="newPasswordChange"
+         type="password">
+</div>
 
-    <div class="field">
-      <label>Nhập lại mật khẩu mới</label>
-      <input id="confirmPasswordChange" type="password">
-    </div>
+<div class="field">
+  <label>Nhập lại mật khẩu mới</label>
+  <input id="confirmPasswordChange"
+         type="password">
+</div>
 
-    <button class="btn" id="changePassword">
-      Đổi mật khẩu
-    </button>
+<button class="btn" id="changePassword">
+  Đổi mật khẩu
+</button>
+```
 
   </div>
 
@@ -658,9 +710,7 @@ button{cursor:pointer}
 </div>
 </div>
 
-
 <div id="toast" class="toast"></div>
-
 
 <script>
 
@@ -697,7 +747,7 @@ function toast(msg){
   window.toastTimer =
     setTimeout(() => {
       $("toast").style.display = "none";
-    }, 3000);
+    },3000);
 }
 
 
@@ -719,13 +769,17 @@ function money(value){
 function esc(value){
 
   return String(value ?? "")
-    .replace(/[&<>"']/g, m => ({
-      "&":"&amp;",
-      "<":"&lt;",
-      ">":"&gt;",
-      '"':"&quot;",
-      "'":"&#39;"
-    }[m]));
+    .replace(/[&<>"']/g,function(m){
+
+      return {
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#39;"
+      }[m];
+
+    });
 }
 
 
@@ -783,8 +837,8 @@ async function login(){
       await db.rpc(
         "login_user",
         {
-          p_username: username,
-          p_password: password
+          p_username:username,
+          p_password:password
         }
       );
 
@@ -951,6 +1005,8 @@ document
 
 /* =========================
    LOAD USERS
+   DÙNG RPC - KHÔNG ĐỌC
+   TRỰC TIẾP BẢNG USERS
 ========================= */
 
 async function loadUsers(){
@@ -963,13 +1019,9 @@ async function loadUsers(){
   }
 
   const result =
-    await db
-      .from("users")
-      .select(
-        "id,username,full_name,role,status,user_ratio,admin_ratio"
-      )
-      .eq("role","staff")
-      .order("username",{ascending:true});
+    await db.rpc(
+      "admin_get_staff_users"
+    );
 
   if(result.error){
 
@@ -981,10 +1033,15 @@ async function loadUsers(){
 
     $("sUsers").textContent = "0";
 
+    $("userCountText").textContent =
+      "(lỗi tải dữ liệu)";
+
     return [];
+
   }
 
-  const users = result.data || [];
+  const users =
+    result.data || [];
 
   $("sUsers").textContent =
     users.length;
@@ -993,6 +1050,7 @@ async function loadUsers(){
     "(" + users.length + " user)";
 
   renderUsers(users);
+
   fillAssignedUsers(users);
 
   return users;
@@ -1009,7 +1067,7 @@ function renderUsers(users){
 
     $("usersBox").innerHTML =
       '<div class="empty">' +
-      'Chưa có user con.' +
+      'Không tìm thấy user con.' +
       '</div>';
 
     return;
@@ -1055,7 +1113,9 @@ function renderUsers(users){
 
       '<td>' +
       '<span class="badge">' +
-      (active ? "Đang hoạt động" : "Đã khóa") +
+      (active
+        ? "Đang hoạt động"
+        : "Đã khóa") +
       '</span>' +
       '</td>' +
 
@@ -1074,19 +1134,21 @@ function renderUsers(users){
       '<div class="actions">' +
 
       '<button class="btn secondary" ' +
-      'onclick="toggleUser(\'' +
-      u.id +
-      '\',' +
-      active +
-      ')">' +
+      'onclick="toggleUser(' +
+      "'" + esc(u.id) + "'" +
+      ',' + active + ')">' +
+
       (active ? "Khóa" : "Mở khóa") +
+
       '</button>' +
 
       '<button class="btn danger" ' +
-      'onclick="deleteUser(\'' +
-      u.id +
-      '\')">' +
+      'onclick="deleteUser(' +
+      "'" + esc(u.id) + "'" +
+      ')">' +
+
       'Xóa' +
+
       '</button>' +
 
       '</div>' +
@@ -1094,6 +1156,7 @@ function renderUsers(users){
       '</td>' +
 
       '</tr>';
+
   }
 
   html +=
@@ -1101,7 +1164,8 @@ function renderUsers(users){
     '</table>' +
     '</div>';
 
-  $("usersBox").innerHTML = html;
+  $("usersBox").innerHTML =
+    html;
 }
 
 
@@ -1114,15 +1178,6 @@ async function loadOrders(){
   if(!currentUser){
     return [];
   }
-
-  /*
-    QUAN TRỌNG:
-
-    Schema hiện tại của orders có:
-    quantity_mp
-
-    Không dùng quantity.
-  */
 
   let query =
     db
@@ -1157,6 +1212,7 @@ async function loadOrders(){
         "assigned_user_id",
         currentUser.id
       );
+
   }
 
   const result =
@@ -1175,7 +1231,10 @@ async function loadOrders(){
       'Lỗi tải đơn.' +
       '</div>';
 
+    $("sOrders").textContent = "0";
+
     return [];
+
   }
 
   const orders =
@@ -1240,8 +1299,8 @@ function renderOrders(
     '<thead>' +
     '<tr>' +
     '<th>Mã đơn</th>' +
-    '<th>MPIN</th>' +
     '<th>Số lượng MP</th>' +
+    '<th>MPIN</th>' +
     '<th>User ID</th>' +
     '<th>Trạng thái</th>' +
     '<th>Tổng tiền</th>' +
@@ -1253,7 +1312,9 @@ function renderOrders(
 
     '<tbody>';
 
-  for(const o of orders.slice(0,max)){
+  for(
+    const o of orders.slice(0,max)
+  ){
 
     html +=
       '<tr>' +
@@ -1265,11 +1326,11 @@ function renderOrders(
       '</td>' +
 
       '<td>' +
-      esc(o.mpin ?? "—") +
+      esc(o.quantity_mp ?? 1) +
       '</td>' +
 
       '<td>' +
-      esc(o.quantity_mp ?? "—") +
+      esc(o.mpin) +
       '</td>' +
 
       '<td>' +
@@ -1304,6 +1365,7 @@ function renderOrders(
       '</td>' +
 
       '</tr>';
+
   }
 
   html +=
@@ -1311,12 +1373,13 @@ function renderOrders(
     '</table>' +
     '</div>';
 
-  box.innerHTML = html;
+  box.innerHTML =
+    html;
 }
 
 
 /* =========================
-   LOAD TRANSACTIONS
+   TRANSACTIONS
 ========================= */
 
 async function loadTransactions(){
@@ -1436,7 +1499,8 @@ function renderGenericTable(rows,boxId){
     '</table>' +
     '</div>';
 
-  $(boxId).innerHTML = html;
+  $(boxId).innerHTML =
+    html;
 }
 
 
@@ -1519,19 +1583,30 @@ async function(){
 
   const result =
     await db.rpc(
-      "create_user_by_admin",
+      "admin_create_staff",
       {
-        p_username: username,
-        p_password_hash: hash,
-        p_full_name: name || username
+        p_username:username,
+        p_password_hash:hash,
+        p_full_name:name || username
       }
     );
 
   if(result.error){
 
+    const msg =
+      result.error.message || "";
+
+    if(msg.includes("USERNAME_EXISTS")){
+
+      toast(
+        "Username đã tồn tại"
+      );
+
+      return;
+    }
+
     toast(
-      "Tạo user lỗi: " +
-      result.error.message
+      "Tạo user lỗi: " + msg
     );
 
     return;
@@ -1551,16 +1626,17 @@ async function(){
    TOGGLE USER
 ========================= */
 
-async function toggleUser(id,active){
+async function toggleUser(
+  id,
+  active
+){
 
   const newStatus =
-    active
-      ? "locked"
-      : "active";
+    active ? "locked" : "active";
 
   const result =
     await db.rpc(
-      "set_staff_status",
+      "admin_set_staff_status",
       {
         p_id:id,
         p_status:newStatus
@@ -1601,7 +1677,7 @@ async function deleteUser(id){
 
   const result =
     await db.rpc(
-      "delete_staff",
+      "admin_delete_staff",
       {
         p_id:id
       }
@@ -1649,7 +1725,8 @@ function generateOrderCode(){
     chars +=
       letters[
         Math.floor(
-          Math.random()*letters.length
+          Math.random() *
+          letters.length
         )
       ];
   }
@@ -1670,18 +1747,24 @@ function fillAssignedUsers(users){
   if(!select) return;
 
   select.innerHTML =
-    '<option value="">-- Chọn user --</option>';
+    '<option value="">' +
+    '-- Chọn user --' +
+    '</option>';
 
   for(const u of users){
 
-    if(u.status !== "active"){
+    if(
+      (u.status || "active") !==
+      "active"
+    ){
       continue;
     }
 
     const option =
       document.createElement("option");
 
-    option.value = u.id;
+    option.value =
+      u.id;
 
     option.textContent =
       u.username +
@@ -1716,7 +1799,7 @@ async function(){
     generateOrderCode();
 
   $("orderMpin").value = "";
-  $("quantityMp").value = "1";
+  $("orderQuantity").value = "1";
   $("orderAmount").value = "";
 
   $("createOrderPanel").style.display =
@@ -1730,7 +1813,7 @@ async function(){
 
 
 /* =========================
-   CANCEL ORDER
+   CANCEL
 ========================= */
 
 $("cancelOrder").onclick =
@@ -1760,9 +1843,6 @@ async function(){
     return;
   }
 
-  const btn =
-    $("createOrder");
-
   const orderCode =
     $("orderCode").value.trim();
 
@@ -1771,7 +1851,7 @@ async function(){
 
   const quantityMp =
     Number(
-      $("quantityMp").value
+      $("orderQuantity").value
     );
 
   const assignedUser =
@@ -1799,7 +1879,10 @@ async function(){
     quantityMp < 1
   ){
 
-    toast("Số lượng MP phải từ 1 trở lên");
+    toast(
+      "Số lượng MP phải từ 1 trở lên"
+    );
+
     return;
   }
 
@@ -1814,7 +1897,10 @@ async function(){
     amount < 0
   ){
 
-    toast("Số tiền không hợp lệ");
+    toast(
+      "Số tiền không hợp lệ"
+    );
+
     return;
   }
 
@@ -1831,137 +1917,64 @@ async function(){
     amount * adminRatio / 100;
 
 
-  /*
-    ĐÚNG SCHEMA:
-
-    quantity_mp
-
-    Không gửi:
-    quantity
-  */
-
-  const insertData = {
-
-    order_code:
-      orderCode,
-
-    quantity_mp:
-      quantityMp,
-
-    mpin:
-      Number(mpin),
-
-    assigned_user_id:
-      assignedUser,
-
-    status:
-      "pending",
-
-    total_amount:
-      amount,
-
-    user_ratio:
-      userRatio,
-
-    admin_ratio:
-      adminRatio,
-
-    user_amount:
-      userAmount,
-
-    admin_amount:
-      adminAmount
-
-  };
-
-
-  btn.disabled = true;
-  btn.textContent = "Đang tạo...";
-
-
-  try{
-
-    const result =
-      await db
-        .from("orders")
-        .insert(insertData)
-        .select()
-        .single();
-
-
-    if(result.error){
-
-      const msg =
-        result.error.message || "";
-
-      console.error(
-        "CREATE ORDER ERROR:",
-        result.error
-      );
-
-      /*
-        Nếu còn lỗi RLS thì báo rõ.
-      */
-
-      if(
-        msg.toLowerCase().includes(
-          "row-level security"
-        )
-      ){
-
-        toast(
-          "Supabase đang chặn INSERT orders bằng RLS."
-        );
-
-        return;
+  const result =
+    await db.rpc(
+      "admin_create_order",
+      {
+        p_order_code:orderCode,
+        p_mpin:Number(mpin),
+        p_quantity_mp:quantityMp,
+        p_assigned_user_id:assignedUser,
+        p_total_amount:amount,
+        p_user_ratio:userRatio,
+        p_admin_ratio:adminRatio,
+        p_user_amount:userAmount,
+        p_admin_amount:adminAmount
       }
+    );
 
-      /*
-        Nếu schema cache chưa cập nhật.
-      */
 
-      if(
-        msg.includes("quantity_mp")
-      ){
+  if(result.error){
 
-        toast(
-          "Supabase chưa nhận cột quantity_mp. Hãy reload schema rồi thử lại."
-        );
+    const msg =
+      result.error.message || "";
 
-        return;
-      }
+    if(
+      msg.includes("duplicate") ||
+      msg.includes("unique") ||
+      msg.includes("order_code")
+    ){
+
+      $("orderCode").value =
+        generateOrderCode();
 
       toast(
-        "Tạo đơn lỗi: " + msg
+        "Mã đơn bị trùng, hãy bấm Tạo đơn lại."
       );
 
       return;
     }
 
-
     toast(
-      "Đã tạo đơn " +
-      orderCode
+      "Tạo đơn lỗi: " + msg
     );
 
-    $("createOrderPanel").style.display =
-      "none";
-
-    await loadOrders();
-
-  }catch(error){
-
-    toast(
-      "Lỗi tạo đơn: " +
-      error.message
-    );
-
-  }finally{
-
-    btn.disabled = false;
-    btn.textContent = "Tạo đơn";
-
+    return;
   }
+
+
+  toast(
+    "Đã tạo đơn " +
+    orderCode
+  );
+
+  $("createOrderPanel").style.display =
+    "none";
+
+  $("orderQuantity").value =
+    "1";
+
+  await loadOrders();
 };
 
 
@@ -2011,7 +2024,6 @@ async function(){
       {
         p_username:
           currentUser.username,
-
         p_password:
           oldPassword
       }
@@ -2059,6 +2071,15 @@ async function(){
     toast(
       "Đổi mật khẩu lỗi: " +
       result.error.message
+    );
+
+    return;
+  }
+
+  if(result.data !== true){
+
+    toast(
+      "Không thể đổi mật khẩu"
     );
 
     return;
@@ -2134,6 +2155,7 @@ async function loadAll(){
     tasks.push(
       loadTransactions()
     );
+
   }
 
   await Promise.all(tasks);
@@ -2143,7 +2165,7 @@ async function loadAll(){
 
 
 /* =========================
-   RELOAD ORDERS
+   RELOAD
 ========================= */
 
 $("reloadOrders").onclick =
@@ -2222,4 +2244,3 @@ $("password").addEventListener(
 
 </body>
 </html>
-```
