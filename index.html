@@ -774,14 +774,17 @@ async function login(){
   currentUser = data[0];
 
 
-  if(currentUser.role !== "admin"){
+  if(
+  currentUser.role !== "admin" &&
+  currentUser.role !== "staff"
+){
 
-    $("loginError").textContent =
-      "Tài khoản này không có quyền admin.";
+  $("loginError").textContent =
+    "Tài khoản không có quyền truy cập.";
 
-    return;
+  return;
 
-  }
+}
 
 
   sessionStorage.setItem(
