@@ -1,3 +1,4 @@
+```html
 <!doctype html>
 <html lang="vi">
 <head>
@@ -9,99 +10,61 @@
 
 <style>
 *{box-sizing:border-box}
-
 body{
   margin:0;
   font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   background:#0b0d10;
-  color:#f3f4f6;
+  color:#f3f4f6
 }
-
 button,input,select{font:inherit}
 button{cursor:pointer}
-
 .login{
   min-height:100vh;
   display:grid;
   place-items:center;
-  padding:20px;
+  padding:20px
 }
-
 .card{
   background:#13171c;
   border:1px solid #252b33;
   border-radius:18px;
   padding:24px;
   width:min(420px,100%);
-  box-shadow:0 20px 70px #0008;
+  box-shadow:0 20px 70px #0008
 }
-
-.logo{
-  font-size:28px;
-  font-weight:800;
-  margin-bottom:6px;
-}
-
+.logo{font-size:28px;font-weight:800;margin-bottom:6px}
 .muted{color:#929aa6}
 .small{font-size:12px}
-
 .field{margin:14px 0}
-
 .field label{
   display:block;
   font-size:13px;
   color:#aab2bd;
-  margin-bottom:7px;
+  margin-bottom:7px
 }
-
-.field input,
-.field select{
+.field input,.field select{
   width:100%;
   background:#0d1014;
   border:1px solid #303741;
   color:#fff;
   border-radius:10px;
   padding:12px;
-  outline:none;
+  outline:none
 }
-
-.field input:focus,
-.field select:focus{
-  border-color:#6ee7b7;
-}
-
+.field input:focus,.field select:focus{border-color:#6ee7b7}
 .btn{
   border:0;
   border-radius:10px;
   padding:11px 15px;
   background:#20c77a;
   color:#04150d;
-  font-weight:700;
+  font-weight:700
 }
-
-.btn.secondary{
-  background:#242b34;
-  color:#fff;
-}
-
-.btn.danger{
-  background:#ef4444;
-  color:#fff;
-}
-
-.btn.full{
-  width:100%;
-  margin-top:8px;
-}
-
-.error{
-  color:#ff7d7d;
-  margin-top:10px;
-  font-size:14px;
-}
-
+.btn.secondary{background:#242b34;color:#fff}
+.btn.danger{background:#ef4444;color:#fff}
+.btn.full{width:100%;margin-top:8px}
+.error{color:#ff7d7d;margin-top:10px;font-size:14px}
 .app{display:none}
-
 .top{
   position:sticky;
   top:0;
@@ -112,29 +75,17 @@ button{cursor:pointer}
   padding:14px 18px;
   display:flex;
   align-items:center;
-  justify-content:space-between;
+  justify-content:space-between
 }
-
 .top b{font-size:18px}
-
-.top .right{
-  display:flex;
-  gap:10px;
-  align-items:center;
-}
-
-.layout{
-  display:flex;
-  min-height:calc(100vh - 64px);
-}
-
+.top .right{display:flex;gap:10px;align-items:center}
+.layout{display:flex;min-height:calc(100vh - 64px)}
 .side{
   width:230px;
   border-right:1px solid #252b33;
   padding:14px;
-  background:#0e1115;
+  background:#0e1115
 }
-
 .nav{
   display:block;
   width:100%;
@@ -144,107 +95,56 @@ button{cursor:pointer}
   color:#aeb6c2;
   padding:12px;
   border-radius:9px;
-  margin:3px 0;
+  margin:3px 0
 }
-
-.nav.active,
-.nav:hover{
-  background:#1a2027;
-  color:#fff;
-}
-
-.main{
-  flex:1;
-  padding:20px;
-  min-width:0;
-}
-
+.nav.active,.nav:hover{background:#1a2027;color:#fff}
+.main{flex:1;padding:20px;min-width:0}
 .page{display:none}
 .page.active{display:block}
-
 .grid{
   display:grid;
   grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:12px;
+  gap:12px
 }
-
 .stat{
   background:#13171c;
   border:1px solid #252b33;
   border-radius:14px;
-  padding:16px;
+  padding:16px
 }
-
-.stat .v{
-  font-size:25px;
-  font-weight:800;
-  margin-top:8px;
-}
-
+.stat .v{font-size:25px;font-weight:800;margin-top:8px}
 .panel{
   background:#13171c;
   border:1px solid #252b33;
   border-radius:14px;
   padding:16px;
-  margin-top:14px;
+  margin-top:14px
 }
-
-.panel h3{
-  margin:0 0 14px;
-}
-
-.actions{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-}
-
-.table-wrap{
-  overflow:auto;
-  border:1px solid #252b33;
-  border-radius:12px;
-}
-
-.table{
-  width:100%;
-  border-collapse:collapse;
-  min-width:850px;
-}
-
-.table th,
-.table td{
+.panel h3{margin:0 0 14px}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+.table-wrap{overflow:auto;border:1px solid #252b33;border-radius:12px}
+.table{width:100%;border-collapse:collapse;min-width:750px}
+.table th,.table td{
   text-align:left;
   padding:11px;
   border-bottom:1px solid #252b33;
   font-size:13px;
-  white-space:nowrap;
+  white-space:nowrap
 }
-
-.table th{
-  color:#9da6b2;
-  background:#101419;
-}
-
+.table th{color:#9da6b2;background:#101419}
 .badge{
   padding:4px 8px;
   border-radius:99px;
   background:#25302b;
   color:#75e2ac;
-  font-size:12px;
+  font-size:12px
 }
-
 .form-grid{
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:12px;
+  gap:12px
 }
-
-.empty{
-  padding:25px;
-  text-align:center;
-  color:#8e97a3;
-}
-
+.empty{padding:25px;text-align:center;color:#8e97a3}
 .toast{
   position:fixed;
   right:15px;
@@ -255,13 +155,9 @@ button{cursor:pointer}
   border-radius:10px;
   border:1px solid #343d47;
   display:none;
-  z-index:20;
+  z-index:20
 }
-
-.order-code{
-  font-weight:800;
-  letter-spacing:1px;
-}
+.order-code{font-weight:800;letter-spacing:1px}
 
 @media(max-width:800px){
   .side{width:68px}
@@ -272,7 +168,6 @@ button{cursor:pointer}
   .top{padding:12px}
   .top .sub{display:none}
 }
-
 @media(max-width:480px){
   .grid{grid-template-columns:1fr 1fr}
   .stat .v{font-size:20px}
@@ -284,12 +179,8 @@ button{cursor:pointer}
 
 <div id="login" class="login">
   <div class="card">
-
     <div class="logo">⚡ Admin Panel</div>
-
-    <div class="muted">
-      Quản lý đơn, user & doanh thu
-    </div>
+    <div class="muted">Quản lý đơn, user & doanh thu</div>
 
     <div class="field">
       <label>Tài khoản</label>
@@ -301,36 +192,23 @@ button{cursor:pointer}
       <input id="password" type="password" autocomplete="current-password">
     </div>
 
-    <button id="loginBtn" class="btn full">
-      Đăng nhập
-    </button>
-
+    <button id="loginBtn" class="btn full">Đăng nhập</button>
     <div id="loginError" class="error"></div>
-
   </div>
 </div>
 
 <div id="app" class="app">
 
 <header class="top">
-
   <div>
     <b>⚡ Admin Panel</b>
     <div class="muted small sub" id="who"></div>
   </div>
 
   <div class="right">
-
-    <span id="ratioTop" class="badge">
-      70/30
-    </span>
-
-    <button class="btn secondary" id="logout">
-      Đăng xuất
-    </button>
-
+    <span id="ratioTop" class="badge">70/30</span>
+    <button class="btn secondary" id="logout">Đăng xuất</button>
   </div>
-
 </header>
 
 <div class="layout">
@@ -394,13 +272,8 @@ button{cursor:pointer}
   </div>
 
   <div class="panel">
-
     <h3>Đơn gần đây</h3>
-
-    <div id="recentOrders" class="empty">
-      Đang tải...
-    </div>
-
+    <div id="recentOrders" class="empty">Đang tải...</div>
   </div>
 
 </section>
@@ -423,18 +296,13 @@ button{cursor:pointer}
 
     </div>
 
-    <div id="ordersInfo"
-         class="muted small"
-         style="margin-top:10px">
-    </div>
+    <div id="ordersInfo" class="muted small" style="margin-top:10px"></div>
 
     <div id="ordersBox" style="margin-top:12px"></div>
 
   </div>
 
-  <div id="createOrderPanel"
-       class="panel"
-       style="display:none">
+  <div id="createOrderPanel" class="panel" style="display:none">
 
     <h3>Tạo đơn hàng</h3>
 
@@ -445,27 +313,17 @@ button{cursor:pointer}
 
     <div class="field">
       <label>MPIN</label>
-      <input
-        id="orderMpin"
-        type="number"
-        placeholder="Nhập MPIN"
-      >
+      <input id="orderMpin" type="number" placeholder="Nhập MPIN">
     </div>
 
     <div class="field">
       <label>Số lượng MP</label>
-      <input
-        id="orderQuantity"
-        type="number"
-        min="1"
-        step="1"
-        value="1"
-        placeholder="Số lượng"
-      >
+      <input id="orderQuantityMp" type="number" min="1" step="1" value="1">
     </div>
 
     <div class="field">
       <label>Người nhận user con</label>
+
       <select id="assignedUser">
         <option value="">-- Chọn user --</option>
       </select>
@@ -473,13 +331,13 @@ button{cursor:pointer}
 
     <div class="field">
       <label>Tổng tiền</label>
+
       <input
         id="orderAmount"
         type="number"
         min="0"
         step="1"
-        placeholder="Nhập số tiền"
-      >
+        placeholder="Nhập số tiền">
     </div>
 
     <div class="actions">
@@ -539,9 +397,7 @@ button{cursor:pointer}
     </h3>
 
     <div id="usersBox">
-      <div class="empty">
-        Đang tải...
-      </div>
+      <div class="empty">Đang tải...</div>
     </div>
 
   </div>
@@ -577,11 +433,8 @@ button{cursor:pointer}
   </div>
 
   <div class="panel">
-
     <h3>Transactions</h3>
-
     <div id="transBox"></div>
-
   </div>
 
 </section>
@@ -683,10 +536,6 @@ let ratio = 70;
 
 const $ = id => document.getElementById(id);
 
-/* =========================
-   TOAST
-========================= */
-
 function toast(msg){
 
   $("toast").textContent = msg;
@@ -697,12 +546,8 @@ function toast(msg){
   window.toastTimer =
     setTimeout(() => {
       $("toast").style.display = "none";
-    }, 3000);
+    },3000);
 }
-
-/* =========================
-   MONEY
-========================= */
 
 function money(value){
 
@@ -710,29 +555,17 @@ function money(value){
     .toLocaleString("vi-VN") + " đ";
 }
 
-/* =========================
-   ESCAPE HTML
-========================= */
-
 function esc(value){
 
   return String(value ?? "")
-    .replace(/[&<>"']/g, function(m){
-
-      return {
-        "&":"&amp;",
-        "<":"&lt;",
-        ">":"&gt;",
-        '"':"&quot;",
-        "'":"&#39;"
-      }[m];
-
-    });
+    .replace(/[&<>"']/g,m => ({
+      "&":"&amp;",
+      "<":"&lt;",
+      ">":"&gt;",
+      '"':"&quot;",
+      "'":"&#39;"
+    }[m]));
 }
-
-/* =========================
-   SHA256
-========================= */
 
 async function sha256(text){
 
@@ -750,9 +583,7 @@ async function sha256(text){
       .join("");
 }
 
-/* =========================
-   LOGIN
-========================= */
+/* LOGIN */
 
 async function login(){
 
@@ -818,7 +649,6 @@ async function login(){
         "Tài khoản không có quyền truy cập.";
 
       currentUser = null;
-
       return;
     }
 
@@ -842,15 +672,11 @@ async function login(){
   }
 }
 
-/* =========================
-   SHOW APP
-========================= */
+/* SHOW APP */
 
 function showApp(){
 
-  if(!currentUser){
-    return;
-  }
+  if(!currentUser)return;
 
   $("login").style.display = "none";
   $("app").style.display = "block";
@@ -871,37 +697,25 @@ function showApp(){
   const isAdmin =
     currentUser.role === "admin";
 
-  document
-    .querySelectorAll(".admin-only")
+  document.querySelectorAll(".admin-only")
     .forEach(el => {
-
       el.style.display =
         isAdmin ? "block" : "none";
-
     });
 
-  document
-    .querySelectorAll(".admin-page")
+  document.querySelectorAll(".admin-page")
     .forEach(el => {
-
       el.style.display =
         isAdmin ? "" : "none";
-
     });
 
   $("newOrderBtn").style.display =
     isAdmin ? "inline-block" : "none";
 
-  if(!isAdmin){
-    $("sUsers").textContent = "—";
-  }
-
   loadAll();
 }
 
-/* =========================
-   LOGOUT
-========================= */
+/* LOGOUT */
 
 $("logout").onclick = () => {
 
@@ -912,51 +726,42 @@ $("logout").onclick = () => {
   location.reload();
 };
 
-/* =========================
-   NAVIGATION
-========================= */
+/* NAVIGATION */
 
-document
-  .querySelectorAll(".nav")
-  .forEach(btn => {
+document.querySelectorAll(".nav")
+.forEach(btn => {
 
-    btn.onclick = () => {
+  btn.onclick = () => {
 
-      if(
-        btn.classList.contains("admin-only") &&
-        currentUser.role !== "admin"
-      ){
-        return;
-      }
+    if(
+      btn.classList.contains("admin-only") &&
+      currentUser.role !== "admin"
+    ){
+      return;
+    }
 
-      document
-        .querySelectorAll(".nav")
-        .forEach(x =>
-          x.classList.remove("active")
-        );
+    document.querySelectorAll(".nav")
+      .forEach(x =>
+        x.classList.remove("active")
+      );
 
-      btn.classList.add("active");
+    btn.classList.add("active");
 
-      document
-        .querySelectorAll(".page")
-        .forEach(x =>
-          x.classList.remove("active")
-        );
+    document.querySelectorAll(".page")
+      .forEach(x =>
+        x.classList.remove("active")
+      );
 
-      const page =
-        $(btn.dataset.page);
+    const page =
+      $(btn.dataset.page);
 
-      if(page){
-        page.classList.add("active");
-      }
+    if(page)
+      page.classList.add("active");
+  };
 
-    };
+});
 
-  });
-
-/* =========================
-   LOAD USERS
-========================= */
+/* USERS */
 
 async function loadUsers(){
 
@@ -974,7 +779,10 @@ async function loadUsers(){
         "id,username,full_name,role,status,user_ratio,admin_ratio"
       )
       .eq("role","staff")
-      .order("username",{ascending:true});
+      .order(
+        "username",
+        {ascending:true}
+      );
 
   if(result.error){
 
@@ -984,15 +792,16 @@ async function loadUsers(){
       esc(result.error.message) +
       '</div>';
 
-    $("sUsers").textContent = "0";
+    $("sUsers").textContent = "Lỗi";
 
     $("userCountText").textContent =
-      "(lỗi tải dữ liệu)";
+      "(không tải được)";
 
     return [];
   }
 
-  const users = result.data || [];
+  const users =
+    result.data || [];
 
   $("sUsers").textContent =
     users.length;
@@ -1005,10 +814,6 @@ async function loadUsers(){
 
   return users;
 }
-
-/* =========================
-   RENDER USERS
-========================= */
 
 function renderUsers(users){
 
@@ -1025,9 +830,7 @@ function renderUsers(users){
   let html =
     '<div class="table-wrap">' +
     '<table class="table">' +
-
-    '<thead>' +
-    '<tr>' +
+    '<thead><tr>' +
     '<th>Username</th>' +
     '<th>Tên</th>' +
     '<th>Role</th>' +
@@ -1035,10 +838,7 @@ function renderUsers(users){
     '<th>User %</th>' +
     '<th>Admin %</th>' +
     '<th>Thao tác</th>' +
-    '</tr>' +
-    '</thead>' +
-
-    '<tbody>';
+    '</tr></thead><tbody>';
 
   for(const u of users){
 
@@ -1047,20 +847,11 @@ function renderUsers(users){
 
     html +=
       '<tr>' +
-
-      '<td>' +
-      esc(u.username) +
-      '</td>' +
-
-      '<td>' +
-      esc(u.full_name || u.username) +
-      '</td>' +
-
-      '<td>' +
-      '<span class="badge">' +
-      esc(u.role) +
-      '</span>' +
-      '</td>' +
+      '<td>' + esc(u.username) + '</td>' +
+      '<td>' + esc(u.full_name || u.username) + '</td>' +
+      '<td><span class="badge">' +
+        esc(u.role) +
+      '</span></td>' +
 
       '<td>' +
       '<span class="badge" style="' +
@@ -1075,17 +866,13 @@ function renderUsers(users){
 
       '<td>' +
       Number(u.user_ratio ?? 30) +
-      '%' +
-      '</td>' +
+      '%</td>' +
 
       '<td>' +
       Number(u.admin_ratio ?? 70) +
-      '%' +
-      '</td>' +
+      '%</td>' +
 
-      '<td>' +
-
-      '<div class="actions">' +
+      '<td><div class="actions">' +
 
       '<button class="btn secondary" ' +
       'onclick="toggleUser(\'' +
@@ -1103,35 +890,43 @@ function renderUsers(users){
       'Xóa' +
       '</button>' +
 
-      '</div>' +
-
-      '</td>' +
+      '</div></td>' +
 
       '</tr>';
   }
 
   html +=
-    '</tbody>' +
-    '</table>' +
-    '</div>';
+    '</tbody></table></div>';
 
   $("usersBox").innerHTML = html;
 }
 
-/* =========================
-   LOAD ORDERS
-========================= */
+/* ORDERS */
 
 async function loadOrders(){
 
-  if(!currentUser){
-    return [];
-  }
+  if(!currentUser)return [];
 
   /*
-    QUAN TRỌNG:
-    Schema hiện tại của bạn có quantity_mp.
-    Không dùng quantity vì database không có cột đó.
+    ĐÚNG THEO SCHEMA HIỆN TẠI:
+
+    id
+    order_code
+    quantity_mp
+    mpin
+    assigned_user_id
+    status
+    received_at
+    deadline
+    completed_at
+    total_amount
+    user_ratio
+    admin_ratio
+    user_amount
+    admin_amount
+    created_at
+
+    KHÔNG dùng quantity.
   */
 
   let query =
@@ -1185,12 +980,13 @@ async function loadOrders(){
       'Lỗi tải đơn.' +
       '</div>';
 
-    $("sOrders").textContent = "0";
+    $("sOrders").textContent = "Lỗi";
 
     return [];
   }
 
-  const orders = result.data || [];
+  const orders =
+    result.data || [];
 
   $("sOrders").textContent =
     orders.length;
@@ -1219,10 +1015,6 @@ async function loadOrders(){
   return orders;
 }
 
-/* =========================
-   RENDER ORDERS
-========================= */
-
 function renderOrders(
   orders,
   boxId,
@@ -1231,9 +1023,7 @@ function renderOrders(
 
   const box = $(boxId);
 
-  if(!box){
-    return;
-  }
+  if(!box)return;
 
   if(!orders.length){
 
@@ -1249,10 +1039,9 @@ function renderOrders(
     '<div class="table-wrap">' +
     '<table class="table">' +
 
-    '<thead>' +
-    '<tr>' +
+    '<thead><tr>' +
     '<th>Mã đơn</th>' +
-    '<th>SL MP</th>' +
+    '<th>Số lượng MP</th>' +
     '<th>MPIN</th>' +
     '<th>User ID</th>' +
     '<th>Trạng thái</th>' +
@@ -1260,24 +1049,19 @@ function renderOrders(
     '<th>User nhận</th>' +
     '<th>Admin nhận</th>' +
     '<th>Ngày tạo</th>' +
-    '</tr>' +
-    '</thead>' +
-
-    '<tbody>';
+    '</tr></thead><tbody>';
 
   for(const o of orders.slice(0,max)){
 
     html +=
       '<tr>' +
 
-      '<td>' +
-      '<span class="order-code">' +
+      '<td><span class="order-code">' +
       esc(o.order_code) +
-      '</span>' +
-      '</td>' +
+      '</span></td>' +
 
       '<td>' +
-      esc(o.quantity_mp ?? 1) +
+      esc(o.quantity_mp) +
       '</td>' +
 
       '<td>' +
@@ -1288,11 +1072,9 @@ function renderOrders(
       esc(o.assigned_user_id || "—") +
       '</td>' +
 
-      '<td>' +
-      '<span class="badge">' +
+      '<td><span class="badge">' +
       esc(o.status || "—") +
-      '</span>' +
-      '</td>' +
+      '</span></td>' +
 
       '<td>' +
       money(o.total_amount) +
@@ -1319,16 +1101,12 @@ function renderOrders(
   }
 
   html +=
-    '</tbody>' +
-    '</table>' +
-    '</div>';
+    '</tbody></table></div>';
 
   box.innerHTML = html;
 }
 
-/* =========================
-   TRANSACTIONS
-========================= */
+/* TRANSACTIONS */
 
 async function loadTransactions(){
 
@@ -1357,12 +1135,13 @@ async function loadTransactions(){
       esc(result.error.message) +
       '</div>';
 
-    $("sTrans").textContent = "0";
+    $("sTrans").textContent = "Lỗi";
 
     return;
   }
 
-  const rows = result.data || [];
+  const rows =
+    result.data || [];
 
   $("sTrans").textContent =
     rows.length;
@@ -1374,10 +1153,6 @@ async function loadTransactions(){
 
   calcRevenue(rows);
 }
-
-/* =========================
-   GENERIC TABLE
-========================= */
 
 function renderGenericTable(rows,boxId){
 
@@ -1400,20 +1175,15 @@ function renderGenericTable(rows,boxId){
 
   let html =
     '<div class="table-wrap">' +
-    '<table class="table">' +
-    '<thead><tr>';
+    '<table class="table"><thead><tr>';
 
   html += cols
     .map(c =>
-      '<th>' +
-      esc(c) +
-      '</th>'
+      '<th>' + esc(c) + '</th>'
     )
     .join("");
 
-  html +=
-    '</tr></thead>' +
-    '<tbody>';
+  html += '</tr></thead><tbody>';
 
   for(const r of rows){
 
@@ -1441,16 +1211,10 @@ function renderGenericTable(rows,boxId){
   }
 
   html +=
-    '</tbody>' +
-    '</table>' +
-    '</div>';
+    '</tbody></table></div>';
 
   $(boxId).innerHTML = html;
 }
-
-/* =========================
-   REVENUE
-========================= */
 
 function calcRevenue(rows){
 
@@ -1460,40 +1224,28 @@ function calcRevenue(rows){
 
   for(const r of rows){
 
-    total +=
-      Number(
-        r.amount ??
-        r.total_amount ??
-        0
-      );
+    total += Number(
+      r.amount ??
+      r.total_amount ??
+      0
+    );
 
-    admin +=
-      Number(
-        r.admin_amount ?? 0
-      );
+    admin += Number(
+      r.admin_amount ?? 0
+    );
 
-    user +=
-      Number(
-        r.user_amount ?? 0
-      );
+    user += Number(
+      r.user_amount ?? 0
+    );
   }
 
-  $("rCount").textContent =
-    rows.length;
-
-  $("rTotal").textContent =
-    money(total);
-
-  $("rAdmin").textContent =
-    money(admin);
-
-  $("rUser").textContent =
-    money(user);
+  $("rCount").textContent = rows.length;
+  $("rTotal").textContent = money(total);
+  $("rAdmin").textContent = money(admin);
+  $("rUser").textContent = money(user);
 }
 
-/* =========================
-   CREATE USER
-========================= */
+/* CREATE USER */
 
 $("createUser").onclick =
 async function(){
@@ -1514,10 +1266,7 @@ async function(){
 
   if(!username || !password){
 
-    toast(
-      "Thiếu username hoặc mật khẩu"
-    );
-
+    toast("Thiếu username hoặc mật khẩu");
     return;
   }
 
@@ -1536,23 +1285,9 @@ async function(){
 
   if(result.error){
 
-    const msg =
-      result.error.message || "";
-
-    if(
-      msg.includes("USERNAME_EXISTS") ||
-      msg.includes("users_username_key")
-    ){
-
-      toast(
-        "Username đã tồn tại"
-      );
-
-      return;
-    }
-
     toast(
-      "Tạo user lỗi: " + msg
+      "Tạo user lỗi: " +
+      result.error.message
     );
 
     return;
@@ -1567,23 +1302,17 @@ async function(){
   await loadUsers();
 };
 
-/* =========================
-   TOGGLE USER
-========================= */
+/* TOGGLE USER */
 
 async function toggleUser(id,active){
-
-  const newStatus =
-    active
-      ? "locked"
-      : "active";
 
   const result =
     await db.rpc(
       "set_staff_status",
       {
         p_id:id,
-        p_status:newStatus
+        p_status:
+          active ? "locked" : "active"
       }
     );
 
@@ -1598,7 +1327,7 @@ async function toggleUser(id,active){
   }
 
   toast(
-    newStatus === "locked"
+    active
       ? "Đã khóa user"
       : "Đã mở khóa user"
   );
@@ -1606,9 +1335,7 @@ async function toggleUser(id,active){
   await loadUsers();
 }
 
-/* =========================
-   DELETE USER
-========================= */
+/* DELETE USER */
 
 async function deleteUser(id){
 
@@ -1641,20 +1368,16 @@ async function deleteUser(id){
   await loadUsers();
 }
 
-/* =========================
-   ORDER CODE
-========================= */
+/* ORDER CODE */
 
 function generateOrderCode(){
 
   let numbers = "";
 
-  for(let i = 0; i < 10; i++){
+  for(let i=0;i<10;i++){
 
     numbers +=
-      Math.floor(
-        Math.random() * 10
-      );
+      Math.floor(Math.random()*10);
   }
 
   const letters =
@@ -1662,13 +1385,12 @@ function generateOrderCode(){
 
   let chars = "";
 
-  for(let i = 0; i < 2; i++){
+  for(let i=0;i<2;i++){
 
     chars +=
       letters[
         Math.floor(
-          Math.random() *
-          letters.length
+          Math.random()*letters.length
         )
       ];
   }
@@ -1676,27 +1398,23 @@ function generateOrderCode(){
   return numbers + chars;
 }
 
-/* =========================
-   FILL USERS
-========================= */
+/* FILL USERS */
 
 function fillAssignedUsers(users){
 
   const select =
     $("assignedUser");
 
-  if(!select){
-    return;
-  }
+  if(!select)return;
 
   select.innerHTML =
-    '<option value="">' +
-    '-- Chọn user --' +
-    '</option>';
+    '<option value="">-- Chọn user --</option>';
 
   for(const u of users){
 
-    if(u.status !== "active"){
+    if(
+      (u.status || "active") !== "active"
+    ){
       continue;
     }
 
@@ -1714,19 +1432,14 @@ function fillAssignedUsers(users){
   }
 }
 
-/* =========================
-   OPEN CREATE ORDER
-========================= */
+/* OPEN ORDER */
 
 $("newOrderBtn").onclick =
 async function(){
 
   if(currentUser.role !== "admin"){
 
-    toast(
-      "Chỉ admin được tạo đơn"
-    );
-
+    toast("Chỉ admin được tạo đơn");
     return;
   }
 
@@ -1734,7 +1447,9 @@ async function(){
     generateOrderCode();
 
   $("orderMpin").value = "";
-  $("orderQuantity").value = "1";
+
+  $("orderQuantityMp").value = "1";
+
   $("orderAmount").value = "";
 
   $("createOrderPanel").style.display =
@@ -1746,9 +1461,7 @@ async function(){
   fillAssignedUsers(users);
 };
 
-/* =========================
-   CANCEL ORDER
-========================= */
+/* CANCEL */
 
 $("cancelOrder").onclick =
 function(){
@@ -1757,19 +1470,14 @@ function(){
     "none";
 };
 
-/* =========================
-   CREATE ORDER
-========================= */
+/* CREATE ORDER */
 
 $("createOrder").onclick =
 async function(){
 
   if(currentUser.role !== "admin"){
 
-    toast(
-      "Chỉ admin được tạo đơn"
-    );
-
+    toast("Chỉ admin được tạo đơn");
     return;
   }
 
@@ -1779,9 +1487,9 @@ async function(){
   const mpin =
     $("orderMpin").value.trim();
 
-  const quantity =
+  const quantityMp =
     Number(
-      $("orderQuantity").value
+      $("orderQuantityMp").value
     );
 
   const assignedUser =
@@ -1805,8 +1513,8 @@ async function(){
   }
 
   if(
-    !Number.isInteger(quantity) ||
-    quantity < 1
+    !Number.isInteger(quantityMp) ||
+    quantityMp < 1
   ){
 
     toast("Số lượng MP phải từ 1 trở lên");
@@ -1841,9 +1549,11 @@ async function(){
     amount * adminRatio / 100;
 
   /*
-    SCHEMA HIỆN TẠI:
-    quantity_mp NOT NULL
-    mpin integer
+    QUAN TRỌNG:
+
+    Không còn quantity.
+    Dùng quantity_mp đúng tên
+    cột trong database.
   */
 
   const insertData = {
@@ -1852,7 +1562,7 @@ async function(){
       orderCode,
 
     quantity_mp:
-      quantity,
+      quantityMp,
 
     mpin:
       Number(mpin),
@@ -1877,7 +1587,6 @@ async function(){
 
     admin_amount:
       adminAmount
-
   };
 
   const result =
@@ -1893,6 +1602,24 @@ async function(){
       result.error.message || "";
 
     if(
+      msg.toLowerCase().includes(
+        "row-level security"
+      )
+    ){
+
+      toast(
+        "Database đang chặn INSERT do RLS. Cần sửa policy orders."
+      );
+
+      console.error(
+        "RLS ERROR:",
+        result.error
+      );
+
+      return;
+    }
+
+    if(
       msg.includes("duplicate") ||
       msg.includes("unique") ||
       msg.includes("order_code")
@@ -1902,7 +1629,7 @@ async function(){
         generateOrderCode();
 
       toast(
-        "Mã đơn bị trùng, đã tạo mã mới. Bấm Tạo đơn lại."
+        "Mã đơn trùng, mã mới đã được tạo. Bấm Tạo đơn lại."
       );
 
       return;
@@ -1921,8 +1648,7 @@ async function(){
   }
 
   toast(
-    "Đã tạo đơn " +
-    orderCode
+    "Đã tạo đơn " + orderCode
   );
 
   $("createOrderPanel").style.display =
@@ -1931,9 +1657,7 @@ async function(){
   await loadOrders();
 };
 
-/* =========================
-   CHANGE PASSWORD
-========================= */
+/* CHANGE PASSWORD */
 
 $("changePassword").onclick =
 async function(){
@@ -1953,10 +1677,7 @@ async function(){
     !confirmPassword
   ){
 
-    toast(
-      "Nhập đầy đủ thông tin"
-    );
-
+    toast("Nhập đầy đủ thông tin");
     return;
   }
 
@@ -1964,10 +1685,7 @@ async function(){
     newPassword !== confirmPassword
   ){
 
-    toast(
-      "Mật khẩu mới không khớp"
-    );
-
+    toast("Mật khẩu mới không khớp");
     return;
   }
 
@@ -2032,25 +1750,18 @@ async function(){
 
   if(result.data !== true){
 
-    toast(
-      "Không thể đổi mật khẩu"
-    );
-
+    toast("Không thể đổi mật khẩu");
     return;
   }
 
-  toast(
-    "Đổi mật khẩu thành công"
-  );
+  toast("Đổi mật khẩu thành công");
 
   $("oldPassword").value = "";
   $("newPasswordChange").value = "";
   $("confirmPasswordChange").value = "";
 };
 
-/* =========================
-   RATIO
-========================= */
+/* RATIO */
 
 $("saveRatio").onclick =
 function(){
@@ -2072,18 +1783,13 @@ function updateRatioUI(){
   const text =
     ratio +
     "/" +
-    (100 - ratio);
+    (100-ratio);
 
-  $("sRatio").textContent =
-    text;
-
-  $("ratioTop").textContent =
-    text;
+  $("sRatio").textContent = text;
+  $("ratioTop").textContent = text;
 }
 
-/* =========================
-   LOAD ALL
-========================= */
+/* LOAD ALL */
 
 async function loadAll(){
 
@@ -2103,7 +1809,6 @@ async function loadAll(){
     tasks.push(
       loadTransactions()
     );
-
   }
 
   await Promise.all(tasks);
@@ -2111,9 +1816,7 @@ async function loadAll(){
   updateRatioUI();
 }
 
-/* =========================
-   RELOAD ORDERS
-========================= */
+/* RELOAD */
 
 $("reloadOrders").onclick =
 async function(){
@@ -2122,27 +1825,21 @@ async function(){
 
 };
 
-/* =========================
-   LOGIN EVENTS
-========================= */
+/* LOGIN EVENTS */
 
 $("loginBtn").onclick =
 login;
 
 $("password").addEventListener(
   "keydown",
-  function(e){
-
+  e => {
     if(e.key === "Enter"){
       login();
     }
-
   }
 );
 
-/* =========================
-   RESTORE SESSION
-========================= */
+/* RESTORE */
 
 (function restoreSession(){
 
@@ -2153,9 +1850,7 @@ $("password").addEventListener(
         "admin_user"
       );
 
-    if(!saved){
-      return;
-    }
+    if(!saved)return;
 
     const user =
       JSON.parse(saved);
@@ -2169,7 +1864,6 @@ $("password").addEventListener(
     ){
 
       currentUser = user;
-
       showApp();
     }
 
@@ -2180,7 +1874,6 @@ $("password").addEventListener(
     sessionStorage.removeItem(
       "admin_user"
     );
-
   }
 
 })();
@@ -2189,3 +1882,4 @@ $("password").addEventListener(
 
 </body>
 </html>
+
