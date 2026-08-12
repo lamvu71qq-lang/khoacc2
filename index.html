@@ -1,322 +1,423 @@
 <!DOCTYPE html>
+
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quản lý doanh thu</title>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <style>
-    body{
-      font-family:Arial,sans-serif;
-      background:#f4f4f4;
-      margin:0;
-      padding:20px;
-    }
-    .box{
-      max-width:1000px;
-      margin:auto;
-      background:#fff;
-      padding:20px;
-      border-radius:10px;
-      box-shadow:0 2px 10px rgba(0,0,0,.1);
-    }
-    h2,h3{
-      color:#2563eb;
-    }
-    input{
-      padding:10px;
-      margin:5px;
-      width:180px;
-    }
-    button{
-      padding:10px 15px;
-      background:#16a34a;
-      color:#fff;
-      border:none;
-      border-radius:5px;
-      cursor:pointer;
-    }
-    button:hover{
-      background:#15803d;
-    }
-    table{
-      width:100%;
-      border-collapse:collapse;
-      margin-top:15px;
-    }
-    th,td{
-      border:1px solid #ddd;
-      padding:10px;
-      text-align:center;
-    }
-    th{
-      background:#2563eb;
-      color:white;
-    }
-    .revenue{
-      margin-top:15px;
-      font-size:24px;
-      font-weight:bold;
-      color:#dc2626;
-      text-align:right;
-    }
-    .hidden{
-      display:none;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard Quản Lý Doanh Thu</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+:root{
+  --bg:#0f172a;
+  --sidebar:#111827;
+  --card:#1f2937;
+  --border:#374151;
+  --text:#f9fafb;
+  --muted:#9ca3af;
+  --accent:#3b82f6;
+  --success:#22c55e;
+  --warning:#f59e0b;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+.hidden{display:none}
+
+.login{
+  width:380px;
+  margin:80px auto;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:24px;
+}
+
+.login input{
+  width:100%;
+  padding:10px;
+  margin:10px 0;
+  border-radius:10px;
+  border:1px solid var(--border);
+  background:#0b1220;
+  color:#fff;
+}
+
+.login button{
+  width:100%;
+  padding:10px;
+  border:none;
+  border-radius:10px;
+  background:var(--accent);
+  color:white;
+  cursor:pointer;
+}
+
+.app{
+  display:flex;
+  min-height:100vh;
+}
+
+.sidebar{
+  width:240px;
+  background:var(--sidebar);
+  border-right:1px solid var(--border);
+  padding:20px;
+}
+
+.sidebar h2{
+  margin:0 0 20px;
+}
+
+.menu button{
+  width:100%;
+  padding:12px;
+  margin:6px 0;
+  background:transparent;
+  color:white;
+  border:1px solid var(--border);
+  border-radius:10px;
+  cursor:pointer;
+  text-align:left;
+}
+
+.menu button:hover,
+.menu button.active{
+  background:var(--accent);
+}
+
+.main{
+  flex:1;
+  padding:24px;
+}
+
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:18px;
+}
+
+.card h3{
+  margin:0;
+  font-size:14px;
+  color:var(--muted);
+}
+
+.card .value{
+  font-size:26px;
+  font-weight:bold;
+  margin-top:8px;
+}
+
+.section{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:20px;
+  margin-top:20px;
+}
+
+.section h3{
+  margin-top:0;
+}
+
+input,select{
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+  border-radius:10px;
+  border:1px solid var(--border);
+  background:#0b1220;
+  color:white;
+}
+
+.primary{
+  background:var(--accent);
+  color:white;
+  border:none;
+  border-radius:10px;
+  padding:10px 16px;
+  cursor:pointer;
+}
+
+.success{
+  background:var(--success);
+  color:white;
+  border:none;
+  border-radius:8px;
+  padding:8px 12px;
+  cursor:pointer;
+}
+
+.warn{
+  background:var(--warning);
+  color:black;
+  border:none;
+  border-radius:8px;
+  padding:8px 12px;
+  cursor:pointer;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+th,td{
+  padding:12px;
+  border-bottom:1px solid var(--border);
+  text-align:left;
+}
+
+.small{
+  color:var(--muted);
+  font-size:13px;
+}
+</style>
+
 </head>
 <body>
 
-<div class="box">
+<!-- LOGIN -->
 
-  <!-- ĐĂNG NHẬP -->
-  <div id="loginBox">
-    <h2>Đăng nhập hệ thống</h2>
-    <input id="username" value="admin" placeholder="Tài khoản">
-    <input id="password" type="password" value="1" placeholder="Mật khẩu">
-    <button onclick="login()">Đăng nhập</button>
+<div id="loginView" class="login">
+  <h2>Đăng nhập</h2>
+  <div class="small">Tài khoản mặc định: admin / 1</div>
+
+  <input id="username" value="admin" placeholder="Tài khoản">
+  <input id="password" type="password" value="1" placeholder="Mật khẩu">
+
+<button onclick="login()">Đăng nhập</button>
+
+  <div id="loginMsg" class="small"></div>
+</div>
+
+<!-- APP -->
+
+<div id="app" class="app hidden">
+
+  <!-- SIDEBAR -->
+
+  <aside class="sidebar">
+
+```
+<h2>Dashboard</h2>
+
+<div class="menu">
+  <button class="active">Tổng quan</button>
+  <button>Đơn hàng chưa nhận</button>
+  <button>Đơn hàng đang nhận</button>
+  <button>Tạo đơn hàng</button>
+  <button>Tạo user</button>
+  <button>Doanh thu</button>
+  <button onclick="logout()">Đăng xuất</button>
+</div>
+```
+
+  </aside>
+
+  <!-- MAIN -->
+
+  <main class="main">
+
+```
+<div class="header">
+  <div>
+    <h2 style="margin:0">Quản lý doanh thu</h2>
+    <div id="userInfo" class="small"></div>
+  </div>
+  <div id="clock" class="small"></div>
+</div>
+
+<!-- DASHBOARD -->
+<div class="grid">
+
+  <div class="card">
+    <h3>Tổng đơn</h3>
+    <div class="value" id="totalOrders">0</div>
   </div>
 
-  <!-- ỨNG DỤNG -->
-  <div id="app" class="hidden">
+  <div class="card">
+    <h3>Đơn chưa nhận</h3>
+    <div class="value" id="pendingOrders">0</div>
+  </div>
 
-    <h2>Quản lý đơn hàng & doanh thu</h2>
+  <div class="card">
+    <h3>Đơn đang nhận</h3>
+    <div class="value" id="receivedOrders">0</div>
+  </div>
 
-    <div id="userInfo"></div>
-    <button onclick="logout()">Đăng xuất</button>
-
-    <!-- ADMIN -->
-    <div id="adminPanel" class="hidden">
-
-      <hr>
-
-      <h3>Thêm đơn hàng</h3>
-
-      <input id="product" placeholder="Tên sản phẩm">
-      <input id="quantity" type="number" placeholder="Số lượng">
-      <input id="price" type="number" placeholder="Đơn giá">
-
-      <button onclick="addOrder()">Thêm đơn hàng</button>
-
-      <hr>
-
-      <h3>Tạo tài khoản nhân viên</h3>
-
-      <input id="staffUser" placeholder="Tài khoản nhân viên">
-      <input id="staffPass" placeholder="Mật khẩu">
-
-      <button onclick="createStaff()">Tạo nhân viên</button>
-
-    </div>
-
-    <hr>
-
-    <h3>Danh sách đơn hàng</h3>
-
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Sản phẩm</th>
-          <th>Số lượng</th>
-          <th>Đơn giá</th>
-          <th>Thành tiền</th>
-          <th>Người tạo</th>
-        </tr>
-      </thead>
-      <tbody id="orderTable"></tbody>
-    </table>
-
-    <div class="revenue" id="revenue">
-      Tổng doanh thu: 0 VNĐ
-    </div>
-
+  <div class="card">
+    <h3>Tổng doanh thu</h3>
+    <div class="value" id="totalRevenue">0đ</div>
   </div>
 
 </div>
 
-<script>
-const SUPABASE_URL = "https://kcefcigkeglvxmfmtrqc.supabase.co";
-const SUPABASE_KEY = "sb_publishable_fM2oUc3igkLmF4ZP_lMeMA_pBzKh_0o";
+<!-- TẠO ĐƠN -->
+<div class="section">
 
+  <h3>Tạo đơn hàng</h3>
+
+  <input id="product" placeholder="Tên sản phẩm">
+  <input id="quantity" type="number" placeholder="Số lượng">
+  <input id="price" type="number" placeholder="Đơn giá">
+
+  <select id="commission">
+    <option value="50/50">Hoa hồng 50/50</option>
+    <option value="60/40">Hoa hồng 60/40</option>
+  </select>
+
+  <button class="primary">Lưu đơn hàng</button>
+
+</div>
+
+<!-- TẠO USER -->
+<div class="section">
+
+  <h3>Tạo user</h3>
+
+  <input id="newUser" placeholder="Tài khoản">
+  <input id="newPass" placeholder="Mật khẩu">
+
+  <select id="role">
+    <option value="staff">Nhân viên</option>
+    <option value="admin">Admin</option>
+  </select>
+
+  <button class="primary">Tạo user</button>
+
+</div>
+
+<!-- BẢNG ĐƠN -->
+<div class="section">
+
+  <h3>Đơn hàng chưa nhận</h3>
+
+  <table>
+
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Sản phẩm</th>
+        <th>SL</th>
+        <th>Tổng</th>
+        <th>Hoa hồng</th>
+        <th>Trạng thái</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody id="orderTable">
+
+      <tr>
+        <td>1</td>
+        <td>iPhone 15</td>
+        <td>1</td>
+        <td>20.000.000đ</td>
+        <td>50/50</td>
+        <td>Chưa nhận</td>
+        <td>
+          <button class="success">Đã nhận</button>
+        </td>
+      </tr>
+
+    </tbody>
+
+  </table>
+
+</div>
+
+<!-- DOANH THU -->
+<div class="section">
+
+  <h3>Doanh thu & Hoa hồng</h3>
+
+  <table>
+
+    <thead>
+      <tr>
+        <th>Tỷ lệ</th>
+        <th>Doanh thu</th>
+        <th>Công ty</th>
+        <th>Nhân viên</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <tr>
+        <td>50/50</td>
+        <td>20.000.000đ</td>
+        <td>10.000.000đ</td>
+        <td>10.000.000đ</td>
+      </tr>
+
+      <tr>
+        <td>60/40</td>
+        <td>0đ</td>
+        <td>0đ</td>
+        <td>0đ</td>
+      </tr>
+
+    </tbody>
+
+  </table>
+
+</div>
+```
+
+  </main>
+
+</div>
+
+<script>
+const SUPABASE_URL = 'https://kcefcigkeglvxmfmtrqc.supabase.co';
+const SUPABASE_KEY = 'YOUR_SUPABASE_KEY';
 const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-let currentUser = null;
+function login(){
+  const user=document.getElementById('username').value;
+  const pass=document.getElementById('password').value;
 
-async function login(){
-
-  const username =
-    document.getElementById('username').value.trim();
-
-  const password =
-    document.getElementById('password').value;
-
-  const {data,error} =
-    await db
-      .from('users')
-      .select('*')
-      .eq('username',username)
-      .eq('password',password)
-      .single();
-
-  if(error || !data){
-    alert('Sai tài khoản hoặc mật khẩu');
-    return;
+  if(user==='admin' && pass==='1'){
+    document.getElementById('loginView').classList.add('hidden');
+    document.getElementById('app').classList.remove('hidden');
+    document.getElementById('userInfo').innerText='admin (admin)';
+  }else{
+    document.getElementById('loginMsg').innerText='Sai tài khoản hoặc mật khẩu';
   }
-
-  currentUser = data;
-
-  document.getElementById('loginBox').classList.add('hidden');
-  document.getElementById('app').classList.remove('hidden');
-
-  document.getElementById('userInfo').innerHTML =
-    '<b>Xin chào:</b> ' +
-    data.username +
-    ' (' + data.role + ')';
-
-  if(data.role === 'admin'){
-    document
-      .getElementById('adminPanel')
-      .classList.remove('hidden');
-  }
-
-  loadOrders();
 }
 
 function logout(){
-  currentUser = null;
   location.reload();
 }
 
-async function loadOrders(){
-
-  const {data,error} =
-    await db
-      .from('orders')
-      .select('*')
-      .order('id',{ascending:true});
-
-  if(error){
-    console.error(error);
-    return;
-  }
-
-  const tbody =
-    document.getElementById('orderTable');
-
-  tbody.innerHTML = '';
-
-  let revenue = 0;
-
-  data.forEach(item => {
-
-    revenue += Number(item.total);
-
-    tbody.innerHTML += `
-      <tr>
-        <td>${item.id}</td>
-        <td>${item.product}</td>
-        <td>${item.quantity}</td>
-        <td>${Number(item.price).toLocaleString('vi-VN')}</td>
-        <td>${Number(item.total).toLocaleString('vi-VN')}</td>
-        <td>${item.created_by || ''}</td>
-      </tr>
-    `;
-
-  });
-
-  document.getElementById('revenue').innerText =
-    'Tổng doanh thu: ' +
-    revenue.toLocaleString('vi-VN') +
-    ' VNĐ';
-
-}
-
-async function addOrder(){
-
-  if(currentUser.role !== 'admin'){
-    alert('Chỉ admin được thêm đơn hàng');
-    return;
-  }
-
-  const product =
-    document.getElementById('product').value.trim();
-
-  const quantity =
-    Number(document.getElementById('quantity').value);
-
-  const price =
-    Number(document.getElementById('price').value);
-
-  if(!product || quantity <= 0 || price <= 0){
-    alert('Nhập đầy đủ thông tin');
-    return;
-  }
-
-  const total = quantity * price;
-
-  const {error} =
-    await db
-      .from('orders')
-      .insert({
-        product,
-        quantity,
-        price,
-        total,
-        created_by: currentUser.username
-      });
-
-  if(error){
-    alert(error.message);
-    return;
-  }
-
-  document.getElementById('product').value = '';
-  document.getElementById('quantity').value = '';
-  document.getElementById('price').value = '';
-
-  loadOrders();
-
-}
-
-async function createStaff(){
-
-  if(currentUser.role !== 'admin'){
-    alert('Chỉ admin được tạo nhân viên');
-    return;
-  }
-
-  const username =
-    document.getElementById('staffUser').value.trim();
-
-  const password =
-    document.getElementById('staffPass').value;
-
-  if(!username || !password){
-    alert('Nhập tài khoản và mật khẩu');
-    return;
-  }
-
-  const {error} =
-    await db
-      .from('users')
-      .insert({
-        username,
-        password,
-        role:'staff'
-      });
-
-  if(error){
-    alert(error.message);
-    return;
-  }
-
-  alert('Đã tạo nhân viên');
-
-  document.getElementById('staffUser').value = '';
-  document.getElementById('staffPass').value = '';
-
-}
+setInterval(()=>{
+  document.getElementById('clock').innerText=
+    new Date().toLocaleString('vi-VN');
+},1000);
 </script>
 
 </body>
