@@ -1510,8 +1510,17 @@ async function loadAll(){
       );
 
 
-    $("sUsers").textContent =
-      staffUsers.length;
+   const {
+  data: userCount,
+  error: userCountError
+} = await db.rpc("count_staff_users");
+
+if (userCountError) {
+  console.error(userCountError);
+  $("sUsers").textContent = "Lỗi";
+} else {
+  $("sUsers").textContent = userCount ?? 0;
+}
 
 
     if(currentUser.role === "admin"){
