@@ -1,4 +1,3 @@
-```html
 <!doctype html>
 <html lang="vi">
 <head>
@@ -15,7 +14,7 @@ body{
   margin:0;
   font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   background:#0b0d10;
-  color:#f3f4f6
+  color:#f3f4f6;
 }
 
 button,input,select{font:inherit}
@@ -25,7 +24,7 @@ button{cursor:pointer}
   min-height:100vh;
   display:grid;
   place-items:center;
-  padding:20px
+  padding:20px;
 }
 
 .card{
@@ -34,16 +33,17 @@ button{cursor:pointer}
   border-radius:18px;
   padding:24px;
   width:min(420px,100%);
-  box-shadow:0 20px 70px #0008
+  box-shadow:0 20px 70px #0008;
 }
 
 .logo{
   font-size:28px;
   font-weight:800;
-  margin-bottom:6px
+  margin-bottom:6px;
 }
 
 .muted{color:#929aa6}
+.small{font-size:12px}
 
 .field{margin:14px 0}
 
@@ -51,7 +51,7 @@ button{cursor:pointer}
   display:block;
   font-size:13px;
   color:#aab2bd;
-  margin-bottom:7px
+  margin-bottom:7px;
 }
 
 .field input,
@@ -62,12 +62,12 @@ button{cursor:pointer}
   color:#fff;
   border-radius:10px;
   padding:12px;
-  outline:none
+  outline:none;
 }
 
 .field input:focus,
 .field select:focus{
-  border-color:#6ee7b7
+  border-color:#6ee7b7;
 }
 
 .btn{
@@ -76,33 +76,28 @@ button{cursor:pointer}
   padding:11px 15px;
   background:#20c77a;
   color:#04150d;
-  font-weight:700
+  font-weight:700;
 }
 
 .btn.secondary{
   background:#242b34;
-  color:#fff
+  color:#fff;
 }
 
 .btn.danger{
   background:#ef4444;
-  color:#fff
-}
-
-.btn.warning{
-  background:#eab308;
-  color:#171100
+  color:#fff;
 }
 
 .btn.full{
   width:100%;
-  margin-top:8px
+  margin-top:8px;
 }
 
 .error{
   color:#ff7d7d;
   margin-top:10px;
-  font-size:14px
+  font-size:14px;
 }
 
 .app{display:none}
@@ -117,7 +112,7 @@ button{cursor:pointer}
   padding:14px 18px;
   display:flex;
   align-items:center;
-  justify-content:space-between
+  justify-content:space-between;
 }
 
 .top b{font-size:18px}
@@ -125,19 +120,19 @@ button{cursor:pointer}
 .top .right{
   display:flex;
   gap:10px;
-  align-items:center
+  align-items:center;
 }
 
 .layout{
   display:flex;
-  min-height:calc(100vh - 64px)
+  min-height:calc(100vh - 64px);
 }
 
 .side{
   width:230px;
   border-right:1px solid #252b33;
   padding:14px;
-  background:#0e1115
+  background:#0e1115;
 }
 
 .nav{
@@ -149,19 +144,19 @@ button{cursor:pointer}
   color:#aeb6c2;
   padding:12px;
   border-radius:9px;
-  margin:3px 0
+  margin:3px 0;
 }
 
 .nav.active,
 .nav:hover{
   background:#1a2027;
-  color:#fff
+  color:#fff;
 }
 
 .main{
   flex:1;
   padding:20px;
-  min-width:0
+  min-width:0;
 }
 
 .page{display:none}
@@ -170,20 +165,20 @@ button{cursor:pointer}
 .grid{
   display:grid;
   grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:12px
+  gap:12px;
 }
 
 .stat{
   background:#13171c;
   border:1px solid #252b33;
   border-radius:14px;
-  padding:16px
+  padding:16px;
 }
 
 .stat .v{
   font-size:25px;
   font-weight:800;
-  margin-top:8px
+  margin-top:8px;
 }
 
 .panel{
@@ -191,29 +186,29 @@ button{cursor:pointer}
   border:1px solid #252b33;
   border-radius:14px;
   padding:16px;
-  margin-top:14px
+  margin-top:14px;
 }
 
 .panel h3{
-  margin:0 0 14px
+  margin:0 0 14px;
 }
 
 .actions{
   display:flex;
   gap:8px;
-  flex-wrap:wrap
+  flex-wrap:wrap;
 }
 
 .table-wrap{
   overflow:auto;
   border:1px solid #252b33;
-  border-radius:12px
+  border-radius:12px;
 }
 
 .table{
   width:100%;
   border-collapse:collapse;
-  min-width:850px
+  min-width:850px;
 }
 
 .table th,
@@ -222,12 +217,12 @@ button{cursor:pointer}
   padding:11px;
   border-bottom:1px solid #252b33;
   font-size:13px;
-  white-space:nowrap
+  white-space:nowrap;
 }
 
 .table th{
   color:#9da6b2;
-  background:#101419
+  background:#101419;
 }
 
 .badge{
@@ -235,32 +230,20 @@ button{cursor:pointer}
   border-radius:99px;
   background:#25302b;
   color:#75e2ac;
-  font-size:12px
-}
-
-.badge.locked{
-  background:#3a2020;
-  color:#ff8585
-}
-
-.badge.pending{
-  background:#332c18;
-  color:#facc15
+  font-size:12px;
 }
 
 .form-grid{
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:12px
+  gap:12px;
 }
 
 .empty{
   padding:25px;
   text-align:center;
-  color:#8e97a3
+  color:#8e97a3;
 }
-
-.small{font-size:12px}
 
 .toast{
   position:fixed;
@@ -272,12 +255,12 @@ button{cursor:pointer}
   border-radius:10px;
   border:1px solid #343d47;
   display:none;
-  z-index:20
+  z-index:20;
 }
 
 .order-code{
   font-weight:800;
-  letter-spacing:1px
+  letter-spacing:1px;
 }
 
 @media(max-width:800px){
@@ -299,9 +282,7 @@ button{cursor:pointer}
 
 <body>
 
-<!-- LOGIN -->
 <div id="login" class="login">
-
   <div class="card">
 
     <div class="logo">⚡ Admin Panel</div>
@@ -312,17 +293,12 @@ button{cursor:pointer}
 
     <div class="field">
       <label>Tài khoản</label>
-      <input id="username"
-             autocomplete="username"
-             placeholder="Username">
+      <input id="username" autocomplete="username" placeholder="Username">
     </div>
 
     <div class="field">
       <label>Mật khẩu</label>
-      <input id="password"
-             type="password"
-             autocomplete="current-password"
-             placeholder="••••••••">
+      <input id="password" type="password" autocomplete="current-password">
     </div>
 
     <button id="loginBtn" class="btn full">
@@ -334,15 +310,13 @@ button{cursor:pointer}
   </div>
 </div>
 
-
-<!-- APP -->
-<div id="app">
+<div id="app" class="app">
 
 <header class="top">
 
   <div>
     <b>⚡ Admin Panel</b>
-    <div id="who" class="muted small"></div>
+    <div class="muted small sub" id="who"></div>
   </div>
 
   <div class="right">
@@ -351,14 +325,13 @@ button{cursor:pointer}
       70/30
     </span>
 
-    <button id="logout" class="btn secondary">
+    <button class="btn secondary" id="logout">
       Đăng xuất
     </button>
 
   </div>
 
 </header>
-
 
 <div class="layout">
 
@@ -390,10 +363,8 @@ button{cursor:pointer}
 
 </aside>
 
-
 <main class="main">
 
-<!-- DASHBOARD -->
 <section id="dashboard" class="page active">
 
   <h2>Tổng quan</h2>
@@ -411,8 +382,8 @@ button{cursor:pointer}
     </div>
 
     <div class="stat">
-      <div class="muted">Đơn đang xử lý</div>
-      <div id="sPending" class="v">—</div>
+      <div class="muted">Giao dịch</div>
+      <div id="sTrans" class="v">—</div>
     </div>
 
     <div class="stat">
@@ -434,103 +405,19 @@ button{cursor:pointer}
 
 </section>
 
-
-<!-- ORDERS -->
 <section id="orders" class="page">
 
   <h2>Đơn hàng</h2>
-
-  <!-- CHỈ ADMIN THẤY -->
-  <div id="createOrderPanel" class="panel admin-page">
-
-    <h3>+ Tạo đơn hàng</h3>
-
-    <div class="form-grid">
-
-      <div class="field">
-
-        <label>Mã đơn</label>
-
-        <div style="display:flex;gap:8px">
-
-          <input id="orderCode"
-                 readonly
-                 placeholder="Tự tạo">
-
-          <button id="newCode"
-                  class="btn secondary">
-            Tạo mã
-          </button>
-
-        </div>
-
-      </div>
-
-
-      <div class="field">
-
-        <label>Số lượng</label>
-
-        <input id="orderQuantity"
-               type="number"
-               min="1"
-               value="1">
-
-      </div>
-
-
-      <div class="field">
-
-        <label>MPIN</label>
-
-        <input id="orderMpin"
-               type="number"
-               min="0"
-               placeholder="MPIN">
-
-      </div>
-
-
-      <div class="field">
-
-        <label>User nhận đơn</label>
-
-        <select id="assignedUser">
-
-          <option value="">
-            Chọn user
-          </option>
-
-        </select>
-
-      </div>
-
-
-      <div class="field">
-
-        <label>Deadline</label>
-
-        <input id="orderDeadline"
-               type="datetime-local">
-
-      </div>
-
-    </div>
-
-    <button id="createOrder"
-            class="btn">
-      Tạo đơn hàng
-    </button>
-
-  </div>
-
 
   <div class="panel">
 
     <div class="actions">
 
-      <button id="reloadOrders"
-              class="btn secondary">
+      <button class="btn" id="newOrderBtn">
+        + Tạo đơn
+      </button>
+
+      <button class="btn secondary" id="reloadOrders">
         ↻ Tải lại
       </button>
 
@@ -541,16 +428,76 @@ button{cursor:pointer}
          style="margin-top:10px">
     </div>
 
-    <div id="ordersBox"
-         style="margin-top:12px">
+    <div id="ordersBox" style="margin-top:12px"></div>
+
+  </div>
+
+  <div id="createOrderPanel"
+       class="panel"
+       style="display:none">
+
+    <h3>Tạo đơn hàng</h3>
+
+    <div class="field">
+      <label>Mã đơn</label>
+      <input id="orderCode" readonly>
+    </div>
+
+    <div class="field">
+      <label>MPIN</label>
+      <input
+        id="orderMpin"
+        type="number"
+        placeholder="Nhập MPIN"
+      >
+    </div>
+
+    <div class="field">
+      <label>Số lượng MP</label>
+      <input
+        id="orderQuantity"
+        type="number"
+        min="1"
+        step="1"
+        value="1"
+        placeholder="Số lượng"
+      >
+    </div>
+
+    <div class="field">
+      <label>Người nhận user con</label>
+      <select id="assignedUser">
+        <option value="">-- Chọn user --</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Tổng tiền</label>
+      <input
+        id="orderAmount"
+        type="number"
+        min="0"
+        step="1"
+        placeholder="Nhập số tiền"
+      >
+    </div>
+
+    <div class="actions">
+
+      <button class="btn" id="createOrder">
+        Tạo đơn
+      </button>
+
+      <button class="btn secondary" id="cancelOrder">
+        Hủy
+      </button>
+
     </div>
 
   </div>
 
 </section>
 
-
-<!-- USERS -->
 <section id="users" class="page admin-page">
 
   <h2>Nhân viên / User con</h2>
@@ -563,40 +510,32 @@ button{cursor:pointer}
 
       <div class="field">
         <label>Username</label>
-        <input id="newUsername"
-               placeholder="Username">
+        <input id="newUsername" placeholder="Username">
       </div>
 
       <div class="field">
         <label>Mật khẩu</label>
-        <input id="newPassword"
-               type="password"
-               placeholder="Mật khẩu">
+        <input id="newPassword" type="password" placeholder="Mật khẩu">
       </div>
 
       <div class="field">
         <label>Tên hiển thị</label>
-        <input id="newName"
-               placeholder="Tên user">
+        <input id="newName" placeholder="Tên nhân viên">
       </div>
 
     </div>
 
-    <button id="createUser"
-            class="btn">
+    <button class="btn" id="createUser">
       + Tạo user con
     </button>
 
   </div>
 
-
   <div class="panel">
 
     <h3>
       Danh sách user con
-      <span id="userCountText"
-            class="muted small">
-      </span>
+      <span id="userCountText" class="muted small"></span>
     </h3>
 
     <div id="usersBox">
@@ -609,8 +548,6 @@ button{cursor:pointer}
 
 </section>
 
-
-<!-- REVENUE -->
 <section id="revenue" class="page admin-page">
 
   <h2>Doanh thu</h2>
@@ -618,7 +555,7 @@ button{cursor:pointer}
   <div class="grid">
 
     <div class="stat">
-      <div class="muted">Tổng đơn</div>
+      <div class="muted">Tổng giao dịch</div>
       <div id="rCount" class="v">—</div>
     </div>
 
@@ -641,44 +578,32 @@ button{cursor:pointer}
 
   <div class="panel">
 
-    <h3>Doanh thu theo đơn</h3>
+    <h3>Transactions</h3>
 
-    <div id="revenueBox"></div>
+    <div id="transBox"></div>
 
   </div>
 
 </section>
 
-
-<!-- SETTINGS -->
 <section id="settings" class="page admin-page">
 
   <h2>Cài đặt</h2>
 
   <div class="panel">
 
-    <h3>Tỷ lệ chia</h3>
-
     <div class="field">
 
-      <label>Tỷ lệ Admin</label>
+      <label>Tỷ lệ</label>
 
       <select id="ratioSelect">
-
-        <option value="70">
-          Admin 70% — User 30%
-        </option>
-
-        <option value="60">
-          Admin 60% — User 40%
-        </option>
-
+        <option value="70">70/30</option>
+        <option value="60">60/40</option>
       </select>
 
     </div>
 
-    <button id="saveRatio"
-            class="btn">
+    <button class="btn" id="saveRatio">
       Lưu tỷ lệ
     </button>
 
@@ -686,8 +611,6 @@ button{cursor:pointer}
 
 </section>
 
-
-<!-- ACCOUNT -->
 <section id="account" class="page">
 
   <h2>Tài khoản</h2>
@@ -696,52 +619,38 @@ button{cursor:pointer}
 
     <h3>Thông tin</h3>
 
-    <p class="muted">
+    <div class="muted">
       Username:
       <b id="accountUsername"></b>
-    </p>
+    </div>
 
-    <p class="muted">
+    <div class="muted" style="margin-top:7px">
       Quyền:
       <b id="accountRole"></b>
-    </p>
+    </div>
 
   </div>
-
 
   <div class="panel">
 
     <h3>Đổi mật khẩu</h3>
 
     <div class="field">
-
       <label>Mật khẩu hiện tại</label>
-
-      <input id="oldPassword"
-             type="password">
-
+      <input id="oldPassword" type="password">
     </div>
 
     <div class="field">
-
       <label>Mật khẩu mới</label>
-
-      <input id="newPasswordChange"
-             type="password">
-
+      <input id="newPasswordChange" type="password">
     </div>
 
     <div class="field">
-
       <label>Nhập lại mật khẩu mới</label>
-
-      <input id="confirmPasswordChange"
-             type="password">
-
+      <input id="confirmPasswordChange" type="password">
     </div>
 
-    <button id="changePassword"
-            class="btn">
+    <button class="btn" id="changePassword">
       Đổi mật khẩu
     </button>
 
@@ -753,134 +662,93 @@ button{cursor:pointer}
 </div>
 </div>
 
-
 <div id="toast" class="toast"></div>
-
 
 <script>
 
-/* =========================
-   SUPABASE
-========================= */
-
 const SUPABASE_URL =
-"https://jatrtdrwmmtlcncrpzek.supabase.co";
+  "https://jatrtdrwmmtlcncrpzek.supabase.co";
 
 const SUPABASE_KEY =
-"sb_publishable_NA5LNdCng3nUfzgtlXJwYg_FtteJnYN";
+  "sb_publishable_NA5LNdCng3nUfzgtlXJwYg_FtteJnYN";
 
 const db =
-window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
-
-
-/* =========================
-   STATE
-========================= */
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
 
 let currentUser = null;
 let ratio = 70;
-let staffUsers = [];
-let allOrders = [];
 
+const $ = id => document.getElementById(id);
 
 /* =========================
-   HELPERS
+   TOAST
 ========================= */
-
-const $ = id =>
-document.getElementById(id);
-
 
 function toast(msg){
 
   $("toast").textContent = msg;
   $("toast").style.display = "block";
 
-  clearTimeout(window.__toastTimer);
+  clearTimeout(window.toastTimer);
 
-  window.__toastTimer =
+  window.toastTimer =
     setTimeout(() => {
       $("toast").style.display = "none";
-    },2500);
+    }, 3000);
 }
 
+/* =========================
+   MONEY
+========================= */
 
-function esc(v){
+function money(value){
 
-  return String(v ?? "")
-    .replace(/[&<>"']/g,m => ({
-      "&":"&amp;",
-      "<":"&lt;",
-      ">":"&gt;",
-      '"':"&quot;",
-      "'":"&#39;"
-    }[m]));
-}
-
-
-function money(v){
-
-  return Number(v || 0)
+  return Number(value || 0)
     .toLocaleString("vi-VN") + " đ";
 }
 
-
-function formatDate(v){
-
-  if(!v) return "";
-
-  const d = new Date(v);
-
-  if(Number.isNaN(d.getTime()))
-    return esc(v);
-
-  return d.toLocaleString("vi-VN");
-}
-
-
 /* =========================
-   MÃ ĐƠN
-   10 SỐ + 2 CHỮ HOA
+   ESCAPE HTML
 ========================= */
 
-function generateOrderCode(){
+function esc(value){
 
-  let numbers = "";
+  return String(value ?? "")
+    .replace(/[&<>"']/g, function(m){
 
-  for(let i=0;i<10;i++){
+      return {
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#39;"
+      }[m];
 
-    numbers +=
-      Math.floor(Math.random()*10);
-
-  }
-
-  const letters =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-  const a =
-    letters[
-      Math.floor(Math.random()*letters.length)
-    ];
-
-  const b =
-    letters[
-      Math.floor(Math.random()*letters.length)
-    ];
-
-  return numbers + a + b;
+    });
 }
 
+/* =========================
+   SHA256
+========================= */
 
-$("newCode").onclick = () => {
+async function sha256(text){
 
-  $("orderCode").value =
-    generateOrderCode();
+  const buffer =
+    await crypto.subtle.digest(
+      "SHA-256",
+      new TextEncoder().encode(text)
+    );
 
-};
-
+  return "$sha256$" +
+    [...new Uint8Array(buffer)]
+      .map(x =>
+        x.toString(16).padStart(2,"0")
+      )
+      .join("");
+}
 
 /* =========================
    LOGIN
@@ -904,69 +772,75 @@ async function login(){
     return;
   }
 
-  $("loginBtn").disabled = true;
+  const btn = $("loginBtn");
 
-  const {
-    data,
-    error
-  } = await db.rpc(
-    "login_user",
-    {
-      p_username: username,
-      p_password: password
+  btn.disabled = true;
+  btn.textContent = "Đang đăng nhập...";
+
+  try{
+
+    const result =
+      await db.rpc(
+        "login_user",
+        {
+          p_username: username,
+          p_password: password
+        }
+      );
+
+    if(result.error){
+
+      $("loginError").textContent =
+        "Lỗi đăng nhập: " +
+        result.error.message;
+
+      return;
     }
-  );
 
-  $("loginBtn").disabled = false;
+    const data = result.data;
 
-  if(error){
+    if(!data || !data.length){
+
+      $("loginError").textContent =
+        "Sai tài khoản, mật khẩu hoặc tài khoản bị khóa.";
+
+      return;
+    }
+
+    currentUser = data[0];
+
+    if(
+      currentUser.role !== "admin" &&
+      currentUser.role !== "staff"
+    ){
+
+      $("loginError").textContent =
+        "Tài khoản không có quyền truy cập.";
+
+      currentUser = null;
+
+      return;
+    }
+
+    sessionStorage.setItem(
+      "admin_user",
+      JSON.stringify(currentUser)
+    );
+
+    showApp();
+
+  }catch(error){
 
     $("loginError").textContent =
-      error.message;
+      "Lỗi: " + error.message;
 
-    return;
+  }finally{
+
+    btn.disabled = false;
+    btn.textContent = "Đăng nhập";
+
   }
-
-  if(!data || !data.length){
-
-    $("loginError").textContent =
-      "Sai tài khoản, mật khẩu hoặc tài khoản bị khóa.";
-
-    return;
-  }
-
-  currentUser = data[0];
-
-  if(
-    currentUser.role !== "admin" &&
-    currentUser.role !== "staff"
-  ){
-
-    $("loginError").textContent =
-      "Tài khoản không có quyền truy cập.";
-
-    return;
-  }
-
-  sessionStorage.setItem(
-    "panel_user",
-    JSON.stringify(currentUser)
-  );
-
-  showApp();
 }
-
-
-$("loginBtn").onclick = login;
-
-$("password").addEventListener(
-  "keydown",
-  e => {
-    if(e.key === "Enter")
-      login();
-  }
-);
-
 
 /* =========================
    SHOW APP
@@ -974,16 +848,17 @@ $("password").addEventListener(
 
 function showApp(){
 
+  if(!currentUser){
+    return;
+  }
+
   $("login").style.display = "none";
   $("app").style.display = "block";
-
-  const isAdmin =
-    currentUser.role === "admin";
 
   $("who").textContent =
     currentUser.username +
     " • " +
-    currentUser.full_name +
+    (currentUser.full_name || "") +
     " • " +
     currentUser.role;
 
@@ -993,8 +868,20 @@ function showApp(){
   $("accountRole").textContent =
     currentUser.role;
 
+  const isAdmin =
+    currentUser.role === "admin";
+
   document
-    .querySelectorAll(".admin-only,.admin-page")
+    .querySelectorAll(".admin-only")
+    .forEach(el => {
+
+      el.style.display =
+        isAdmin ? "block" : "none";
+
+    });
+
+  document
+    .querySelectorAll(".admin-page")
     .forEach(el => {
 
       el.style.display =
@@ -1002,12 +889,15 @@ function showApp(){
 
     });
 
-  $("createOrderPanel").style.display =
-    isAdmin ? "" : "none";
+  $("newOrderBtn").style.display =
+    isAdmin ? "inline-block" : "none";
+
+  if(!isAdmin){
+    $("sUsers").textContent = "—";
+  }
 
   loadAll();
 }
-
 
 /* =========================
    LOGOUT
@@ -1015,60 +905,54 @@ function showApp(){
 
 $("logout").onclick = () => {
 
-  sessionStorage.removeItem(
-    "panel_user"
-  );
+  sessionStorage.removeItem("admin_user");
+
+  currentUser = null;
 
   location.reload();
 };
-
 
 /* =========================
    NAVIGATION
 ========================= */
 
 document
-.querySelectorAll(".nav")
-.forEach(btn => {
+  .querySelectorAll(".nav")
+  .forEach(btn => {
 
-  btn.onclick = () => {
+    btn.onclick = () => {
 
-    const page =
-      btn.dataset.page;
+      if(
+        btn.classList.contains("admin-only") &&
+        currentUser.role !== "admin"
+      ){
+        return;
+      }
 
-    if(
-      btn.classList.contains("admin-only") &&
-      currentUser.role !== "admin"
-    )
-      return;
+      document
+        .querySelectorAll(".nav")
+        .forEach(x =>
+          x.classList.remove("active")
+        );
 
-    document
-      .querySelectorAll(".nav")
-      .forEach(x =>
-        x.classList.remove("active")
-      );
+      btn.classList.add("active");
 
-    btn.classList.add("active");
+      document
+        .querySelectorAll(".page")
+        .forEach(x =>
+          x.classList.remove("active")
+        );
 
-    document
-      .querySelectorAll(".page")
-      .forEach(x =>
-        x.classList.remove("active")
-      );
+      const page =
+        $(btn.dataset.page);
 
-    $(page).classList.add("active");
+      if(page){
+        page.classList.add("active");
+      }
 
-    if(page === "orders")
-      loadOrders();
+    };
 
-    if(page === "users" &&
-       currentUser.role === "admin")
-      loadUsers();
-
-  };
-
-});
-
+  });
 
 /* =========================
    LOAD USERS
@@ -1076,361 +960,163 @@ document
 
 async function loadUsers(){
 
-  if(currentUser.role !== "admin")
-    return;
+  if(
+    !currentUser ||
+    currentUser.role !== "admin"
+  ){
+    return [];
+  }
 
-  const {
-    data,
-    error
-  } =
-    await db.rpc(
-      "get_staff_users"
-    );
+  const result =
+    await db
+      .from("users")
+      .select(
+        "id,username,full_name,role,status,user_ratio,admin_ratio"
+      )
+      .eq("role","staff")
+      .order("username",{ascending:true});
 
-  if(error){
+  if(result.error){
 
     $("usersBox").innerHTML =
-      `<div class="empty">
-        Lỗi tải user: ${esc(error.message)}
-      </div>`;
+      '<div class="empty">' +
+      'Lỗi tải user: ' +
+      esc(result.error.message) +
+      '</div>';
 
-    return;
+    $("sUsers").textContent = "0";
+
+    $("userCountText").textContent =
+      "(lỗi tải dữ liệu)";
+
+    return [];
   }
 
-  staffUsers =
-    data || [];
+  const users = result.data || [];
 
   $("sUsers").textContent =
-    staffUsers.length;
+    users.length;
 
   $("userCountText").textContent =
-    "• " + staffUsers.length + " user";
+    "(" + users.length + " user)";
 
-  renderUsers();
+  renderUsers(users);
+  fillAssignedUsers(users);
 
-  loadAssignedUsers();
+  return users;
 }
 
+/* =========================
+   RENDER USERS
+========================= */
 
-function renderUsers(){
+function renderUsers(users){
 
-  const box =
-    $("usersBox");
+  if(!users.length){
 
-  if(!staffUsers.length){
-
-    box.innerHTML =
-      `<div class="empty">
-        Chưa có user con.
-      </div>`;
+    $("usersBox").innerHTML =
+      '<div class="empty">' +
+      'Chưa có user con.' +
+      '</div>';
 
     return;
   }
 
-  let html = `
-    <div class="table-wrap">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Username</th>
-          <th>Tên</th>
-          <th>Role</th>
-          <th>Trạng thái</th>
-          <th>User %</th>
-          <th>Admin %</th>
-          <th>Thao tác</th>
-        </tr>
-      </thead>
-      <tbody>
-  `;
+  let html =
+    '<div class="table-wrap">' +
+    '<table class="table">' +
 
-  for(const u of staffUsers){
+    '<thead>' +
+    '<tr>' +
+    '<th>Username</th>' +
+    '<th>Tên</th>' +
+    '<th>Role</th>' +
+    '<th>Trạng thái</th>' +
+    '<th>User %</th>' +
+    '<th>Admin %</th>' +
+    '<th>Thao tác</th>' +
+    '</tr>' +
+    '</thead>' +
+
+    '<tbody>';
+
+  for(const u of users){
 
     const active =
-      u.status === "active";
+      (u.status || "active") === "active";
 
-    html += `
-      <tr>
+    html +=
+      '<tr>' +
 
-        <td>
-          <b>${esc(u.username)}</b>
-        </td>
+      '<td>' +
+      esc(u.username) +
+      '</td>' +
 
-        <td>
-          ${esc(u.full_name || "")}
-        </td>
+      '<td>' +
+      esc(u.full_name || u.username) +
+      '</td>' +
 
-        <td>
-          <span class="badge">
-            ${esc(u.role)}
-          </span>
-        </td>
+      '<td>' +
+      '<span class="badge">' +
+      esc(u.role) +
+      '</span>' +
+      '</td>' +
 
-        <td>
-          <span class="badge ${
-            active ? "" : "locked"
-          }">
-            ${
-              active
-              ? "Đang hoạt động"
-              : "Đã khóa"
-            }
-          </span>
-        </td>
+      '<td>' +
+      '<span class="badge" style="' +
+      'background:' +
+      (active ? "#25302b" : "#3a2020") +
+      ';color:' +
+      (active ? "#75e2ac" : "#ff8585") +
+      '">' +
+      (active ? "Đang hoạt động" : "Đã khóa") +
+      '</span>' +
+      '</td>' +
 
-        <td>
-          ${Number(u.user_ratio ?? 30)}%
-        </td>
+      '<td>' +
+      Number(u.user_ratio ?? 30) +
+      '%' +
+      '</td>' +
 
-        <td>
-          ${Number(u.admin_ratio ?? 70)}%
-        </td>
+      '<td>' +
+      Number(u.admin_ratio ?? 70) +
+      '%' +
+      '</td>' +
 
-        <td>
+      '<td>' +
 
-          <div class="actions">
+      '<div class="actions">' +
 
-            <button
-              class="btn ${
-                active
-                ? "warning"
-                : "secondary"
-              }"
-              onclick="toggleStaff('${u.id}',${active})"
-            >
-              ${
-                active
-                ? "Khóa"
-                : "Mở khóa"
-              }
-            </button>
+      '<button class="btn secondary" ' +
+      'onclick="toggleUser(\'' +
+      u.id +
+      '\',' +
+      active +
+      ')">' +
+      (active ? "Khóa" : "Mở khóa") +
+      '</button>' +
 
-            <button
-              class="btn danger"
-              onclick="deleteStaff('${u.id}')"
-            >
-              Xóa
-            </button>
+      '<button class="btn danger" ' +
+      'onclick="deleteUser(\'' +
+      u.id +
+      '\')">' +
+      'Xóa' +
+      '</button>' +
 
-          </div>
+      '</div>' +
 
-        </td>
+      '</td>' +
 
-      </tr>
-    `;
+      '</tr>';
   }
 
-  html += `
-      </tbody>
-    </table>
-    </div>
-  `;
+  html +=
+    '</tbody>' +
+    '</table>' +
+    '</div>';
 
-  box.innerHTML = html;
+  $("usersBox").innerHTML = html;
 }
-
-
-/* =========================
-   TOGGLE STAFF
-========================= */
-
-async function toggleStaff(id,active){
-
-  const {
-    data,
-    error
-  } =
-    await db.rpc(
-      "set_staff_status",
-      {
-        p_id:id,
-        p_status:
-          active ? "locked" : "active"
-      }
-    );
-
-  if(error){
-
-    toast(
-      "Lỗi: " + error.message
-    );
-
-    return;
-  }
-
-  toast(
-    active
-    ? "Đã khóa user"
-    : "Đã mở khóa user"
-  );
-
-  loadUsers();
-}
-
-
-/* =========================
-   DELETE STAFF
-========================= */
-
-async function deleteStaff(id){
-
-  if(
-    !confirm(
-      "Xóa user này? Không thể hoàn tác."
-    )
-  )
-    return;
-
-  const {
-    data,
-    error
-  } =
-    await db.rpc(
-      "delete_staff",
-      {
-        p_id:id
-      }
-    );
-
-  if(error){
-
-    toast(
-      "Xóa lỗi: " +
-      error.message
-    );
-
-    return;
-  }
-
-  toast("Đã xóa user");
-
-  loadUsers();
-}
-
-
-/* =========================
-   CREATE USER
-========================= */
-
-$("createUser").onclick =
-async () => {
-
-  const username =
-    $("newUsername").value.trim();
-
-  const password =
-    $("newPassword").value;
-
-  const fullName =
-    $("newName").value.trim();
-
-  if(!username || !password){
-
-    toast(
-      "Nhập username và mật khẩu"
-    );
-
-    return;
-  }
-
-  if(password.length < 4){
-
-    toast(
-      "Mật khẩu tối thiểu 4 ký tự"
-    );
-
-    return;
-  }
-
-  const {
-    data,
-    error
-  } =
-    await db.rpc(
-      "create_user_by_admin",
-      {
-        p_username:username,
-        p_password:password,
-        p_full_name:
-          fullName || username
-      }
-    );
-
-  if(error){
-
-    if(
-      error.message.includes(
-        "USERNAME_EXISTS"
-      ) ||
-      error.message.includes(
-        "users_username_key"
-      )
-    ){
-
-      toast(
-        "Username đã tồn tại"
-      );
-
-      return;
-    }
-
-    toast(
-      "Tạo user lỗi: " +
-      error.message
-    );
-
-    return;
-  }
-
-  toast("Đã tạo user con");
-
-  $("newUsername").value = "";
-  $("newPassword").value = "";
-  $("newName").value = "";
-
-  await loadUsers();
-};
-
-
-/* =========================
-   LOAD ASSIGNED USERS
-========================= */
-
-async function loadAssignedUsers(){
-
-  if(currentUser.role !== "admin")
-    return;
-
-  const select =
-    $("assignedUser");
-
-  select.innerHTML =
-    `<option value="">
-      Chọn user
-    </option>`;
-
-  for(const u of staffUsers){
-
-    if(u.status !== "active")
-      continue;
-
-    const opt =
-      document.createElement("option");
-
-    opt.value = u.id;
-
-    opt.textContent =
-      u.username +
-      (
-        u.full_name
-        ? " — " + u.full_name
-        : ""
-      );
-
-    select.appendChild(opt);
-  }
-}
-
 
 /* =========================
    LOAD ORDERS
@@ -1438,13 +1124,23 @@ async function loadAssignedUsers(){
 
 async function loadOrders(){
 
+  if(!currentUser){
+    return [];
+  }
+
+  /*
+    QUAN TRỌNG:
+    Schema hiện tại của bạn có quantity_mp.
+    Không dùng quantity vì database không có cột đó.
+  */
+
   let query =
     db
       .from("orders")
       .select(`
         id,
         order_code,
-        quantity,
+        quantity_mp,
         mpin,
         assigned_user_id,
         status,
@@ -1462,7 +1158,7 @@ async function loadOrders(){
         "created_at",
         {ascending:false}
       )
-      .limit(200);
+      .limit(100);
 
   if(currentUser.role === "staff"){
 
@@ -1471,183 +1167,559 @@ async function loadOrders(){
         "assigned_user_id",
         currentUser.id
       );
-
   }
 
-  const {
-    data,
-    error
-  } = await query;
+  const result =
+    await query;
 
-  if(error){
+  if(result.error){
 
     $("ordersBox").innerHTML =
-      `<div class="empty">
-        Lỗi tải đơn: ${esc(error.message)}
-      </div>`;
+      '<div class="empty">' +
+      'Lỗi tải đơn: ' +
+      esc(result.error.message) +
+      '</div>';
 
-    return;
+    $("recentOrders").innerHTML =
+      '<div class="empty">' +
+      'Lỗi tải đơn.' +
+      '</div>';
+
+    $("sOrders").textContent = "0";
+
+    return [];
   }
 
-  allOrders =
-    data || [];
-
-  renderOrders(
-    allOrders
-  );
-}
-
-
-function renderOrders(rows){
+  const orders = result.data || [];
 
   $("sOrders").textContent =
-    rows.length;
-
-  $("sPending").textContent =
-    rows.filter(
-      x =>
-        !["completed","done","cancelled"]
-        .includes(
-          String(x.status || "")
-            .toLowerCase()
-        )
-    ).length;
+    orders.length;
 
   $("ordersInfo").textContent =
     currentUser.role === "admin"
-      ? `Tổng ${rows.length} đơn`
-      : `Đơn được giao cho ${currentUser.username}: ${rows.length}`;
+      ? "Đang hiển thị " +
+        orders.length +
+        " đơn"
+      : "Bạn được xem " +
+        orders.length +
+        " đơn được giao";
 
-  if(!rows.length){
+  renderOrders(
+    orders,
+    "ordersBox",
+    100
+  );
 
-    $("ordersBox").innerHTML =
-      `<div class="empty">
-        Chưa có đơn hàng.
-      </div>`;
+  renderOrders(
+    orders,
+    "recentOrders",
+    5
+  );
 
-    $("recentOrders").innerHTML =
-      `<div class="empty">
-        Chưa có đơn hàng.
-      </div>`;
+  return orders;
+}
+
+/* =========================
+   RENDER ORDERS
+========================= */
+
+function renderOrders(
+  orders,
+  boxId,
+  max
+){
+
+  const box = $(boxId);
+
+  if(!box){
+    return;
+  }
+
+  if(!orders.length){
+
+    box.innerHTML =
+      '<div class="empty">' +
+      'Chưa có đơn hàng.' +
+      '</div>';
 
     return;
   }
 
-  const html = buildOrdersTable(rows);
+  let html =
+    '<div class="table-wrap">' +
+    '<table class="table">' +
 
-  $("ordersBox").innerHTML =
-    html;
+    '<thead>' +
+    '<tr>' +
+    '<th>Mã đơn</th>' +
+    '<th>SL MP</th>' +
+    '<th>MPIN</th>' +
+    '<th>User ID</th>' +
+    '<th>Trạng thái</th>' +
+    '<th>Tổng tiền</th>' +
+    '<th>User nhận</th>' +
+    '<th>Admin nhận</th>' +
+    '<th>Ngày tạo</th>' +
+    '</tr>' +
+    '</thead>' +
 
-  $("recentOrders").innerHTML =
-    buildOrdersTable(
-      rows.slice(0,5),
-      true
-    );
-}
+    '<tbody>';
 
+  for(const o of orders.slice(0,max)){
 
-function buildOrdersTable(
-  rows,
-  compact=false
-){
+    html +=
+      '<tr>' +
 
-  let html = `
-    <div class="table-wrap">
-    <table class="table">
+      '<td>' +
+      '<span class="order-code">' +
+      esc(o.order_code) +
+      '</span>' +
+      '</td>' +
 
-      <thead>
-        <tr>
-          <th>Mã đơn</th>
-          <th>Số lượng</th>
-          <th>MPIN</th>
-          <th>Trạng thái</th>
-          <th>Deadline</th>
-          <th>Tổng tiền</th>
-          <th>Tạo lúc</th>
-        </tr>
-      </thead>
+      '<td>' +
+      esc(o.quantity_mp ?? 1) +
+      '</td>' +
 
-      <tbody>
-  `;
+      '<td>' +
+      esc(o.mpin) +
+      '</td>' +
 
-  for(const o of rows){
+      '<td>' +
+      esc(o.assigned_user_id || "—") +
+      '</td>' +
 
-    let status =
-      String(o.status || "pending");
+      '<td>' +
+      '<span class="badge">' +
+      esc(o.status || "—") +
+      '</span>' +
+      '</td>' +
 
-    let cls = "";
+      '<td>' +
+      money(o.total_amount) +
+      '</td>' +
 
-    if(
-      ["completed","done"]
-      .includes(status.toLowerCase())
-    ){
-      cls = "";
-    }
-    else if(
-      ["cancelled","cancel","locked"]
-      .includes(status.toLowerCase())
-    ){
-      cls = "locked";
-    }
-    else{
-      cls = "pending";
-    }
+      '<td>' +
+      money(o.user_amount) +
+      '</td>' +
 
-    html += `
-      <tr>
+      '<td>' +
+      money(o.admin_amount) +
+      '</td>' +
 
-        <td>
-          <span class="order-code">
-            ${esc(o.order_code)}
-          </span>
-        </td>
+      '<td>' +
+      (
+        o.created_at
+          ? new Date(o.created_at)
+              .toLocaleString("vi-VN")
+          : "—"
+      ) +
+      '</td>' +
 
-        <td>
-          ${esc(o.quantity)}
-        </td>
-
-        <td>
-          ${esc(o.mpin)}
-        </td>
-
-        <td>
-          <span class="badge ${cls}">
-            ${esc(status)}
-          </span>
-        </td>
-
-        <td>
-          ${formatDate(o.deadline)}
-        </td>
-
-        <td>
-          ${money(o.total_amount)}
-        </td>
-
-        <td>
-          ${formatDate(o.created_at)}
-        </td>
-
-      </tr>
-    `;
+      '</tr>';
   }
 
-  html += `
-      </tbody>
-    </table>
-    </div>
-  `;
+  html +=
+    '</tbody>' +
+    '</table>' +
+    '</div>';
 
-  return html;
+  box.innerHTML = html;
 }
 
-
 /* =========================
-   CREATE ORDER
+   TRANSACTIONS
 ========================= */
 
-$("createOrder").onclick =
-async () => {
+async function loadTransactions(){
+
+  if(
+    !currentUser ||
+    currentUser.role !== "admin"
+  ){
+    return;
+  }
+
+  const result =
+    await db
+      .from("transactions")
+      .select("*")
+      .order(
+        "created_at",
+        {ascending:false}
+      )
+      .limit(100);
+
+  if(result.error){
+
+    $("transBox").innerHTML =
+      '<div class="empty">' +
+      'Lỗi tải giao dịch: ' +
+      esc(result.error.message) +
+      '</div>';
+
+    $("sTrans").textContent = "0";
+
+    return;
+  }
+
+  const rows = result.data || [];
+
+  $("sTrans").textContent =
+    rows.length;
+
+  renderGenericTable(
+    rows,
+    "transBox"
+  );
+
+  calcRevenue(rows);
+}
+
+/* =========================
+   GENERIC TABLE
+========================= */
+
+function renderGenericTable(rows,boxId){
+
+  if(!rows.length){
+
+    $(boxId).innerHTML =
+      '<div class="empty">' +
+      'Chưa có dữ liệu.' +
+      '</div>';
+
+    return;
+  }
+
+  const cols =
+    [...new Set(
+      rows.flatMap(
+        r => Object.keys(r)
+      )
+    )];
+
+  let html =
+    '<div class="table-wrap">' +
+    '<table class="table">' +
+    '<thead><tr>';
+
+  html += cols
+    .map(c =>
+      '<th>' +
+      esc(c) +
+      '</th>'
+    )
+    .join("");
+
+  html +=
+    '</tr></thead>' +
+    '<tbody>';
+
+  for(const r of rows){
+
+    html += '<tr>';
+
+    for(const c of cols){
+
+      let value = r[c];
+
+      if(
+        value !== null &&
+        typeof value === "object"
+      ){
+        value =
+          JSON.stringify(value);
+      }
+
+      html +=
+        '<td>' +
+        esc(value) +
+        '</td>';
+    }
+
+    html += '</tr>';
+  }
+
+  html +=
+    '</tbody>' +
+    '</table>' +
+    '</div>';
+
+  $(boxId).innerHTML = html;
+}
+
+/* =========================
+   REVENUE
+========================= */
+
+function calcRevenue(rows){
+
+  let total = 0;
+  let admin = 0;
+  let user = 0;
+
+  for(const r of rows){
+
+    total +=
+      Number(
+        r.amount ??
+        r.total_amount ??
+        0
+      );
+
+    admin +=
+      Number(
+        r.admin_amount ?? 0
+      );
+
+    user +=
+      Number(
+        r.user_amount ?? 0
+      );
+  }
+
+  $("rCount").textContent =
+    rows.length;
+
+  $("rTotal").textContent =
+    money(total);
+
+  $("rAdmin").textContent =
+    money(admin);
+
+  $("rUser").textContent =
+    money(user);
+}
+
+/* =========================
+   CREATE USER
+========================= */
+
+$("createUser").onclick =
+async function(){
+
+  if(currentUser.role !== "admin"){
+    toast("Chỉ admin được tạo user");
+    return;
+  }
+
+  const username =
+    $("newUsername").value.trim();
+
+  const password =
+    $("newPassword").value;
+
+  const name =
+    $("newName").value.trim();
+
+  if(!username || !password){
+
+    toast(
+      "Thiếu username hoặc mật khẩu"
+    );
+
+    return;
+  }
+
+  const hash =
+    await sha256(password);
+
+  const result =
+    await db.rpc(
+      "create_user_by_admin",
+      {
+        p_username: username,
+        p_password_hash: hash,
+        p_full_name: name || username
+      }
+    );
+
+  if(result.error){
+
+    const msg =
+      result.error.message || "";
+
+    if(
+      msg.includes("USERNAME_EXISTS") ||
+      msg.includes("users_username_key")
+    ){
+
+      toast(
+        "Username đã tồn tại"
+      );
+
+      return;
+    }
+
+    toast(
+      "Tạo user lỗi: " + msg
+    );
+
+    return;
+  }
+
+  toast("Đã tạo user con");
+
+  $("newUsername").value = "";
+  $("newPassword").value = "";
+  $("newName").value = "";
+
+  await loadUsers();
+};
+
+/* =========================
+   TOGGLE USER
+========================= */
+
+async function toggleUser(id,active){
+
+  const newStatus =
+    active
+      ? "locked"
+      : "active";
+
+  const result =
+    await db.rpc(
+      "set_staff_status",
+      {
+        p_id:id,
+        p_status:newStatus
+      }
+    );
+
+  if(result.error){
+
+    toast(
+      "Lỗi khóa user: " +
+      result.error.message
+    );
+
+    return;
+  }
+
+  toast(
+    newStatus === "locked"
+      ? "Đã khóa user"
+      : "Đã mở khóa user"
+  );
+
+  await loadUsers();
+}
+
+/* =========================
+   DELETE USER
+========================= */
+
+async function deleteUser(id){
+
+  if(!confirm(
+    "Bạn chắc chắn muốn xóa user này?"
+  )){
+    return;
+  }
+
+  const result =
+    await db.rpc(
+      "delete_staff",
+      {
+        p_id:id
+      }
+    );
+
+  if(result.error){
+
+    toast(
+      "Xóa lỗi: " +
+      result.error.message
+    );
+
+    return;
+  }
+
+  toast("Đã xóa user");
+
+  await loadUsers();
+}
+
+/* =========================
+   ORDER CODE
+========================= */
+
+function generateOrderCode(){
+
+  let numbers = "";
+
+  for(let i = 0; i < 10; i++){
+
+    numbers +=
+      Math.floor(
+        Math.random() * 10
+      );
+  }
+
+  const letters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+  let chars = "";
+
+  for(let i = 0; i < 2; i++){
+
+    chars +=
+      letters[
+        Math.floor(
+          Math.random() *
+          letters.length
+        )
+      ];
+  }
+
+  return numbers + chars;
+}
+
+/* =========================
+   FILL USERS
+========================= */
+
+function fillAssignedUsers(users){
+
+  const select =
+    $("assignedUser");
+
+  if(!select){
+    return;
+  }
+
+  select.innerHTML =
+    '<option value="">' +
+    '-- Chọn user --' +
+    '</option>';
+
+  for(const u of users){
+
+    if(u.status !== "active"){
+      continue;
+    }
+
+    const option =
+      document.createElement("option");
+
+    option.value = u.id;
+
+    option.textContent =
+      u.username +
+      " • " +
+      (u.full_name || "");
+
+    select.appendChild(option);
+  }
+}
+
+/* =========================
+   OPEN CREATE ORDER
+========================= */
+
+$("newOrderBtn").onclick =
+async function(){
 
   if(currentUser.role !== "admin"){
 
@@ -1658,38 +1730,77 @@ async () => {
     return;
   }
 
-  let orderCode =
+  $("orderCode").value =
+    generateOrderCode();
+
+  $("orderMpin").value = "";
+  $("orderQuantity").value = "1";
+  $("orderAmount").value = "";
+
+  $("createOrderPanel").style.display =
+    "block";
+
+  const users =
+    await loadUsers();
+
+  fillAssignedUsers(users);
+};
+
+/* =========================
+   CANCEL ORDER
+========================= */
+
+$("cancelOrder").onclick =
+function(){
+
+  $("createOrderPanel").style.display =
+    "none";
+};
+
+/* =========================
+   CREATE ORDER
+========================= */
+
+$("createOrder").onclick =
+async function(){
+
+  if(currentUser.role !== "admin"){
+
+    toast(
+      "Chỉ admin được tạo đơn"
+    );
+
+    return;
+  }
+
+  const orderCode =
     $("orderCode").value.trim();
 
-  if(!orderCode){
-
-    orderCode =
-      generateOrderCode();
-
-    $("orderCode").value =
-      orderCode;
-  }
+  const mpin =
+    $("orderMpin").value.trim();
 
   const quantity =
     Number(
       $("orderQuantity").value
     );
 
-  const mpinRaw =
-    $("orderMpin").value.trim();
-
   const assignedUser =
     $("assignedUser").value;
 
-  const deadlineRaw =
-    $("orderDeadline").value;
-
-  if(!assignedUser){
-
-    toast(
-      "Chọn user nhận đơn"
+  const amount =
+    Number(
+      $("orderAmount").value
     );
 
+  if(!orderCode){
+
+    toast("Mã đơn không hợp lệ");
+    return;
+  }
+
+  if(!mpin){
+
+    toast("Nhập MPIN");
     return;
   }
 
@@ -1698,105 +1809,112 @@ async () => {
     quantity < 1
   ){
 
-    toast(
-      "Số lượng không hợp lệ"
-    );
-
+    toast("Số lượng MP phải từ 1 trở lên");
     return;
   }
 
-  let deadline = null;
+  if(!assignedUser){
 
-  if(deadlineRaw){
-
-    deadline =
-      new Date(
-        deadlineRaw
-      ).toISOString();
+    toast("Chọn user nhận đơn");
+    return;
   }
 
-  const user =
-    staffUsers.find(
-      x => x.id === assignedUser
-    );
+  if(
+    !Number.isFinite(amount) ||
+    amount < 0
+  ){
+
+    toast("Số tiền không hợp lệ");
+    return;
+  }
 
   const userRatio =
-    Number(
-      user?.user_ratio ??
-      (100-ratio)
-    );
+    100 - ratio;
 
   const adminRatio =
-    Number(
-      user?.admin_ratio ??
-      ratio
-    );
-
-  /*
-    total_amount hiện chưa có ô nhập
-    nên để 0. Sau này có thể thêm
-    giá trị tiền nếu hệ thống cần.
-  */
-
-  const totalAmount = 0;
+    ratio;
 
   const userAmount =
-    totalAmount *
-    userRatio / 100;
+    amount * userRatio / 100;
 
   const adminAmount =
-    totalAmount *
-    adminRatio / 100;
+    amount * adminRatio / 100;
 
-  const insertRow = {
-    order_code:orderCode,
-    quantity:quantity,
+  /*
+    SCHEMA HIỆN TẠI:
+    quantity_mp NOT NULL
+    mpin integer
+  */
+
+  const insertData = {
+
+    order_code:
+      orderCode,
+
+    quantity_mp:
+      quantity,
+
     mpin:
-      mpinRaw === ""
-      ? null
-      : Number(mpinRaw),
-    assigned_user_id:assignedUser,
-    status:"pending",
-    deadline:deadline,
-    total_amount:totalAmount,
-    user_ratio:userRatio,
-    admin_ratio:adminRatio,
-    user_amount:userAmount,
-    admin_amount:adminAmount
+      Number(mpin),
+
+    assigned_user_id:
+      assignedUser,
+
+    status:
+      "pending",
+
+    total_amount:
+      amount,
+
+    user_ratio:
+      userRatio,
+
+    admin_ratio:
+      adminRatio,
+
+    user_amount:
+      userAmount,
+
+    admin_amount:
+      adminAmount
+
   };
 
-  const {
-    data,
-    error
-  } =
+  const result =
     await db
       .from("orders")
-      .insert(insertRow)
+      .insert(insertData)
       .select()
       .single();
 
-  if(error){
+  if(result.error){
+
+    const msg =
+      result.error.message || "";
 
     if(
-      error.message &&
-      error.message.includes(
-        "order_code"
-      )
+      msg.includes("duplicate") ||
+      msg.includes("unique") ||
+      msg.includes("order_code")
     ){
-
-      toast(
-        "Mã đơn đã tồn tại, bấm Tạo mã rồi thử lại"
-      );
 
       $("orderCode").value =
         generateOrderCode();
+
+      toast(
+        "Mã đơn bị trùng, đã tạo mã mới. Bấm Tạo đơn lại."
+      );
 
       return;
     }
 
     toast(
-      "Tạo đơn lỗi: " +
-      error.message
+      "Tạo đơn lỗi: " + msg
+    );
+
+    console.error(
+      "CREATE ORDER ERROR:",
+      result.error
     );
 
     return;
@@ -1807,32 +1925,18 @@ async () => {
     orderCode
   );
 
-  $("orderCode").value =
-    generateOrderCode();
+  $("createOrderPanel").style.display =
+    "none";
 
-  $("orderQuantity").value = 1;
-  $("orderMpin").value = "";
-  $("assignedUser").value = "";
-  $("orderDeadline").value = "";
-
-  loadOrders();
+  await loadOrders();
 };
-
-
-/* =========================
-   RELOAD
-========================= */
-
-$("reloadOrders").onclick =
-loadOrders;
-
 
 /* =========================
    CHANGE PASSWORD
 ========================= */
 
 $("changePassword").onclick =
-async () => {
+async function(){
 
   const oldPassword =
     $("oldPassword").value;
@@ -1856,56 +1960,80 @@ async () => {
     return;
   }
 
-  if(newPassword.length < 4){
+  if(
+    newPassword !== confirmPassword
+  ){
 
     toast(
-      "Mật khẩu mới tối thiểu 4 ký tự"
+      "Mật khẩu mới không khớp"
     );
 
     return;
   }
 
-  if(newPassword !== confirmPassword){
+  const check =
+    await db.rpc(
+      "login_user",
+      {
+        p_username:
+          currentUser.username,
+
+        p_password:
+          oldPassword
+      }
+    );
+
+  if(check.error){
 
     toast(
-      "Mật khẩu nhập lại không khớp"
+      "Lỗi kiểm tra mật khẩu: " +
+      check.error.message
     );
 
     return;
   }
 
-  const {
-    data,
-    error
-  } =
+  if(
+    !check.data ||
+    !check.data.length
+  ){
+
+    toast(
+      "Mật khẩu hiện tại không đúng"
+    );
+
+    return;
+  }
+
+  const newHash =
+    await sha256(newPassword);
+
+  const result =
     await db.rpc(
       "change_user_password",
       {
         p_username:
           currentUser.username,
 
-        p_old_password:
-          oldPassword,
-
-        p_new_password:
-          newPassword
+        p_new_password_hash:
+          newHash
       }
     );
 
-  if(error){
+  if(result.error){
 
     toast(
       "Đổi mật khẩu lỗi: " +
-      error.message
+      result.error.message
     );
 
     return;
   }
 
-  if(!data){
+  if(result.data !== true){
 
     toast(
-      "Mật khẩu hiện tại không đúng"
+      "Không thể đổi mật khẩu"
     );
 
     return;
@@ -1920,144 +2048,38 @@ async () => {
   $("confirmPasswordChange").value = "";
 };
 
-
-/* =========================
-   REVENUE
-========================= */
-
-function calculateRevenue(){
-
-  const rows =
-    allOrders || [];
-
-  let total = 0;
-  let admin = 0;
-  let user = 0;
-
-  for(const o of rows){
-
-    total += Number(
-      o.total_amount || 0
-    );
-
-    admin += Number(
-      o.admin_amount || 0
-    );
-
-    user += Number(
-      o.user_amount || 0
-    );
-  }
-
-  $("rCount").textContent =
-    rows.length;
-
-  $("rTotal").textContent =
-    money(total);
-
-  $("rAdmin").textContent =
-    money(admin);
-
-  $("rUser").textContent =
-    money(user);
-
-  let html = "";
-
-  if(!rows.length){
-
-    html =
-      `<div class="empty">
-        Chưa có dữ liệu doanh thu.
-      </div>`;
-
-  }else{
-
-    html = `
-      <div class="table-wrap">
-      <table class="table">
-
-        <thead>
-          <tr>
-            <th>Mã đơn</th>
-            <th>Tổng tiền</th>
-            <th>Admin</th>
-            <th>User</th>
-            <th>Tỷ lệ</th>
-          </tr>
-        </thead>
-
-        <tbody>
-    `;
-
-    for(const o of rows){
-
-      html += `
-        <tr>
-
-          <td>
-            ${esc(o.order_code)}
-          </td>
-
-          <td>
-            ${money(o.total_amount)}
-          </td>
-
-          <td>
-            ${money(o.admin_amount)}
-          </td>
-
-          <td>
-            ${money(o.user_amount)}
-          </td>
-
-          <td>
-            ${Number(o.admin_ratio ?? 70)}/
-            ${Number(o.user_ratio ?? 30)}
-          </td>
-
-        </tr>
-      `;
-    }
-
-    html += `
-        </tbody>
-      </table>
-      </div>
-    `;
-  }
-
-  $("revenueBox").innerHTML =
-    html;
-}
-
-
 /* =========================
    RATIO
 ========================= */
 
 $("saveRatio").onclick =
-async () => {
+function(){
 
   ratio =
     Number(
       $("ratioSelect").value
     );
 
-  $("sRatio").textContent =
-    ratio === 70
-      ? "70/30"
-      : "60/40";
-
-  $("ratioTop").textContent =
-    ratio === 70
-      ? "70/30"
-      : "60/40";
+  updateRatioUI();
 
   toast(
-    "Đã đổi tỷ lệ mặc định"
+    "Đã đổi tỷ lệ trên giao diện"
   );
 };
 
+function updateRatioUI(){
+
+  const text =
+    ratio +
+    "/" +
+    (100 - ratio);
+
+  $("sRatio").textContent =
+    text;
+
+  $("ratioTop").textContent =
+    text;
+}
 
 /* =========================
    LOAD ALL
@@ -2065,71 +2087,105 @@ async () => {
 
 async function loadAll(){
 
-  await loadOrders();
+  $("sUsers").textContent = "…";
+  $("sOrders").textContent = "…";
+
+  const tasks = [
+    loadOrders()
+  ];
 
   if(currentUser.role === "admin"){
 
-    await loadUsers();
+    tasks.push(
+      loadUsers()
+    );
 
-    calculateRevenue();
+    tasks.push(
+      loadTransactions()
+    );
 
   }
 
-  $("sRatio").textContent =
-    ratio === 70
-      ? "70/30"
-      : "60/40";
+  await Promise.all(tasks);
+
+  updateRatioUI();
 }
 
+/* =========================
+   RELOAD ORDERS
+========================= */
+
+$("reloadOrders").onclick =
+async function(){
+
+  await loadOrders();
+
+};
+
+/* =========================
+   LOGIN EVENTS
+========================= */
+
+$("loginBtn").onclick =
+login;
+
+$("password").addEventListener(
+  "keydown",
+  function(e){
+
+    if(e.key === "Enter"){
+      login();
+    }
+
+  }
+);
 
 /* =========================
    RESTORE SESSION
 ========================= */
 
-try{
+(function restoreSession(){
 
-  const saved =
-    sessionStorage.getItem(
-      "panel_user"
-    );
+  try{
 
-  if(saved){
+    const saved =
+      sessionStorage.getItem(
+        "admin_user"
+      );
 
-    currentUser =
+    if(!saved){
+      return;
+    }
+
+    const user =
       JSON.parse(saved);
 
     if(
-      currentUser &&
+      user &&
       (
-        currentUser.role === "admin" ||
-        currentUser.role === "staff"
+        user.role === "admin" ||
+        user.role === "staff"
       )
     ){
 
-      showApp();
+      currentUser = user;
 
+      showApp();
     }
+
+  }catch(error){
+
+    console.error(error);
+
+    sessionStorage.removeItem(
+      "admin_user"
+    );
 
   }
 
-}catch(e){
-
-  sessionStorage.removeItem(
-    "panel_user"
-  );
-
-}
-
-
-/* =========================
-   INIT ORDER CODE
-========================= */
-
-$("orderCode").value =
-generateOrderCode();
+})();
 
 </script>
 
 </body>
 </html>
-
