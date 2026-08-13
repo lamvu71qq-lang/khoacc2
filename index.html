@@ -2,1955 +2,236 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quản Lý Kho ACC</title>
-
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ACC Warehouse</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <style>
-*{box-sizing:border-box}
-
-body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:#0f172a;
-  color:#e5e7eb;
-}
-
-header{
-  padding:18px;
-  background:#111827;
-  border-bottom:1px solid #263244;
-  position:sticky;
-  top:0;
-  z-index:10;
-}
-
-header h1{
-  margin:0 0 5px;
-  font-size:22px;
-}
-
-.container{
-  max-width:1200px;
-  margin:auto;
-  padding:15px;
-}
-
-.tabs{
-  display:flex;
-  gap:8px;
-  overflow-x:auto;
-  margin-bottom:15px;
-  padding-bottom:3px;
-}
-
-.tab{
-  white-space:nowrap;
-  padding:11px 15px;
-  border:1px solid #334155;
-  border-radius:10px;
-  background:#1e293b;
-  color:#cbd5e1;
-  cursor:pointer;
-}
-
-.tab.active{
-  background:#2563eb;
-  color:#fff;
-  border-color:#2563eb;
-}
-
-.page{display:none}
-.page.active{display:block}
-
-.card{
-  background:#111827;
-  border:1px solid #263244;
-  border-radius:14px;
-  padding:15px;
-  margin-bottom:15px;
-}
-
-.stats{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:10px;
-}
-
-.stat{
-  background:#1e293b;
-  border-radius:12px;
-  padding:15px;
-}
-
-.stat b{
-  display:block;
-  font-size:25px;
-  margin-top:5px;
-}
-
-textarea,input{
-  width:100%;
-  background:#0b1220;
-  color:#fff;
-  border:1px solid #334155;
-  border-radius:9px;
-  padding:11px;
-  outline:none;
-}
-
-textarea{
-  min-height:150px;
-  resize:vertical;
-}
-
-label{
-  display:block;
-  margin:10px 0 6px;
-  color:#94a3b8;
-}
-
-button{
-  border:0;
-  border-radius:9px;
-  padding:10px 14px;
-  background:#2563eb;
-  color:#fff;
-  cursor:pointer;
-  margin:4px 3px 4px 0;
-}
-
-button:hover{opacity:.9}
-
-button.red{background:#dc2626}
-button.green{background:#16a34a}
-button.gray{background:#475569}
-button.orange{background:#ea580c}
-
-.toolbar{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-  margin-bottom:12px;
-}
-
-.toolbar input{
-  flex:1;
-  min-width:180px;
-}
-
-.table-wrap{
-  overflow:auto;
-}
-
-table{
-  width:100%;
-  border-collapse:collapse;
-  min-width:650px;
-}
-
-th,td{
-  padding:10px;
-  border-bottom:1px solid #263244;
-  text-align:left;
-}
-
-th{
-  color:#94a3b8;
-  background:#172033;
-}
-
-.badge{
-  display:inline-block;
-  padding:4px 8px;
-  border-radius:20px;
-  font-size:12px;
-}
-
-.badge.yellow{
-  background:#854d0e;
-  color:#fde68a;
-}
-
-.badge.green{
-  background:#166534;
-  color:#bbf7d0;
-}
-
-.empty{
-  text-align:center;
-  padding:30px;
-  color:#64748b;
-}
-
-.small{
-  color:#94a3b8;
-  font-size:13px;
-}
-
-.toast{
-  position:fixed;
-  right:15px;
-  bottom:15px;
-  background:#16a34a;
-  color:white;
-  padding:12px 16px;
-  border-radius:10px;
-  display:none;
-  z-index:100;
-}
-
-.modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.7);
-  z-index:50;
-  align-items:center;
-  justify-content:center;
-  padding:15px;
-}
-
-.modal-box{
-  width:100%;
-  max-width:420px;
-  background:#111827;
-  border:1px solid #334155;
-  border-radius:14px;
-  padding:18px;
-}
-
-.modal-box h3{
-  margin-top:0;
-}
-
-.loading{
-  text-align:center;
-  padding:25px;
-  color:#94a3b8;
-}
-
-@media(max-width:700px){
-  .stats{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  header h1{
-    font-size:19px;
-  }
-
-  .container{
-    padding:10px;
-  }
-}
+:root{--bg:#070b14;--panel:rgba(15,23,42,.72);--panel2:#111827;--line:rgba(148,163,184,.14);--text:#f8fafc;--muted:#94a3b8;--blue:#6366f1;--cyan:#06b6d4;--green:#22c55e;--red:#ef4444;--orange:#f59e0b;--shadow:0 20px 60px rgba(0,0,0,.35)}
+*{box-sizing:border-box}body{margin:0;color:var(--text);font:14px -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:radial-gradient(circle at 10% 0%,#172554 0,transparent 30%),radial-gradient(circle at 90% 10%,#164e63 0,transparent 28%),var(--bg);min-height:100vh}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background:linear-gradient(120deg,transparent 20%,rgba(99,102,241,.04),transparent 70%);animation:drift 8s ease-in-out infinite alternate}@keyframes drift{to{transform:translateX(30px)}}
+button,input,textarea{font:inherit}button{border:0;color:white;background:linear-gradient(135deg,var(--blue),#4f46e5);padding:10px 14px;border-radius:11px;cursor:pointer;transition:.2s;box-shadow:0 8px 25px rgba(79,70,229,.18)}button:hover{transform:translateY(-1px);filter:brightness(1.08)}button:active{transform:scale(.98)}button.gray{background:#263244}button.green{background:linear-gradient(135deg,#16a34a,#22c55e)}button.red{background:linear-gradient(135deg,#dc2626,#ef4444)}button.orange{background:linear-gradient(135deg,#d97706,#f59e0b)}
+input,textarea{width:100%;background:rgba(2,6,23,.65);border:1px solid var(--line);color:white;border-radius:12px;padding:12px;outline:0}input:focus,textarea:focus{border-color:rgba(99,102,241,.7);box-shadow:0 0 0 3px rgba(99,102,241,.1)}textarea{min-height:150px;resize:vertical}
+.login{min-height:100vh;display:grid;place-items:center;padding:20px}.login-box,.card{background:var(--panel);backdrop-filter:blur(18px);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:20px}.login-box{width:min(430px,100%);padding:28px}.logo{width:62px;height:62px;display:grid;place-items:center;border-radius:18px;background:linear-gradient(135deg,#6366f1,#06b6d4);font-size:30px;box-shadow:0 15px 40px rgba(6,182,212,.2);margin-bottom:18px}.login h1{margin:0 0 7px}.muted,.small{color:var(--muted)}.small{font-size:12px}.field{margin:14px 0}.field label{display:block;margin:0 0 7px;color:#cbd5e1}
+.app{display:none}.top{position:sticky;top:0;z-index:20;background:rgba(7,11,20,.78);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}.topin{max-width:1250px;margin:auto;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{display:flex;align-items:center;gap:10px}.brand-icon{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,var(--blue),var(--cyan))}.brand b{font-size:17px}.role{font-size:11px;padding:5px 8px;border-radius:999px;background:rgba(99,102,241,.15);color:#c7d2fe}.wrap{max-width:1250px;margin:auto;padding:16px}.tabs{display:flex;gap:8px;overflow:auto;margin-bottom:16px}.tab{white-space:nowrap;background:rgba(30,41,59,.7);box-shadow:none;border:1px solid var(--line)}.tab.active{background:linear-gradient(135deg,var(--blue),#4f46e5);border-color:transparent}.page{display:none;animation:fade .22s ease}.page.active{display:block}@keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.stat{padding:17px;background:var(--panel);border:1px solid var(--line);border-radius:17px;box-shadow:var(--shadow)}.stat .ico{font-size:20px}.stat b{display:block;font-size:27px;margin-top:7px}.card{padding:17px;margin-bottom:15px}.card h3{margin:0 0 13px}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.toolbar input{flex:1;min-width:180px}.tablewrap{overflow:auto;border:1px solid var(--line);border-radius:13px}table{width:100%;border-collapse:collapse;min-width:700px}th,td{padding:11px;border-bottom:1px solid var(--line);text-align:left}th{background:rgba(30,41,59,.55);color:#94a3b8;font-weight:600}tr:last-child td{border-bottom:0}.badge{padding:5px 8px;border-radius:999px;font-size:11px}.yellow{background:rgba(245,158,11,.12);color:#fbbf24}.green-b{background:rgba(34,197,94,.12);color:#4ade80}.danger{color:#f87171}.empty{text-align:center;padding:30px;color:#64748b}.splitgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.splitgrid .card{margin:0}.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(5px);z-index:50;place-items:center;padding:16px}.modalbox{width:min(420px,100%);padding:20px;background:#0f172a;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}.toast{position:fixed;right:16px;bottom:16px;z-index:100;padding:12px 16px;border-radius:12px;background:#172033;border:1px solid var(--line);box-shadow:var(--shadow);display:none}.admin-only{display:none}
+@media(max-width:800px){.grid4{grid-template-columns:repeat(2,1fr)}.splitgrid{grid-template-columns:1fr}.topin{padding:11px}.wrap{padding:10px}.brand b{font-size:15px}}
 </style>
 </head>
-
 <body>
 
-<header>
-  <h1>📦 Quản Lý Kho ACC</h1>
-  <div class="small">Supabase Database</div>
-</header>
-
-<div class="container">
-
-  <div class="tabs">
-
-    <button class="tab active"
-      onclick="showPage('dashboard',this)">
-      📊 Tổng quan
-    </button>
-
-    <button class="tab"
-      onclick="showPage('warehouse',this)">
-      📦 Kho tổng
-    </button>
-
-    <button class="tab"
-      onclick="showPage('unfiltered',this)">
-      🟡 Chưa lọc
-    </button>
-
-    <button class="tab"
-      onclick="showPage('filtered',this)">
-      🟢 Đã lọc
-    </button>
-
-    <button class="tab"
-      onclick="showPage('split',this)">
-      ✂️ Tách acc
-    </button>
-
+<div id="login" class="login">
+  <div class="login-box">
+    <div class="logo">📦</div>
+    <h1>ACC Warehouse</h1>
+    <div class="muted">Đăng nhập hệ thống quản lý kho</div>
+    <div class="field"><label>Tài khoản</label><input id="loginUser" autocomplete="username" placeholder="admin"></div>
+    <div class="field"><label>Mật khẩu</label><input id="loginPass" type="password" autocomplete="current-password" placeholder="••••••"></div>
+    <button style="width:100%;margin-top:6px" onclick="login()">Đăng nhập</button>
+    <div class="small" style="margin-top:13px">Tài khoản mặc định: admin / 1</div>
   </div>
-
-
-  <!-- ================= DASHBOARD ================= -->
-
-  <section id="dashboard" class="page active">
-
-    <div class="stats">
-
-      <div class="stat">
-        📦 Kho tổng
-        <b id="totalCount">0</b>
-      </div>
-
-      <div class="stat">
-        🟡 Chưa lọc
-        <b id="unfilteredCount">0</b>
-      </div>
-
-      <div class="stat">
-        🟢 Đã lọc
-        <b id="filteredCount">0</b>
-      </div>
-
-      <div class="stat">
-        ✂️ Đã tách
-        <b id="splitCount">0</b>
-      </div>
-
-    </div>
-
-
-    <div class="card">
-
-      <h3>⚡ Thao tác nhanh</h3>
-
-      <button onclick="showPageById('warehouse')">
-        📦 Kho tổng
-      </button>
-
-      <button onclick="showPageById('unfiltered')">
-        🟡 Chưa lọc
-      </button>
-
-      <button onclick="showPageById('filtered')">
-        🟢 Đã lọc
-      </button>
-
-      <button onclick="showPageById('split')">
-        ✂️ Tách acc
-      </button>
-
-    </div>
-
-  </section>
-
-
-  <!-- ================= KHO TỔNG ================= -->
-
-  <section id="warehouse" class="page">
-
-    <div class="card">
-
-      <h3>📥 Nhập acc vào kho tổng</h3>
-
-      <div class="small">
-        Mỗi dòng một tài khoản theo dạng:
-        TK|MK
-      </div>
-
-      <br>
-
-      <textarea
-        id="warehouseInput"
-        placeholder="abc@gmail.com|123456
-def@gmail.com|abcdef"
-      ></textarea>
-
-      <button onclick="importAccounts()">
-        ➕ Nhập vào kho
-      </button>
-
-      <button class="gray"
-        onclick="clearInput('warehouseInput')">
-        Xóa
-      </button>
-
-    </div>
-
-
-    <div class="card">
-
-      <div class="toolbar">
-
-        <input
-          id="warehouseSearch"
-          placeholder="🔍 Tìm tài khoản..."
-          oninput="renderWarehouse()"
-        >
-
-        <button class="green"
-          onclick="copyAllWarehouse()">
-          📋 Copy tất cả
-        </button>
-
-      </div>
-
-
-      <div class="table-wrap">
-
-        <table>
-
-          <thead>
-
-            <tr>
-              <th>#</th>
-              <th>TK</th>
-              <th>MK</th>
-              <th>Trạng thái</th>
-              <th>MP</th>
-              <th>Thao tác</th>
-            </tr>
-
-          </thead>
-
-          <tbody id="warehouseTable"></tbody>
-
-        </table>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- ================= CHƯA LỌC ================= -->
-
-  <section id="unfiltered" class="page">
-
-    <div class="card">
-
-      <h3>🟡 Chưa lọc</h3>
-
-      <div class="toolbar">
-
-        <input
-          id="unfilteredSearch"
-          placeholder="🔍 Tìm tài khoản..."
-          oninput="renderUnfiltered()"
-        >
-
-        <button class="green"
-          onclick="filterSelected()">
-          ➜ Lọc đã chọn
-        </button>
-
-        <button class="gray"
-          onclick="copySelectedUnfiltered()">
-          📋 Copy đã chọn
-        </button>
-
-      </div>
-
-
-      <div class="table-wrap">
-
-        <table>
-
-          <thead>
-
-            <tr>
-
-              <th>
-                <input
-                  type="checkbox"
-                  onchange="toggleAllUnfiltered(this)"
-                >
-              </th>
-
-              <th>TK</th>
-              <th>MK</th>
-
-            </tr>
-
-          </thead>
-
-          <tbody id="unfilteredTable"></tbody>
-
-        </table>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- ================= ĐÃ LỌC ================= -->
-
-  <section id="filtered" class="page">
-
-    <div class="card">
-
-      <h3>🟢 Đã lọc</h3>
-
-      <div class="toolbar">
-
-        <input
-          id="filteredSearch"
-          placeholder="🔍 Tìm tài khoản..."
-          oninput="renderFiltered()"
-        >
-
-        <button class="green"
-          onclick="exportSelectedFiltered()">
-          📤 Xuất acc đã chọn
-        </button>
-
-        <button class="gray"
-          onclick="copyAllFiltered()">
-          📋 Copy tất cả
-        </button>
-
-      </div>
-
-
-      <div class="table-wrap">
-
-        <table>
-
-          <thead>
-
-            <tr>
-
-              <th>
-                <input
-                  type="checkbox"
-                  onchange="toggleAllFiltered(this)"
-                >
-              </th>
-
-              <th>TK</th>
-              <th>MK</th>
-              <th>MP</th>
-              <th>Thao tác</th>
-
-            </tr>
-
-          </thead>
-
-          <tbody id="filteredTable"></tbody>
-
-        </table>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- ================= TÁCH ACC ================= -->
-
-  <section id="split" class="page">
-
-    <div class="card">
-
-      <h3>✂️ Tách acc</h3>
-
-      <div class="small">
-        Nhập danh sách TK|MK.
-        Hệ thống sẽ tách thành TK, MK và TK|MK đã tách.
-      </div>
-
-
-      <label>Số lượng cần tách</label>
-
-      <input
-        id="splitLimit"
-        type="number"
-        min="1"
-        placeholder="Để trống = tách tất cả"
-      >
-
-
-      <label>Danh sách TK|MK</label>
-
-      <textarea
-        id="splitInput"
-        placeholder="abc@gmail.com|123456
-def@gmail.com|abcdef"
-      ></textarea>
-
-
-      <button onclick="splitAccounts()">
-        ✂️ Tách acc
-      </button>
-
-      <button class="red"
-        onclick="clearSplit()">
-        🗑️ Xóa dữ liệu đã tách
-      </button>
-
-    </div>
-
-
-    <div class="card">
-
-      <h3>👤 TK</h3>
-
-      <textarea
-        id="splitUsernames"
-        readonly
-      ></textarea>
-
-      <button
-        onclick="copyText('splitUsernames')">
-        📋 Copy TK
-      </button>
-
-    </div>
-
-
-    <div class="card">
-
-      <h3>🔑 MK</h3>
-
-      <textarea
-        id="splitPasswords"
-        readonly
-      ></textarea>
-
-      <button
-        onclick="copyText('splitPasswords')">
-        📋 Copy MK
-      </button>
-
-    </div>
-
-
-    <div class="card">
-
-      <h3>🔗 TK|MK đã tách</h3>
-
-      <textarea
-        id="splitPairs"
-        readonly
-      ></textarea>
-
-      <button
-        onclick="copyText('splitPairs')">
-        📋 Copy TK|MK
-      </button>
-
-    </div>
-
-  </section>
-
 </div>
 
+<div id="app" class="app">
+  <div class="top"><div class="topin">
+    <div class="brand"><div class="brand-icon">📦</div><div><b>ACC Warehouse</b><div class="small"><span id="who"></span> · <span id="role"></span></div></div></div>
+    <button class="gray" onclick="logout()">Đăng xuất</button>
+  </div></div>
 
-<!-- ================= MODAL ================= -->
+  <div class="wrap">
+    <div class="tabs">
+      <button class="tab active" onclick="page('dashboard',this)">📊 Tổng quan</button>
+      <button class="tab" onclick="page('warehouse',this)">📦 Kho tổng</button>
+      <button class="tab" onclick="page('unfiltered',this)">🟡 Chưa lọc</button>
+      <button class="tab" onclick="page('filtered',this)">🟢 Đã lọc</button>
+      <button class="tab" onclick="page('history',this)">📜 Lịch sử</button>
+      <button class="tab" onclick="page('split',this)">✂️ Tách acc</button>
+      <button id="usersTab" class="tab admin-only" onclick="page('users',this)">👥 Users</button>
+    </div>
 
-<div id="mpModal" class="modal">
+    <section id="dashboard" class="page active">
+      <div class="grid4">
+        <div class="stat">📦 Kho tổng<b id="sTotal">0</b></div>
+        <div class="stat">🟡 Chưa lọc<b id="sUn">0</b></div>
+        <div class="stat">🟢 Đã lọc<b id="sFil">0</b></div>
+        <div class="stat">📤 Đã xuất<b id="sExp">0</b></div>
+      </div>
+      <div class="card" style="margin-top:15px"><h3>⚡ Thao tác nhanh</h3>
+        <button onclick="pageById('warehouse')">📦 Nhập kho</button>
+        <button onclick="pageById('unfiltered')">🟡 Chưa lọc</button>
+        <button onclick="pageById('filtered')">🟢 Đã lọc</button>
+        <button onclick="pageById('history')">📜 Lịch sử</button>
+      </div>
+    </section>
 
-  <div class="modal-box">
+    <section id="warehouse" class="page">
+      <div class="card"><h3>📥 Nhập kho tổng</h3><div class="small">Mỗi dòng: TK|MK</div>
+        <textarea id="warehouseInput" placeholder="abc@gmail.com|123456&#10;def@gmail.com|abcdef"></textarea>
+        <button onclick="importAccounts()">➕ Nhập kho</button>
+        <button class="gray" onclick="clearEl('warehouseInput')">Xóa</button>
+      </div>
+      <div class="card"><div class="toolbar"><input id="warehouseSearch" oninput="renderWarehouse()" placeholder="🔍 Tìm tài khoản..."><button class="green" onclick="copyWarehouse()">📋 Copy tất cả</button></div>
+        <div class="tablewrap"><table><thead><tr><th>#</th><th>TK</th><th>MK</th><th>Trạng thái</th><th>MP</th><th></th></tr></thead><tbody id="warehouseTable"></tbody></table></div>
+      </div>
+    </section>
 
-    <h3>Nhập số MP</h3>
+    <section id="unfiltered" class="page">
+      <div class="card"><h3>🟡 Chưa lọc</h3><div class="toolbar"><input id="unSearch" oninput="renderUnfiltered()" placeholder="🔍 Tìm..."><button class="green" onclick="openMP()">➜ Chuyển đã lọc</button><button class="gray" onclick="copySelected('unCheck')">📋 Copy</button></div>
+        <div class="tablewrap"><table><thead><tr><th><input type="checkbox" onchange="toggleChecks('unCheck',this.checked)"></th><th>TK</th><th>MK</th></tr></thead><tbody id="unTable"></tbody></table></div>
+      </div>
+    </section>
 
-    <input
-      id="mpInput"
-      type="number"
-      min="0"
-      placeholder="Ví dụ: 100"
-    >
+    <section id="filtered" class="page">
+      <div class="card"><h3>🟢 Đã lọc</h3><div class="toolbar"><input id="filSearch" oninput="renderFiltered()" placeholder="🔍 Tìm..."><button class="green" onclick="exportSelected()">📤 Xuất đã chọn</button><button class="gray" onclick="copyFiltered()">📋 Copy tất cả</button></div>
+        <div class="tablewrap"><table><thead><tr><th><input type="checkbox" onchange="toggleChecks('filCheck',this.checked)"></th><th>TK</th><th>MK</th><th>MP</th><th></th></tr></thead><tbody id="filTable"></tbody></table></div>
+      </div>
+    </section>
 
-    <br>
+    <section id="history" class="page">
+      <div class="card"><h3>📜 Lịch sử xuất acc</h3><div class="toolbar"><input id="histSearch" oninput="renderHistory()" placeholder="🔍 Tìm TK / người xuất..."></div>
+        <div class="tablewrap"><table><thead><tr><th>TK</th><th>MK</th><th>MP</th><th>Người xuất</th><th>Thời gian</th></tr></thead><tbody id="histTable"></tbody></table></div>
+      </div>
+    </section>
 
-    <button onclick="confirmFilter()">
-      ✅ Xác nhận
-    </button>
+    <section id="split" class="page">
+      <div class="card"><h3>✂️ Tách acc</h3><div class="small">Nhập TK|MK. Có thể giới hạn số lượng.</div><div style="margin:10px 0"><input id="splitLimit" type="number" min="1" placeholder="Số lượng cần tách, để trống = tất cả"></div>
+        <textarea id="splitInput" placeholder="abc@gmail.com|123456&#10;def@gmail.com|abcdef"></textarea><button onclick="splitAccounts()">✂️ Tách</button><button class="red" onclick="clearSplit()">🗑️ Xóa lịch sử tách</button>
+      </div>
+      <div class="splitgrid">
+        <div class="card"><h3>👤 TK</h3><textarea id="splitUsers" readonly></textarea><button onclick="copyEl('splitUsers')">📋 Copy TK</button></div>
+        <div class="card"><h3>🔑 MK</h3><textarea id="splitPass" readonly></textarea><button onclick="copyEl('splitPass')">📋 Copy MK</button></div>
+        <div class="card"><h3>🔗 TK|MK đã tách</h3><textarea id="splitPairs" readonly></textarea><button onclick="copyEl('splitPairs')">📋 Copy TK|MK</button></div>
+      </div>
+    </section>
 
-    <button
-      class="gray"
-      onclick="closeModal()">
-      Hủy
-    </button>
-
+    <section id="users" class="page admin-only">
+      <div class="card"><h3>👥 Quản lý user</h3><div class="toolbar"><input id="newUser" placeholder="Tên user"><input id="newPass" placeholder="Mật khẩu"><button onclick="createUser()">➕ Tạo user</button></div>
+        <div class="tablewrap"><table><thead><tr><th>User</th><th>Quyền</th><th>Ngày tạo</th><th></th></tr></thead><tbody id="usersTable"></tbody></table></div>
+      </div>
+      <div class="card"><h3>🔐 Đổi mật khẩu</h3><div class="toolbar"><input id="oldPass" type="password" placeholder="Mật khẩu hiện tại"><input id="newOwnPass" type="password" placeholder="Mật khẩu mới"><button onclick="changeOwnPassword()">Đổi mật khẩu</button></div></div>
+    </section>
   </div>
-
 </div>
 
-
+<div id="mpModal" class="modal"><div class="modalbox"><h3>Nhập MP</h3><input id="mpValue" type="number" min="0" placeholder="Ví dụ 100"><div style="margin-top:12px"><button onclick="confirmMP()">Xác nhận</button><button class="gray" onclick="closeModal()">Hủy</button></div></div></div>
 <div id="toast" class="toast"></div>
 
-
 <script>
+const URL="https://quxfnfjqechltlklhurx.supabase.co";
+const KEY="sb_publishable_HHKnM90LfCcLEw28QeltRQ_rce_Zxtv";
+const db=supabase.createClient(URL,KEY);
+let me=null,accounts=[],history=[],splits=[],users=[],pending=[];
 
-/* ==================================================
-   SUPABASE
-================================================== */
+const $=id=>document.getElementById(id);
+function toast(s){$("toast").textContent=s;$("toast").style.display="block";clearTimeout(window.tt);window.tt=setTimeout(()=>$("toast").style.display="none",2200)}
+function esc(v){return String(v??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;")}
+async function hash(s){const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(s));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("")}
+async function copy(v){try{await navigator.clipboard.writeText(v)}catch{let t=document.createElement("textarea");t.value=v;document.body.appendChild(t);t.select();document.execCommand("copy");t.remove()};toast("📋 Đã copy")}
+function copyEl(id){let v=$(id).value;if(v)copy(v);else toast("Không có dữ liệu")}
+function clearEl(id){$(id).value=""}
+function page(id,btn){document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));$(id).classList.add("active");if(btn)btn.classList.add("active");render()}
+function pageById(id){let b=[...document.querySelectorAll(".tab")].find(x=>x.getAttribute("onclick")?.includes("'"+id+"'"));page(id,b)}
+function logout(){me=null;sessionStorage.removeItem("me");$("app").style.display="none";$("login").style.display="grid";$("loginPass").value=""}
 
-const SUPABASE_URL =
-"https://quxfnfjqechltlklhurx.supabase.co";
-
-const SUPABASE_ANON_KEY =
-"sb_publishable_HHKnM90LfCcLEw28QeltRQ_rce_Zxtv";
-
-
-const db = supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_ANON_KEY
-);
-
-
-/* ==================================================
-   DATA
-================================================== */
-
-let accounts = [];
-let splitData = [];
-
-let pendingFilterIds = [];
-
-
-/* ==================================================
-   TOAST
-================================================== */
-
-function toast(message){
-
-  const el =
-    document.getElementById("toast");
-
-  el.textContent = message;
-
-  el.style.display = "block";
-
-  clearTimeout(window.toastTimer);
-
-  window.toastTimer =
-    setTimeout(()=>{
-      el.style.display = "none";
-    },2200);
+async function login(){
+  let u=$("loginUser").value.trim(),p=$("loginPass").value;
+  if(!u||!p)return toast("Nhập đủ tài khoản và mật khẩu");
+  let {data,error}=await db.from("users").select("*").eq("username",u).maybeSingle();
+  if(error||!data)return toast("Sai tài khoản hoặc mật khẩu");
+  let hp=await hash(p);
+  if(data.password!==hp)return toast("Sai tài khoản hoặc mật khẩu");
+  me={id:data.id,username:data.username,role:data.role};
+  sessionStorage.setItem("me",JSON.stringify(me));
+  await startApp();
 }
 
-
-/* ==================================================
-   PAGE
-================================================== */
-
-function showPage(id,btn){
-
-  document
-    .querySelectorAll(".page")
-    .forEach(x=>x.classList.remove("active"));
-
-  document
-    .querySelectorAll(".tab")
-    .forEach(x=>x.classList.remove("active"));
-
-  document
-    .getElementById(id)
-    .classList.add("active");
-
-  if(btn){
-    btn.classList.add("active");
-  }
-
-  renderAll();
+async function startApp(){
+  $("login").style.display="none";$("app").style.display="block";$("who").textContent=me.username;$("role").textContent=me.role==="admin"?"ADMIN":"USER";
+  document.querySelectorAll(".admin-only").forEach(x=>x.style.display=me.role==="admin"?"block":"none");
+  await load();
 }
-
-
-function showPageById(id){
-
-  document
-    .querySelectorAll(".page")
-    .forEach(x=>x.classList.remove("active"));
-
-  document
-    .querySelectorAll(".tab")
-    .forEach(x=>x.classList.remove("active"));
-
-  document
-    .getElementById(id)
-    .classList.add("active");
-
-  const tab =
-    [...document.querySelectorAll(".tab")]
-    .find(x=>
-      x.getAttribute("onclick")?.includes(`'${id}'`)
-    );
-
-  if(tab){
-    tab.classList.add("active");
-  }
-
-  renderAll();
+async function load(){
+  let a=await db.from("accounts").select("*").order("id",{ascending:false});if(!a.error)accounts=a.data||[];
+  let h=await db.from("export_history").select("*").order("id",{ascending:false});if(!h.error)history=h.data||[];
+  let s=await db.from("split_accounts").select("*").order("id",{ascending:false});if(!s.error)splits=s.data||[];
+  if(me?.role==="admin"){let u=await db.from("users").select("id,username,role,created_at").order("id",{ascending:false});if(!u.error)users=u.data||[]}
+  render();
 }
-
-
-/* ==================================================
-   LOAD DATA
-================================================== */
-
-async function loadData(){
-
-  const {data,error} =
-    await db
-      .from("accounts")
-      .select("*")
-      .order("id",{ascending:false});
-
-
-  if(error){
-
-    console.error(error);
-
-    toast("❌ Không tải được kho acc");
-
-    return;
-  }
-
-
-  accounts = data || [];
-
-
-  const splitResult =
-    await db
-      .from("split_accounts")
-      .select("*")
-      .order("id",{ascending:false});
-
-
-  if(splitResult.error){
-
-    console.error(splitResult.error);
-
-  }else{
-
-    splitData =
-      splitResult.data || [];
-
-  }
-
-
-  renderAll();
+function render(){
+  $("sTotal").textContent=accounts.length;$("sUn").textContent=accounts.filter(x=>x.status==="unfiltered").length;$("sFil").textContent=accounts.filter(x=>x.status==="filtered").length;$("sExp").textContent=history.length;
+  renderWarehouse();renderUnfiltered();renderFiltered();renderHistory();renderSplit();if(me?.role==="admin")renderUsers();
 }
-
-
-/* ==================================================
-   RENDER
-================================================== */
-
-function renderAll(){
-
-  const total =
-    accounts.length;
-
-  const unfiltered =
-    accounts.filter(
-      x=>x.status==="unfiltered"
-    ).length;
-
-  const filtered =
-    accounts.filter(
-      x=>x.status==="filtered"
-    ).length;
-
-
-  document.getElementById("totalCount")
-    .textContent = total;
-
-  document.getElementById("unfilteredCount")
-    .textContent = unfiltered;
-
-  document.getElementById("filteredCount")
-    .textContent = filtered;
-
-  document.getElementById("splitCount")
-    .textContent = splitData.length;
-
-
-  renderWarehouse();
-  renderUnfiltered();
-  renderFiltered();
-  renderSplit();
-}
-
-
-/* ==================================================
-   IMPORT
-================================================== */
-
-async function importAccounts(){
-
-  const input =
-    document
-      .getElementById("warehouseInput")
-      .value
-      .trim();
-
-
-  if(!input){
-
-    toast("⚠️ Chưa nhập acc");
-
-    return;
-  }
-
-
-  const lines =
-    input
-      .split(/\r?\n/)
-      .map(x=>x.trim())
-      .filter(Boolean);
-
-
-  const rows = [];
-
-
-  for(const line of lines){
-
-    const index =
-      line.indexOf("|");
-
-
-    if(index===-1)
-      continue;
-
-
-    const username =
-      line
-        .slice(0,index)
-        .trim();
-
-
-    const password =
-      line
-        .slice(index+1)
-        .trim();
-
-
-    if(!username || !password)
-      continue;
-
-
-    rows.push({
-      username,
-      password,
-      status:"unfiltered",
-      mp:null
-    });
-
-  }
-
-
-  if(!rows.length){
-
-    toast("⚠️ Không có acc hợp lệ");
-
-    return;
-  }
-
-
-  const {error} =
-    await db
-      .from("accounts")
-      .insert(rows);
-
-
-  if(error){
-
-    console.error(error);
-
-    toast("❌ Nhập acc thất bại");
-
-    return;
-  }
-
-
-  document
-    .getElementById("warehouseInput")
-    .value="";
-
-
-  toast(
-    `✅ Đã nhập ${rows.length} acc`
-  );
-
-
-  await loadData();
-}
-
-
-/* ==================================================
-   WAREHOUSE
-================================================== */
-
 function renderWarehouse(){
-
-  const tbody =
-    document.getElementById("warehouseTable");
-
-
-  const search =
-    (
-      document
-        .getElementById("warehouseSearch")
-        ?.value || ""
-    ).toLowerCase();
-
-
-  const data =
-    accounts.filter(x=>
-      x.username
-        .toLowerCase()
-        .includes(search)
-    );
-
-
-  if(!data.length){
-
-    tbody.innerHTML =
-      `<tr>
-        <td colspan="6" class="empty">
-          Kho đang trống
-        </td>
-      </tr>`;
-
-    return;
-  }
-
-
-  tbody.innerHTML =
-    data.map((x,i)=>`
-
-      <tr>
-
-        <td>${i+1}</td>
-
-        <td>${esc(x.username)}</td>
-
-        <td>${esc(x.password)}</td>
-
-        <td>
-
-          ${
-            x.status==="filtered"
-
-            ? `<span class="badge green">
-                Đã lọc
-              </span>`
-
-            : `<span class="badge yellow">
-                Chưa lọc
-              </span>`
-          }
-
-        </td>
-
-        <td>
-          ${x.mp ?? "-"}
-        </td>
-
-        <td>
-
-          <button
-            class="green"
-            onclick="copyAccount(
-              '${encodeURIComponent(x.username)}',
-              '${encodeURIComponent(x.password)}'
-            )">
-            📋 Copy
-          </button>
-
-          <button
-            class="red"
-            onclick="deleteAccount(${x.id})">
-            🗑️ Xóa
-          </button>
-
-        </td>
-
-      </tr>
-
-    `).join("");
+ let q=($("warehouseSearch")?.value||"").toLowerCase(),d=accounts.filter(x=>x.username.toLowerCase().includes(q));
+ $("warehouseTable").innerHTML=d.length?d.map((x,i)=>`<tr><td>${i+1}</td><td>${esc(x.username)}</td><td>${esc(x.password)}</td><td>${x.status==="filtered"?'<span class="badge green-b">Đã lọc</span>':'<span class="badge yellow">Chưa lọc</span>'}</td><td>${x.mp??"-"}</td><td><button class="green" onclick="copy('${encodeURIComponent(x.username)}|${encodeURIComponent(x.password)}')">Copy</button><button class="red" onclick="delAcc(${x.id})">Xóa</button></td></tr>`).join(""):`<tr><td colspan="6" class="empty">Kho trống</td></tr>`
 }
-
-
-/* ==================================================
-   UNFILTERED
-================================================== */
-
 function renderUnfiltered(){
-
-  const tbody =
-    document.getElementById(
-      "unfilteredTable"
-    );
-
-
-  const search =
-    (
-      document
-        .getElementById(
-          "unfilteredSearch"
-        )
-        ?.value || ""
-    ).toLowerCase();
-
-
-  const data =
-    accounts.filter(x=>
-      x.status==="unfiltered" &&
-      x.username
-        .toLowerCase()
-        .includes(search)
-    );
-
-
-  if(!data.length){
-
-    tbody.innerHTML =
-      `<tr>
-        <td colspan="3" class="empty">
-          Không có acc
-        </td>
-      </tr>`;
-
-    return;
-  }
-
-
-  tbody.innerHTML =
-    data.map(x=>`
-
-      <tr>
-
-        <td>
-
-          <input
-            type="checkbox"
-            class="unfilteredCheck"
-            value="${x.id}"
-          >
-
-        </td>
-
-        <td>
-          ${esc(x.username)}
-        </td>
-
-        <td>
-          ${esc(x.password)}
-        </td>
-
-      </tr>
-
-    `).join("");
+ let q=($("unSearch")?.value||"").toLowerCase(),d=accounts.filter(x=>x.status==="unfiltered"&&x.username.toLowerCase().includes(q));
+ $("unTable").innerHTML=d.length?d.map(x=>`<tr><td><input class="unCheck" type="checkbox" value="${x.id}"></td><td>${esc(x.username)}</td><td>${esc(x.password)}</td></tr>`).join(""):`<tr><td colspan="3" class="empty">Không có acc</td></tr>`
 }
-
-
-function toggleAllUnfiltered(el){
-
-  document
-    .querySelectorAll(".unfilteredCheck")
-    .forEach(x=>{
-      x.checked =
-        el.checked;
-    });
-}
-
-
-function getSelectedUnfiltered(){
-
-  return [
-    ...document
-      .querySelectorAll(
-        ".unfilteredCheck:checked"
-      )
-  ].map(x=>Number(x.value));
-}
-
-
-/* ==================================================
-   FILTER
-================================================== */
-
-function filterSelected(){
-
-  const ids =
-    getSelectedUnfiltered();
-
-
-  if(!ids.length){
-
-    toast("⚠️ Chưa chọn acc");
-
-    return;
-  }
-
-
-  pendingFilterIds =
-    ids;
-
-
-  document
-    .getElementById("mpInput")
-    .value="";
-
-
-  document
-    .getElementById("mpModal")
-    .style.display="flex";
-}
-
-
-function closeModal(){
-
-  document
-    .getElementById("mpModal")
-    .style.display="none";
-}
-
-
-async function confirmFilter(){
-
-  const raw =
-    document
-      .getElementById("mpInput")
-      .value
-      .trim();
-
-
-  if(raw===""){
-
-    toast("⚠️ Nhập số MP");
-
-    return;
-  }
-
-
-  const mp =
-    Number(raw);
-
-
-  if(!Number.isFinite(mp) || mp<0){
-
-    toast("⚠️ MP không hợp lệ");
-
-    return;
-  }
-
-
-  const {error} =
-    await db
-      .from("accounts")
-      .update({
-        status:"filtered",
-        mp:mp
-      })
-      .in("id",pendingFilterIds);
-
-
-  if(error){
-
-    console.error(error);
-
-    toast("❌ Không thể chuyển acc");
-
-    return;
-  }
-
-
-  closeModal();
-
-
-  toast(
-    `✅ Đã lọc ${pendingFilterIds.length} acc`
-  );
-
-
-  pendingFilterIds=[];
-
-
-  await loadData();
-}
-
-
-function copySelectedUnfiltered(){
-
-  const ids =
-    getSelectedUnfiltered();
-
-
-  const rows =
-    accounts
-      .filter(x=>ids.includes(x.id))
-      .map(x=>
-        `${x.username}|${x.password}`
-      );
-
-
-  if(!rows.length){
-
-    toast("⚠️ Chưa chọn acc");
-
-    return;
-  }
-
-
-  copyTextValue(
-    rows.join("\n")
-  );
-
-
-  toast(
-    `📋 Đã copy ${rows.length} acc`
-  );
-}
-
-
-/* ==================================================
-   FILTERED
-================================================== */
-
 function renderFiltered(){
-
-  const tbody =
-    document.getElementById(
-      "filteredTable"
-    );
-
-
-  const search =
-    (
-      document
-        .getElementById(
-          "filteredSearch"
-        )
-        ?.value || ""
-    ).toLowerCase();
-
-
-  const data =
-    accounts.filter(x=>
-      x.status==="filtered" &&
-      x.username
-        .toLowerCase()
-        .includes(search)
-    );
-
-
-  if(!data.length){
-
-    tbody.innerHTML =
-      `<tr>
-        <td colspan="5" class="empty">
-          Chưa có acc đã lọc
-        </td>
-      </tr>`;
-
-    return;
-  }
-
-
-  tbody.innerHTML =
-    data.map(x=>`
-
-      <tr>
-
-        <td>
-
-          <input
-            type="checkbox"
-            class="filteredCheck"
-            value="${x.id}"
-          >
-
-        </td>
-
-        <td>
-          ${esc(x.username)}
-        </td>
-
-        <td>
-          ${esc(x.password)}
-        </td>
-
-        <td>
-          ${x.mp ?? "-"}
-        </td>
-
-        <td>
-
-          <button
-            class="green"
-            onclick="exportOne(${x.id})">
-            📤 Xuất acc
-          </button>
-
-          <button
-            class="orange"
-            onclick="changeMP(${x.id})">
-            MP
-          </button>
-
-        </td>
-
-      </tr>
-
-    `).join("");
+ let q=($("filSearch")?.value||"").toLowerCase(),d=accounts.filter(x=>x.status==="filtered"&&x.username.toLowerCase().includes(q));
+ $("filTable").innerHTML=d.length?d.map(x=>`<tr><td><input class="filCheck" type="checkbox" value="${x.id}"></td><td>${esc(x.username)}</td><td>${esc(x.password)}</td><td>${x.mp??"-"}</td><td><button class="green" onclick="exportOne(${x.id})">📤 Xuất</button><button class="orange" onclick="editMP(${x.id})">MP</button></td></tr>`).join(""):`<tr><td colspan="5" class="empty">Chưa có acc đã lọc</td></tr>`
 }
-
-
-function toggleAllFiltered(el){
-
-  document
-    .querySelectorAll(".filteredCheck")
-    .forEach(x=>{
-      x.checked =
-        el.checked;
-    });
+function renderHistory(){
+ let q=($("histSearch")?.value||"").toLowerCase(),d=history.filter(x=>(x.account_username||"").toLowerCase().includes(q)||(x.exported_by||"").toLowerCase().includes(q));
+ $("histTable").innerHTML=d.length?d.map(x=>`<tr><td>${esc(x.account_username)}</td><td>${esc(x.account_password)}</td><td>${x.mp??"-"}</td><td>${esc(x.exported_by)}</td><td>${new Date(x.exported_at).toLocaleString("vi-VN")}</td></tr>`).join(""):`<tr><td colspan="5" class="empty">Chưa có lịch sử</td></tr>`
 }
-
-
-function getSelectedFiltered(){
-
-  return [
-    ...document
-      .querySelectorAll(
-        ".filteredCheck:checked"
-      )
-  ].map(x=>Number(x.value));
-}
-
-
-/* ==================================================
-   EXPORT
-================================================== */
-
-function exportOne(id){
-
-  const acc =
-    accounts.find(x=>x.id===id);
-
-
-  if(!acc)
-    return;
-
-
-  copyTextValue(
-    `${acc.username}|${acc.password}`
-  );
-
-
-  toast("📋 Đã copy TK|MK");
-}
-
-
-function exportSelectedFiltered(){
-
-  const ids =
-    getSelectedFiltered();
-
-
-  if(!ids.length){
-
-    toast("⚠️ Chưa chọn acc");
-
-    return;
-  }
-
-
-  const rows =
-    accounts
-      .filter(x=>ids.includes(x.id))
-      .map(x=>
-        `${x.username}|${x.password}`
-      );
-
-
-  copyTextValue(
-    rows.join("\n")
-  );
-
-
-  toast(
-    `📋 Đã copy ${rows.length} acc`
-  );
-}
-
-
-function copyAllFiltered(){
-
-  const rows =
-    accounts
-      .filter(
-        x=>x.status==="filtered"
-      )
-      .map(x=>
-        `${x.username}|${x.password}`
-      );
-
-
-  if(!rows.length){
-
-    toast("⚠️ Chưa có acc");
-
-    return;
-  }
-
-
-  copyTextValue(
-    rows.join("\n")
-  );
-
-
-  toast(
-    `📋 Đã copy ${rows.length} acc`
-  );
-}
-
-
-/* ==================================================
-   MP
-================================================== */
-
-async function changeMP(id){
-
-  const acc =
-    accounts.find(x=>x.id===id);
-
-
-  if(!acc)
-    return;
-
-
-  const value =
-    prompt(
-      "Nhập số MP:",
-      acc.mp ?? ""
-    );
-
-
-  if(value===null)
-    return;
-
-
-  const mp =
-    Number(value);
-
-
-  if(!Number.isFinite(mp) || mp<0){
-
-    toast("⚠️ MP không hợp lệ");
-
-    return;
-  }
-
-
-  const {error} =
-    await db
-      .from("accounts")
-      .update({mp})
-      .eq("id",id);
-
-
-  if(error){
-
-    console.error(error);
-
-    toast("❌ Cập nhật thất bại");
-
-    return;
-  }
-
-
-  toast("✅ Đã cập nhật MP");
-
-
-  await loadData();
-}
-
-
-/* ==================================================
-   DELETE
-================================================== */
-
-async function deleteAccount(id){
-
-  if(
-    !confirm(
-      "Bạn chắc chắn muốn xóa acc này?"
-    )
-  )
-    return;
-
-
-  const {error} =
-    await db
-      .from("accounts")
-      .delete()
-      .eq("id",id);
-
-
-  if(error){
-
-    console.error(error);
-
-    toast("❌ Xóa thất bại");
-
-    return;
-  }
-
-
-  toast("🗑️ Đã xóa acc");
-
-
-  await loadData();
-}
-
-
-/* ==================================================
-   COPY WAREHOUSE
-================================================== */
-
-function copyAllWarehouse(){
-
-  const rows =
-    accounts.map(x=>
-      `${x.username}|${x.password}`
-    );
-
-
-  if(!rows.length){
-
-    toast("⚠️ Kho trống");
-
-    return;
-  }
-
-
-  copyTextValue(
-    rows.join("\n")
-  );
-
-
-  toast(
-    `📋 Đã copy ${rows.length} acc`
-  );
-}
-
-
-/* ==================================================
-   SPLIT
-================================================== */
-
-async function splitAccounts(){
-
-  const input =
-    document
-      .getElementById("splitInput")
-      .value
-      .trim();
-
-
-  if(!input){
-
-    toast("⚠️ Chưa nhập TK|MK");
-
-    return;
-  }
-
-
-  let lines =
-    input
-      .split(/\r?\n/)
-      .map(x=>x.trim())
-      .filter(Boolean);
-
-
-  const limitRaw =
-    document
-      .getElementById("splitLimit")
-      .value;
-
-
-  if(limitRaw){
-
-    const limit =
-      Number(limitRaw);
-
-
-    if(
-      Number.isFinite(limit) &&
-      limit>0
-    ){
-
-      lines =
-        lines.slice(0,limit);
-
-    }
-
-  }
-
-
-  const rows=[];
-
-
-  for(const line of lines){
-
-    const index =
-      line.indexOf("|");
-
-
-    if(index===-1)
-      continue;
-
-
-    const username =
-      line
-        .slice(0,index)
-        .trim();
-
-
-    const password =
-      line
-        .slice(index+1)
-        .trim();
-
-
-    if(!username || !password)
-      continue;
-
-
-    rows.push({
-      username,
-      password
-    });
-
-  }
-
-
-  if(!rows.length){
-
-    toast("⚠️ Không có acc hợp lệ");
-
-    return;
-  }
-
-
-  const {error} =
-    await db
-      .from("split_accounts")
-      .insert(rows);
-
-
-  if(error){
-
-    console.error(error);
-
-    toast("❌ Lỗi lưu dữ liệu tách");
-
-    return;
-  }
-
-
-  document
-    .getElementById("splitInput")
-    .value="";
-
-
-  document
-    .getElementById("splitLimit")
-    .value="";
-
-
-  toast(
-    `✅ Đã tách ${rows.length} acc`
-  );
-
-
-  await loadData();
-}
-
-
 function renderSplit(){
-
-  const users =
-    splitData
-      .map(x=>x.username);
-
-
-  const passwords =
-    splitData
-      .map(x=>x.password);
-
-
-  const pairs =
-    splitData
-      .map(x=>
-        `${x.username}|${x.password}`
-      );
-
-
-  document
-    .getElementById("splitUsernames")
-    .value =
-      users.join("\n");
-
-
-  document
-    .getElementById("splitPasswords")
-    .value =
-      passwords.join("\n");
-
-
-  document
-    .getElementById("splitPairs")
-    .value =
-      pairs.join("\n");
+ $("splitUsers").value=splits.map(x=>x.username).join("\n");$("splitPass").value=splits.map(x=>x.password).join("\n");$("splitPairs").value=splits.map(x=>x.username+"|"+x.password).join("\n")
+}
+function renderUsers(){
+ $("usersTable").innerHTML=users.map(x=>`<tr><td>${esc(x.username)}</td><td>${x.role==="admin"?"ADMIN":"USER"}</td><td>${new Date(x.created_at).toLocaleString("vi-VN")}</td><td>${x.username!=="admin"?`<button class="red" onclick="deleteUser(${x.id})">Xóa</button>`:""}</td></tr>`).join("")||`<tr><td colspan="4" class="empty">Chưa có user</td></tr>`
+}
+async function importAccounts(){
+ let lines=$("warehouseInput").value.split(/\r?\n/).map(x=>x.trim()).filter(Boolean),rows=[];
+ for(let line of lines){let i=line.indexOf("|");if(i<0)continue;let username=line.slice(0,i).trim(),password=line.slice(i+1).trim();if(username&&password)rows.push({username,password,status:"unfiltered",mp:null})}
+ if(!rows.length)return toast("Không có acc hợp lệ");
+ let {error}=await db.from("accounts").insert(rows);if(error)return toast("Nhập kho lỗi");$("warehouseInput").value="";toast("Đã nhập "+rows.length+" acc");await load()
+}
+function ids(cls){return [...document.querySelectorAll("."+cls+":checked")].map(x=>Number(x.value))}
+function toggleChecks(cls,v){document.querySelectorAll("."+cls).forEach(x=>x.checked=v)}
+function copySelected(cls){let d=accounts.filter(x=>ids(cls).includes(x.id));if(d.length)copy(d.map(x=>x.username+"|"+x.password).join("\n"));else toast("Chưa chọn acc")}
+function openMP(){pending=ids("unCheck");if(!pending.length)return toast("Chưa chọn acc");$("mpValue").value="";$("mpModal").style.display="grid"}
+function closeModal(){$("mpModal").style.display="none"}
+async function confirmMP(){
+ let mp=Number($("mpValue").value);if(!Number.isFinite(mp)||mp<0)return toast("MP không hợp lệ");
+ let {error}=await db.from("accounts").update({status:"filtered",mp}).in("id",pending);if(error)return toast("Không cập nhật được");
+ closeModal();pending=[];toast("Đã lọc acc");await load()
+}
+async function editMP(id){let x=accounts.find(a=>a.id===id),v=prompt("Nhập MP",x?.mp??"");if(v===null)return;let mp=Number(v);if(!Number.isFinite(mp)||mp<0)return toast("MP không hợp lệ");await db.from("accounts").update({mp}).eq("id",id);await load()}
+function copyWarehouse(){if(accounts.length)copy(accounts.map(x=>x.username+"|"+x.password).join("\n"));else toast("Kho trống")}
+function copyFiltered(){let d=accounts.filter(x=>x.status==="filtered");if(d.length)copy(d.map(x=>x.username+"|"+x.password).join("\n"));else toast("Chưa có acc")}
+async function exportOne(id){let x=accounts.find(a=>a.id===id);if(x)await exportRows([x])}
+async function exportSelected(){let d=accounts.filter(x=>ids("filCheck").includes(x.id));if(d.length)await exportRows(d);else toast("Chưa chọn acc")}
+async function exportRows(rows){
+  await copy(rows.map(x=>x.username+"|"+x.password).join("\n"));
+  let hist=rows.map(x=>({account_username:x.username,account_password:x.password,mp:x.mp,exported_by:me.username}));
+  let ins=await db.from("export_history").insert(hist);if(ins.error)return toast("Lỗi ghi lịch sử");
+  let del=await db.from("accounts").delete().in("id",rows.map(x=>x.id));if(del.error)return toast("Lỗi xóa khỏi kho");
+  toast("Đã xuất "+rows.length+" acc");await load()
+}
+async function delAcc(id){if(!confirm("Xóa acc này?"))return;await db.from("accounts").delete().eq("id",id);await load()}
+async function splitAccounts(){
+ let lines=$("splitInput").value.split(/\r?\n/).map(x=>x.trim()).filter(Boolean),lim=Number($("splitLimit").value);if(Number.isFinite(lim)&&lim>0)lines=lines.slice(0,lim);
+ let rows=[];for(let l of lines){let i=l.indexOf("|");if(i<0)continue;let u=l.slice(0,i).trim(),p=l.slice(i+1).trim();if(u&&p)rows.push({username:u,password:p})}
+ if(!rows.length)return toast("Không có acc hợp lệ");let {error}=await db.from("split_accounts").insert(rows);if(error)return toast("Lỗi lưu tách");$("splitInput").value="";$("splitLimit").value="";toast("Đã tách "+rows.length+" acc");await load()
+}
+async function clearSplit(){if(!confirm("Xóa toàn bộ dữ liệu tách?"))return;await db.from("split_accounts").delete().gte("id",0);await load()}
+async function createUser(){
+ if(me?.role!=="admin")return;
+ let u=$("newUser").value.trim(),p=$("newPass").value;if(!u||!p)return toast("Nhập đủ user và mật khẩu");
+ let exists=users.some(x=>x.username===u);if(exists)return toast("User đã tồn tại");
+ let {error}=await db.from("users").insert({username:u,password:await hash(p),role:"user"});if(error)return toast("Tạo user lỗi");$("newUser").value="";$("newPass").value="";toast("Đã tạo user");await load()
+}
+async function deleteUser(id){if(!confirm("Xóa user này?"))return;await db.from("users").delete().eq("id",id);await load()}
+async function changeOwnPassword(){
+ let old=$("oldPass").value,nw=$("newOwnPass").value;if(!old||!nw)return toast("Nhập đủ mật khẩu");
+ let {data}=await db.from("users").select("password").eq("id",me.id).single();if(!data||data.password!==await hash(old))return toast("Mật khẩu hiện tại sai");
+ await db.from("users").update({password:await hash(nw)}).eq("id",me.id);$("oldPass").value="";$("newOwnPass").value="";toast("Đã đổi mật khẩu")
 }
 
-
-async function clearSplit(){
-
-  if(
-    !confirm(
-      "Xóa toàn bộ danh sách TK/MK đã tách?"
-    )
-  )
-    return;
-
-
-  const {error} =
-    await db
-      .from("split_accounts")
-      .delete()
-      .gte("id",0);
-
-
-  if(error){
-
-    console.error(error);
-
-    toast("❌ Không thể xóa");
-
-    return;
-  }
-
-
-  toast("🗑️ Đã xóa dữ liệu tách");
-
-
-  await loadData();
-}
-
-
-/* ==================================================
-   COPY
-================================================== */
-
-async function copyText(id){
-
-  const value =
-    document
-      .getElementById(id)
-      .value;
-
-
-  if(!value){
-
-    toast("⚠️ Không có dữ liệu");
-
-    return;
-  }
-
-
-  copyTextValue(value);
-
-
-  toast("📋 Đã copy");
-}
-
-
-async function copyTextValue(value){
-
-  try{
-
-    await navigator
-      .clipboard
-      .writeText(value);
-
-  }catch(e){
-
-    const textarea =
-      document.createElement("textarea");
-
-
-    textarea.value=value;
-
-
-    textarea.style.position="fixed";
-    textarea.style.opacity="0";
-
-
-    document.body.appendChild(
-      textarea
-    );
-
-
-    textarea.select();
-
-
-    document.execCommand(
-      "copy"
-    );
-
-
-    textarea.remove();
-  }
-}
-
-
-function copyAccount(username,password){
-
-  copyTextValue(
-    `${decodeURIComponent(username)}|${decodeURIComponent(password)}`
-  );
-
-
-  toast("📋 Đã copy TK|MK");
-}
-
-
-/* ==================================================
-   UTILS
-================================================== */
-
-function clearInput(id){
-
-  document
-    .getElementById(id)
-    .value="";
-}
-
-
-function esc(value){
-
-  return String(value)
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
-}
-
-
-/* ==================================================
-   START
-================================================== */
-
-loadData();
-
+(async()=>{
+ let saved=sessionStorage.getItem("me");if(saved){try{me=JSON.parse(saved);await startApp()}catch{logout()}}
+})()
 </script>
-
 </body>
 </html>
