@@ -39,6 +39,19 @@ textarea{min-height:125px;resize:vertical}input:focus,textarea:focus,select:focu
 .empty{text-align:center;color:#777784;padding:24px 8px}
 .toast{position:fixed;z-index:100;left:50%;bottom:22px;transform:translate(-50%,150px);transition:.25s;background:#25252e;border:1px solid #3b3b47;padding:12px 16px;border-radius:13px;max-width:90%;text-align:center}.toast.show{transform:translate(-50%,0)}
 .small{font-size:12px;color:#777784;margin-top:-4px;margin-bottom:12px}
+
+
+.chatmsg{display:flex;margin:7px 0}
+.chatmsg.mine{justify-content:flex-end}
+.chatbubble{max-width:82%;padding:9px 12px;border-radius:15px;background:#20202a}
+.chatmsg.mine .chatbubble{background:linear-gradient(135deg,#ff4c98,#775cff)}
+.chatname{font-size:11px;font-weight:800;margin-bottom:3px;opacity:.8}
+.chattime{font-size:10px;opacity:.6;margin-top:4px;text-align:right}
+
+.reactions{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.reactbtn{border:1px solid #363641;background:#111119;color:#fff;border-radius:12px;padding:6px 9px;font-size:14px}
+.reactbtn.active{border-color:#ff5b9f;background:#321726}
+.reactionCount{font-size:12px;color:#aaa;margin-top:7px}
 </style>
 </head>
 <body>
@@ -101,6 +114,31 @@ textarea{min-height:125px;resize:vertical}input:focus,textarea:focus,select:focu
     </div>
 
     <div class="card">
+      <div class="title">💬 Nhắn tin</div>
+      <div id="chatList" style="height:330px;overflow:auto;background:#101017;border:1px solid #292934;border-radius:16px;padding:10px;margin-bottom:10px">
+        <div class="empty">Chưa có tin nhắn.</div>
+      </div>
+      <div style="display:flex;gap:8px">
+        <input id="messageInput" placeholder="Nhập tin nhắn..." style="margin:0;flex:1">
+        <button id="sendMessageBtn" class="btn" style="width:auto;padding:0 17px">Gửi</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="title">⚙️ Tài khoản</div>
+      <div class="small">Đang đăng nhập: <b id="currentUsername"></b></div>
+      <label>Tài khoản mới</label>
+      <input id="newUsername" placeholder="Nhập tài khoản mới">
+      <label>Mật khẩu hiện tại</label>
+      <input id="currentPassword" type="password" placeholder="Nhập mật khẩu hiện tại">
+      <label>Mật khẩu mới</label>
+      <input id="newPassword" type="password" placeholder="Nhập mật khẩu mới">
+      <label>Nhập lại mật khẩu mới</label>
+      <input id="confirmPassword" type="password" placeholder="Nhập lại mật khẩu mới">
+      <button id="accountBtn" class="btn">💾 Lưu thay đổi</button>
+    </div>
+
+    <div class="card">
       <div class="title">📖 Nhật ký chung</div>
       <div id="diaryList"><div class="empty">Đang tải...</div></div>
     </div>
@@ -129,6 +167,8 @@ let me = null;
 let allUsers = [];
 let myNicknames = {};
 let realtimeChannel = null;
+let chatRealtimeChannel = null;
+let diaryReactions = {};
 
 const $ = id => document.getElementById(id);
 
@@ -149,7 +189,7 @@ function toast(text){
 
 function nameOf(user){
   if(!user) return "Người dùng";
-  return myNicknames[user.id] || user.display_name || user.username || "Người dùng";
+  return myNicknames.shared || user.display_name || user.username || "Người dùng";
 }
 
 async function login(){
@@ -192,7 +232,9 @@ async function openApp(){
     await loadNicknames();
     renderPeople();
     await loadEntries();
+    await loadMessages();
     subscribeRealtime();
+    subscribeChatRealtime();
   }catch(err){
     console.error(err);
     toast("Không tải được dữ liệu: "+err.message);
@@ -208,16 +250,18 @@ async function loadUsers(){
 
 async function loadNicknames(){
   const {data,error}=await supabaseClient
-    .from("diary_nicknames")
-    .select("owner_id,target_id,nickname")
-    .eq("owner_id",me.id);
+    .from("diary_shared_settings")
+    .select("nickname")
+    .eq("id",1)
+    .maybeSingle();
   if(error) throw error;
   myNicknames={};
-  (data||[]).forEach(row=>myNicknames[row.target_id]=row.nickname);
+  if(data && data.nickname) myNicknames.shared=data.nickname;
 }
 
 function renderPeople(){
   $("brandSub").textContent=nameOf(me);
+  $("currentUsername").textContent=me.username || "";
   $("people").innerHTML=allUsers.map(user=>{
     const mine=user.id===me.id;
     return `<div class="person">
@@ -227,34 +271,87 @@ function renderPeople(){
     </div>`;
   }).join("");
 
-  const other=allUsers.find(u=>String(u.id)!==String(me.id));
-  $("nicknameInfo").textContent=other
-    ? "Bạn đang đặt biệt danh cho: "+(other.display_name || other.username || "Người kia")
-    : "Chưa tìm thấy người thứ hai. Hãy chạy SQL sửa database bên dưới.";
+  $("nicknameInfo").textContent="Biệt danh này dùng chung cho cả 2 điện thoại.";
+}
+
+
+async function updateAccount(){
+  const username=$("newUsername").value.trim();
+  const currentPassword=$("currentPassword").value;
+  const newPassword=$("newPassword").value;
+  const confirmPassword=$("confirmPassword").value;
+
+  if(!username && !newPassword){
+    toast("Hãy nhập tài khoản mới hoặc mật khẩu mới.");
+    return;
+  }
+
+  if(!currentPassword){
+    toast("Nhập mật khẩu hiện tại.");
+    return;
+  }
+
+  if(newPassword && newPassword!==confirmPassword){
+    toast("Mật khẩu mới không trùng nhau.");
+    return;
+  }
+
+  $("accountBtn").disabled=true;
+  $("accountBtn").textContent="Đang lưu...";
+
+  try{
+    const {data,error}=await supabaseClient.rpc("update_diary_account",{
+      p_user_id:me.id,
+      p_current_password:currentPassword,
+      p_new_username:username || null,
+      p_new_password:newPassword || null
+    });
+
+    if(error)throw error;
+    if(!data || !data.length)throw new Error("Không thể cập nhật tài khoản.");
+
+    me.username=data[0].username;
+    sessionStorage.setItem("diary_current_user",JSON.stringify(me));
+
+    $("currentUsername").textContent=me.username;
+    $("newUsername").value="";
+    $("currentPassword").value="";
+    $("newPassword").value="";
+    $("confirmPassword").value="";
+
+    toast("Đã đổi tài khoản/mật khẩu thành công ❤️");
+  }catch(err){
+    console.error(err);
+    toast(err.message || "Không thể đổi tài khoản.");
+  }finally{
+    $("accountBtn").disabled=false;
+    $("accountBtn").textContent="💾 Lưu thay đổi";
+  }
 }
 
 async function saveNickname(){
-  const other=allUsers.find(u=>String(u.id)!==String(me.id));
-  if(!other){
-    toast("Chưa tải được người thứ 2. Hãy chạy SQL sửa database.");
-    return;
-  }
   const nickname=$("nicknameInput").value.trim();
   if(!nickname){toast("Hãy nhập biệt danh.");return;}
 
-  const {error}=await supabaseClient.from("diary_nicknames").upsert({
-    owner_id:me.id,
-    target_id:other.id,
-    nickname:nickname,
-    updated_at:new Date().toISOString()
-  },{onConflict:"owner_id,target_id"});
+  const {error}=await supabaseClient
+    .from("diary_shared_settings")
+    .upsert({
+      id:1,
+      nickname:nickname,
+      updated_at:new Date().toISOString()
+    });
 
-  if(error){console.error(error);toast("Lỗi lưu biệt danh: "+error.message);return;}
+  if(error){
+    console.error(error);
+    toast("Lỗi lưu biệt danh: "+error.message);
+    return;
+  }
 
-  myNicknames[other.id]=nickname;
+  myNicknames.shared=nickname;
   renderPeople();
+  await loadEntries();
   $("nicknameInput").value="";
-  toast("Đã lưu biệt danh ❤️");
+  toast("Đã đổi biệt danh chung ❤️");
 }
 
 $("entryFile").addEventListener("change",function(){
@@ -355,6 +452,60 @@ async function sendTelegramNotification(){
   if(!result.ok) throw new Error(result.description || "Telegram API lỗi");
 }
 
+
+async function loadReactions(entryIds){
+  diaryReactions={};
+  if(!entryIds.length)return;
+
+  const {data,error}=await supabaseClient
+    .from("diary_reactions")
+    .select("id,entry_id,user_id,reaction")
+    .in("entry_id",entryIds);
+
+  if(error){
+    console.error("Reactions:",error);
+    return;
+  }
+
+  (data||[]).forEach(r=>{
+    if(!diaryReactions[r.entry_id])diaryReactions[r.entry_id]=[];
+    diaryReactions[r.entry_id].push(r);
+  });
+}
+
+async function toggleReaction(entryId,reaction){
+  const current=(diaryReactions[entryId]||[]).find(
+    r=>String(r.user_id)===String(me.id) && r.reaction===reaction
+  );
+
+  if(current){
+    const {error}=await supabaseClient
+      .from("diary_reactions")
+      .delete()
+      .eq("id",current.id);
+    if(error){toast("Không bỏ được cảm xúc: "+error.message);return;}
+  }else{
+    // Mỗi người chỉ có 1 cảm xúc cho một nhật ký.
+    await supabaseClient
+      .from("diary_reactions")
+      .delete()
+      .eq("entry_id",entryId)
+      .eq("user_id",me.id);
+
+    const {error}=await supabaseClient
+      .from("diary_reactions")
+      .insert({
+        entry_id:entryId,
+        user_id:me.id,
+        reaction:reaction
+      });
+
+    if(error){toast("Không thả cảm xúc được: "+error.message);return;}
+  }
+
+  await loadEntries();
+}
+
 async function loadEntries(){
   const {data,error}=await supabaseClient
     .from("diary_entries")
@@ -362,6 +513,8 @@ async function loadEntries(){
     .order("created_at",{ascending:false});
 
   if(error) throw error;
+
+  await loadReactions((data||[]).map(x=>x.id));
 
   $("diaryList").innerHTML="";
   if(!data || !data.length){
@@ -389,6 +542,14 @@ async function loadEntries(){
       <div class="mood">${escapeHTML(entry.mood||"❤️")}</div>
       ${entry.content?`<div class="content">${escapeHTML(entry.content)}</div>`:""}
       ${entry.image_url?`<img class="photo" src="${escapeHTML(entry.image_url)}" loading="lazy">`:""}
+      <div class="reactions">
+        ${["❤️","😂","🥰","😮","😢","😡"].map(r=>{
+          const rows=diaryReactions[entry.id]||[];
+          const mine=rows.some(x=>String(x.user_id)===String(me.id)&&x.reaction===r);
+          const count=rows.filter(x=>x.reaction===r).length;
+          return `<button class="reactbtn ${mine?"active":""}" data-entry="${escapeHTML(entry.id)}" data-reaction="${r}">${r}${count?` ${count}`:""}</button>`;
+        }).join("")}
+      </div>
       ${entry.user_id===me.id?`<button class="delete" data-id="${escapeHTML(entry.id)}">🗑 Xóa</button>`:""}
     `;
     $("diaryList").appendChild(el);
@@ -397,6 +558,134 @@ async function loadEntries(){
   document.querySelectorAll(".delete").forEach(btn=>{
     btn.addEventListener("click",()=>deleteEntry(btn.dataset.id));
   });
+
+  document.querySelectorAll(".reactbtn").forEach(btn=>{
+    btn.addEventListener("click",()=>toggleReaction(btn.dataset.entry,btn.dataset.reaction));
+  });
+}
+
+
+async function loadMessages(){
+  const {data,error}=await supabaseClient
+    .from("diary_messages")
+    .select("id,sender_id,receiver_id,message,created_at")
+    .order("created_at",{ascending:true});
+
+  if(error){
+    console.error(error);
+    $("chatList").innerHTML='<div class="empty">Không tải được tin nhắn: '+escapeHTML(error.message)+'</div>';
+    return;
+  }
+
+  const list=$("chatList");
+  list.innerHTML="";
+
+  if(!data || !data.length){
+    list.innerHTML='<div class="empty">Chưa có tin nhắn.</div>';
+    return;
+  }
+
+  data.forEach(msg=>{
+    const sender=allUsers.find(u=>String(u.id)===String(msg.sender_id));
+    const receiver=allUsers.find(u=>String(u.id)===String(msg.receiver_id));
+    const mine=String(msg.sender_id)===String(me.id);
+    const time=new Date(msg.created_at).toLocaleTimeString("vi-VN",{
+      hour:"2-digit",minute:"2-digit"
+    });
+
+    const item=document.createElement("div");
+    item.className="chatmsg"+(mine?" mine":"");
+    item.innerHTML=`
+      <div class="chatbubble">
+        <div class="chatname">${escapeHTML(nameOf(sender))} → ${escapeHTML(nameOf(receiver))}</div>
+        <div>${escapeHTML(msg.message)}</div>
+        <div class="chattime">${escapeHTML(time)}</div>
+      </div>`;
+    list.appendChild(item);
+  });
+
+  list.scrollTop=list.scrollHeight;
+}
+
+async function sendMessage(){
+  const input=$("messageInput");
+  const message=input.value.trim();
+  if(!message)return;
+
+  const receiver=allUsers.find(u=>String(u.id)!==String(me.id));
+  if(!receiver){
+    toast("Không tìm thấy người nhận.");
+    return;
+  }
+
+  $("sendMessageBtn").disabled=true;
+
+  try{
+    const {error}=await supabaseClient
+      .from("diary_messages")
+      .insert({
+        sender_id:me.id,
+        receiver_id:receiver.id,
+        message:message
+      });
+
+    if(error)throw error;
+
+    input.value="";
+    await loadMessages();
+
+    // Telegram: "biệt danh1 đã gửi tn cho biệt danh2"
+    sendMessageTelegram(receiver).catch(err=>console.error("Telegram:",err));
+  }catch(err){
+    console.error(err);
+    toast("Không gửi được tin nhắn: "+err.message);
+  }finally{
+    $("sendMessageBtn").disabled=false;
+  }
+}
+
+async function sendMessageTelegram(receiver){
+  if(!TELEGRAM_BOT_TOKEN ||
+     TELEGRAM_BOT_TOKEN==="DÁN_TOKEN_BOT_MỚI_VÀO_ĐÂY"){
+    console.warn("Chưa nhập Telegram bot token.");
+    return;
+  }
+
+  const text="💬 "+nameOf(me)+" đã gửi tn cho "+nameOf(receiver);
+
+  const response=await fetch(
+    "https://api.telegram.org/bot"+TELEGRAM_BOT_TOKEN+"/sendMessage",
+    {
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        chat_id:TELEGRAM_CHAT_ID,
+        text:text
+      })
+    }
+  );
+
+  const result=await response.json();
+  if(!result.ok)throw new Error(result.description||"Telegram API lỗi");
+}
+
+function subscribeChatRealtime(){
+  if(chatRealtimeChannel){
+    supabaseClient.removeChannel(chatRealtimeChannel);
+  }
+
+  chatRealtimeChannel=supabaseClient
+    .channel("diary-messages-live")
+    .on(
+      "postgres_changes",
+      {event:"*",schema:"public",table:"diary_messages"},
+      ()=>loadMessages().catch(console.error)
+    ).on(
+      "postgres_changes",
+      {event:"*",schema:"public",table:"diary_reactions"},
+      ()=>loadEntries().catch(console.error)
+    )
+    .subscribe();
 }
 
 async function deleteEntry(id){
@@ -413,6 +702,7 @@ async function deleteEntry(id){
 
 function subscribeRealtime(){
   if(realtimeChannel) supabaseClient.removeChannel(realtimeChannel);
+  if(chatRealtimeChannel) supabaseClient.removeChannel(chatRealtimeChannel);
 
   realtimeChannel=supabaseClient
     .channel("diary-live")
@@ -420,7 +710,7 @@ function subscribeRealtime(){
       {event:"*",schema:"public",table:"diary_entries"},
       ()=>loadEntries().catch(console.error))
     .on("postgres_changes",
-      {event:"*",schema:"public",table:"diary_nicknames"},
+      {event:"*",schema:"public",table:"diary_shared_settings"},
       async()=>{
         try{
           await loadNicknames();
@@ -433,6 +723,7 @@ function subscribeRealtime(){
 
 function logout(){
   if(realtimeChannel) supabaseClient.removeChannel(realtimeChannel);
+  if(chatRealtimeChannel) supabaseClient.removeChannel(chatRealtimeChannel);
   sessionStorage.removeItem("diary_current_user");
   location.reload();
 }
@@ -441,6 +732,14 @@ $("loginBtn").addEventListener("click",login);
 $("logoutBtn").addEventListener("click",logout);
 $("postBtn").addEventListener("click",postEntry);
 $("nicknameBtn").addEventListener("click",saveNickname);
+$("accountBtn").addEventListener("click",updateAccount);
+$("sendMessageBtn").addEventListener("click",sendMessage);
+$("messageInput").addEventListener("keydown",e=>{
+  if(e.key==="Enter" && !e.shiftKey){
+    e.preventDefault();
+    sendMessage();
+  }
+});
 $("removePhoto").addEventListener("click",removePhoto);
 
 $("loginPass").addEventListener("keydown",e=>{
