@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
@@ -200,10 +200,8 @@ async function openApp(){
 }
 
 async function loadUsers(){
-  const {data,error}=await supabaseClient
-    .from("diary_users")
-    .select("id,username,display_name,created_at")
-    .order("created_at",{ascending:true});
+  // Dùng RPC SECURITY DEFINER để không bị RLS chỉ cho thấy chính mình.
+  const {data,error}=await supabaseClient.rpc("get_diary_users");
   if(error) throw error;
   allUsers=data || [];
 }
@@ -229,15 +227,18 @@ function renderPeople(){
     </div>`;
   }).join("");
 
-  const other=allUsers.find(u=>u.id!==me.id);
+  const other=allUsers.find(u=>String(u.id)!==String(me.id));
   $("nicknameInfo").textContent=other
-    ? "Biệt danh bạn đặt sẽ hiện ở phía bạn: "+(other.display_name||other.username)
-    : "Chưa có người thứ hai.";
+    ? "Bạn đang đặt biệt danh cho: "+(other.display_name || other.username || "Người kia")
+    : "Chưa tìm thấy người thứ hai. Hãy chạy SQL sửa database bên dưới.";
 }
 
 async function saveNickname(){
-  const other=allUsers.find(u=>u.id!==me.id);
-  if(!other){toast("Không tìm thấy người kia.");return;}
+  const other=allUsers.find(u=>String(u.id)!==String(me.id));
+  if(!other){
+    toast("Chưa tải được người thứ 2. Hãy chạy SQL sửa database.");
+    return;
+  }
   const nickname=$("nicknameInput").value.trim();
   if(!nickname){toast("Hãy nhập biệt danh.");return;}
 
