@@ -2,847 +2,2157 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Our Diary ❤️</title>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
 *{box-sizing:border-box}
-html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#08080c;color:#fff}
-body{background:radial-gradient(circle at 0 0,#35152d 0,transparent 35%),radial-gradient(circle at 100% 0,#152442 0,transparent 35%),#08080c}
-button,input,textarea,select{font:inherit}
-button{cursor:pointer}
+
+body{
+ margin:0;
+ background:#09090f;
+ color:#fff;
+ font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif
+}
+
+.wrap{
+ max-width:720px;
+ margin:auto;
+ padding:14px
+}
+
+.card{
+ background:#15151e;
+ border:1px solid #30303b;
+ border-radius:20px;
+ padding:16px;
+ margin-bottom:12px
+}
+
 .hidden{display:none!important}
-.wrap{width:min(760px,100%);margin:auto;padding:12px}
-.card{background:rgba(19,19,27,.94);border:1px solid #30303b;border-radius:22px;padding:17px;margin-bottom:12px;box-shadow:0 15px 50px #0005}
-.login{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:18px}
-.login .card{width:min(420px,100%);padding:25px}
-.logo{width:74px;height:74px;border-radius:23px;display:grid;place-items:center;margin:0 auto 14px;font-size:38px;background:linear-gradient(135deg,#ff4c98,#775cff)}
-h1{font-size:25px;text-align:center;margin:0}
-.muted{color:#858591;font-size:13px;text-align:center;margin:8px 0 22px}
-label{display:block;color:#aaa;font-size:13px;margin:0 0 7px}
-input,textarea,select{width:100%;border:1px solid #363641;background:#111119;color:#fff;border-radius:14px;padding:13px;outline:none;margin-bottom:13px}
-textarea{min-height:125px;resize:vertical}
-input:focus,textarea:focus,select:focus{border-color:#ff5b9f}
-.btn{width:100%;border:0;border-radius:14px;padding:14px;background:linear-gradient(135deg,#ff4c98,#775cff);color:#fff;font-weight:800}
-.btn:disabled{opacity:.55}
-.err{color:#ff7389;text-align:center;min-height:20px;font-size:13px;margin-top:8px}
-.top{position:sticky;top:0;z-index:20;background:#08080cdc;backdrop-filter:blur(18px);border-bottom:1px solid #292933}
-.topin{width:min(760px,100%);margin:auto;padding:10px 13px;display:flex;align-items:center;justify-content:space-between}
-.brand{display:flex;align-items:center;gap:10px}
-.brandIcon{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(135deg,#ff4c98,#775cff);font-size:25px}
-.brandTitle{font-weight:900;font-size:18px}
-.brandSub{font-size:13px;color:#ff6cac;margin-top:2px}
-.out{border:1px solid #363641;background:#17171f;color:#aaa;padding:10px 13px;border-radius:12px}
-.title{font-size:18px;font-weight:900;margin-bottom:13px}
-.small{font-size:12px;color:#777784;margin:-4px 0 12px}
-.people{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.person{background:#17171f;border:1px solid #2d2d38;border-radius:17px;padding:14px}
-.picon{font-size:25px}
-.pname{font-weight:900;margin-top:7px}
-.psub{font-size:12px;color:#ff6cac;margin-top:3px}
-.preview{display:none;position:relative;margin:0 0 13px}
-.preview img{width:100%;max-height:380px;object-fit:cover;border-radius:16px;display:block}
-.remove{position:absolute;right:8px;top:8px;width:34px;height:34px;border:0;border-radius:50%;background:#000b;color:#fff;font-size:22px}
-.diary{background:#17171f;border:1px solid #2d2d38;border-radius:18px;padding:15px;margin-bottom:10px}
-.head{display:flex;gap:10px;align-items:center}
-.avatar{width:40px;height:40px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,#ff4c98,#775cff)}
-.author{font-weight:900}
-.time{font-size:11px;color:#777784;margin-top:3px}
-.mood{font-size:25px;margin:11px 0 6px}
-.content{white-space:pre-wrap;word-break:break-word;line-height:1.6}
-.photo{width:100%;max-height:460px;object-fit:cover;border-radius:15px;display:block;margin-top:11px}
-.delete{margin-top:10px;border:1px solid #4a2d37;background:#21171b;color:#ff778d;border-radius:10px;padding:7px 10px}
-.empty{text-align:center;color:#777784;padding:24px 8px}
-.toast{position:fixed;z-index:100;left:50%;bottom:22px;transform:translate(-50%,150px);transition:.25s;background:#25252e;border:1px solid #3b3b47;padding:12px 16px;border-radius:13px;max-width:90%;text-align:center}
-.toast.show{transform:translate(-50%,0)}
-.chatList{height:330px;overflow:auto;background:#101017;border:1px solid #292934;border-radius:16px;padding:10px;margin-bottom:10px}
-.chatmsg{display:flex;margin:7px 0}
-.chatmsg.mine{justify-content:flex-end}
-.chatbubble{max-width:82%;padding:9px 12px;border-radius:15px;background:#20202a;word-break:break-word}
-.chatmsg.mine .chatbubble{background:linear-gradient(135deg,#ff4c98,#775cff)}
-.chatname{font-size:11px;font-weight:800;margin-bottom:3px;opacity:.8}
-.chattime{font-size:10px;opacity:.6;margin-top:4px;text-align:right}
-.reactions{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
-.reactbtn{border:1px solid #363641;background:#111119;color:#fff;border-radius:12px;padding:6px 9px;font-size:14px}
-.reactbtn.active{border-color:#ff5b9f;background:#321726}
-@media(max-width:430px){.wrap{padding:8px}.card{padding:14px}.people{grid-template-columns:1fr 1fr}}
+
+h1{
+ margin:0 0 6px;
+ text-align:center
+}
+
+.muted,.small{
+ color:#858593;
+ font-size:13px
+}
+
+.muted{
+ text-align:center;
+ margin-bottom:20px
+}
+
+label{
+ display:block;
+ margin-top:8px;
+ font-size:13px;
+ color:#aaa
+}
+
+input,textarea,select{
+ width:100%;
+ padding:13px;
+ margin:6px 0 12px;
+ background:#101017;
+ color:#fff;
+ border:1px solid #383844;
+ border-radius:13px;
+ outline:none
+}
+
+textarea{
+ min-height:100px;
+ resize:vertical
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+ border-color:#ff4c98
+}
+
+.btn{
+ border:0;
+ border-radius:13px;
+ padding:13px 16px;
+ background:linear-gradient(135deg,#ff4c98,#765cff);
+ color:#fff;
+ font-weight:800;
+ width:100%;
+ cursor:pointer
+}
+
+.secondary{
+ background:#20202a;
+ border:1px solid #393946
+}
+
+.top{
+ position:sticky;
+ top:0;
+ background:#09090fee;
+ backdrop-filter:blur(15px);
+ padding:10px;
+ z-index:5;
+ border-bottom:1px solid #252530
+}
+
+.topin{
+ max-width:720px;
+ margin:auto;
+ display:flex;
+ justify-content:space-between;
+ align-items:center
+}
+
+.brand{
+ font-weight:900;
+ font-size:18px
+}
+
+.logout{
+ background:#191922;
+ color:#aaa;
+ border:1px solid #363641;
+ border-radius:10px;
+ padding:9px 12px
+}
+
+.people{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:10px
+}
+
+.person{
+ background:#1b1b25;
+ padding:13px;
+ border-radius:15px;
+ border:1px solid #30303a
+}
+
+.pname{
+ font-weight:900;
+ margin-top:6px
+}
+
+.diary{
+ background:#1a1a24;
+ border:1px solid #30303a;
+ border-radius:17px;
+ padding:14px;
+ margin:10px 0
+}
+
+.head{
+ display:flex;
+ gap:9px;
+ align-items:center
+}
+
+.avatar{
+ width:40px;
+ height:40px;
+ border-radius:12px;
+ background:linear-gradient(135deg,#ff4c98,#765cff);
+ display:grid;
+ place-items:center
+}
+
+.time{
+ font-size:11px;
+ color:#777;
+ margin-top:2px
+}
+
+.content{
+ white-space:pre-wrap;
+ line-height:1.55;
+ margin-top:9px
+}
+
+.photo{
+ width:100%;
+ max-height:450px;
+ object-fit:cover;
+ border-radius:14px;
+ margin-top:10px
+}
+
+.reactions{
+ display:flex;
+ gap:6px;
+ flex-wrap:wrap;
+ margin-top:10px
+}
+
+.react{
+ background:#111119;
+ color:#fff;
+ border:1px solid #363641;
+ border-radius:10px;
+ padding:6px 9px;
+ cursor:pointer
+}
+
+.react.active{
+ border-color:#ff579e;
+ background:#321725
+}
+
+.chat{
+ height:330px;
+ overflow:auto;
+ background:#101017;
+ border:1px solid #292933;
+ border-radius:15px;
+ padding:9px
+}
+
+.msg{
+ margin:7px 0;
+ display:flex
+}
+
+.msg.mine{
+ justify-content:flex-end
+}
+
+.bubble{
+ max-width:82%;
+ background:#22222c;
+ padding:9px 12px;
+ border-radius:15px;
+ word-break:break-word
+}
+
+.mine .bubble{
+ background:linear-gradient(135deg,#ff4c98,#765cff)
+}
+
+.msgname{
+ font-size:10px;
+ font-weight:800;
+ opacity:.7;
+ margin-bottom:3px
+}
+
+.msgtime{
+ font-size:9px;
+ text-align:right;
+ opacity:.6;
+ margin-top:3px
+}
+
+.status{
+ text-align:center;
+ font-size:12px;
+ color:#777;
+ margin-top:8px
+}
+
+.toast{
+ position:fixed;
+ left:50%;
+ bottom:20px;
+ transform:translate(-50%,120px);
+ background:#25252e;
+ border:1px solid #444;
+ padding:12px 15px;
+ border-radius:12px;
+ transition:.2s;
+ z-index:50;
+ max-width:90%;
+ text-align:center
+}
+
+.toast.show{
+ transform:translate(-50%,0)
+}
 </style>
 </head>
+
 <body>
 
-<section id="loginPage" class="login">
-  <div class="card">
-    <div class="logo">❤️</div>
-    <h1>Our Diary</h1>
-    <div class="muted">Nhật ký riêng của 2 người</div>
-    <label>Tài khoản</label>
-    <input id="loginUser" autocomplete="username" placeholder="user1">
-    <label>Mật khẩu</label>
-    <input id="loginPass" type="password" autocomplete="current-password" placeholder="123456">
-    <button id="loginBtn" class="btn">Đăng nhập ❤️</button>
-    <div id="loginErr" class="err"></div>
-  </div>
+<!-- ================= LOGIN ================= -->
+
+<section id="login" class="wrap" style="padding-top:80px">
+
+<div class="card">
+
+<h1>❤️ Our Diary</h1>
+
+<div class="muted">
+Nhật ký riêng của 2 người
+</div>
+
+<label>Tài khoản</label>
+
+<input
+ id="username"
+ placeholder="user1"
+ autocomplete="username"
+>
+
+<label>Mật khẩu</label>
+
+<input
+ id="password"
+ type="password"
+ placeholder="Mật khẩu"
+ autocomplete="current-password"
+>
+
+<button
+ id="loginBtn"
+ class="btn"
+>
+Đăng nhập
+</button>
+
+<div
+ id="loginError"
+ class="muted"
+></div>
+
+</div>
+
 </section>
 
-<section id="appPage" class="hidden">
+
+<!-- ================= APP ================= -->
+
+<section
+ id="app"
+ class="hidden"
+>
+
 <header class="top">
-  <div class="topin">
-    <div class="brand">
-      <div class="brandIcon">❤️</div>
-      <div>
-        <div class="brandTitle">Our Diary</div>
-        <div id="brandSub" class="brandSub"></div>
-      </div>
-    </div>
-    <button id="logoutBtn" class="out">Đăng xuất</button>
-  </div>
+
+<div class="topin">
+
+<div class="brand">
+❤️ Our Diary
+</div>
+
+<button
+ id="logout"
+ class="logout"
+>
+Đăng xuất
+</button>
+
+</div>
+
 </header>
+
 
 <main class="wrap">
 
-<div class="card">
-  <div class="title">💕 Hai người</div>
-  <div id="people" class="people"></div>
-</div>
+
+<!-- ================= PEOPLE ================= -->
 
 <div class="card">
-  <div class="title">✍️ Ghi nhật ký</div>
-  <label>Nội dung</label>
-  <textarea id="entryText" placeholder="Viết điều bạn muốn lưu lại..."></textarea>
-  <label>Cảm xúc</label>
-  <select id="entryMood">
-    <option>❤️</option><option>🥰</option><option>😍</option><option>😊</option>
-    <option>😘</option><option>😂</option><option>🥺</option><option>😢</option>
-    <option>😡</option><option>😴</option><option>💔</option>
-  </select>
-  <label>📷 Ảnh đính kèm</label>
-  <input id="entryFile" type="file" accept="image/*">
-  <div id="preview" class="preview">
-    <img id="previewImg">
-    <button id="removePhoto" class="remove" type="button">×</button>
-  </div>
-  <button id="postBtn" class="btn">❤️ Đăng nhật ký</button>
+
+<div style="font-weight:900;margin-bottom:10px">
+💕 Hai người
 </div>
 
-<div class="card">
-  <div class="title">🥰 Đặt biệt danh cho người kia</div>
-  <div class="small">Biệt danh này đồng bộ trên cả 2 điện thoại.</div>
-  <input id="nicknameInput" placeholder="Ví dụ: Sưuu ❤️">
-  <button id="nicknameBtn" class="btn">Lưu biệt danh</button>
+<div
+ id="people"
+ class="people"
+></div>
+
 </div>
 
-<div class="card">
-  <div class="title">💬 Nhắn tin</div>
-  <div id="chatList" class="chatList"><div class="empty">Đang tải...</div></div>
-  <div style="display:flex;gap:8px">
-    <input id="messageInput" placeholder="Nhập tin nhắn..." style="margin:0;flex:1">
-    <button id="sendMessageBtn" class="btn" style="width:auto;padding:0 18px">Gửi</button>
-  </div>
-</div>
+
+<!-- ================= DIARY ================= -->
 
 <div class="card">
-  <div class="title">⚙️ Tài khoản</div>
-  <div class="small">Đang đăng nhập: <b id="currentUsername"></b></div>
-  <label>Tài khoản mới</label>
-  <input id="newUsername" placeholder="Bỏ trống nếu không đổi">
-  <label>Mật khẩu hiện tại</label>
-  <input id="currentPassword" type="password" placeholder="Mật khẩu hiện tại">
-  <label>Mật khẩu mới</label>
-  <input id="newPassword" type="password" placeholder="Bỏ trống nếu không đổi">
-  <label>Nhập lại mật khẩu mới</label>
-  <input id="confirmPassword" type="password" placeholder="Nhập lại mật khẩu mới">
-  <button id="accountBtn" class="btn">💾 Lưu thay đổi</button>
+
+<div style="font-weight:900">
+✍️ Ghi nhật ký
 </div>
 
-<div class="card">
-  <div class="title">📖 Nhật ký chung</div>
-  <div id="diaryList"><div class="empty">Đang tải...</div></div>
+<textarea
+ id="note"
+ placeholder="Viết điều bạn muốn lưu lại..."
+></textarea>
+
+<select id="mood">
+
+<option>❤️</option>
+<option>🥰</option>
+<option>😍</option>
+<option>😊</option>
+<option>😘</option>
+<option>😂</option>
+<option>🥺</option>
+<option>😢</option>
+<option>😡</option>
+<option>😴</option>
+<option>💔</option>
+
+</select>
+
+<label>
+📷 Ảnh đính kèm
+</label>
+
+<input
+ id="image"
+ type="file"
+ accept="image/*"
+>
+
+<button
+ id="post"
+ class="btn"
+>
+❤️ Đăng nhật ký
+</button>
+
 </div>
+
+
+<!-- ================= NICKNAME ================= -->
+
+<div class="card">
+
+<div style="font-weight:900">
+🥰 Biệt danh
+</div>
+
+<div
+ id="nickTarget"
+ class="small"
+ style="margin:8px 0"
+></div>
+
+<input
+ id="nick"
+ placeholder="Nhập biệt danh cho người kia"
+>
+
+<button
+ id="saveNick"
+ class="btn"
+>
+Lưu biệt danh
+</button>
+
+</div>
+
+
+<!-- ================= CHAT ================= -->
+
+<div class="card">
+
+<div style="font-weight:900;margin-bottom:10px">
+💬 Tin nhắn
+</div>
+
+<div
+ id="chat"
+ class="chat"
+>
+<div
+ class="small"
+ style="text-align:center;padding:20px"
+>
+Chưa có tin nhắn.
+</div>
+</div>
+
+<div
+ style="display:flex;gap:7px;margin-top:9px"
+>
+
+<input
+ id="message"
+ placeholder="Nhập tin nhắn..."
+ style="margin:0"
+>
+
+<button
+ id="send"
+ class="btn"
+ style="width:auto"
+>
+Gửi
+</button>
+
+</div>
+
+</div>
+
+
+<!-- ================= TELEGRAM ================= -->
+
+<div class="card">
+
+<div style="font-weight:900">
+🤖 Cấu hình Telegram
+</div>
+
+<div
+ class="small"
+ style="margin:8px 0 12px"
+>
+Nhập Bot Token ngay trên web.
+Token sẽ được lưu vào Supabase và tự sử dụng cho những lần sau.
+</div>
+
+<label>
+Bot Token
+</label>
+
+<input
+ id="telegramToken"
+ type="password"
+ placeholder="123456789:AA..."
+>
+
+<button
+ id="saveTelegram"
+ class="btn"
+>
+💾 Lưu Bot Token
+</button>
+
+<button
+ id="testTelegram"
+ class="btn secondary"
+ style="margin-top:8px"
+>
+📨 Test Telegram
+</button>
+
+<div
+ id="telegramStatus"
+ class="status"
+></div>
+
+</div>
+
+
+<!-- ================= ACCOUNT ================= -->
+
+<div class="card">
+
+<div style="font-weight:900">
+⚙️ Tài khoản
+</div>
+
+<div class="small">
+Đang đăng nhập:
+<b id="currentUser"></b>
+</div>
+
+<label>
+Mật khẩu hiện tại
+</label>
+
+<input
+ id="currentPass"
+ type="password"
+ placeholder="Mật khẩu hiện tại"
+>
+
+<label>
+Tài khoản mới
+</label>
+
+<input
+ id="newUser"
+ placeholder="Bỏ trống nếu không đổi"
+>
+
+<label>
+Mật khẩu mới
+</label>
+
+<input
+ id="newPass"
+ type="password"
+ placeholder="Bỏ trống nếu không đổi"
+>
+
+<label>
+Nhập lại mật khẩu mới
+</label>
+
+<input
+ id="confirmPass"
+ type="password"
+ placeholder="Nhập lại mật khẩu mới"
+>
+
+<button
+ id="updateAccount"
+ class="btn"
+>
+💾 Lưu thay đổi
+</button>
+
+</div>
+
+
+<!-- ================= DIARY HISTORY ================= -->
+
+<div class="card">
+
+<div style="font-weight:900">
+📖 Nhật ký chung
+</div>
+
+<div id="diary">
+
+<div
+ class="small"
+ style="text-align:center;padding:20px"
+>
+Đang tải...
+</div>
+
+</div>
+
+</div>
+
 
 </main>
+
 </section>
 
-<div id="toast" class="toast"></div>
+
+<div
+ id="toast"
+ class="toast"
+></div>
+
 
 <script>
-/* =========================================================
+
+/* =====================================================
    SUPABASE
-   ========================================================= */
-const SUPABASE_URL="https://mmgqalltjkwpnxmfrajh.supabase.co";
-const SUPABASE_ANON_KEY="sb_publishable_Ce_O6R53zyBorjk9eF0tUg_XwstpHWk";
-const supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+===================================================== */
 
-/* =========================================================
-   TELEGRAM - CHỈ THAY TOKEN Ở ĐÂY
-   ========================================================= */
-const TELEGRAM_BOT_TOKEN="8503723223:AAF8FonAHhyHUz7vKmy-7K7sBPqYJUJlCwo";
-const TELEGRAM_CHAT_ID="-5515276053";
+const SUPABASE_URL =
+"https://mmgqalltjkwpnxmfrajh.supabase.co";
 
-let me=null;
-let allUsers=[];
-let sharedNickname="";
-let reactions={};
-let liveChannel=null;
+const SUPABASE_KEY =
+"sb_publishable_Ce_O6R53zyBorjk9eF0tUg_XwstpHWk";
 
-const $=id=>document.getElementById(id);
+const TELEGRAM_CHAT_ID =
+"-5515276053";
 
-function escapeHTML(v){
-  return String(v??"")
-    .replace(/&/g,"&amp;").replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;").replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+const db =
+window.supabase.createClient(
+ SUPABASE_URL,
+ SUPABASE_KEY
+);
+
+
+/* =====================================================
+   VARIABLES
+===================================================== */
+
+let me = null;
+
+let users = [];
+
+let nicknames = {};
+
+let telegramToken = "";
+
+let realtimeChannel = null;
+
+
+/* =====================================================
+   HELPERS
+===================================================== */
+
+const $ = id =>
+document.getElementById(id);
+
+
+function esc(value){
+
+ return String(value ?? "")
+ .replace(/[&<>"']/g,function(c){
+
+  return {
+   "&":"&amp;",
+   "<":"&lt;",
+   ">":"&gt;",
+   '"':"&quot;",
+   "'":"&#039;"
+  }[c];
+
+ });
+
 }
 
-function toast(text){
-  const x=$("toast");
-  x.textContent=text;
-  x.classList.add("show");
-  clearTimeout(window.__toastTimer);
-  window.__toastTimer=setTimeout(()=>x.classList.remove("show"),2800);
+
+function toast(message){
+
+ const el = $("toast");
+
+ el.textContent = message;
+
+ el.classList.add("show");
+
+ clearTimeout(window.toastTimer);
+
+ window.toastTimer =
+ setTimeout(
+  ()=>el.classList.remove("show"),
+  3000
+ );
+
 }
 
-function nicknameFor(user){
-  if(sharedNickname) return sharedNickname;
-  return user?.display_name || user?.username || "Người dùng";
+
+function getOtherUser(){
+
+ return users.find(
+  u =>
+  String(u.id) !== String(me.id)
+ );
+
 }
 
-function otherUser(){
-  return allUsers.find(u=>String(u.id)!==String(me.id));
+
+function getName(userId){
+
+ const user =
+ users.find(
+  u =>
+  String(u.id) === String(userId)
+ );
+
+ if(!user)
+ return "Người dùng";
+
+ return (
+  nicknames[String(userId)] ||
+  user.display_name ||
+  user.username ||
+  "Người dùng"
+ );
+
 }
 
-/* =========================================================
+
+function myName(){
+
+ return getName(me.id);
+
+}
+
+
+/* =====================================================
    LOGIN
-   ========================================================= */
+===================================================== */
+
 async function login(){
-  const username=$("loginUser").value.trim();
-  const password=$("loginPass").value;
 
-  if(!username||!password){
-    $("loginErr").textContent="Nhập tài khoản và mật khẩu.";
-    return;
-  }
+ const username =
+ $("username").value.trim();
 
-  $("loginBtn").disabled=true;
-  $("loginBtn").textContent="Đang đăng nhập...";
-  $("loginErr").textContent="";
+ const password =
+ $("password").value;
 
-  try{
-    const {data,error}=await supabaseClient.rpc("login_diary",{
-      p_username:username,
-      p_password:password
-    });
+ $("loginError").textContent = "";
 
-    if(error)throw error;
-    if(!data?.length)throw new Error("Sai tài khoản hoặc mật khẩu.");
+ if(!username || !password){
 
-    me=data[0];
-    sessionStorage.setItem("diary_current_user",JSON.stringify(me));
-    await openApp();
-  }catch(e){
-    console.error(e);
-    $("loginErr").textContent=e.message||"Đăng nhập thất bại.";
-  }finally{
-    $("loginBtn").disabled=false;
-    $("loginBtn").textContent="Đăng nhập ❤️";
-  }
-}
+  $("loginError").textContent =
+  "Vui lòng nhập tài khoản và mật khẩu.";
 
-/* =========================================================
-   OPEN
-   ========================================================= */
-async function openApp(){
-  $("loginPage").classList.add("hidden");
-  $("appPage").classList.remove("hidden");
+  return;
+ }
 
-  try{
-    await loadUsers();
-    await loadNickname();
-    renderPeople();
-    await Promise.all([loadEntries(),loadMessages()]);
-    subscribeRealtime();
-  }catch(e){
-    console.error(e);
-    toast("Lỗi tải dữ liệu: "+e.message);
-  }
-}
+ $("loginBtn").disabled = true;
 
-async function loadUsers(){
-  const {data,error}=await supabaseClient.rpc("get_diary_users");
-  if(error)throw error;
-  allUsers=data||[];
-}
+ try{
 
-async function loadNickname(){
-  const {data,error}=await supabaseClient
-    .from("diary_shared_settings")
-    .select("nickname")
-    .eq("id",1)
-    .maybeSingle();
-
-  if(error)throw error;
-  sharedNickname=data?.nickname||"";
-}
-
-function renderPeople(){
-  $("brandSub").textContent=nicknameFor(me);
-  $("currentUsername").textContent=me.username||"";
-
-  $("people").innerHTML=allUsers.map(u=>{
-    const mine=String(u.id)===String(me.id);
-    return `
-      <div class="person">
-        <div class="picon">${mine?"🧑":"❤️"}</div>
-        <div class="pname">${escapeHTML(nicknameFor(u))}</div>
-        <div class="psub">${mine?"Bạn":"Người kia"}</div>
-      </div>`;
-  }).join("");
-}
-
-/* =========================================================
-   BIỆT DANH
-   ========================================================= */
-async function saveNickname(){
-  const nickname=$("nicknameInput").value.trim();
-  if(!nickname){
-    toast("Hãy nhập biệt danh.");
-    return;
-  }
-
-  $("nicknameBtn").disabled=true;
-
-  try{
-    const {data,error}=await supabaseClient.rpc("update_diary_nickname",{
-      p_nickname:nickname
-    });
-
-    if(error)throw error;
-
-    sharedNickname=data||nickname;
-    $("nicknameInput").value="";
-    renderPeople();
-    await loadEntries();
-    toast("Đã đổi biệt danh ❤️");
-  }catch(e){
-    console.error(e);
-    toast("Không đổi được biệt danh: "+e.message);
-  }finally{
-    $("nicknameBtn").disabled=false;
-  }
-}
-
-/* =========================================================
-   ACCOUNT
-   ========================================================= */
-async function updateAccount(){
-  const username=$("newUsername").value.trim();
-  const currentPassword=$("currentPassword").value;
-  const newPassword=$("newPassword").value;
-  const confirmPassword=$("confirmPassword").value;
-
-  if(!username&&!newPassword){
-    toast("Nhập tài khoản mới hoặc mật khẩu mới.");
-    return;
-  }
-
-  if(!currentPassword){
-    toast("Nhập mật khẩu hiện tại.");
-    return;
-  }
-
-  if(newPassword!==confirmPassword){
-    toast("Mật khẩu mới không trùng nhau.");
-    return;
-  }
-
-  $("accountBtn").disabled=true;
-  $("accountBtn").textContent="Đang lưu...";
-
-  try{
-    const {data,error}=await supabaseClient.rpc("update_diary_account",{
-      p_user_id:me.id,
-      p_current_password:currentPassword,
-      p_new_username:username||null,
-      p_new_password:newPassword||null
-    });
-
-    if(error)throw error;
-    if(!data?.length)throw new Error("Không nhận được kết quả cập nhật.");
-
-    me.username=data[0].new_username||data[0].username||me.username;
-    sessionStorage.setItem("diary_current_user",JSON.stringify(me));
-
-    $("currentUsername").textContent=me.username;
-    $("newUsername").value="";
-    $("currentPassword").value="";
-    $("newPassword").value="";
-    $("confirmPassword").value="";
-
-    toast("Đã đổi tài khoản/mật khẩu ❤️");
-  }catch(e){
-    console.error(e);
-    toast("Không đổi được tài khoản: "+e.message);
-  }finally{
-    $("accountBtn").disabled=false;
-    $("accountBtn").textContent="💾 Lưu thay đổi";
-  }
-}
-
-/* =========================================================
-   IMAGE
-   ========================================================= */
-$("entryFile").addEventListener("change",()=>{
-  const file=$("entryFile").files[0];
-
-  if(!file){
-    removePhoto();
-    return;
-  }
-
-  if(!file.type.startsWith("image/")){
-    toast("Chỉ được chọn ảnh.");
-    $("entryFile").value="";
-    return;
-  }
-
-  if(file.size>10*1024*1024){
-    toast("Ảnh tối đa 10MB.");
-    $("entryFile").value="";
-    return;
-  }
-
-  $("previewImg").src=URL.createObjectURL(file);
-  $("preview").style.display="block";
-});
-
-function removePhoto(){
-  $("entryFile").value="";
-  $("previewImg").removeAttribute("src");
-  $("preview").style.display="none";
-}
-
-async function uploadImage(file){
-  const ext=(file.name.split(".").pop()||"jpg").toLowerCase();
-  const path=me.id+"/"+Date.now()+"-"+Math.random().toString(36).slice(2)+"."+ext;
-
-  const {error}=await supabaseClient
-    .storage
-    .from("diary-images")
-    .upload(path,file,{upsert:false,contentType:file.type});
-
-  if(error)throw error;
-
-  const {data}=supabaseClient
-    .storage
-    .from("diary-images")
-    .getPublicUrl(path);
-
-  return data.publicUrl;
-}
-
-/* =========================================================
-   POST DIARY
-   ========================================================= */
-async function postEntry(){
-  const content=$("entryText").value.trim();
-  const mood=$("entryMood").value;
-  const file=$("entryFile").files[0];
-
-  if(!content&&!file){
-    toast("Viết nội dung hoặc chọn ảnh.");
-    return;
-  }
-
-  $("postBtn").disabled=true;
-  $("postBtn").textContent="Đang đăng...";
-
-  try{
-    let image_url=null;
-
-    if(file){
-      image_url=await uploadImage(file);
-    }
-
-    const {error}=await supabaseClient
-      .from("diary_entries")
-      .insert({
-        user_id:me.id,
-        content:content||null,
-        mood:mood,
-        image_url:image_url
-      });
-
-    if(error)throw error;
-
-    $("entryText").value="";
-    removePhoto();
-    await loadEntries();
-
-    toast("Đã đăng nhật ký ❤️");
-    sendTelegram(
-      "❤️ "+nicknameFor(me)+" đã up ghi chú"
-    ).catch(console.error);
-
-  }catch(e){
-    console.error(e);
-    toast("Không đăng được: "+e.message);
-  }finally{
-    $("postBtn").disabled=false;
-    $("postBtn").textContent="❤️ Đăng nhật ký";
-  }
-}
-
-/* =========================================================
-   TELEGRAM
-   ========================================================= */
-async function sendTelegram(text){
-  if(!TELEGRAM_BOT_TOKEN||
-     TELEGRAM_BOT_TOKEN==="DÁN_TOKEN_BOT_MỚI_VÀO_ĐÂY"){
-    console.warn("Chưa thay TELEGRAM_BOT_TOKEN.");
-    return;
-  }
-
-  const r=await fetch(
-    "https://api.telegram.org/bot"+TELEGRAM_BOT_TOKEN+"/sendMessage",
-    {
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({
-        chat_id:TELEGRAM_CHAT_ID,
-        text:text
-      })
-    }
+  const {data,error} =
+  await db.rpc(
+   "login_diary",
+   {
+    p_username:username,
+    p_password:password
+   }
   );
 
-  const result=await r.json();
+  if(error)
+  throw error;
 
-  if(!result.ok){
-    throw new Error(result.description||"Telegram API lỗi");
-  }
+  if(!data || !data.length)
+  throw new Error(
+   "Sai tài khoản hoặc mật khẩu."
+  );
+
+  me = data[0];
+
+  sessionStorage.setItem(
+   "our_diary_user",
+   JSON.stringify(me)
+  );
+
+  await openApp();
+
+ }
+ catch(error){
+
+  console.error(error);
+
+  $("loginError").textContent =
+  error.message ||
+  "Đăng nhập thất bại.";
+
+ }
+ finally{
+
+  $("loginBtn").disabled = false;
+
+ }
+
 }
 
-/* =========================================================
-   DIARY
-   ========================================================= */
-async function loadEntries(){
-  const {data,error}=await supabaseClient
-    .from("diary_entries")
-    .select("id,user_id,content,mood,image_url,created_at")
-    .order("created_at",{ascending:false});
 
-  if(error)throw error;
+/* =====================================================
+   LOAD USERS
+===================================================== */
 
-  const ids=(data||[]).map(x=>x.id);
+async function loadUsers(){
 
-  reactions={};
+ const {data,error} =
+ await db.rpc(
+  "get_diary_users"
+ );
 
-  if(ids.length){
-    const rr=await supabaseClient
-      .from("diary_reactions")
-      .select("id,entry_id,user_id,reaction")
-      .in("entry_id",ids);
+ if(error)
+ throw error;
 
-    if(rr.error)throw rr.error;
+ users = data || [];
 
-    (rr.data||[]).forEach(r=>{
-      if(!reactions[r.entry_id])reactions[r.entry_id]=[];
-      reactions[r.entry_id].push(r);
-    });
-  }
-
-  const box=$("diaryList");
-
-  if(!data?.length){
-    box.innerHTML='<div class="empty">Chưa có ghi chú nào ❤️</div>';
-    return;
-  }
-
-  box.innerHTML="";
-
-  data.forEach(entry=>{
-    const author=allUsers.find(u=>String(u.id)===String(entry.user_id));
-    const rows=reactions[entry.id]||[];
-    const time=new Date(entry.created_at).toLocaleString("vi-VN",{
-      day:"2-digit",
-      month:"2-digit",
-      year:"numeric",
-      hour:"2-digit",
-      minute:"2-digit"
-    });
-
-    const el=document.createElement("div");
-    el.className="diary";
-
-    const reactButtons=["❤️","😂","🥰","😮","😢","😡"].map(r=>{
-      const mine=rows.some(x=>String(x.user_id)===String(me.id)&&x.reaction===r);
-      const count=rows.filter(x=>x.reaction===r).length;
-
-      return `
-        <button
-          class="reactbtn ${mine?"active":""}"
-          data-entry="${escapeHTML(entry.id)}"
-          data-reaction="${r}">
-          ${r}${count?" "+count:""}
-        </button>`;
-    }).join("");
-
-    el.innerHTML=`
-      <div class="head">
-        <div class="avatar">❤️</div>
-        <div>
-          <div class="author">${escapeHTML(nicknameFor(author))}</div>
-          <div class="time">${escapeHTML(time)}</div>
-        </div>
-      </div>
-
-      <div class="mood">${escapeHTML(entry.mood||"❤️")}</div>
-
-      ${entry.content?
-        `<div class="content">${escapeHTML(entry.content)}</div>`:""}
-
-      ${entry.image_url?
-        `<img class="photo" src="${escapeHTML(entry.image_url)}" loading="lazy">`:""}
-
-      <div class="reactions">${reactButtons}</div>
-
-      ${String(entry.user_id)===String(me.id)?
-        `<button class="delete" data-id="${escapeHTML(entry.id)}">🗑 Xóa</button>`:""}
-    `;
-
-    box.appendChild(el);
-  });
-
-  box.querySelectorAll(".reactbtn").forEach(btn=>{
-    btn.addEventListener("click",()=>{
-      toggleReaction(btn.dataset.entry,btn.dataset.reaction);
-    });
-  });
-
-  box.querySelectorAll(".delete").forEach(btn=>{
-    btn.addEventListener("click",()=>{
-      deleteEntry(btn.dataset.id);
-    });
-  });
 }
 
-/* =========================================================
-   REACTION
-   ========================================================= */
-async function toggleReaction(entryId,reaction){
+
+/* =====================================================
+   LOAD NICKNAMES
+===================================================== */
+
+async function loadNicknames(){
+
+ const {data,error} =
+ await db
+ .from("diary_nicknames")
+ .select(
+  "target_user_id,nickname"
+ );
+
+ if(error)
+ throw error;
+
+ nicknames = {};
+
+ (data || []).forEach(
+  row => {
+
+   nicknames[
+    String(row.target_user_id)
+   ] =
+   row.nickname || "";
+
+  }
+ );
+
+}
+
+
+/* =====================================================
+   RENDER PEOPLE
+===================================================== */
+
+function renderPeople(){
+
+ $("currentUser").textContent =
+ me.username || "";
+
+ $("people").innerHTML =
+ users.map(
+  user => `
+
+  <div class="person">
+
+   ❤️
+
+   <div class="pname">
+    ${esc(getName(user.id))}
+   </div>
+
+   <div class="small">
+    ${
+     String(user.id) === String(me.id)
+     ? "Bạn"
+     : "Người kia"
+    }
+   </div>
+
+  </div>
+
+  `
+ ).join("");
+
+ const other =
+ getOtherUser();
+
+ if(other){
+
+  $("nickTarget").textContent =
+  "Đang đặt biệt danh cho: " +
+  getName(other.id);
+
+  $("nick").value =
+  nicknames[String(other.id)] || "";
+
+ }
+ else{
+
+  $("nickTarget").textContent =
+  "Không tìm thấy người kia";
+
+ }
+
+}
+
+
+/* =====================================================
+   SAVE NICKNAME
+===================================================== */
+
+async function saveNickname(){
+
+ const other =
+ getOtherUser();
+
+ const nickname =
+ $("nick").value.trim();
+
+ if(!other){
+
+  toast(
+   "Không tìm thấy User kia."
+  );
+
+  return;
+
+ }
+
+ if(!nickname){
+
+  toast(
+   "Chưa nhập biệt danh."
+  );
+
+  return;
+
+ }
+
+ try{
+
+  const {error} =
+  await db
+  .from("diary_nicknames")
+  .upsert(
+   {
+    target_user_id:other.id,
+    set_by_user_id:me.id,
+    nickname:nickname
+   },
+   {
+    onConflict:"target_user_id"
+   }
+  );
+
+  if(error)
+  throw error;
+
+  await loadNicknames();
+
+  renderPeople();
+
+  await loadDiary();
+
+  await loadChat();
+
+  toast(
+   "Đã đổi biệt danh cho người kia ❤️"
+  );
+
+ }
+ catch(error){
+
+  console.error(error);
+
+  toast(
+   "Lỗi đổi biệt danh: " +
+   error.message
+  );
+
+ }
+
+}
+
+
+/* =====================================================
+   TELEGRAM LOAD TOKEN
+===================================================== */
+
+async function loadTelegramToken(){
+
+ try{
+
+  const {data,error} =
+  await db
+  .from("diary_settings")
+  .select(
+   "telegram_bot_token"
+  )
+  .eq("id",1)
+  .maybeSingle();
+
+  if(error)
+  throw error;
+
+  telegramToken =
+  data?.telegram_bot_token || "";
+
+  $("telegramToken").value =
+  telegramToken;
+
+  if(telegramToken){
+
+   $("telegramStatus").textContent =
+   "✅ Đã có Bot Token được lưu.";
+
+  }
+  else{
+
+   $("telegramStatus").textContent =
+   "⚠️ Chưa có Bot Token.";
+
+  }
+
+ }
+ catch(error){
+
+  console.error(error);
+
+  $("telegramStatus").textContent =
+  "Lỗi tải token: " +
+  error.message;
+
+ }
+
+}
+
+
+/* =====================================================
+   SAVE TELEGRAM TOKEN
+===================================================== */
+
+async function saveTelegramToken(){
+
+ const token =
+ $("telegramToken")
+ .value
+ .trim();
+
+ if(!token){
+
+  toast(
+   "Hãy nhập Bot Token."
+  );
+
+  return;
+
+ }
+
+ $("saveTelegram").disabled = true;
+
+ try{
+
+  const {error} =
+  await db
+  .from("diary_settings")
+  .upsert(
+   {
+    id:1,
+    telegram_bot_token:token
+   },
+   {
+    onConflict:"id"
+   }
+  );
+
+  if(error)
+  throw error;
+
+  telegramToken = token;
+
+  $("telegramStatus").textContent =
+  "✅ Token đã được lưu cố định.";
+
+  toast(
+   "Đã lưu Bot Token Telegram."
+  );
+
+ }
+ catch(error){
+
+  console.error(error);
+
+  toast(
+   "Không lưu được token: " +
+   error.message
+  );
+
+ }
+ finally{
+
+  $("saveTelegram").disabled =
+  false;
+
+ }
+
+}
+
+
+/* =====================================================
+   SEND TELEGRAM
+===================================================== */
+
+async function sendTelegram(text){
+
+ if(!telegramToken){
+
+  throw new Error(
+   "Chưa lưu Bot Token Telegram."
+  );
+
+ }
+
+ const response =
+ await fetch(
+  "https://api.telegram.org/bot" +
+  telegramToken +
+  "/sendMessage",
+  {
+   method:"POST",
+
+   headers:{
+    "Content-Type":
+    "application/json"
+   },
+
+   body:JSON.stringify({
+
+    chat_id:
+    TELEGRAM_CHAT_ID,
+
+    text:text,
+
+    disable_web_page_preview:
+    true
+
+   })
+  }
+ );
+
+ let result;
+
+ try{
+
+  result =
+  await response.json();
+
+ }
+ catch{
+
+  throw new Error(
+   "Telegram không trả dữ liệu."
+  );
+
+ }
+
+ if(
+  !response.ok ||
+  !result.ok
+ ){
+
+  throw new Error(
+   result.description ||
+   "Telegram API lỗi."
+  );
+
+ }
+
+ return result;
+
+}
+
+
+/* =====================================================
+   TEST TELEGRAM
+===================================================== */
+
+async function testTelegram(){
+
+ try{
+
+  await sendTelegram(
+   "✅ Our Diary: kết nối Telegram thành công."
+  );
+
+  toast(
+   "✅ Telegram đã nhận tin test."
+  );
+
+ }
+ catch(error){
+
+  console.error(error);
+
+  alert(
+   "KHÔNG GỬI ĐƯỢC TELEGRAM\n\n" +
+   error.message +
+   "\n\n" +
+   "Kiểm tra:\n" +
+   "1. Bot Token\n" +
+   "2. Chat ID\n" +
+   "3. Bot đã được thêm vào nhóm"
+  );
+
+ }
+
+}
+
+
+/* =====================================================
+   UPLOAD IMAGE
+===================================================== */
+
+async function uploadImage(file){
+
+ const extension =
+ (
+  file.name
+  .split(".")
+  .pop() ||
+  "jpg"
+ ).toLowerCase();
+
+ const path =
+ me.id +
+ "/" +
+ Date.now() +
+ "-" +
+ Math.random()
+ .toString(36)
+ .slice(2) +
+ "." +
+ extension;
+
+ const {error} =
+ await db
+ .storage
+ .from("diary-images")
+ .upload(
+  path,
+  file,
+  {
+   upsert:false,
+   contentType:file.type
+  }
+ );
+
+ if(error)
+ throw error;
+
+ return db
+ .storage
+ .from("diary-images")
+ .getPublicUrl(path)
+ .data
+ .publicUrl;
+
+}
+
+
+/* =====================================================
+   POST DIARY
+===================================================== */
+
+async function postDiary(){
+
+ const content =
+ $("note").value.trim();
+
+ const mood =
+ $("mood").value;
+
+ const file =
+ $("image").files[0];
+
+ if(!content && !file){
+
+  toast(
+   "Nhập nội dung hoặc chọn ảnh."
+  );
+
+  return;
+
+ }
+
+ $("post").disabled = true;
+
+ try{
+
+  let imageUrl = null;
+
+  if(file){
+
+   imageUrl =
+   await uploadImage(file);
+
+  }
+
+  const {error} =
+  await db
+  .from("diary_entries")
+  .insert({
+
+   user_id:me.id,
+
+   content:
+   content || null,
+
+   mood:mood,
+
+   image_url:imageUrl
+
+  });
+
+  if(error)
+  throw error;
+
+  $("note").value = "";
+
+  $("image").value = "";
+
+  await loadDiary();
+
+  toast(
+   "Đã đăng nhật ký ❤️"
+  );
+
   try{
-    const {error}=await supabaseClient.rpc("toggle_diary_reaction",{
-      p_entry_id:entryId,
-      p_user_id:me.id,
-      p_reaction:reaction
-    });
 
-    if(error)throw error;
+   await sendTelegram(
+    "❤️ " +
+    myName() +
+    " đã up ghi chú"
+   );
 
-    await loadEntries();
-  }catch(e){
-    console.error(e);
-    toast("Không thả cảm xúc được: "+e.message);
   }
+  catch(error){
+
+   toast(
+    "Đã lưu nhật ký nhưng Telegram lỗi: " +
+    error.message
+   );
+
+  }
+
+ }
+ catch(error){
+
+  console.error(error);
+
+  toast(
+   "Không đăng được: " +
+   error.message
+  );
+
+ }
+ finally{
+
+  $("post").disabled = false;
+
+ }
+
 }
 
-/* =========================================================
-   DELETE
-   ========================================================= */
-async function deleteEntry(id){
-  if(!confirm("Xóa nhật ký này?"))return;
 
-  const {error}=await supabaseClient
-    .from("diary_entries")
-    .delete()
-    .eq("id",id)
-    .eq("user_id",me.id);
+/* =====================================================
+   LOAD DIARY
+===================================================== */
 
-  if(error){
-    toast("Không xóa được: "+error.message);
-    return;
+async function loadDiary(){
+
+ const {data,error} =
+ await db
+ .from("diary_entries")
+ .select("*")
+ .order(
+  "created_at",
+  {
+   ascending:false
   }
+ );
 
-  await loadEntries();
-  toast("Đã xóa nhật ký.");
-}
+ if(error)
+ throw error;
 
-/* =========================================================
-   CHAT
-   ========================================================= */
-async function loadMessages(){
-  const {data,error}=await supabaseClient
-    .from("diary_messages")
-    .select("id,sender_id,receiver_id,message,created_at")
-    .order("created_at",{ascending:true});
+ const box =
+ $("diary");
 
-  if(error)throw error;
+ if(!data || !data.length){
 
-  const box=$("chatList");
+  box.innerHTML =
+  `
+  <div
+   class="small"
+   style="text-align:center;padding:20px"
+  >
+   Chưa có nhật ký ❤️
+  </div>
+  `;
 
-  if(!data?.length){
-    box.innerHTML='<div class="empty">Chưa có tin nhắn.</div>';
-    return;
-  }
+  return;
 
-  box.innerHTML="";
+ }
 
-  data.forEach(msg=>{
-    const sender=allUsers.find(u=>String(u.id)===String(msg.sender_id));
-    const receiver=allUsers.find(u=>String(u.id)===String(msg.receiver_id));
-    const mine=String(msg.sender_id)===String(me.id);
+ box.innerHTML = "";
 
-    const time=new Date(msg.created_at).toLocaleTimeString("vi-VN",{
-      hour:"2-digit",
-      minute:"2-digit"
-    });
+ for(const entry of data){
 
-    const el=document.createElement("div");
-    el.className="chatmsg"+(mine?" mine":"");
+  const {data:reactionData,error:reactionError} =
+  await db
+  .from("diary_reactions")
+  .select(
+   "user_id,reaction"
+  )
+  .eq(
+   "entry_id",
+   entry.id
+  );
 
-    el.innerHTML=`
-      <div class="chatbubble">
-        <div class="chatname">
-          ${escapeHTML(nicknameFor(sender))}
-          →
-          ${escapeHTML(nicknameFor(receiver))}
-        </div>
-        <div>${escapeHTML(msg.message)}</div>
-        <div class="chattime">${escapeHTML(time)}</div>
-      </div>
+  if(reactionError)
+  throw reactionError;
+
+  const reactions =
+  reactionData || [];
+
+  const emojis =
+  [
+   "❤️",
+   "😂",
+   "🥰",
+   "😮",
+   "😢",
+   "😡"
+  ];
+
+  const reactionHtml =
+  emojis.map(
+   emoji => {
+
+    const count =
+    reactions.filter(
+     x =>
+     x.reaction === emoji
+    ).length;
+
+    const active =
+    reactions.some(
+     x =>
+     String(x.user_id) ===
+     String(me.id) &&
+     x.reaction === emoji
+    );
+
+    return `
+    <button
+     class="react ${active?"active":""}"
+     data-entry="${esc(entry.id)}"
+     data-reaction="${emoji}"
+    >
+     ${emoji}
+     ${count ? count : ""}
+    </button>
     `;
 
-    box.appendChild(el);
-  });
+   }
+  ).join("");
 
-  box.scrollTop=box.scrollHeight;
+  const el =
+  document.createElement("div");
+
+  el.className =
+  "diary";
+
+  el.innerHTML = `
+
+  <div class="head">
+
+   <div class="avatar">
+    ❤️
+   </div>
+
+   <div>
+
+    <b>
+     ${esc(getName(entry.user_id))}
+    </b>
+
+    <div class="time">
+     ${esc(
+      new Date(
+       entry.created_at
+      ).toLocaleString("vi-VN")
+     )}
+    </div>
+
+   </div>
+
+  </div>
+
+  <div
+   style="font-size:25px;margin-top:9px"
+  >
+   ${esc(entry.mood || "❤️")}
+  </div>
+
+  ${
+   entry.content
+   ?
+   `<div class="content">
+    ${esc(entry.content)}
+   </div>`
+   :
+   ""
+  }
+
+  ${
+   entry.image_url
+   ?
+   `<img
+     class="photo"
+     src="${esc(entry.image_url)}"
+    >`
+   :
+   ""
+  }
+
+  <div class="reactions">
+   ${reactionHtml}
+  </div>
+
+  `;
+
+  box.appendChild(el);
+
+ }
+
+ document
+ .querySelectorAll(".react")
+ .forEach(
+  button => {
+
+   button.onclick =
+   async function(){
+
+    try{
+
+     const {error} =
+     await db.rpc(
+      "toggle_diary_reaction",
+      {
+       p_entry_id:
+       button.dataset.entry,
+
+       p_user_id:
+       me.id,
+
+       p_reaction:
+       button.dataset.reaction
+      }
+     );
+
+     if(error)
+     throw error;
+
+     await loadDiary();
+
+    }
+    catch(error){
+
+     toast(
+      "Không thả cảm xúc được: " +
+      error.message
+     );
+
+    }
+
+   };
+
+  }
+ );
+
 }
+
+
+/* =====================================================
+   LOAD CHAT
+===================================================== */
+
+async function loadChat(){
+
+ const {data,error} =
+ await db
+ .from("diary_messages")
+ .select("*")
+ .order(
+  "created_at",
+  {
+   ascending:true
+  }
+ );
+
+ if(error)
+ throw error;
+
+ const box =
+ $("chat");
+
+ if(!data || !data.length){
+
+  box.innerHTML =
+  `
+  <div
+   class="small"
+   style="text-align:center;padding:20px"
+  >
+   Chưa có tin nhắn.
+  </div>
+  `;
+
+  return;
+
+ }
+
+ box.innerHTML =
+ data.map(
+  message => {
+
+   const mine =
+   String(message.sender_id) ===
+   String(me.id);
+
+   return `
+
+   <div
+    class="msg ${mine?"mine":""}"
+   >
+
+    <div class="bubble">
+
+     <div class="msgname">
+
+      ${esc(
+       getName(
+        message.sender_id
+       )
+      )}
+
+      →
+
+      ${esc(
+       getName(
+        message.receiver_id
+       )
+      )}
+
+     </div>
+
+     ${esc(message.message)}
+
+     <div class="msgtime">
+
+      ${esc(
+       new Date(
+        message.created_at
+       ).toLocaleTimeString(
+        "vi-VN",
+        {
+         hour:"2-digit",
+         minute:"2-digit"
+        }
+       )
+      )}
+
+     </div>
+
+    </div>
+
+   </div>
+
+   `;
+
+  }
+ ).join("");
+
+ box.scrollTop =
+ box.scrollHeight;
+
+}
+
+
+/* =====================================================
+   SEND MESSAGE
+===================================================== */
 
 async function sendMessage(){
-  const message=$("messageInput").value.trim();
 
-  if(!message)return;
+ const message =
+ $("message").value.trim();
 
-  const receiver=otherUser();
+ const other =
+ getOtherUser();
 
-  if(!receiver){
-    toast("Không tìm thấy người kia.");
-    return;
-  }
+ if(!message){
 
-  $("sendMessageBtn").disabled=true;
+  return;
+
+ }
+
+ if(!other){
+
+  toast(
+   "Không tìm thấy người kia."
+  );
+
+  return;
+
+ }
+
+ $("send").disabled = true;
+
+ try{
+
+  const {error} =
+  await db
+  .from("diary_messages")
+  .insert({
+
+   sender_id:
+   me.id,
+
+   receiver_id:
+   other.id,
+
+   message:
+   message
+
+  });
+
+  if(error)
+  throw error;
+
+  $("message").value = "";
+
+  await loadChat();
 
   try{
-    const {error}=await supabaseClient.rpc("send_diary_message",{
-      p_sender_id:me.id,
-      p_receiver_id:receiver.id,
-      p_message:message
-    });
 
-    if(error)throw error;
+   await sendTelegram(
+    "💬 " +
+    myName() +
+    " đã gửi tn cho " +
+    getName(other.id)
+   );
 
-    $("messageInput").value="";
-    await loadMessages();
-
-    sendTelegram(
-      "💬 "+nicknameFor(me)+" đã gửi tn cho "+nicknameFor(receiver)
-    ).catch(console.error);
-
-  }catch(e){
-    console.error(e);
-    toast("Không gửi được tin nhắn: "+e.message);
-  }finally{
-    $("sendMessageBtn").disabled=false;
   }
+  catch(error){
+
+   toast(
+    "Tin nhắn đã gửi nhưng Telegram lỗi: " +
+    error.message
+   );
+
+  }
+
+ }
+ catch(error){
+
+  console.error(error);
+
+  toast(
+   "Không gửi được tin nhắn: " +
+   error.message
+  );
+
+ }
+ finally{
+
+  $("send").disabled =
+  false;
+
+ }
+
 }
 
-/* =========================================================
+
+/* =====================================================
+   UPDATE ACCOUNT
+===================================================== */
+
+async function updateAccount(){
+
+ const currentPassword =
+ $("currentPass").value;
+
+ const newUsername =
+ $("newUser").value.trim();
+
+ const newPassword =
+ $("newPass").value;
+
+ const confirmPassword =
+ $("confirmPass").value;
+
+ if(!currentPassword){
+
+  toast(
+   "Nhập mật khẩu hiện tại."
+  );
+
+  return;
+
+ }
+
+ if(
+  newPassword !==
+  confirmPassword
+ ){
+
+  toast(
+   "Mật khẩu mới không trùng nhau."
+  );
+
+  return;
+
+ }
+
+ try{
+
+  const {data,error} =
+  await db.rpc(
+   "update_diary_account",
+   {
+
+    p_user_id:
+    me.id,
+
+    p_current_password:
+    currentPassword,
+
+    p_new_username:
+    newUsername || null,
+
+    p_new_password:
+    newPassword || null
+
+   }
+  );
+
+  if(error)
+  throw error;
+
+  me.username =
+  data[0].new_username;
+
+  sessionStorage.setItem(
+   "our_diary_user",
+   JSON.stringify(me)
+  );
+
+  $("currentUser").textContent =
+  me.username;
+
+  $("currentPass").value = "";
+  $("newUser").value = "";
+  $("newPass").value = "";
+  $("confirmPass").value = "";
+
+  toast(
+   "Đã cập nhật tài khoản ❤️"
+  );
+
+ }
+ catch(error){
+
+  toast(
+   "Không cập nhật được: " +
+   error.message
+  );
+
+ }
+
+}
+
+
+/* =====================================================
    REALTIME
-   ========================================================= */
+===================================================== */
+
 function subscribeRealtime(){
-  if(liveChannel){
-    supabaseClient.removeChannel(liveChannel);
+
+ if(realtimeChannel){
+
+  db.removeChannel(
+   realtimeChannel
+  );
+
+ }
+
+ realtimeChannel =
+ db
+ .channel(
+  "our-diary-" +
+  Date.now()
+ )
+
+ .on(
+  "postgres_changes",
+  {
+   event:"*",
+   schema:"public",
+   table:"diary_entries"
+  },
+  () =>
+  loadDiary()
+ )
+
+ .on(
+  "postgres_changes",
+  {
+   event:"*",
+   schema:"public",
+   table:"diary_reactions"
+  },
+  () =>
+  loadDiary()
+ )
+
+ .on(
+  "postgres_changes",
+  {
+   event:"*",
+   schema:"public",
+   table:"diary_messages"
+  },
+  () =>
+  loadChat()
+ )
+
+ .on(
+  "postgres_changes",
+  {
+   event:"*",
+   schema:"public",
+   table:"diary_nicknames"
+  },
+  async () => {
+
+   await loadNicknames();
+
+   renderPeople();
+
+   await loadDiary();
+
+   await loadChat();
+
   }
+ )
 
-  liveChannel=supabaseClient
-    .channel("our-diary-live-"+Date.now())
+ .subscribe();
 
-    .on(
-      "postgres_changes",
-      {event:"*",schema:"public",table:"diary_entries"},
-      ()=>loadEntries().catch(console.error)
-    )
-
-    .on(
-      "postgres_changes",
-      {event:"*",schema:"public",table:"diary_reactions"},
-      ()=>loadEntries().catch(console.error)
-    )
-
-    .on(
-      "postgres_changes",
-      {event:"*",schema:"public",table:"diary_messages"},
-      ()=>loadMessages().catch(console.error)
-    )
-
-    .on(
-      "postgres_changes",
-      {event:"*",schema:"public",table:"diary_shared_settings"},
-      async()=>{
-        try{
-          await loadNickname();
-          renderPeople();
-          await loadEntries();
-          await loadMessages();
-        }catch(e){
-          console.error(e);
-        }
-      }
-    )
-
-    .subscribe();
 }
 
-/* =========================================================
+
+/* =====================================================
+   OPEN APP
+===================================================== */
+
+async function openApp(){
+
+ $("login")
+ .classList
+ .add("hidden");
+
+ $("app")
+ .classList
+ .remove("hidden");
+
+ try{
+
+  await loadUsers();
+
+  await loadNicknames();
+
+  renderPeople();
+
+  await loadTelegramToken();
+
+  await loadDiary();
+
+  await loadChat();
+
+  subscribeRealtime();
+
+ }
+ catch(error){
+
+  console.error(error);
+
+  toast(
+   "Lỗi tải dữ liệu: " +
+   error.message
+  );
+
+ }
+
+}
+
+
+/* =====================================================
    EVENTS
-   ========================================================= */
-$("loginBtn").addEventListener("click",login);
-$("logoutBtn").addEventListener("click",()=>{
-  if(liveChannel)supabaseClient.removeChannel(liveChannel);
-  sessionStorage.removeItem("diary_current_user");
-  location.reload();
-});
+===================================================== */
 
-$("postBtn").addEventListener("click",postEntry);
-$("nicknameBtn").addEventListener("click",saveNickname);
-$("accountBtn").addEventListener("click",updateAccount);
-$("sendMessageBtn").addEventListener("click",sendMessage);
-$("removePhoto").addEventListener("click",removePhoto);
+$("loginBtn").onclick =
+login;
 
-$("loginPass").addEventListener("keydown",e=>{
-  if(e.key==="Enter")login();
-});
+$("logout").onclick =
+function(){
 
-$("messageInput").addEventListener("keydown",e=>{
-  if(e.key==="Enter"){
-    e.preventDefault();
-    sendMessage();
-  }
-});
+ if(realtimeChannel){
 
-/* =========================================================
+  db.removeChannel(
+   realtimeChannel
+  );
+
+ }
+
+ sessionStorage.removeItem(
+  "our_diary_user"
+ );
+
+ location.reload();
+
+};
+
+$("saveNick").onclick =
+saveNickname;
+
+$("post").onclick =
+postDiary;
+
+$("send").onclick =
+sendMessage;
+
+$("saveTelegram").onclick =
+saveTelegramToken;
+
+$("testTelegram").onclick =
+testTelegram;
+
+$("updateAccount").onclick =
+updateAccount;
+
+
+$("password").onkeydown =
+function(event){
+
+ if(event.key === "Enter"){
+
+  login();
+
+ }
+
+};
+
+
+$("message").onkeydown =
+function(event){
+
+ if(event.key === "Enter"){
+
+  event.preventDefault();
+
+  sendMessage();
+
+ }
+
+};
+
+
+/* =====================================================
    AUTO LOGIN
-   ========================================================= */
-(async()=>{
-  const saved=sessionStorage.getItem("diary_current_user");
-  if(!saved)return;
+===================================================== */
 
-  try{
-    me=JSON.parse(saved);
-    await openApp();
-  }catch(e){
-    console.error(e);
-    sessionStorage.removeItem("diary_current_user");
-  }
+(async function(){
+
+ const saved =
+ sessionStorage.getItem(
+  "our_diary_user"
+ );
+
+ if(!saved)
+ return;
+
+ try{
+
+  me =
+  JSON.parse(saved);
+
+  await openApp();
+
+ }
+ catch(error){
+
+  console.error(error);
+
+  sessionStorage.removeItem(
+   "our_diary_user"
+  );
+
+ }
+
 })();
+
 </script>
+
 </body>
 </html>
