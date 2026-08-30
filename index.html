@@ -1,23 +1,18 @@
-````html
+```html
 <!DOCTYPE html>
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 
-<title>Western Food</title>
+<title>Keiths Hotdog</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-
-/* =========================================================
-   COLOR PALETTE
-========================================================= */
-
 :root{
-  --mustard:#B58A1F;
-  --mustard-dark:#806015;
+  --mustard:#C49A24;
+  --mustard-dark:#927317;
 
   --orange:#DC4826;
   --orange-dark:#A93620;
@@ -32,14 +27,8 @@
   --brown-light:#5B4030;
 
   --border:#C5AE82;
-
   --white:#FFF9EA;
 }
-
-
-/* =========================================================
-   GLOBAL
-========================================================= */
 
 *{
   box-sizing:border-box;
@@ -55,7 +44,7 @@ body{
   background:
     radial-gradient(
       circle at top,
-      #F1E7D0 0%,
+      #F0E4C8 0%,
       #E9DEC5 55%,
       #DCC9A6 100%
     );
@@ -84,9 +73,9 @@ button{
 }
 
 
-/* =========================================================
-   HEADER
-========================================================= */
+/* =========================
+   CUSTOMER HEADER
+========================= */
 
 header{
   position:sticky;
@@ -97,8 +86,7 @@ header{
 
   color:white;
 
-  box-shadow:
-    0 3px 15px #0005;
+  box-shadow:0 3px 15px #0005;
 }
 
 .header-inner{
@@ -116,17 +104,14 @@ header{
   font-size:21px;
   font-weight:1000;
   letter-spacing:.7px;
-
   user-select:none;
 }
 
 .logo small{
   display:block;
-
   margin-top:2px;
 
   font-size:9px;
-
   color:var(--pink);
 
   letter-spacing:1.3px;
@@ -134,48 +119,41 @@ header{
 
 .cart-button{
   border:2px solid var(--pink);
-
   border-radius:11px;
 
   padding:9px 13px;
 
   background:var(--orange);
-
   color:white;
 
   font-weight:1000;
 
-  box-shadow:
-    0 3px 0 var(--orange-dark);
+  box-shadow:0 3px 0 var(--orange-dark);
 }
 
 
-/* =========================================================
+/* =========================
    MAIN
-========================================================= */
+========================= */
 
 .container{
   max-width:950px;
-
   margin:auto;
 
   padding:16px;
-
   padding-bottom:105px;
 }
 
 
-/* =========================================================
+/* =========================
    BANNER
-========================================================= */
+========================= */
 
 .banner{
   position:relative;
-
   overflow:hidden;
 
   margin-bottom:15px;
-
   padding:27px 22px;
 
   border-radius:20px;
@@ -189,48 +167,53 @@ header{
 
   color:white;
 
-  border-bottom:
-    5px solid var(--mustard);
+  border-bottom:5px solid var(--mustard);
 
-  box-shadow:
-    0 7px 18px #0003;
+  box-shadow:0 7px 18px #0003;
 }
 
 .banner h1{
   margin:0 0 6px;
-
-  font-size:28px;
+  font-size:29px;
+  font-weight:1000;
 }
 
 .banner p{
   margin:0;
-
   color:#E8D9BA;
-
   font-size:14px;
 }
 
 .banner:after{
-  content:"🍔";
+  content:"🌭";
 
   position:absolute;
-
   right:20px;
   bottom:-10px;
 
   font-size:75px;
+  opacity:.15;
+}
 
-  opacity:.13;
+.banner:before{
+  content:"";
+
+  position:absolute;
+  inset:8px;
+
+  border:1px solid #F2869D35;
+  border-radius:14px;
+
+  pointer-events:none;
 }
 
 
-/* =========================================================
+/* =========================
    CATEGORY
-========================================================= */
+========================= */
 
 .categories{
   display:flex;
-
   gap:8px;
 
   overflow-x:auto;
@@ -252,7 +235,6 @@ header{
   white-space:nowrap;
 
   background:#EDE2C9;
-
   color:var(--brown);
 
   font-weight:900;
@@ -262,7 +244,6 @@ header{
 
 .category.active{
   background:var(--mustard);
-
   border-color:var(--mustard);
 
   color:white;
@@ -276,13 +257,12 @@ header{
 }
 
 
-/* =========================================================
+/* =========================
    SECTION TITLE
-========================================================= */
+========================= */
 
 .section-title{
   display:flex;
-
   align-items:center;
 
   gap:8px;
@@ -290,7 +270,6 @@ header{
   margin:5px 0 14px;
 
   font-size:22px;
-
   font-weight:1000;
 }
 
@@ -310,9 +289,9 @@ header{
 }
 
 
-/* =========================================================
+/* =========================
    FOOD GRID
-========================================================= */
+========================= */
 
 .food-grid{
   display:grid;
@@ -324,11 +303,11 @@ header{
 }
 
 .food-card{
+  position:relative;
+
   overflow:hidden;
 
-  border:
-    2px solid var(--border);
-
+  border:2px solid var(--border);
   border-radius:17px;
 
   background:var(--cream-light);
@@ -336,23 +315,33 @@ header{
   box-shadow:
     0 5px 12px #3A2A1F20;
 
-  transition:
-    transform .15s,
-    box-shadow .15s;
+  transition:.15s;
+}
+
+.food-card:before{
+  content:"";
+
+  position:absolute;
+
+  top:0;
+  left:12px;
+  right:12px;
+
+  height:3px;
+
+  background:var(--pink);
+
+  z-index:2;
 }
 
 .food-card:active{
   transform:scale(.985);
-
-  box-shadow:
-    0 2px 7px #3A2A1F20;
 }
 
 .food-image{
   display:block;
 
   width:100%;
-
   height:160px;
 
   object-fit:cover;
@@ -366,7 +355,6 @@ header{
 
 .food-name{
   font-size:16px;
-
   font-weight:1000;
 }
 
@@ -378,15 +366,12 @@ header{
   color:#796650;
 
   font-size:12px;
-
   line-height:1.35;
 }
 
 .food-bottom{
   display:flex;
-
   align-items:center;
-
   justify-content:space-between;
 
   gap:8px;
@@ -396,19 +381,16 @@ header{
   color:var(--orange);
 
   font-size:16px;
-
   font-weight:1000;
 }
 
 .add-button{
   border:0;
-
   border-radius:9px;
 
   padding:8px 11px;
 
   background:var(--orange);
-
   color:white;
 
   font-weight:1000;
@@ -419,14 +401,13 @@ header{
 
 .add-button:active{
   transform:translateY(2px);
-
   box-shadow:none;
 }
 
 
-/* =========================================================
+/* =========================
    BOTTOM CART
-========================================================= */
+========================= */
 
 .bottom-cart{
   position:fixed;
@@ -452,19 +433,16 @@ header{
   display:block;
 
   width:100%;
-
   max-width:950px;
 
   margin:auto;
 
   border:0;
-
   border-radius:12px;
 
   padding:13px;
 
   background:var(--orange);
-
   color:white;
 
   font-weight:1000;
@@ -474,15 +452,14 @@ header{
 }
 
 
-/* =========================================================
+/* =========================
    MODAL
-========================================================= */
+========================= */
 
 .modal{
   display:none;
 
   position:fixed;
-
   inset:0;
 
   z-index:100;
@@ -498,26 +475,20 @@ header{
 
 .modal-box{
   width:100%;
-
   max-width:720px;
 
   max-height:94vh;
-
   overflow:auto;
 
   margin:auto;
 
   padding:20px;
 
-  border:
-    2px solid var(--border);
+  border:2px solid var(--border);
 
-  border-radius:
-    23px 23px 0 0;
+  border-radius:23px 23px 0 0;
 
   background:var(--cream-light);
-
-  color:var(--brown);
 }
 
 @media(min-width:700px){
@@ -534,13 +505,10 @@ header{
 
 .modal-header{
   display:flex;
-
   align-items:center;
-
   justify-content:space-between;
 
   margin-bottom:15px;
-
   padding-bottom:10px;
 
   border-bottom:
@@ -549,17 +517,14 @@ header{
 
 .modal-title{
   font-size:22px;
-
   font-weight:1000;
 }
 
 .close{
   width:35px;
-
   height:35px;
 
   border:0;
-
   border-radius:50%;
 
   background:#E4D3B1;
@@ -567,20 +532,18 @@ header{
   color:var(--brown);
 
   font-size:21px;
-
   font-weight:900;
 }
 
 
-/* =========================================================
+/* =========================
    CART
-========================================================= */
+========================= */
 
 .cart-item{
   display:flex;
 
   align-items:center;
-
   justify-content:space-between;
 
   gap:10px;
@@ -609,23 +572,18 @@ header{
 
 .quantity{
   display:flex;
-
   align-items:center;
-
   gap:7px;
 }
 
 .quantity button{
   width:32px;
-
   height:32px;
 
   border:0;
-
   border-radius:8px;
 
   background:var(--brown);
-
   color:white;
 
   font-size:18px;
@@ -633,15 +591,12 @@ header{
 
 .total-row{
   display:flex;
-
   align-items:center;
-
   justify-content:space-between;
 
   padding:15px 0;
 
   font-size:21px;
-
   font-weight:1000;
 }
 
@@ -650,21 +605,19 @@ header{
 }
 
 
-/* =========================================================
-   PRIMARY BUTTON
-========================================================= */
+/* =========================
+   BUTTON
+========================= */
 
 .primary{
   width:100%;
 
   border:0;
-
   border-radius:11px;
 
   padding:14px;
 
   background:var(--orange);
-
   color:white;
 
   font-weight:1000;
@@ -675,14 +628,13 @@ header{
 
 .primary:active{
   transform:translateY(2px);
-
   box-shadow:none;
 }
 
 
-/* =========================================================
+/* =========================
    FORM
-========================================================= */
+========================= */
 
 label{
   display:block;
@@ -710,7 +662,6 @@ select{
   outline:none;
 
   background:#FFF9EA;
-
   color:var(--brown);
 }
 
@@ -721,9 +672,9 @@ select:focus{
 }
 
 
-/* =========================================================
+/* =========================
    ADMIN
-========================================================= */
+========================= */
 
 #adminScreen{
   display:none;
@@ -739,7 +690,6 @@ select:focus{
   position:sticky;
 
   top:0;
-
   z-index:60;
 
   background:var(--brown);
@@ -752,33 +702,27 @@ select:focus{
 
 .admin-header-inner{
   max-width:1000px;
-
   margin:auto;
 
   padding:12px 15px;
 
   display:flex;
-
   align-items:center;
-
   justify-content:space-between;
 }
 
 .admin-logo{
   font-size:19px;
-
   font-weight:1000;
 }
 
 .admin-actions{
   display:flex;
-
   gap:6px;
 }
 
 .admin-btn{
   border:0;
-
   border-radius:9px;
 
   padding:9px 11px;
@@ -788,19 +732,16 @@ select:focus{
 
 .customer-btn{
   background:var(--pink);
-
   color:var(--brown);
 }
 
 .logout-btn{
   background:#5A4030;
-
   color:white;
 }
 
 .admin-container{
   max-width:1000px;
-
   margin:auto;
 
   padding:15px;
@@ -808,7 +749,6 @@ select:focus{
 
 .admin-nav{
   display:flex;
-
   gap:8px;
 
   overflow-x:auto;
@@ -827,7 +767,6 @@ select:focus{
   white-space:nowrap;
 
   background:var(--cream-light);
-
   color:var(--brown);
 
   font-weight:900;
@@ -850,9 +789,9 @@ select:focus{
 }
 
 
-/* =========================================================
+/* =========================
    STATS
-========================================================= */
+========================= */
 
 .stats{
   display:grid;
@@ -891,9 +830,9 @@ select:focus{
 }
 
 
-/* =========================================================
+/* =========================
    ADMIN CARD
-========================================================= */
+========================= */
 
 .admin-card{
   margin-bottom:15px;
@@ -913,13 +852,12 @@ select:focus{
 }
 
 
-/* =========================================================
+/* =========================
    ADMIN FOOD
-========================================================= */
+========================= */
 
 .admin-food{
   display:flex;
-
   align-items:center;
 
   gap:10px;
@@ -932,7 +870,6 @@ select:focus{
 
 .admin-food img{
   width:65px;
-
   height:65px;
 
   object-fit:cover;
@@ -945,7 +882,6 @@ select:focus{
 
 .admin-food-info{
   flex:1;
-
   min-width:0;
 }
 
@@ -955,25 +891,21 @@ select:focus{
 
 .admin-food-price{
   color:var(--orange);
-
   font-weight:1000;
 }
 
 .admin-food-category{
   color:#796650;
-
   font-size:12px;
 }
 
 .admin-food-actions{
   display:flex;
-
   gap:5px;
 }
 
 .small-btn{
   border:0;
-
   border-radius:8px;
 
   padding:8px 9px;
@@ -983,20 +915,18 @@ select:focus{
 
 .edit-btn{
   background:#E9D49A;
-
   color:#60470A;
 }
 
 .delete-btn{
   background:#F3C5CD;
-
   color:#8E3044;
 }
 
 
-/* =========================================================
+/* =========================
    ORDER
-========================================================= */
+========================= */
 
 .order-card{
   margin-bottom:12px;
@@ -1013,9 +943,7 @@ select:focus{
 
 .order-head{
   display:flex;
-
   align-items:flex-start;
-
   justify-content:space-between;
 
   gap:10px;
@@ -1023,7 +951,6 @@ select:focus{
 
 .order-code{
   color:var(--orange);
-
   font-weight:1000;
 }
 
@@ -1033,11 +960,9 @@ select:focus{
   border-radius:7px;
 
   background:var(--pink);
-
   color:#63303C;
 
   font-size:12px;
-
   font-weight:900;
 }
 
@@ -1057,14 +982,13 @@ select:focus{
   color:var(--orange);
 
   font-size:18px;
-
   font-weight:1000;
 }
 
 
-/* =========================================================
+/* =========================
    EMPTY
-========================================================= */
+========================= */
 
 .empty{
   padding:35px 10px;
@@ -1075,13 +999,12 @@ select:focus{
 }
 
 
-/* =========================================================
+/* =========================
    SUCCESS
-========================================================= */
+========================= */
 
 .success{
   padding:15px;
-
   text-align:center;
 }
 
@@ -1095,20 +1018,18 @@ select:focus{
   color:var(--orange);
 
   font-size:30px;
-
   font-weight:1000;
 }
 
 
-/* =========================================================
-   SECRET
-========================================================= */
+/* =========================
+   SECRET ADMIN
+========================= */
 
 .secret-hint{
   position:fixed;
 
   left:50%;
-
   bottom:85px;
 
   z-index:200;
@@ -1137,15 +1058,14 @@ select:focus{
 }
 
 
-/* =========================================================
+/* =========================
    MOBILE
-========================================================= */
+========================= */
 
 @media(max-width:550px){
 
   .container{
     padding:12px;
-
     padding-bottom:105px;
   }
 
@@ -1167,7 +1087,6 @@ select:focus{
 
   .food-description{
     min-height:30px;
-
     font-size:11px;
   }
 
@@ -1177,7 +1096,6 @@ select:focus{
 
   .add-button{
     padding:7px 9px;
-
     font-size:12px;
   }
 
@@ -1187,51 +1105,8 @@ select:focus{
 
 }
 
-
-/* =========================================================
-   EXTRA VINTAGE DETAILS
-========================================================= */
-
-.banner,
-.food-card,
-.admin-card,
-.order-card,
-.modal-box{
-  position:relative;
-}
-
-.banner:before{
-  content:"";
-
-  position:absolute;
-
-  inset:8px;
-
-  border:
-    1px solid #F2869D35;
-
-  border-radius:14px;
-
-  pointer-events:none;
-}
-
-.food-card:before{
-  content:"";
-
-  position:absolute;
-
-  top:0;
-  left:12px;
-  right:12px;
-
-  height:3px;
-
-  background:var(--pink);
-}
-
 </style>
 </head>
-
 
 <body>
 
@@ -1250,7 +1125,7 @@ select:focus{
 class="logo"
 onclick="secretAdminClick()">
 
-🍔 WESTERN FOOD
+🌭 KEITHS HOTDOG
 
 <small>
 GOOD FOOD • GOOD MOOD
@@ -1279,11 +1154,11 @@ onclick="openCart()">
 <div class="banner">
 
 <h1>
-Ăn ngon kiểu Tây 🇺🇸
+Keiths Hotdog 🌭
 </h1>
 
 <p>
-Burger • Chicken • Snacks • Drinks
+Hotdog • Snacks • Drinks
 </p>
 
 </div>
@@ -1301,7 +1176,7 @@ onclick="changeCategory('all',this)">
 <button
 class="category"
 onclick="changeCategory('main',this)">
-🍔 Ăn chính
+🌭 Ăn chính
 </button>
 
 
@@ -1364,7 +1239,6 @@ class="food-grid">
 </div>
 
 
-
 <!-- =====================================================
      ADMIN
 ===================================================== -->
@@ -1376,7 +1250,7 @@ class="food-grid">
 <div class="admin-header-inner">
 
 <div class="admin-logo">
-⚙️ WESTERN FOOD ADMIN
+⚙️ KEITHS HOTDOG ADMIN
 </div>
 
 
@@ -1385,14 +1259,18 @@ class="food-grid">
 <button
 class="admin-btn customer-btn"
 onclick="showCustomer()">
+
 ← Khách
+
 </button>
 
 
 <button
 class="admin-btn logout-btn"
 onclick="adminLogout()">
+
 Thoát
+
 </button>
 
 </div>
@@ -1410,25 +1288,30 @@ Thoát
 <button
 class="admin-tab active"
 onclick="adminTab('dashboard',this)">
+
 📊 Tổng quan
+
 </button>
 
 
 <button
 class="admin-tab"
 onclick="adminTab('foods',this)">
-🍔 Món ăn
+
+🌭 Món ăn
+
 </button>
 
 
 <button
 class="admin-tab"
 onclick="adminTab('orders',this)">
+
 📦 Đơn hàng
+
 </button>
 
 </div>
-
 
 
 <!-- DASHBOARD -->
@@ -1497,7 +1380,6 @@ Doanh thu
 </div>
 
 
-
 <!-- FOODS -->
 
 <div
@@ -1518,7 +1400,7 @@ Tên món
 
 <input
 id="foodName"
-placeholder="Classic Beef Burger">
+placeholder="Classic Hotdog">
 
 
 <label>
@@ -1538,7 +1420,7 @@ Danh mục
 <select id="foodCategory">
 
 <option value="main">
-🍔 Ăn chính
+🌭 Ăn chính
 </option>
 
 <option value="snack">
@@ -1563,7 +1445,7 @@ Mô tả
 <textarea
 id="foodDescription"
 rows="3"
-placeholder="Burger bò, phô mai, rau...">
+placeholder="Mô tả món ăn...">
 </textarea>
 
 
@@ -1587,11 +1469,10 @@ onclick="addFood()">
 </div>
 
 
-
 <div class="admin-card">
 
 <h2>
-🍔 Danh sách món
+🌭 Danh sách món
 </h2>
 
 <div id="adminFoodList"></div>
@@ -1599,7 +1480,6 @@ onclick="addFood()">
 </div>
 
 </div>
-
 
 
 <!-- ORDERS -->
@@ -1624,7 +1504,6 @@ class="admin-page">
 </div>
 
 </div>
-
 
 
 <!-- =====================================================
@@ -1681,7 +1560,6 @@ Tiếp tục đặt hàng
 </div>
 
 </div>
-
 
 
 <!-- =====================================================
@@ -1771,7 +1649,6 @@ onclick="placeOrder()">
 </div>
 
 
-
 <!-- =====================================================
      SUCCESS
 ===================================================== -->
@@ -1816,9 +1693,8 @@ Về trang chủ
 </div>
 
 
-
 <!-- =====================================================
-     ADMIN LOGIN
+     LOGIN
 ===================================================== -->
 
 <div
@@ -1875,7 +1751,6 @@ onclick="adminLogin()">
 </div>
 
 
-
 <div
 class="secret-hint"
 id="secretHint">
@@ -1885,12 +1760,11 @@ id="secretHint">
 </div>
 
 
-
 <script>
 
-/* =========================================================
+/* =====================================================
    SUPABASE
-========================================================= */
+===================================================== */
 
 const SUPABASE_URL =
 "https://dcqrngutharengnanzna.supabase.co";
@@ -1905,9 +1779,9 @@ window.supabase.createClient(
 );
 
 
-/* =========================================================
+/* =====================================================
    VARIABLES
-========================================================= */
+===================================================== */
 
 let foods=[];
 let orders=[];
@@ -1919,9 +1793,9 @@ let secretClicks=0;
 let secretTimer=null;
 
 
-/* =========================================================
+/* =====================================================
    HELPERS
-========================================================= */
+===================================================== */
 
 function money(value){
 
@@ -1946,7 +1820,7 @@ function escapeHtml(value){
 function categoryName(category){
 
   const names={
-    main:"🍔 Ăn chính",
+    main:"🌭 Ăn chính",
     snack:"🍟 Ăn vặt",
     extra:"🧀 Đồ ăn thêm",
     drink:"🥤 Đồ uống"
@@ -1957,9 +1831,9 @@ function categoryName(category){
 }
 
 
-/* =========================================================
+/* =====================================================
    LOAD FOODS
-========================================================= */
+===================================================== */
 
 async function loadFoods(){
 
@@ -1997,7 +1871,6 @@ async function loadFoods(){
 
   foods=data || [];
 
-
   renderFoods();
 
   renderAdminFoods();
@@ -2007,9 +1880,9 @@ async function loadFoods(){
 }
 
 
-/* =========================================================
+/* =====================================================
    LOAD ORDERS
-========================================================= */
+===================================================== */
 
 async function loadOrders(){
 
@@ -2032,7 +1905,6 @@ async function loadOrders(){
 
   orders=data || [];
 
-
   renderOrders();
 
   renderDashboard();
@@ -2040,9 +1912,9 @@ async function loadOrders(){
 }
 
 
-/* =========================================================
+/* =====================================================
    RENDER FOODS
-========================================================= */
+===================================================== */
 
 function renderFoods(){
 
@@ -2086,42 +1958,27 @@ function renderFoods(){
 
       <div class="food-card">
 
-
         <img
           class="food-image"
           src="${escapeHtml(food.image_url || "")}"
           alt="${escapeHtml(food.name)}"
           onerror="this.style.display='none'">
 
-
         <div class="food-content">
 
-
           <div class="food-name">
-
             ${escapeHtml(food.name)}
-
           </div>
-
 
           <div class="food-description">
-
-            ${escapeHtml(
-              food.description || ""
-            )}
-
+            ${escapeHtml(food.description || "")}
           </div>
-
 
           <div class="food-bottom">
 
-
             <div class="price">
-
               ${money(food.price)}
-
             </div>
-
 
             <button
               class="add-button"
@@ -2131,12 +1988,9 @@ function renderFoods(){
 
             </button>
 
-
           </div>
 
-
         </div>
-
 
       </div>
 
@@ -2145,9 +1999,9 @@ function renderFoods(){
 }
 
 
-/* =========================================================
+/* =====================================================
    CATEGORY
-========================================================= */
+===================================================== */
 
 function changeCategory(
   category,
@@ -2171,7 +2025,7 @@ function changeCategory(
 
     all:"Tất cả món",
 
-    main:"🍔 Ăn chính",
+    main:"🌭 Ăn chính",
 
     snack:"🍟 Ăn vặt",
 
@@ -2192,9 +2046,9 @@ function changeCategory(
 }
 
 
-/* =========================================================
+/* =====================================================
    CART
-========================================================= */
+===================================================== */
 
 function addCart(id){
 
@@ -2358,24 +2212,14 @@ function renderCart(){
 
       <div class="cart-item">
 
-
         <div class="cart-info">
 
           <div class="cart-name">
-
-            ${escapeHtml(
-              item.name
-            )}
-
+            ${escapeHtml(item.name)}
           </div>
 
-
           <div class="cart-price">
-
-            ${money(
-              item.price
-            )}
-
+            ${money(item.price)}
           </div>
 
         </div>
@@ -2383,38 +2227,21 @@ function renderCart(){
 
         <div class="quantity">
 
-
           <button
-            onclick="changeQty(
-              ${item.id},
-              -1
-            )">
-
+            onclick="changeQty(${item.id},-1)">
             −
-
           </button>
-
 
           <b>
-
             ${item.qty}
-
           </b>
 
-
           <button
-            onclick="changeQty(
-              ${item.id},
-              1
-            )">
-
+            onclick="changeQty(${item.id},1)">
             +
-
           </button>
 
-
         </div>
-
 
       </div>
 
@@ -2440,9 +2267,9 @@ function renderCart(){
 }
 
 
-/* =========================================================
+/* =====================================================
    CHECKOUT
-========================================================= */
+===================================================== */
 
 function openCheckout(){
 
@@ -2457,15 +2284,11 @@ function openCheckout(){
   }
 
 
-  closeModal(
-    "cartModal"
-  );
+  closeModal("cartModal");
 
 
   document
-    .getElementById(
-      "checkoutModal"
-    )
+    .getElementById("checkoutModal")
     .classList.add("show");
 
 }
@@ -2486,33 +2309,25 @@ async function placeOrder(){
 
   const name=
     document
-      .getElementById(
-        "customerName"
-      )
+      .getElementById("customerName")
       .value.trim();
 
 
   const phone=
     document
-      .getElementById(
-        "customerPhone"
-      )
+      .getElementById("customerPhone")
       .value.trim();
 
 
   const address=
     document
-      .getElementById(
-        "customerAddress"
-      )
+      .getElementById("customerAddress")
       .value.trim();
 
 
   const payment=
     document
-      .getElementById(
-        "payment"
-      )
+      .getElementById("payment")
       .value;
 
 
@@ -2621,9 +2436,7 @@ async function placeOrder(){
 
   if(itemError){
 
-    console.error(
-      itemError
-    );
+    console.error(itemError);
 
     alert(
       "Lưu món trong đơn lỗi: "+
@@ -2640,69 +2453,53 @@ async function placeOrder(){
   updateCart();
 
 
-  closeModal(
-    "checkoutModal"
-  );
+  closeModal("checkoutModal");
 
 
   document
-    .getElementById(
-      "successCode"
-    )
+    .getElementById("successCode")
     .textContent=code;
 
 
   document
-    .getElementById(
-      "successModal"
-    )
+    .getElementById("successModal")
     .classList.add("show");
 
 
   document
-    .getElementById(
-      "customerName"
-    )
+    .getElementById("customerName")
     .value="";
 
 
   document
-    .getElementById(
-      "customerPhone"
-    )
+    .getElementById("customerPhone")
     .value="";
 
 
   document
-    .getElementById(
-      "customerAddress"
-    )
+    .getElementById("customerAddress")
     .value="";
 
 }
 
 
-/* =========================================================
+/* =====================================================
    SECRET ADMIN
-========================================================= */
+===================================================== */
 
 function secretAdminClick(){
 
   secretClicks++;
 
+  clearTimeout(secretTimer);
 
-  clearTimeout(
-    secretTimer
+
+  secretTimer=setTimeout(
+    ()=>{
+      secretClicks=0;
+    },
+    2000
   );
-
-
-  secretTimer=
-    setTimeout(
-      ()=>{
-        secretClicks=0;
-      },
-      2000
-    );
 
 
   if(secretClicks<5){
@@ -2713,16 +2510,12 @@ function secretAdminClick(){
       );
 
 
-    hint.classList.add(
-      "show"
-    );
+    hint.classList.add("show");
 
 
     setTimeout(
       ()=>{
-        hint.classList.remove(
-          "show"
-        );
+        hint.classList.remove("show");
       },
       700
     );
@@ -2734,43 +2527,33 @@ function secretAdminClick(){
 
     secretClicks=0;
 
-    clearTimeout(
-      secretTimer
-    );
+    clearTimeout(secretTimer);
 
 
     document
-      .getElementById(
-        "loginModal"
-      )
-      .classList.add(
-        "show"
-      );
+      .getElementById("loginModal")
+      .classList.add("show");
 
   }
 
 }
 
 
-/* =========================================================
+/* =====================================================
    ADMIN LOGIN
-========================================================= */
+===================================================== */
 
 function adminLogin(){
 
   const username=
     document
-      .getElementById(
-        "loginUser"
-      )
+      .getElementById("loginUser")
       .value.trim();
 
 
   const password=
     document
-      .getElementById(
-        "loginPass"
-      )
+      .getElementById("loginPass")
       .value;
 
 
@@ -2785,22 +2568,16 @@ function adminLogin(){
     );
 
 
-    closeModal(
-      "loginModal"
-    );
+    closeModal("loginModal");
 
 
     document
-      .getElementById(
-        "customerScreen"
-      )
+      .getElementById("customerScreen")
       .style.display="none";
 
 
     document
-      .getElementById(
-        "adminScreen"
-      )
+      .getElementById("adminScreen")
       .style.display="block";
 
 
@@ -2833,24 +2610,20 @@ function adminLogout(){
 function showCustomer(){
 
   document
-    .getElementById(
-      "adminScreen"
-    )
+    .getElementById("adminScreen")
     .style.display="none";
 
 
   document
-    .getElementById(
-      "customerScreen"
-    )
+    .getElementById("customerScreen")
     .style.display="block";
 
 }
 
 
-/* =========================================================
+/* =====================================================
    ADMIN TAB
-========================================================= */
+===================================================== */
 
 function adminTab(
   id,
@@ -2858,37 +2631,25 @@ function adminTab(
 ){
 
   document
-    .querySelectorAll(
-      ".admin-page"
-    )
+    .querySelectorAll(".admin-page")
     .forEach(page =>
-      page.classList.remove(
-        "active"
-      )
+      page.classList.remove("active")
     );
 
 
   document
-    .querySelectorAll(
-      ".admin-tab"
-    )
+    .querySelectorAll(".admin-tab")
     .forEach(btn =>
-      btn.classList.remove(
-        "active"
-      )
+      btn.classList.remove("active")
     );
 
 
   document
     .getElementById(id)
-    .classList.add(
-      "active"
-    );
+    .classList.add("active");
 
 
-  button.classList.add(
-    "active"
-  );
+  button.classList.add("active");
 
 
   if(id==="orders"){
@@ -2903,73 +2664,56 @@ function adminTab(
 }
 
 
-/* =========================================================
+/* =====================================================
    ADD FOOD
-========================================================= */
+===================================================== */
 
 async function addFood(){
 
   const name=
     document
-      .getElementById(
-        "foodName"
-      )
+      .getElementById("foodName")
       .value.trim();
 
 
   const price=
     Number(
       document
-        .getElementById(
-          "foodPrice"
-        )
+        .getElementById("foodPrice")
         .value
     );
 
 
   const category=
     document
-      .getElementById(
-        "foodCategory"
-      )
+      .getElementById("foodCategory")
       .value;
 
 
   const description=
     document
-      .getElementById(
-        "foodDescription"
-      )
+      .getElementById("foodDescription")
       .value.trim();
 
 
   const image=
     document
-      .getElementById(
-        "foodImage"
-      )
+      .getElementById("foodImage")
       .value.trim();
 
 
   if(!name){
 
-    alert(
-      "Nhập tên món!"
-    );
+    alert("Nhập tên món!");
 
     return;
 
   }
 
 
-  if(
-    !price ||
-    price<=0
-  ){
+  if(!price || price<=0){
 
-    alert(
-      "Nhập giá hợp lệ!"
-    );
+    alert("Nhập giá hợp lệ!");
 
     return;
 
@@ -2988,8 +2732,7 @@ async function addFood(){
 
         category:category,
 
-        description:
-          description,
+        description:description,
 
         image_url:image,
 
@@ -3013,46 +2756,36 @@ async function addFood(){
 
 
   document
-    .getElementById(
-      "foodName"
-    )
+    .getElementById("foodName")
     .value="";
 
 
   document
-    .getElementById(
-      "foodPrice"
-    )
+    .getElementById("foodPrice")
     .value="";
 
 
   document
-    .getElementById(
-      "foodDescription"
-    )
+    .getElementById("foodDescription")
     .value="";
 
 
   document
-    .getElementById(
-      "foodImage"
-    )
+    .getElementById("foodImage")
     .value="";
 
 
   await loadFoods();
 
 
-  alert(
-    "Đã thêm món!"
-  );
+  alert("Đã thêm món!");
 
 }
 
 
-/* =========================================================
+/* =====================================================
    ADMIN FOOD LIST
-========================================================= */
+===================================================== */
 
 function renderAdminFoods(){
 
@@ -3070,9 +2803,7 @@ function renderAdminFoods(){
     box.innerHTML=`
 
       <div class="empty">
-
         Chưa có món.
-
       </div>
 
     `;
@@ -3088,11 +2819,8 @@ function renderAdminFoods(){
 
       <div class="admin-food">
 
-
         <img
-          src="${escapeHtml(
-            food.image_url || ""
-          )}"
+          src="${escapeHtml(food.image_url || "")}"
           onerror="
             this.style.display='none'
           ">
@@ -3100,48 +2828,26 @@ function renderAdminFoods(){
 
         <div class="admin-food-info">
 
-
           <div class="admin-food-name">
-
-            ${escapeHtml(
-              food.name
-            )}
-
+            ${escapeHtml(food.name)}
           </div>
-
 
           <div class="admin-food-price">
-
-            ${money(
-              food.price
-            )}
-
+            ${money(food.price)}
           </div>
-
 
           <div class="admin-food-category">
-
-            ${categoryName(
-              food.category
-            )}
-
+            ${categoryName(food.category)}
           </div>
-
 
         </div>
 
 
-        <div
-          class="admin-food-actions">
-
+        <div class="admin-food-actions">
 
           <button
             class="small-btn edit-btn"
-            onclick="
-              editFood(
-                ${food.id}
-              )
-            ">
+            onclick="editFood(${food.id})">
 
             Sửa
 
@@ -3150,19 +2856,13 @@ function renderAdminFoods(){
 
           <button
             class="small-btn delete-btn"
-            onclick="
-              deleteFood(
-                ${food.id}
-              )
-            ">
+            onclick="deleteFood(${food.id})">
 
             Xóa
 
           </button>
 
-
         </div>
-
 
       </div>
 
@@ -3171,9 +2871,9 @@ function renderAdminFoods(){
 }
 
 
-/* =========================================================
+/* =====================================================
    EDIT FOOD
-========================================================= */
+===================================================== */
 
 async function editFood(id){
 
@@ -3214,9 +2914,7 @@ async function editFood(id){
     );
 
 
-  if(
-    description===null
-  )return;
+  if(description===null)return;
 
 
   const image=
@@ -3237,9 +2935,7 @@ async function editFood(id){
 
         name:name.trim(),
 
-        price:Number(
-          price
-        ),
+        price:Number(price),
 
         description:
           description.trim(),
@@ -3248,10 +2944,7 @@ async function editFood(id){
           image.trim()
 
       })
-      .eq(
-        "id",
-        id
-      );
+      .eq("id",id);
 
 
   if(error){
@@ -3271,9 +2964,9 @@ async function editFood(id){
 }
 
 
-/* =========================================================
+/* =====================================================
    DELETE FOOD
-========================================================= */
+===================================================== */
 
 async function deleteFood(id){
 
@@ -3303,10 +2996,7 @@ async function deleteFood(id){
       .update({
         active:false
       })
-      .eq(
-        "id",
-        id
-      );
+      .eq("id",id);
 
 
   if(error){
@@ -3326,9 +3016,9 @@ async function deleteFood(id){
 }
 
 
-/* =========================================================
+/* =====================================================
    ORDERS
-========================================================= */
+===================================================== */
 
 async function renderOrders(){
 
@@ -3346,9 +3036,7 @@ async function renderOrders(){
     box.innerHTML=`
 
       <div class="empty">
-
         📦 Chưa có đơn hàng.
-
       </div>
 
     `;
@@ -3364,42 +3052,26 @@ async function renderOrders(){
 
       <div class="order-card">
 
-
         <div class="order-head">
-
 
           <div>
 
             <div class="order-code">
-
-              ${escapeHtml(
-                order.order_code
-              )}
-
+              ${escapeHtml(order.order_code)}
             </div>
 
-
             <small>
-
               ${new Date(
                 order.created_at
-              ).toLocaleString(
-                "vi-VN"
-              )}
-
+              ).toLocaleString("vi-VN")}
             </small>
 
           </div>
 
 
           <div class="order-status">
-
-            ${escapeHtml(
-              order.status
-            )}
-
+            ${escapeHtml(order.status)}
           </div>
-
 
         </div>
 
@@ -3408,24 +3080,18 @@ async function renderOrders(){
 
           👤
           <b>
-            ${escapeHtml(
-              order.customer_name
-            )}
+            ${escapeHtml(order.customer_name)}
           </b>
 
           <br>
 
           📞
-          ${escapeHtml(
-            order.customer_phone
-          )}
+          ${escapeHtml(order.customer_phone)}
 
           <br>
 
           📍
-          ${escapeHtml(
-            order.customer_address
-          )}
+          ${escapeHtml(order.customer_address)}
 
           <br>
 
@@ -3451,9 +3117,7 @@ async function renderOrders(){
         <div class="order-total">
 
           Tổng:
-          ${money(
-            order.total
-          )}
+          ${money(order.total)}
 
         </div>
 
@@ -3466,12 +3130,10 @@ async function renderOrders(){
             )
           ">
 
-
           <option
             value="Chờ xác nhận"
             ${
-              order.status===
-              "Chờ xác nhận"
+              order.status==="Chờ xác nhận"
               ?"selected"
               :""
             }>
@@ -3484,8 +3146,7 @@ async function renderOrders(){
           <option
             value="Đang chuẩn bị"
             ${
-              order.status===
-              "Đang chuẩn bị"
+              order.status==="Đang chuẩn bị"
               ?"selected"
               :""
             }>
@@ -3498,8 +3159,7 @@ async function renderOrders(){
           <option
             value="Đang giao"
             ${
-              order.status===
-              "Đang giao"
+              order.status==="Đang giao"
               ?"selected"
               :""
             }>
@@ -3512,8 +3172,7 @@ async function renderOrders(){
           <option
             value="Hoàn thành"
             ${
-              order.status===
-              "Hoàn thành"
+              order.status==="Hoàn thành"
               ?"selected"
               :""
             }>
@@ -3526,8 +3185,7 @@ async function renderOrders(){
           <option
             value="Đã hủy"
             ${
-              order.status===
-              "Đã hủy"
+              order.status==="Đã hủy"
               ?"selected"
               :""
             }>
@@ -3536,9 +3194,7 @@ async function renderOrders(){
 
           </option>
 
-
         </select>
-
 
       </div>
 
@@ -3558,9 +3214,9 @@ async function renderOrders(){
 }
 
 
-/* =========================================================
+/* =====================================================
    ORDER ITEMS
-========================================================= */
+===================================================== */
 
 async function loadOrderItems(
   orderId
@@ -3574,10 +3230,7 @@ async function loadOrderItems(
     await db
       .from("order_items")
       .select("*")
-      .eq(
-        "order_id",
-        orderId
-      );
+      .eq("order_id",orderId);
 
 
   const box=
@@ -3618,17 +3271,13 @@ async function loadOrderItems(
 
       <div>
 
-        ${escapeHtml(
-          item.food_name
-        )}
+        ${escapeHtml(item.food_name)}
 
         ×
         ${item.quantity}
 
         —
-        ${money(
-          item.subtotal
-        )}
+        ${money(item.subtotal)}
 
       </div>
 
@@ -3637,9 +3286,9 @@ async function loadOrderItems(
 }
 
 
-/* =========================================================
+/* =====================================================
    CHANGE ORDER STATUS
-========================================================= */
+===================================================== */
 
 async function changeOrderStatus(
   id,
@@ -3653,10 +3302,7 @@ async function changeOrderStatus(
       .update({
         status:status
       })
-      .eq(
-        "id",
-        id
-      );
+      .eq("id",id);
 
 
   if(error){
@@ -3676,9 +3322,9 @@ async function changeOrderStatus(
 }
 
 
-/* =========================================================
+/* =====================================================
    DASHBOARD
-========================================================= */
+===================================================== */
 
 function renderDashboard(){
 
@@ -3687,18 +3333,15 @@ function renderDashboard(){
       "statFoods"
     );
 
-
   const statOrders=
     document.getElementById(
       "statOrders"
     );
 
-
   const statPending=
     document.getElementById(
       "statPending"
     );
-
 
   const statRevenue=
     document.getElementById(
@@ -3747,9 +3390,7 @@ function renderDashboard(){
         .reduce(
           (sum,x) =>
             sum+
-            Number(
-              x.total || 0
-            ),
+            Number(x.total || 0),
           0
         );
 
@@ -3773,17 +3414,15 @@ function renderAdmin(){
 }
 
 
-/* =========================================================
+/* =====================================================
    MODAL
-========================================================= */
+===================================================== */
 
 function closeModal(id){
 
   document
     .getElementById(id)
-    .classList.remove(
-      "show"
-    );
+    .classList.remove("show");
 
 }
 
@@ -3797,8 +3436,7 @@ document
       event=>{
 
         if(
-          event.target===
-          modal
+          event.target===modal
         ){
 
           modal.classList.remove(
@@ -3813,14 +3451,12 @@ document
   });
 
 
-/* =========================================================
+/* =====================================================
    ENTER LOGIN
-========================================================= */
+===================================================== */
 
 document
-  .getElementById(
-    "loginPass"
-  )
+  .getElementById("loginPass")
   .addEventListener(
     "keydown",
     event=>{
@@ -3837,9 +3473,9 @@ document
   );
 
 
-/* =========================================================
+/* =====================================================
    START
-========================================================= */
+===================================================== */
 
 async function start(){
 
@@ -3849,11 +3485,10 @@ async function start(){
 
 }
 
-
 start();
 
 </script>
 
 </body>
 </html>
-```
+
