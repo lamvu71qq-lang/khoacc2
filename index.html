@@ -1,27 +1,45 @@
-```html
+````html
 <!DOCTYPE html>
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 
 <title>Western Food</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
+
+/* =========================================================
+   COLOR PALETTE
+========================================================= */
+
 :root{
-  --mustard:#D4A72C;
-  --mustard-dark:#A97D16;
-  --cream:#F7EED8;
-  --cream-light:#FFF9EA;
-  --brown:#3A2A1F;
-  --brown-light:#634936;
-  --brick:#B84A32;
-  --olive:#68734A;
-  --border:#D8C7A5;
-  --white:#FFFFFF;
+  --mustard:#B58A1F;
+  --mustard-dark:#806015;
+
+  --orange:#DC4826;
+  --orange-dark:#A93620;
+
+  --pink:#F2869D;
+  --pink-dark:#C96378;
+
+  --cream:#E9DEC5;
+  --cream-light:#F3E9D2;
+
+  --brown:#2E2119;
+  --brown-light:#5B4030;
+
+  --border:#C5AE82;
+
+  --white:#FFF9EA;
 }
+
+
+/* =========================================================
+   GLOBAL
+========================================================= */
 
 *{
   box-sizing:border-box;
@@ -35,12 +53,25 @@ html{
 body{
   margin:0;
   background:
-    radial-gradient(circle at top,#FFF9EA 0,#F7EED8 55%,#EADBBE 100%);
+    radial-gradient(
+      circle at top,
+      #F1E7D0 0%,
+      #E9DEC5 55%,
+      #DCC9A6 100%
+    );
   color:var(--brown);
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Arial,
+    sans-serif;
 }
 
-button,input,textarea,select{
+button,
+input,
+textarea,
+select{
   font:inherit;
 }
 
@@ -52,21 +83,30 @@ button{
   display:none!important;
 }
 
-/* HEADER */
+
+/* =========================================================
+   HEADER
+========================================================= */
 
 header{
   position:sticky;
   top:0;
   z-index:50;
+
   background:var(--brown);
+
   color:white;
-  box-shadow:0 3px 12px #0003;
+
+  box-shadow:
+    0 3px 15px #0005;
 }
 
 .header-inner{
   max-width:950px;
   margin:auto;
+
   padding:12px 15px;
+
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -75,76 +115,126 @@ header{
 .logo{
   font-size:21px;
   font-weight:1000;
-  letter-spacing:.5px;
+  letter-spacing:.7px;
+
   user-select:none;
 }
 
 .logo small{
   display:block;
+
   margin-top:2px;
+
   font-size:9px;
-  color:#E5C766;
-  letter-spacing:1px;
+
+  color:var(--pink);
+
+  letter-spacing:1.3px;
 }
 
 .cart-button{
-  border:2px solid #E7C95D;
-  border-radius:12px;
+  border:2px solid var(--pink);
+
+  border-radius:11px;
+
   padding:9px 13px;
-  background:var(--mustard);
-  color:var(--brown);
+
+  background:var(--orange);
+
+  color:white;
+
   font-weight:1000;
+
+  box-shadow:
+    0 3px 0 var(--orange-dark);
 }
 
-/* MAIN */
+
+/* =========================================================
+   MAIN
+========================================================= */
 
 .container{
   max-width:950px;
+
   margin:auto;
+
   padding:16px;
-  padding-bottom:100px;
+
+  padding-bottom:105px;
 }
 
-/* HERO */
+
+/* =========================================================
+   BANNER
+========================================================= */
 
 .banner{
   position:relative;
+
   overflow:hidden;
+
   margin-bottom:15px;
-  padding:25px 22px;
+
+  padding:27px 22px;
+
   border-radius:20px;
-  background:linear-gradient(135deg,var(--brown),#4A3526);
+
+  background:
+    linear-gradient(
+      135deg,
+      #2E2119,
+      #4B3427
+    );
+
   color:white;
-  border-bottom:5px solid var(--mustard);
-  box-shadow:0 7px 18px #0002;
+
+  border-bottom:
+    5px solid var(--mustard);
+
+  box-shadow:
+    0 7px 18px #0003;
 }
 
 .banner h1{
   margin:0 0 6px;
+
   font-size:28px;
 }
 
 .banner p{
   margin:0;
-  color:#EEDDB7;
+
+  color:#E8D9BA;
+
   font-size:14px;
 }
 
 .banner:after{
   content:"🍔";
+
   position:absolute;
+
   right:20px;
   bottom:-10px;
+
   font-size:75px;
-  opacity:.15;
+
+  opacity:.13;
 }
 
-/* CATEGORY */
+
+/* =========================================================
+   CATEGORY
+========================================================= */
 
 .categories{
   display:flex;
+
   gap:8px;
+
   overflow-x:auto;
+
   padding:2px 0 13px;
 }
 
@@ -154,64 +244,120 @@ header{
 
 .category{
   border:2px solid var(--border);
+
   border-radius:30px;
+
   padding:9px 14px;
+
   white-space:nowrap;
-  background:var(--cream-light);
+
+  background:#EDE2C9;
+
   color:var(--brown);
+
   font-weight:900;
+
+  transition:.2s;
 }
 
 .category.active{
   background:var(--mustard);
+
   border-color:var(--mustard);
+
   color:white;
+
+  box-shadow:
+    0 3px 0 var(--mustard-dark);
 }
 
-/* TITLE */
+.category:active{
+  transform:scale(.96);
+}
+
+
+/* =========================================================
+   SECTION TITLE
+========================================================= */
 
 .section-title{
   display:flex;
+
   align-items:center;
+
   gap:8px;
+
   margin:5px 0 14px;
+
   font-size:22px;
+
   font-weight:1000;
 }
 
 .section-title:after{
   content:"";
+
   flex:1;
+
   height:3px;
-  background:repeating-linear-gradient(
-    90deg,
-    var(--mustard) 0 8px,
-    transparent 8px 14px
-  );
+
+  background:
+    repeating-linear-gradient(
+      90deg,
+      var(--orange) 0 8px,
+      transparent 8px 14px
+    );
 }
 
-/* FOOD */
+
+/* =========================================================
+   FOOD GRID
+========================================================= */
 
 .food-grid{
   display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
+
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
+
   gap:13px;
 }
 
 .food-card{
   overflow:hidden;
-  border:2px solid var(--border);
+
+  border:
+    2px solid var(--border);
+
   border-radius:17px;
+
   background:var(--cream-light);
-  box-shadow:0 5px 12px #3A2A1F18;
+
+  box-shadow:
+    0 5px 12px #3A2A1F20;
+
+  transition:
+    transform .15s,
+    box-shadow .15s;
+}
+
+.food-card:active{
+  transform:scale(.985);
+
+  box-shadow:
+    0 2px 7px #3A2A1F20;
 }
 
 .food-image{
   display:block;
+
   width:100%;
+
   height:160px;
+
   object-fit:cover;
-  background:#E6D6B8;
+
+  background:#D5C29B;
 }
 
 .food-content{
@@ -220,74 +366,130 @@ header{
 
 .food-name{
   font-size:16px;
+
   font-weight:1000;
 }
 
 .food-description{
   min-height:32px;
+
   margin:5px 0 10px;
-  color:#7C6A56;
+
+  color:#796650;
+
   font-size:12px;
+
   line-height:1.35;
 }
 
 .food-bottom{
   display:flex;
+
   align-items:center;
+
   justify-content:space-between;
+
   gap:8px;
 }
 
 .price{
-  color:var(--brick);
+  color:var(--orange);
+
   font-size:16px;
+
   font-weight:1000;
 }
 
 .add-button{
   border:0;
+
   border-radius:9px;
+
   padding:8px 11px;
-  background:var(--mustard);
+
+  background:var(--orange);
+
   color:white;
+
   font-weight:1000;
+
+  box-shadow:
+    0 3px 0 var(--orange-dark);
 }
 
-/* BOTTOM CART */
+.add-button:active{
+  transform:translateY(2px);
+
+  box-shadow:none;
+}
+
+
+/* =========================================================
+   BOTTOM CART
+========================================================= */
 
 .bottom-cart{
   position:fixed;
+
   left:0;
   right:0;
   bottom:0;
+
   z-index:40;
-  padding:9px 14px calc(9px + env(safe-area-inset-bottom));
-  background:#3A2A1F;
-  border-top:3px solid var(--mustard);
+
+  padding:
+    9px
+    14px
+    calc(9px + env(safe-area-inset-bottom));
+
+  background:var(--brown);
+
+  border-top:
+    3px solid var(--mustard);
 }
 
 .bottom-cart button{
   display:block;
+
   width:100%;
+
   max-width:950px;
+
   margin:auto;
+
   border:0;
+
   border-radius:12px;
+
   padding:13px;
-  background:var(--mustard);
+
+  background:var(--orange);
+
   color:white;
+
   font-weight:1000;
+
+  box-shadow:
+    0 3px 0 var(--orange-dark);
 }
 
-/* MODAL */
+
+/* =========================================================
+   MODAL
+========================================================= */
 
 .modal{
   display:none;
+
   position:fixed;
+
   inset:0;
+
   z-index:100;
+
   align-items:flex-end;
-  background:#24170DB8;
+
+  background:#24170DCC;
 }
 
 .modal.show{
@@ -296,18 +498,30 @@ header{
 
 .modal-box{
   width:100%;
+
   max-width:720px;
+
   max-height:94vh;
+
   overflow:auto;
+
   margin:auto;
+
   padding:20px;
-  border:2px solid var(--border);
-  border-radius:23px 23px 0 0;
+
+  border:
+    2px solid var(--border);
+
+  border-radius:
+    23px 23px 0 0;
+
   background:var(--cream-light);
+
   color:var(--brown);
 }
 
 @media(min-width:700px){
+
   .modal{
     align-items:center;
   }
@@ -315,42 +529,66 @@ header{
   .modal-box{
     border-radius:22px;
   }
+
 }
 
 .modal-header{
   display:flex;
+
   align-items:center;
+
   justify-content:space-between;
+
   margin-bottom:15px;
+
   padding-bottom:10px;
-  border-bottom:2px solid var(--border);
+
+  border-bottom:
+    2px solid var(--border);
 }
 
 .modal-title{
   font-size:22px;
+
   font-weight:1000;
 }
 
 .close{
   width:35px;
+
   height:35px;
+
   border:0;
+
   border-radius:50%;
-  background:#E7DCC6;
+
+  background:#E4D3B1;
+
   color:var(--brown);
+
   font-size:21px;
+
   font-weight:900;
 }
 
-/* CART */
+
+/* =========================================================
+   CART
+========================================================= */
 
 .cart-item{
   display:flex;
+
   align-items:center;
+
   justify-content:space-between;
+
   gap:10px;
+
   padding:13px 0;
-  border-bottom:1px dashed #CDBB98;
+
+  border-bottom:
+    1px dashed #CDBB98;
 }
 
 .cart-info{
@@ -363,54 +601,94 @@ header{
 
 .cart-price{
   margin-top:3px;
-  color:var(--brick);
+
+  color:var(--orange);
+
   font-size:13px;
 }
 
 .quantity{
   display:flex;
+
   align-items:center;
+
   gap:7px;
 }
 
 .quantity button{
   width:32px;
+
   height:32px;
+
   border:0;
+
   border-radius:8px;
+
   background:var(--brown);
+
   color:white;
+
   font-size:18px;
 }
 
 .total-row{
   display:flex;
+
   align-items:center;
+
   justify-content:space-between;
+
   padding:15px 0;
+
   font-size:21px;
+
   font-weight:1000;
 }
 
 #cartTotal{
-  color:var(--brick);
+  color:var(--orange);
 }
+
+
+/* =========================================================
+   PRIMARY BUTTON
+========================================================= */
 
 .primary{
   width:100%;
+
   border:0;
+
   border-radius:11px;
+
   padding:14px;
-  background:var(--mustard);
+
+  background:var(--orange);
+
   color:white;
+
   font-weight:1000;
+
+  box-shadow:
+    0 3px 0 var(--orange-dark);
 }
 
-/* FORM */
+.primary:active{
+  transform:translateY(2px);
+
+  box-shadow:none;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
 
 label{
   display:block;
+
   margin-top:10px;
+
   font-weight:900;
 }
 
@@ -418,101 +696,148 @@ input,
 textarea,
 select{
   width:100%;
-  margin:6px 0 12px;
+
+  margin:
+    6px 0 12px;
+
   padding:12px;
-  border:2px solid var(--border);
+
+  border:
+    2px solid var(--border);
+
   border-radius:10px;
+
   outline:none;
-  background:#FFFDF6;
+
+  background:#FFF9EA;
+
   color:var(--brown);
 }
 
 input:focus,
 textarea:focus,
 select:focus{
-  border-color:var(--mustard);
+  border-color:var(--orange);
 }
 
-/* ADMIN */
+
+/* =========================================================
+   ADMIN
+========================================================= */
 
 #adminScreen{
   display:none;
+
   min-height:100vh;
+
   background:var(--cream);
+
   color:var(--brown);
 }
 
 .admin-header{
   position:sticky;
+
   top:0;
+
   z-index:60;
+
   background:var(--brown);
+
   color:white;
-  border-bottom:4px solid var(--mustard);
+
+  border-bottom:
+    4px solid var(--mustard);
 }
 
 .admin-header-inner{
   max-width:1000px;
+
   margin:auto;
+
   padding:12px 15px;
+
   display:flex;
+
   align-items:center;
+
   justify-content:space-between;
 }
 
 .admin-logo{
   font-size:19px;
+
   font-weight:1000;
 }
 
 .admin-actions{
   display:flex;
+
   gap:6px;
 }
 
 .admin-btn{
   border:0;
+
   border-radius:9px;
+
   padding:9px 11px;
+
   font-weight:900;
 }
 
 .customer-btn{
-  background:var(--mustard);
-  color:white;
+  background:var(--pink);
+
+  color:var(--brown);
 }
 
 .logout-btn{
   background:#5A4030;
+
   color:white;
 }
 
 .admin-container{
   max-width:1000px;
+
   margin:auto;
+
   padding:15px;
 }
 
 .admin-nav{
   display:flex;
+
   gap:8px;
+
   overflow-x:auto;
+
   margin-bottom:15px;
 }
 
 .admin-tab{
-  border:2px solid var(--border);
+  border:
+    2px solid var(--border);
+
   border-radius:10px;
+
   padding:10px 14px;
+
   white-space:nowrap;
+
   background:var(--cream-light);
+
   color:var(--brown);
+
   font-weight:900;
 }
 
 .admin-tab.active{
   border-color:var(--mustard);
+
   background:var(--mustard);
+
   color:white;
 }
 
@@ -524,40 +849,62 @@ select:focus{
   display:block;
 }
 
-/* STATS */
+
+/* =========================================================
+   STATS
+========================================================= */
 
 .stats{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
+
+  grid-template-columns:
+    repeat(2,1fr);
+
   gap:10px;
+
   margin-bottom:15px;
 }
 
 .stat{
   padding:16px;
-  border:2px solid var(--border);
+
+  border:
+    2px solid var(--border);
+
   border-radius:16px;
+
   background:var(--cream-light);
 }
 
 .stat small{
-  color:#7C6A56;
+  color:#796650;
 }
 
 .stat strong{
   display:block;
+
   margin-top:5px;
-  color:var(--brick);
+
+  color:var(--orange);
+
   font-size:22px;
 }
 
-/* ADMIN CARD */
+
+/* =========================================================
+   ADMIN CARD
+========================================================= */
 
 .admin-card{
   margin-bottom:15px;
+
   padding:18px;
-  border:2px solid var(--border);
+
+  border:
+    2px solid var(--border);
+
   border-radius:18px;
+
   background:var(--cream-light);
 }
 
@@ -565,26 +912,40 @@ select:focus{
   margin-top:0;
 }
 
-/* ADMIN FOOD */
+
+/* =========================================================
+   ADMIN FOOD
+========================================================= */
 
 .admin-food{
   display:flex;
+
   align-items:center;
+
   gap:10px;
+
   padding:12px 0;
-  border-bottom:1px dashed #CDBB98;
+
+  border-bottom:
+    1px dashed #CDBB98;
 }
 
 .admin-food img{
   width:65px;
+
   height:65px;
+
   object-fit:cover;
-  border:2px solid var(--border);
+
+  border:
+    2px solid var(--border);
+
   border-radius:10px;
 }
 
 .admin-food-info{
   flex:1;
+
   min-width:0;
 }
 
@@ -593,94 +954,134 @@ select:focus{
 }
 
 .admin-food-price{
-  color:var(--brick);
+  color:var(--orange);
+
   font-weight:1000;
 }
 
 .admin-food-category{
-  color:#7C6A56;
+  color:#796650;
+
   font-size:12px;
 }
 
 .admin-food-actions{
   display:flex;
+
   gap:5px;
 }
 
 .small-btn{
   border:0;
+
   border-radius:8px;
+
   padding:8px 9px;
+
   font-weight:900;
 }
 
 .edit-btn{
   background:#E9D49A;
+
   color:#60470A;
 }
 
 .delete-btn{
-  background:#F0C8BE;
-  color:#8E281A;
+  background:#F3C5CD;
+
+  color:#8E3044;
 }
 
-/* ORDER */
+
+/* =========================================================
+   ORDER
+========================================================= */
 
 .order-card{
   margin-bottom:12px;
+
   padding:14px;
-  border:2px solid var(--border);
+
+  border:
+    2px solid var(--border);
+
   border-radius:15px;
+
   background:var(--cream-light);
 }
 
 .order-head{
   display:flex;
+
   align-items:flex-start;
+
   justify-content:space-between;
+
   gap:10px;
 }
 
 .order-code{
-  color:var(--brick);
+  color:var(--orange);
+
   font-weight:1000;
 }
 
 .order-status{
   padding:5px 8px;
+
   border-radius:7px;
-  background:#E9D49A;
-  color:#654B0C;
+
+  background:var(--pink);
+
+  color:#63303C;
+
   font-size:12px;
+
   font-weight:900;
 }
 
 .order-items{
   margin:10px 0;
+
   padding:10px;
+
   border-radius:10px;
-  background:#F1E5CC;
+
+  background:#E9DBC0;
+
   color:#5E4B39;
 }
 
 .order-total{
-  color:var(--brick);
+  color:var(--orange);
+
   font-size:18px;
+
   font-weight:1000;
 }
 
-/* EMPTY */
+
+/* =========================================================
+   EMPTY
+========================================================= */
 
 .empty{
   padding:35px 10px;
+
   text-align:center;
+
   color:#8A7861;
 }
 
-/* SUCCESS */
+
+/* =========================================================
+   SUCCESS
+========================================================= */
 
 .success{
   padding:15px;
+
   text-align:center;
 }
 
@@ -690,26 +1091,44 @@ select:focus{
 
 .success-code{
   margin:15px;
-  color:var(--brick);
+
+  color:var(--orange);
+
   font-size:30px;
+
   font-weight:1000;
 }
 
-/* SECRET */
+
+/* =========================================================
+   SECRET
+========================================================= */
 
 .secret-hint{
   position:fixed;
+
   left:50%;
+
   bottom:85px;
+
   z-index:200;
+
   transform:translateX(-50%);
+
   padding:9px 13px;
+
   border-radius:10px;
+
   background:var(--brown);
+
   color:white;
+
   font-size:12px;
+
   opacity:0;
+
   pointer-events:none;
+
   transition:.2s;
 }
 
@@ -717,13 +1136,17 @@ select:focus{
   opacity:1;
 }
 
-/* MOBILE */
+
+/* =========================================================
+   MOBILE
+========================================================= */
 
 @media(max-width:550px){
 
   .container{
     padding:12px;
-    padding-bottom:100px;
+
+    padding-bottom:105px;
   }
 
   .food-grid{
@@ -744,6 +1167,7 @@ select:focus{
 
   .food-description{
     min-height:30px;
+
     font-size:11px;
   }
 
@@ -753,501 +1177,720 @@ select:focus{
 
   .add-button{
     padding:7px 9px;
+
     font-size:12px;
   }
 
   .admin-food-actions{
     flex-direction:column;
   }
+
 }
+
+
+/* =========================================================
+   EXTRA VINTAGE DETAILS
+========================================================= */
+
+.banner,
+.food-card,
+.admin-card,
+.order-card,
+.modal-box{
+  position:relative;
+}
+
+.banner:before{
+  content:"";
+
+  position:absolute;
+
+  inset:8px;
+
+  border:
+    1px solid #F2869D35;
+
+  border-radius:14px;
+
+  pointer-events:none;
+}
+
+.food-card:before{
+  content:"";
+
+  position:absolute;
+
+  top:0;
+  left:12px;
+  right:12px;
+
+  height:3px;
+
+  background:var(--pink);
+}
+
 </style>
 </head>
 
+
 <body>
 
-<!-- ================= CUSTOMER ================= -->
+
+<!-- =====================================================
+     CUSTOMER
+===================================================== -->
 
 <div id="customerScreen">
 
 <header>
-  <div class="header-inner">
 
-    <div
-      class="logo"
-      onclick="secretAdminClick()">
+<div class="header-inner">
 
-      🍔 WESTERN FOOD
+<div
+class="logo"
+onclick="secretAdminClick()">
 
-      <small>
-        GOOD FOOD • GOOD MOOD
-      </small>
+🍔 WESTERN FOOD
 
-    </div>
+<small>
+GOOD FOOD • GOOD MOOD
+</small>
 
-    <button
-      class="cart-button"
-      onclick="openCart()">
+</div>
 
-      🛒
-      <span id="cartCount">0</span>
 
-    </button>
+<button
+class="cart-button"
+onclick="openCart()">
 
-  </div>
+🛒
+<span id="cartCount">0</span>
+
+</button>
+
+</div>
+
 </header>
+
 
 <main class="container">
 
-  <div class="banner">
-    <h1>Ăn ngon kiểu Tây 🇺🇸</h1>
-    <p>Burger • Chicken • Snacks • Drinks</p>
-  </div>
 
-  <div class="categories">
+<div class="banner">
 
-    <button
-      class="category active"
-      onclick="changeCategory('all',this)">
-      🍽️ Tất cả
-    </button>
+<h1>
+Ăn ngon kiểu Tây 🇺🇸
+</h1>
 
-    <button
-      class="category"
-      onclick="changeCategory('main',this)">
-      🍔 Ăn chính
-    </button>
+<p>
+Burger • Chicken • Snacks • Drinks
+</p>
 
-    <button
-      class="category"
-      onclick="changeCategory('snack',this)">
-      🍟 Ăn vặt
-    </button>
+</div>
 
-    <button
-      class="category"
-      onclick="changeCategory('extra',this)">
-      🧀 Đồ ăn thêm
-    </button>
 
-    <button
-      class="category"
-      onclick="changeCategory('drink',this)">
-      🥤 Đồ uống
-    </button>
+<div class="categories">
 
-  </div>
+<button
+class="category active"
+onclick="changeCategory('all',this)">
+🍽️ Tất cả
+</button>
 
-  <div
-    class="section-title"
-    id="sectionTitle">
-    Tất cả món
-  </div>
 
-  <div
-    id="foodList"
-    class="food-grid">
-  </div>
+<button
+class="category"
+onclick="changeCategory('main',this)">
+🍔 Ăn chính
+</button>
+
+
+<button
+class="category"
+onclick="changeCategory('snack',this)">
+🍟 Ăn vặt
+</button>
+
+
+<button
+class="category"
+onclick="changeCategory('extra',this)">
+🧀 Đồ ăn thêm
+</button>
+
+
+<button
+class="category"
+onclick="changeCategory('drink',this)">
+🥤 Đồ uống
+</button>
+
+</div>
+
+
+<div
+class="section-title"
+id="sectionTitle">
+
+Tất cả món
+
+</div>
+
+
+<div
+id="foodList"
+class="food-grid">
+
+</div>
+
 
 </main>
 
+
 <div class="bottom-cart">
-  <button onclick="openCart()">
-    🛒 Xem giỏ hàng •
-    <span id="bottomTotal">0đ</span>
-  </button>
-</div>
+
+<button onclick="openCart()">
+
+🛒 Xem giỏ hàng •
+
+<span id="bottomTotal">
+0đ
+</span>
+
+</button>
 
 </div>
 
+</div>
 
-<!-- ================= ADMIN ================= -->
+
+
+<!-- =====================================================
+     ADMIN
+===================================================== -->
 
 <div id="adminScreen">
 
-  <div class="admin-header">
+<div class="admin-header">
 
-    <div class="admin-header-inner">
+<div class="admin-header-inner">
 
-      <div class="admin-logo">
-        ⚙️ WESTERN FOOD ADMIN
-      </div>
-
-      <div class="admin-actions">
-
-        <button
-          class="admin-btn customer-btn"
-          onclick="showCustomer()">
-          ← Khách
-        </button>
-
-        <button
-          class="admin-btn logout-btn"
-          onclick="adminLogout()">
-          Thoát
-        </button>
-
-      </div>
-
-    </div>
-
-  </div>
-
-  <div class="admin-container">
-
-    <div class="admin-nav">
-
-      <button
-        class="admin-tab active"
-        onclick="adminTab('dashboard',this)">
-        📊 Tổng quan
-      </button>
-
-      <button
-        class="admin-tab"
-        onclick="adminTab('foods',this)">
-        🍔 Món ăn
-      </button>
-
-      <button
-        class="admin-tab"
-        onclick="adminTab('orders',this)">
-        📦 Đơn hàng
-      </button>
-
-    </div>
-
-
-    <!-- DASHBOARD -->
-
-    <div
-      id="dashboard"
-      class="admin-page active">
-
-      <div class="stats">
-
-        <div class="stat">
-          <small>Tổng món</small>
-          <strong id="statFoods">0</strong>
-        </div>
-
-        <div class="stat">
-          <small>Tổng đơn</small>
-          <strong id="statOrders">0</strong>
-        </div>
-
-        <div class="stat">
-          <small>Đang xử lý</small>
-          <strong id="statPending">0</strong>
-        </div>
-
-        <div class="stat">
-          <small>Doanh thu</small>
-          <strong id="statRevenue">0đ</strong>
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- FOODS -->
-
-    <div
-      id="foods"
-      class="admin-page">
-
-      <div class="admin-card">
-
-        <h2>➕ Thêm món</h2>
-
-        <label>Tên món</label>
-        <input
-          id="foodName"
-          placeholder="Classic Beef Burger">
-
-        <label>Giá</label>
-        <input
-          id="foodPrice"
-          type="number"
-          placeholder="65000">
-
-        <label>Danh mục</label>
-
-        <select id="foodCategory">
-
-          <option value="main">
-            🍔 Ăn chính
-          </option>
-
-          <option value="snack">
-            🍟 Ăn vặt
-          </option>
-
-          <option value="extra">
-            🧀 Đồ ăn thêm
-          </option>
-
-          <option value="drink">
-            🥤 Đồ uống
-          </option>
-
-        </select>
-
-        <label>Mô tả</label>
-
-        <textarea
-          id="foodDescription"
-          rows="3"
-          placeholder="Burger bò, phô mai, rau...">
-        </textarea>
-
-        <label>Link ảnh</label>
-
-        <input
-          id="foodImage"
-          placeholder="https://...">
-
-        <button
-          class="primary"
-          onclick="addFood()">
-          ➕ THÊM MÓN
-        </button>
-
-      </div>
-
-
-      <div class="admin-card">
-
-        <h2>🍔 Danh sách món</h2>
-
-        <div id="adminFoodList"></div>
-
-      </div>
-
-    </div>
-
-
-    <!-- ORDERS -->
-
-    <div
-      id="orders"
-      class="admin-page">
-
-      <div class="admin-card">
-
-        <h2>📦 Đơn hàng</h2>
-
-        <div id="adminOrders"></div>
-
-      </div>
-
-    </div>
-
-  </div>
+<div class="admin-logo">
+⚙️ WESTERN FOOD ADMIN
 </div>
 
 
-<!-- ================= CART ================= -->
+<div class="admin-actions">
+
+<button
+class="admin-btn customer-btn"
+onclick="showCustomer()">
+← Khách
+</button>
+
+
+<button
+class="admin-btn logout-btn"
+onclick="adminLogout()">
+Thoát
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="admin-container">
+
+
+<div class="admin-nav">
+
+<button
+class="admin-tab active"
+onclick="adminTab('dashboard',this)">
+📊 Tổng quan
+</button>
+
+
+<button
+class="admin-tab"
+onclick="adminTab('foods',this)">
+🍔 Món ăn
+</button>
+
+
+<button
+class="admin-tab"
+onclick="adminTab('orders',this)">
+📦 Đơn hàng
+</button>
+
+</div>
+
+
+
+<!-- DASHBOARD -->
 
 <div
-  class="modal"
-  id="cartModal">
+id="dashboard"
+class="admin-page active">
 
-  <div class="modal-box">
+<div class="stats">
 
-    <div class="modal-header">
 
-      <div class="modal-title">
-        🛒 Giỏ hàng
-      </div>
+<div class="stat">
 
-      <button
-        class="close"
-        onclick="closeModal('cartModal')">
-        ×
-      </button>
+<small>
+Tổng món
+</small>
 
-    </div>
+<strong id="statFoods">
+0
+</strong>
 
-    <div id="cartItems"></div>
-
-    <div class="total-row">
-
-      <span>Tổng</span>
-
-      <span id="cartTotal">0đ</span>
-
-    </div>
-
-    <button
-      class="primary"
-      onclick="openCheckout()">
-      Tiếp tục đặt hàng
-    </button>
-
-  </div>
 </div>
 
 
-<!-- ================= CHECKOUT ================= -->
+<div class="stat">
+
+<small>
+Tổng đơn
+</small>
+
+<strong id="statOrders">
+0
+</strong>
+
+</div>
+
+
+<div class="stat">
+
+<small>
+Đang xử lý
+</small>
+
+<strong id="statPending">
+0
+</strong>
+
+</div>
+
+
+<div class="stat">
+
+<small>
+Doanh thu
+</small>
+
+<strong id="statRevenue">
+0đ
+</strong>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- FOODS -->
 
 <div
-  class="modal"
-  id="checkoutModal">
+id="foods"
+class="admin-page">
 
-  <div class="modal-box">
 
-    <div class="modal-header">
+<div class="admin-card">
 
-      <div class="modal-title">
-        📦 Thông tin giao hàng
-      </div>
+<h2>
+➕ Thêm món
+</h2>
 
-      <button
-        class="close"
-        onclick="closeModal('checkoutModal')">
-        ×
-      </button>
 
-    </div>
+<label>
+Tên món
+</label>
 
-    <label>Họ tên</label>
+<input
+id="foodName"
+placeholder="Classic Beef Burger">
 
-    <input
-      id="customerName"
-      placeholder="Nguyễn Văn A">
 
-    <label>Số điện thoại</label>
+<label>
+Giá
+</label>
 
-    <input
-      id="customerPhone"
-      type="tel"
-      placeholder="09xxxxxxxx">
+<input
+id="foodPrice"
+type="number"
+placeholder="65000">
 
-    <label>Địa chỉ</label>
 
-    <textarea
-      id="customerAddress"
-      rows="3"
-      placeholder="Địa chỉ giao hàng">
-    </textarea>
+<label>
+Danh mục
+</label>
 
-    <label>Thanh toán</label>
+<select id="foodCategory">
 
-    <select id="payment">
+<option value="main">
+🍔 Ăn chính
+</option>
 
-      <option value="COD">
-        💵 Tiền mặt khi nhận
-      </option>
+<option value="snack">
+🍟 Ăn vặt
+</option>
 
-      <option value="BANK">
-        🏦 Chuyển khoản
-      </option>
+<option value="extra">
+🧀 Đồ ăn thêm
+</option>
 
-    </select>
+<option value="drink">
+🥤 Đồ uống
+</option>
 
-    <button
-      class="primary"
-      onclick="placeOrder()">
-      ✅ XÁC NHẬN ĐẶT HÀNG
-    </button>
+</select>
 
-  </div>
+
+<label>
+Mô tả
+</label>
+
+<textarea
+id="foodDescription"
+rows="3"
+placeholder="Burger bò, phô mai, rau...">
+</textarea>
+
+
+<label>
+Link ảnh
+</label>
+
+<input
+id="foodImage"
+placeholder="https://...">
+
+
+<button
+class="primary"
+onclick="addFood()">
+
+➕ THÊM MÓN
+
+</button>
+
 </div>
 
 
-<!-- ================= SUCCESS ================= -->
+
+<div class="admin-card">
+
+<h2>
+🍔 Danh sách món
+</h2>
+
+<div id="adminFoodList"></div>
+
+</div>
+
+</div>
+
+
+
+<!-- ORDERS -->
 
 <div
-  class="modal"
-  id="successModal">
+id="orders"
+class="admin-page">
 
-  <div class="modal-box">
+<div class="admin-card">
 
-    <div class="success">
+<h2>
+📦 Đơn hàng
+</h2>
 
-      <div class="success-icon">
-        🎉
-      </div>
+<div id="adminOrders"></div>
 
-      <h2>Đặt hàng thành công!</h2>
+</div>
 
-      <p>Mã đơn hàng</p>
-
-      <div
-        class="success-code"
-        id="successCode">
-      </div>
-
-      <button
-        class="primary"
-        onclick="closeModal('successModal')">
-        Về trang chủ
-      </button>
-
-    </div>
-
-  </div>
 </div>
 
 
-<!-- ================= LOGIN ================= -->
+</div>
+
+</div>
+
+
+
+<!-- =====================================================
+     CART MODAL
+===================================================== -->
 
 <div
-  class="modal"
-  id="loginModal">
+class="modal"
+id="cartModal">
 
-  <div class="modal-box">
+<div class="modal-box">
 
-    <div class="modal-header">
 
-      <div class="modal-title">
-        🔐 Admin
-      </div>
+<div class="modal-header">
 
-      <button
-        class="close"
-        onclick="closeModal('loginModal')">
-        ×
-      </button>
-
-    </div>
-
-    <label>Tài khoản</label>
-
-    <input
-      id="loginUser"
-      placeholder="admin">
-
-    <label>Mật khẩu</label>
-
-    <input
-      id="loginPass"
-      type="password"
-      placeholder="123456">
-
-    <button
-      class="primary"
-      onclick="adminLogin()">
-      ĐĂNG NHẬP
-    </button>
-
-  </div>
+<div class="modal-title">
+🛒 Giỏ hàng
 </div>
+
+
+<button
+class="close"
+onclick="closeModal('cartModal')">
+×
+</button>
+
+</div>
+
+
+<div id="cartItems"></div>
+
+
+<div class="total-row">
+
+<span>
+Tổng
+</span>
+
+<span id="cartTotal">
+0đ
+</span>
+
+</div>
+
+
+<button
+class="primary"
+onclick="openCheckout()">
+
+Tiếp tục đặt hàng
+
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- =====================================================
+     CHECKOUT
+===================================================== -->
+
+<div
+class="modal"
+id="checkoutModal">
+
+<div class="modal-box">
+
+
+<div class="modal-header">
+
+<div class="modal-title">
+📦 Thông tin giao hàng
+</div>
+
+
+<button
+class="close"
+onclick="closeModal('checkoutModal')">
+×
+</button>
+
+</div>
+
+
+<label>
+Họ tên
+</label>
+
+<input
+id="customerName"
+placeholder="Nguyễn Văn A">
+
+
+<label>
+Số điện thoại
+</label>
+
+<input
+id="customerPhone"
+type="tel"
+placeholder="09xxxxxxxx">
+
+
+<label>
+Địa chỉ
+</label>
+
+<textarea
+id="customerAddress"
+rows="3"
+placeholder="Địa chỉ giao hàng">
+</textarea>
+
+
+<label>
+Thanh toán
+</label>
+
+<select id="payment">
+
+<option value="COD">
+💵 Tiền mặt khi nhận
+</option>
+
+<option value="BANK">
+🏦 Chuyển khoản
+</option>
+
+</select>
+
+
+<button
+class="primary"
+onclick="placeOrder()">
+
+✅ XÁC NHẬN ĐẶT HÀNG
+
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- =====================================================
+     SUCCESS
+===================================================== -->
+
+<div
+class="modal"
+id="successModal">
+
+<div class="modal-box">
+
+<div class="success">
+
+<div class="success-icon">
+🎉
+</div>
+
+<h2>
+Đặt hàng thành công!
+</h2>
+
+<p>
+Mã đơn hàng
+</p>
+
+<div
+class="success-code"
+id="successCode">
+</div>
+
+<button
+class="primary"
+onclick="closeModal('successModal')">
+
+Về trang chủ
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- =====================================================
+     ADMIN LOGIN
+===================================================== -->
+
+<div
+class="modal"
+id="loginModal">
+
+<div class="modal-box">
+
+
+<div class="modal-header">
+
+<div class="modal-title">
+🔐 Admin
+</div>
+
+<button
+class="close"
+onclick="closeModal('loginModal')">
+×
+</button>
+
+</div>
+
+
+<label>
+Tài khoản
+</label>
+
+<input
+id="loginUser"
+placeholder="admin">
+
+
+<label>
+Mật khẩu
+</label>
+
+<input
+id="loginPass"
+type="password"
+placeholder="123456">
+
+
+<button
+class="primary"
+onclick="adminLogin()">
+
+ĐĂNG NHẬP
+
+</button>
+
+</div>
+
+</div>
+
 
 
 <div
-  class="secret-hint"
-  id="secretHint">
-  🔐 Bấm logo 5 lần để vào Admin
+class="secret-hint"
+id="secretHint">
+
+🔐 Bấm logo 5 lần để vào Admin
+
 </div>
+
 
 
 <script>
 
-/* =====================================================
+/* =========================================================
    SUPABASE
-===================================================== */
+========================================================= */
 
 const SUPABASE_URL =
 "https://dcqrngutharengnanzna.supabase.co";
@@ -1262,22 +1905,23 @@ window.supabase.createClient(
 );
 
 
-/* =====================================================
+/* =========================================================
    VARIABLES
-===================================================== */
+========================================================= */
 
 let foods=[];
 let orders=[];
 let cart=[];
+
 let currentCategory="all";
 
 let secretClicks=0;
 let secretTimer=null;
 
 
-/* =====================================================
+/* =========================================================
    HELPERS
-===================================================== */
+========================================================= */
 
 function money(value){
 
@@ -1313,75 +1957,97 @@ function categoryName(category){
 }
 
 
-/* =====================================================
+/* =========================================================
    LOAD FOODS
-===================================================== */
+========================================================= */
 
 async function loadFoods(){
 
-  const {data,error} =
+  const {data,error}=
+
     await db
       .from("foods")
       .select("*")
       .eq("active",true)
       .order("id",{ascending:true});
 
+
   if(error){
 
     console.error(error);
 
-    document.getElementById("foodList").innerHTML=
-      `<div class="empty">
-        Không tải được món ăn.<br>
-        Kiểm tra Supabase/RLS.
-      </div>`;
+    document
+      .getElementById("foodList")
+      .innerHTML=`
+
+      <div class="empty">
+
+      Không tải được món ăn.<br>
+
+      Kiểm tra Supabase/RLS.
+
+      </div>
+
+      `;
 
     return;
+
   }
+
 
   foods=data || [];
 
+
   renderFoods();
+
   renderAdminFoods();
+
   renderDashboard();
 
 }
 
 
-/* =====================================================
+/* =========================================================
    LOAD ORDERS
-===================================================== */
+========================================================= */
 
 async function loadOrders(){
 
-  const {data,error} =
+  const {data,error}=
+
     await db
       .from("orders")
       .select("*")
       .order("created_at",{ascending:false});
 
+
   if(error){
 
     console.error(error);
+
     return;
 
   }
 
+
   orders=data || [];
 
+
   renderOrders();
+
   renderDashboard();
 
 }
 
 
-/* =====================================================
-   RENDER FOOD
-===================================================== */
+/* =========================================================
+   RENDER FOODS
+========================================================= */
 
 function renderFoods(){
 
   let list=foods;
+
 
   if(currentCategory!=="all"){
 
@@ -1392,19 +2058,27 @@ function renderFoods(){
 
   }
 
+
   const box=
     document.getElementById("foodList");
 
+
   if(!list.length){
 
-    box.innerHTML=
-      `<div class="empty">
-        Chưa có món trong mục này.
-      </div>`;
+    box.innerHTML=`
+
+    <div class="empty">
+
+      Chưa có món trong mục này.
+
+    </div>
+
+    `;
 
     return;
 
   }
+
 
   box.innerHTML=
 
@@ -1412,37 +2086,57 @@ function renderFoods(){
 
       <div class="food-card">
 
+
         <img
           class="food-image"
           src="${escapeHtml(food.image_url || "")}"
           alt="${escapeHtml(food.name)}"
           onerror="this.style.display='none'">
 
+
         <div class="food-content">
 
+
           <div class="food-name">
+
             ${escapeHtml(food.name)}
+
           </div>
 
+
           <div class="food-description">
-            ${escapeHtml(food.description || "")}
+
+            ${escapeHtml(
+              food.description || ""
+            )}
+
           </div>
+
 
           <div class="food-bottom">
 
+
             <div class="price">
+
               ${money(food.price)}
+
             </div>
+
 
             <button
               class="add-button"
               onclick="addCart(${food.id})">
+
               + Thêm
+
             </button>
+
 
           </div>
 
+
         </div>
+
 
       </div>
 
@@ -1451,13 +2145,17 @@ function renderFoods(){
 }
 
 
-/* =====================================================
+/* =========================================================
    CATEGORY
-===================================================== */
+========================================================= */
 
-function changeCategory(category,button){
+function changeCategory(
+  category,
+  button
+){
 
   currentCategory=category;
+
 
   document
     .querySelectorAll(".category")
@@ -1465,38 +2163,55 @@ function changeCategory(category,button){
       btn.classList.remove("active")
     );
 
+
   button.classList.add("active");
 
+
   const titles={
+
     all:"Tất cả món",
+
     main:"🍔 Ăn chính",
+
     snack:"🍟 Ăn vặt",
+
     extra:"🧀 Đồ ăn thêm",
+
     drink:"🥤 Đồ uống"
+
   };
+
 
   document
     .getElementById("sectionTitle")
     .textContent=titles[category];
+
 
   renderFoods();
 
 }
 
 
-/* =====================================================
+/* =========================================================
    CART
-===================================================== */
+========================================================= */
 
 function addCart(id){
 
   const food=
-    foods.find(item => item.id===id);
+    foods.find(item =>
+      item.id===id
+    );
+
 
   if(!food)return;
 
+
   const item=
-    cart.find(item => item.id===id);
+    cart.find(item =>
+      item.id===id
+    );
+
 
   if(item){
 
@@ -1505,36 +2220,55 @@ function addCart(id){
   }else{
 
     cart.push({
+
       id:food.id,
+
       name:food.name,
+
       price:Number(food.price),
+
       qty:1
+
     });
 
   }
+
 
   updateCart();
 
 }
 
 
-function changeQty(id,value){
+function changeQty(
+  id,
+  value
+){
 
   const item=
-    cart.find(x => x.id===id);
+    cart.find(x =>
+      x.id===id
+    );
+
 
   if(!item)return;
 
+
   item.qty+=value;
+
 
   if(item.qty<=0){
 
     cart=
-      cart.filter(x => x.id!==id);
+      cart.filter(
+        x =>
+          x.id!==id
+      );
 
   }
 
+
   updateCart();
+
   renderCart();
 
 }
@@ -1543,26 +2277,34 @@ function changeQty(id,value){
 function updateCart(){
 
   const count=
+
     cart.reduce(
       (sum,item) =>
         sum+item.qty,
       0
     );
 
+
   const total=
+
     cart.reduce(
       (sum,item) =>
-        sum+(item.price*item.qty),
+        sum+
+        item.price*
+        item.qty,
       0
     );
+
 
   document
     .getElementById("cartCount")
     .textContent=count;
 
+
   document
     .getElementById("bottomTotal")
-    .textContent=money(total);
+    .textContent=
+      money(total);
 
 }
 
@@ -1570,6 +2312,7 @@ function updateCart(){
 function openCart(){
 
   renderCart();
+
 
   document
     .getElementById("cartModal")
@@ -1581,22 +2324,33 @@ function openCart(){
 function renderCart(){
 
   const box=
-    document.getElementById("cartItems");
+    document.getElementById(
+      "cartItems"
+    );
+
 
   if(!cart.length){
 
-    box.innerHTML=
-      `<div class="empty">
+    box.innerHTML=`
+
+      <div class="empty">
+
         🛒 Giỏ hàng đang trống
-      </div>`;
+
+      </div>
+
+    `;
+
 
     document
       .getElementById("cartTotal")
       .textContent="0đ";
 
+
     return;
 
   }
+
 
   box.innerHTML=
 
@@ -1604,69 +2358,114 @@ function renderCart(){
 
       <div class="cart-item">
 
+
         <div class="cart-info">
 
           <div class="cart-name">
-            ${escapeHtml(item.name)}
+
+            ${escapeHtml(
+              item.name
+            )}
+
           </div>
 
+
           <div class="cart-price">
-            ${money(item.price)}
+
+            ${money(
+              item.price
+            )}
+
           </div>
 
         </div>
+
 
         <div class="quantity">
 
+
           <button
-            onclick="changeQty(${item.id},-1)">
+            onclick="changeQty(
+              ${item.id},
+              -1
+            )">
+
             −
+
           </button>
 
-          <b>${item.qty}</b>
+
+          <b>
+
+            ${item.qty}
+
+          </b>
+
 
           <button
-            onclick="changeQty(${item.id},1)">
+            onclick="changeQty(
+              ${item.id},
+              1
+            )">
+
             +
+
           </button>
+
 
         </div>
+
 
       </div>
 
     `).join("");
 
+
   const total=
+
     cart.reduce(
       (sum,item) =>
-        sum+(item.price*item.qty),
+        sum+
+        item.price*
+        item.qty,
       0
     );
 
+
   document
     .getElementById("cartTotal")
-    .textContent=money(total);
+    .textContent=
+      money(total);
 
 }
 
 
-/* =====================================================
+/* =========================================================
    CHECKOUT
-===================================================== */
+========================================================= */
 
 function openCheckout(){
 
   if(!cart.length){
 
-    alert("Giỏ hàng đang trống!");
+    alert(
+      "Giỏ hàng đang trống!"
+    );
+
     return;
 
   }
 
-  closeModal("cartModal");
+
+  closeModal(
+    "cartModal"
+  );
+
 
   document
-    .getElementById("checkoutModal")
+    .getElementById(
+      "checkoutModal"
+    )
     .classList.add("show");
 
 }
@@ -1676,44 +2475,72 @@ async function placeOrder(){
 
   if(!cart.length){
 
-    alert("Giỏ hàng đang trống!");
+    alert(
+      "Giỏ hàng đang trống!"
+    );
+
     return;
 
   }
+
 
   const name=
     document
-      .getElementById("customerName")
+      .getElementById(
+        "customerName"
+      )
       .value.trim();
+
 
   const phone=
     document
-      .getElementById("customerPhone")
+      .getElementById(
+        "customerPhone"
+      )
       .value.trim();
+
 
   const address=
     document
-      .getElementById("customerAddress")
+      .getElementById(
+        "customerAddress"
+      )
       .value.trim();
+
 
   const payment=
     document
-      .getElementById("payment")
+      .getElementById(
+        "payment"
+      )
       .value;
 
-  if(!name || !phone || !address){
 
-    alert("Vui lòng nhập đầy đủ thông tin!");
+  if(
+    !name ||
+    !phone ||
+    !address
+  ){
+
+    alert(
+      "Vui lòng nhập đầy đủ thông tin!"
+    );
+
     return;
 
   }
 
+
   const total=
+
     cart.reduce(
       (sum,item) =>
-        sum+(item.price*item.qty),
+        sum+
+        item.price*
+        item.qty,
       0
     );
+
 
   const code=
     "OD"+
@@ -1721,20 +2548,34 @@ async function placeOrder(){
       .toString()
       .slice(-8);
 
-  const {data,error}=
+
+  const {
+    data,
+    error
+  }=
+
     await db
       .from("orders")
       .insert({
+
         order_code:code,
+
         customer_name:name,
+
         customer_phone:phone,
+
         customer_address:address,
+
         payment:payment,
+
         total:total,
+
         status:"Chờ xác nhận"
+
       })
       .select()
       .single();
+
 
   if(error){
 
@@ -1749,25 +2590,40 @@ async function placeOrder(){
 
   }
 
+
   const items=
+
     cart.map(item=>({
 
       order_id:data.id,
+
       food_name:item.name,
+
       price:item.price,
+
       quantity:item.qty,
-      subtotal:item.price*item.qty
+
+      subtotal:
+        item.price*
+        item.qty
 
     }));
 
-  const {error:itemError}=
+
+  const {
+    error:itemError
+  }=
+
     await db
       .from("order_items")
       .insert(items);
 
+
   if(itemError){
 
-    console.error(itemError);
+    console.error(
+      itemError
+    );
 
     alert(
       "Lưu món trong đơn lỗi: "+
@@ -1778,93 +2634,145 @@ async function placeOrder(){
 
   }
 
+
   cart=[];
 
   updateCart();
 
-  closeModal("checkoutModal");
+
+  closeModal(
+    "checkoutModal"
+  );
+
 
   document
-    .getElementById("successCode")
+    .getElementById(
+      "successCode"
+    )
     .textContent=code;
 
+
   document
-    .getElementById("successModal")
+    .getElementById(
+      "successModal"
+    )
     .classList.add("show");
 
-  document
-    .getElementById("customerName")
-    .value="";
 
   document
-    .getElementById("customerPhone")
+    .getElementById(
+      "customerName"
+    )
     .value="";
 
+
   document
-    .getElementById("customerAddress")
+    .getElementById(
+      "customerPhone"
+    )
+    .value="";
+
+
+  document
+    .getElementById(
+      "customerAddress"
+    )
     .value="";
 
 }
 
 
-/* =====================================================
+/* =========================================================
    SECRET ADMIN
-===================================================== */
+========================================================= */
 
 function secretAdminClick(){
 
   secretClicks++;
 
-  clearTimeout(secretTimer);
+
+  clearTimeout(
+    secretTimer
+  );
+
 
   secretTimer=
-    setTimeout(()=>{
-      secretClicks=0;
-    },2000);
+    setTimeout(
+      ()=>{
+        secretClicks=0;
+      },
+      2000
+    );
+
 
   if(secretClicks<5){
 
     const hint=
-      document.getElementById("secretHint");
+      document.getElementById(
+        "secretHint"
+      );
 
-    hint.classList.add("show");
 
-    setTimeout(()=>{
-      hint.classList.remove("show");
-    },700);
+    hint.classList.add(
+      "show"
+    );
+
+
+    setTimeout(
+      ()=>{
+        hint.classList.remove(
+          "show"
+        );
+      },
+      700
+    );
 
   }
+
 
   if(secretClicks>=5){
 
     secretClicks=0;
 
-    clearTimeout(secretTimer);
+    clearTimeout(
+      secretTimer
+    );
+
 
     document
-      .getElementById("loginModal")
-      .classList.add("show");
+      .getElementById(
+        "loginModal"
+      )
+      .classList.add(
+        "show"
+      );
 
   }
 
 }
 
 
-/* =====================================================
+/* =========================================================
    ADMIN LOGIN
-===================================================== */
+========================================================= */
 
 function adminLogin(){
 
   const username=
     document
-      .getElementById("loginUser")
+      .getElementById(
+        "loginUser"
+      )
       .value.trim();
+
 
   const password=
     document
-      .getElementById("loginPass")
+      .getElementById(
+        "loginPass"
+      )
       .value;
+
 
   if(
     username==="admin" &&
@@ -1876,22 +2784,35 @@ function adminLogin(){
       "1"
     );
 
-    closeModal("loginModal");
+
+    closeModal(
+      "loginModal"
+    );
+
 
     document
-      .getElementById("customerScreen")
+      .getElementById(
+        "customerScreen"
+      )
       .style.display="none";
 
+
     document
-      .getElementById("adminScreen")
+      .getElementById(
+        "adminScreen"
+      )
       .style.display="block";
 
+
     renderAdmin();
+
     loadOrders();
 
   }else{
 
-    alert("Sai tài khoản hoặc mật khẩu!");
+    alert(
+      "Sai tài khoản hoặc mật khẩu!"
+    );
 
   }
 
@@ -1912,43 +2833,68 @@ function adminLogout(){
 function showCustomer(){
 
   document
-    .getElementById("adminScreen")
+    .getElementById(
+      "adminScreen"
+    )
     .style.display="none";
 
+
   document
-    .getElementById("customerScreen")
+    .getElementById(
+      "customerScreen"
+    )
     .style.display="block";
 
 }
 
 
-/* =====================================================
+/* =========================================================
    ADMIN TAB
-===================================================== */
+========================================================= */
 
-function adminTab(id,button){
+function adminTab(
+  id,
+  button
+){
 
   document
-    .querySelectorAll(".admin-page")
+    .querySelectorAll(
+      ".admin-page"
+    )
     .forEach(page =>
-      page.classList.remove("active")
+      page.classList.remove(
+        "active"
+      )
     );
 
+
   document
-    .querySelectorAll(".admin-tab")
+    .querySelectorAll(
+      ".admin-tab"
+    )
     .forEach(btn =>
-      btn.classList.remove("active")
+      btn.classList.remove(
+        "active"
+      )
     );
+
 
   document
     .getElementById(id)
-    .classList.add("active");
+    .classList.add(
+      "active"
+    );
 
-  button.classList.add("active");
+
+  button.classList.add(
+    "active"
+  );
+
 
   if(id==="orders"){
     loadOrders();
   }
+
 
   if(id==="foods"){
     renderAdminFoods();
@@ -1957,64 +2903,100 @@ function adminTab(id,button){
 }
 
 
-/* =====================================================
+/* =========================================================
    ADD FOOD
-===================================================== */
+========================================================= */
 
 async function addFood(){
 
   const name=
     document
-      .getElementById("foodName")
+      .getElementById(
+        "foodName"
+      )
       .value.trim();
+
 
   const price=
     Number(
       document
-        .getElementById("foodPrice")
+        .getElementById(
+          "foodPrice"
+        )
         .value
     );
 
+
   const category=
     document
-      .getElementById("foodCategory")
+      .getElementById(
+        "foodCategory"
+      )
       .value;
+
 
   const description=
     document
-      .getElementById("foodDescription")
+      .getElementById(
+        "foodDescription"
+      )
       .value.trim();
+
 
   const image=
     document
-      .getElementById("foodImage")
+      .getElementById(
+        "foodImage"
+      )
       .value.trim();
+
 
   if(!name){
 
-    alert("Nhập tên món!");
+    alert(
+      "Nhập tên món!"
+    );
+
     return;
 
   }
 
-  if(!price || price<=0){
 
-    alert("Nhập giá hợp lệ!");
+  if(
+    !price ||
+    price<=0
+  ){
+
+    alert(
+      "Nhập giá hợp lệ!"
+    );
+
     return;
 
   }
+
 
   const {error}=
+
     await db
       .from("foods")
       .insert({
+
         name:name,
+
         price:price,
+
         category:category,
-        description:description,
+
+        description:
+          description,
+
         image_url:image,
+
         active:true
+
       });
+
 
   if(error){
 
@@ -2029,39 +3011,76 @@ async function addFood(){
 
   }
 
-  document.getElementById("foodName").value="";
-  document.getElementById("foodPrice").value="";
-  document.getElementById("foodDescription").value="";
-  document.getElementById("foodImage").value="";
+
+  document
+    .getElementById(
+      "foodName"
+    )
+    .value="";
+
+
+  document
+    .getElementById(
+      "foodPrice"
+    )
+    .value="";
+
+
+  document
+    .getElementById(
+      "foodDescription"
+    )
+    .value="";
+
+
+  document
+    .getElementById(
+      "foodImage"
+    )
+    .value="";
+
 
   await loadFoods();
 
-  alert("Đã thêm món!");
+
+  alert(
+    "Đã thêm món!"
+  );
 
 }
 
 
-/* =====================================================
+/* =========================================================
    ADMIN FOOD LIST
-===================================================== */
+========================================================= */
 
 function renderAdminFoods(){
 
   const box=
-    document.getElementById("adminFoodList");
+    document.getElementById(
+      "adminFoodList"
+    );
+
 
   if(!box)return;
 
+
   if(!foods.length){
 
-    box.innerHTML=
-      `<div class="empty">
+    box.innerHTML=`
+
+      <div class="empty">
+
         Chưa có món.
-      </div>`;
+
+      </div>
+
+    `;
 
     return;
 
   }
+
 
   box.innerHTML=
 
@@ -2069,41 +3088,81 @@ function renderAdminFoods(){
 
       <div class="admin-food">
 
+
         <img
-          src="${escapeHtml(food.image_url || "")}"
-          onerror="this.style.display='none'">
+          src="${escapeHtml(
+            food.image_url || ""
+          )}"
+          onerror="
+            this.style.display='none'
+          ">
+
 
         <div class="admin-food-info">
 
+
           <div class="admin-food-name">
-            ${escapeHtml(food.name)}
+
+            ${escapeHtml(
+              food.name
+            )}
+
           </div>
+
 
           <div class="admin-food-price">
-            ${money(food.price)}
+
+            ${money(
+              food.price
+            )}
+
           </div>
 
+
           <div class="admin-food-category">
-            ${categoryName(food.category)}
+
+            ${categoryName(
+              food.category
+            )}
+
           </div>
+
 
         </div>
 
-        <div class="admin-food-actions">
+
+        <div
+          class="admin-food-actions">
+
 
           <button
             class="small-btn edit-btn"
-            onclick="editFood(${food.id})">
+            onclick="
+              editFood(
+                ${food.id}
+              )
+            ">
+
             Sửa
+
           </button>
+
 
           <button
             class="small-btn delete-btn"
-            onclick="deleteFood(${food.id})">
+            onclick="
+              deleteFood(
+                ${food.id}
+              )
+            ">
+
             Xóa
+
           </button>
 
+
         </div>
+
 
       </div>
 
@@ -2112,26 +3171,41 @@ function renderAdminFoods(){
 }
 
 
-/* =====================================================
+/* =========================================================
    EDIT FOOD
-===================================================== */
+========================================================= */
 
 async function editFood(id){
 
   const food=
-    foods.find(x => x.id===id);
+    foods.find(
+      x =>
+        x.id===id
+    );
+
 
   if(!food)return;
 
+
   const name=
-    prompt("Tên món:",food.name);
+    prompt(
+      "Tên món:",
+      food.name
+    );
+
 
   if(name===null)return;
 
+
   const price=
-    prompt("Giá:",food.price);
+    prompt(
+      "Giá:",
+      food.price
+    );
+
 
   if(price===null)return;
+
 
   const description=
     prompt(
@@ -2139,7 +3213,11 @@ async function editFood(id){
       food.description || ""
     );
 
-  if(description===null)return;
+
+  if(
+    description===null
+  )return;
+
 
   const image=
     prompt(
@@ -2147,18 +3225,34 @@ async function editFood(id){
       food.image_url || ""
     );
 
+
   if(image===null)return;
 
+
   const {error}=
+
     await db
       .from("foods")
       .update({
+
         name:name.trim(),
-        price:Number(price),
-        description:description.trim(),
-        image_url:image.trim()
+
+        price:Number(
+          price
+        ),
+
+        description:
+          description.trim(),
+
+        image_url:
+          image.trim()
+
       })
-      .eq("id",id);
+      .eq(
+        "id",
+        id
+      );
+
 
   if(error){
 
@@ -2171,21 +3265,27 @@ async function editFood(id){
 
   }
 
+
   await loadFoods();
 
 }
 
 
-/* =====================================================
+/* =========================================================
    DELETE FOOD
-===================================================== */
+========================================================= */
 
 async function deleteFood(id){
 
   const food=
-    foods.find(x => x.id===id);
+    foods.find(
+      x =>
+        x.id===id
+    );
+
 
   if(!food)return;
+
 
   if(
     !confirm(
@@ -2195,13 +3295,19 @@ async function deleteFood(id){
     )
   )return;
 
+
   const {error}=
+
     await db
       .from("foods")
       .update({
         active:false
       })
-      .eq("id",id);
+      .eq(
+        "id",
+        id
+      );
+
 
   if(error){
 
@@ -2214,32 +3320,43 @@ async function deleteFood(id){
 
   }
 
+
   await loadFoods();
 
 }
 
 
-/* =====================================================
+/* =========================================================
    ORDERS
-===================================================== */
+========================================================= */
 
 async function renderOrders(){
 
   const box=
-    document.getElementById("adminOrders");
+    document.getElementById(
+      "adminOrders"
+    );
+
 
   if(!box)return;
 
+
   if(!orders.length){
 
-    box.innerHTML=
-      `<div class="empty">
+    box.innerHTML=`
+
+      <div class="empty">
+
         📦 Chưa có đơn hàng.
-      </div>`;
+
+      </div>
+
+    `;
 
     return;
 
   }
+
 
   box.innerHTML=
 
@@ -2247,43 +3364,68 @@ async function renderOrders(){
 
       <div class="order-card">
 
+
         <div class="order-head">
+
 
           <div>
 
             <div class="order-code">
-              ${escapeHtml(order.order_code)}
+
+              ${escapeHtml(
+                order.order_code
+              )}
+
             </div>
 
+
             <small>
-              ${new Date(order.created_at)
-                .toLocaleString("vi-VN")}
+
+              ${new Date(
+                order.created_at
+              ).toLocaleString(
+                "vi-VN"
+              )}
+
             </small>
 
           </div>
 
+
           <div class="order-status">
-            ${escapeHtml(order.status)}
+
+            ${escapeHtml(
+              order.status
+            )}
+
           </div>
 
+
         </div>
+
 
         <p>
 
           👤
           <b>
-            ${escapeHtml(order.customer_name)}
+            ${escapeHtml(
+              order.customer_name
+            )}
           </b>
 
           <br>
 
           📞
-          ${escapeHtml(order.customer_phone)}
+          ${escapeHtml(
+            order.customer_phone
+          )}
 
           <br>
 
           📍
-          ${escapeHtml(order.customer_address)}
+          ${escapeHtml(
+            order.customer_address
+          )}
 
           <br>
 
@@ -2296,80 +3438,156 @@ async function renderOrders(){
 
         </p>
 
+
         <div
           class="order-items"
           id="items-${order.id}">
+
           Đang tải món...
+
         </div>
+
 
         <div class="order-total">
-          Tổng: ${money(order.total)}
+
+          Tổng:
+          ${money(
+            order.total
+          )}
+
         </div>
 
+
         <select
-          onchange="changeOrderStatus(${order.id},this.value)">
+          onchange="
+            changeOrderStatus(
+              ${order.id},
+              this.value
+            )
+          ">
+
 
           <option
             value="Chờ xác nhận"
-            ${order.status==="Chờ xác nhận"?"selected":""}>
+            ${
+              order.status===
+              "Chờ xác nhận"
+              ?"selected"
+              :""
+            }>
+
             Chờ xác nhận
+
           </option>
+
 
           <option
             value="Đang chuẩn bị"
-            ${order.status==="Đang chuẩn bị"?"selected":""}>
+            ${
+              order.status===
+              "Đang chuẩn bị"
+              ?"selected"
+              :""
+            }>
+
             Đang chuẩn bị
+
           </option>
+
 
           <option
             value="Đang giao"
-            ${order.status==="Đang giao"?"selected":""}>
+            ${
+              order.status===
+              "Đang giao"
+              ?"selected"
+              :""
+            }>
+
             Đang giao
+
           </option>
+
 
           <option
             value="Hoàn thành"
-            ${order.status==="Hoàn thành"?"selected":""}>
+            ${
+              order.status===
+              "Hoàn thành"
+              ?"selected"
+              :""
+            }>
+
             Hoàn thành
+
           </option>
+
 
           <option
             value="Đã hủy"
-            ${order.status==="Đã hủy"?"selected":""}>
+            ${
+              order.status===
+              "Đã hủy"
+              ?"selected"
+              :""
+            }>
+
             Đã hủy
+
           </option>
 
+
         </select>
+
 
       </div>
 
     `).join("");
 
-  for(const order of orders){
-    loadOrderItems(order.id);
+
+  for(
+    const order of orders
+  ){
+
+    loadOrderItems(
+      order.id
+    );
+
   }
 
 }
 
 
-/* =====================================================
+/* =========================================================
    ORDER ITEMS
-===================================================== */
+========================================================= */
 
-async function loadOrderItems(orderId){
+async function loadOrderItems(
+  orderId
+){
 
-  const {data,error}=
+  const {
+    data,
+    error
+  }=
+
     await db
       .from("order_items")
       .select("*")
-      .eq("order_id",orderId);
+      .eq(
+        "order_id",
+        orderId
+      );
+
 
   const box=
     document.getElementById(
       "items-"+orderId
     );
 
+
   if(!box)return;
+
 
   if(error){
 
@@ -2380,7 +3598,11 @@ async function loadOrderItems(orderId){
 
   }
 
-  if(!data || !data.length){
+
+  if(
+    !data ||
+    !data.length
+  ){
 
     box.textContent=
       "Không có món.";
@@ -2389,15 +3611,25 @@ async function loadOrderItems(orderId){
 
   }
 
+
   box.innerHTML=
 
     data.map(item=>`
 
       <div>
-        ${escapeHtml(item.food_name)}
-        × ${item.quantity}
+
+        ${escapeHtml(
+          item.food_name
+        )}
+
+        ×
+        ${item.quantity}
+
         —
-        ${money(item.subtotal)}
+        ${money(
+          item.subtotal
+        )}
+
       </div>
 
     `).join("");
@@ -2405,19 +3637,27 @@ async function loadOrderItems(orderId){
 }
 
 
-/* =====================================================
+/* =========================================================
    CHANGE ORDER STATUS
-===================================================== */
+========================================================= */
 
-async function changeOrderStatus(id,status){
+async function changeOrderStatus(
+  id,
+  status
+){
 
   const {error}=
+
     await db
       .from("orders")
       .update({
         status:status
       })
-      .eq("id",id);
+      .eq(
+        "id",
+        id
+      );
+
 
   if(error){
 
@@ -2430,36 +3670,57 @@ async function changeOrderStatus(id,status){
 
   }
 
+
   await loadOrders();
 
 }
 
 
-/* =====================================================
+/* =========================================================
    DASHBOARD
-===================================================== */
+========================================================= */
 
 function renderDashboard(){
 
   const statFoods=
-    document.getElementById("statFoods");
+    document.getElementById(
+      "statFoods"
+    );
+
 
   const statOrders=
-    document.getElementById("statOrders");
+    document.getElementById(
+      "statOrders"
+    );
+
 
   const statPending=
-    document.getElementById("statPending");
+    document.getElementById(
+      "statPending"
+    );
+
 
   const statRevenue=
-    document.getElementById("statRevenue");
+    document.getElementById(
+      "statRevenue"
+    );
+
 
   if(statFoods){
-    statFoods.textContent=foods.length;
+
+    statFoods.textContent=
+      foods.length;
+
   }
 
+
   if(statOrders){
-    statOrders.textContent=orders.length;
+
+    statOrders.textContent=
+      orders.length;
+
   }
+
 
   if(statPending){
 
@@ -2473,6 +3734,7 @@ function renderDashboard(){
 
   }
 
+
   if(statRevenue){
 
     const revenue=
@@ -2484,9 +3746,13 @@ function renderDashboard(){
         )
         .reduce(
           (sum,x) =>
-            sum+Number(x.total || 0),
+            sum+
+            Number(
+              x.total || 0
+            ),
           0
         );
+
 
     statRevenue.textContent=
       money(revenue);
@@ -2499,21 +3765,25 @@ function renderDashboard(){
 function renderAdmin(){
 
   renderDashboard();
+
   renderAdminFoods();
+
   renderOrders();
 
 }
 
 
-/* =====================================================
+/* =========================================================
    MODAL
-===================================================== */
+========================================================= */
 
 function closeModal(id){
 
   document
     .getElementById(id)
-    .classList.remove("show");
+    .classList.remove(
+      "show"
+    );
 
 }
 
@@ -2526,9 +3796,14 @@ document
       "click",
       event=>{
 
-        if(event.target===modal){
+        if(
+          event.target===
+          modal
+        ){
 
-          modal.classList.remove("show");
+          modal.classList.remove(
+            "show"
+          );
 
         }
 
@@ -2538,27 +3813,33 @@ document
   });
 
 
-/* =====================================================
+/* =========================================================
    ENTER LOGIN
-===================================================== */
+========================================================= */
 
 document
-  .getElementById("loginPass")
+  .getElementById(
+    "loginPass"
+  )
   .addEventListener(
     "keydown",
     event=>{
 
-      if(event.key==="Enter"){
+      if(
+        event.key==="Enter"
+      ){
+
         adminLogin();
+
       }
 
     }
   );
 
 
-/* =====================================================
+/* =========================================================
    START
-===================================================== */
+========================================================= */
 
 async function start(){
 
