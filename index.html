@@ -3,16 +3,21 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 <title>Keiths Hotdog</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
+/* =========================================================
+   KEITHS HOTDOG
+   COLOR PALETTE
+========================================================= */
+
 :root{
-  --mustard:#C49A24;
-  --mustard-dark:#927317;
+  --mustard:#D7A028;
+  --mustard-dark:#A87918;
 
   --orange:#DC4826;
   --orange-dark:#A93620;
@@ -21,13 +26,15 @@
   --pink-dark:#C96378;
 
   --cream:#E9DEC5;
-  --cream-light:#F3E9D2;
+  --cream-light:#F5EBD6;
 
   --brown:#2E2119;
   --brown-light:#5B4030;
 
-  --border:#C5AE82;
+  --border:#C8B181;
   --white:#FFF9EA;
+
+  --green:#6F7C52;
 }
 
 *{
@@ -41,14 +48,17 @@ html{
 
 body{
   margin:0;
+
   background:
     radial-gradient(
       circle at top,
-      #F0E4C8 0%,
+      #F2E7CF 0%,
       #E9DEC5 55%,
       #DCC9A6 100%
     );
+
   color:var(--brown);
+
   font-family:
     -apple-system,
     BlinkMacSystemFont,
@@ -73,9 +83,9 @@ button{
 }
 
 
-/* =========================
+/* =========================================================
    CUSTOMER HEADER
-========================= */
+========================================================= */
 
 header{
   position:sticky;
@@ -83,14 +93,16 @@ header{
   z-index:50;
 
   background:var(--brown);
-
   color:white;
 
-  box-shadow:0 3px 15px #0005;
+  box-shadow:
+    0 4px 16px #0004;
 }
 
 .header-inner{
-  max-width:950px;
+  width:100%;
+  max-width:1000px;
+
   margin:auto;
 
   padding:12px 15px;
@@ -103,22 +115,29 @@ header{
 .logo{
   font-size:21px;
   font-weight:1000;
+
   letter-spacing:.7px;
+
   user-select:none;
+
+  cursor:pointer;
 }
 
 .logo small{
   display:block;
+
   margin-top:2px;
 
-  font-size:9px;
   color:var(--pink);
 
-  letter-spacing:1.3px;
+  font-size:9px;
+
+  letter-spacing:1.5px;
 }
 
 .cart-button{
   border:2px solid var(--pink);
+
   border-radius:11px;
 
   padding:9px 13px;
@@ -128,59 +147,78 @@ header{
 
   font-weight:1000;
 
-  box-shadow:0 3px 0 var(--orange-dark);
+  box-shadow:
+    0 3px 0 var(--orange-dark);
+}
+
+.cart-button:active{
+  transform:translateY(2px);
+  box-shadow:none;
 }
 
 
-/* =========================
+/* =========================================================
    MAIN
-========================= */
+========================================================= */
 
 .container{
-  max-width:950px;
+  width:100%;
+  max-width:1000px;
+
   margin:auto;
 
   padding:16px;
-  padding-bottom:105px;
+
+  padding-bottom:110px;
 }
 
 
-/* =========================
+/* =========================================================
    BANNER
-========================= */
+========================================================= */
 
 .banner{
   position:relative;
+
   overflow:hidden;
 
   margin-bottom:15px;
-  padding:27px 22px;
+
+  padding:28px 22px;
 
   border-radius:20px;
 
   background:
     linear-gradient(
       135deg,
-      #2E2119,
-      #4B3427
+      #2E2119 0%,
+      #4A3326 100%
     );
 
   color:white;
 
-  border-bottom:5px solid var(--mustard);
+  border-bottom:
+    5px solid var(--mustard);
 
-  box-shadow:0 7px 18px #0003;
+  box-shadow:
+    0 7px 18px #0003;
 }
 
 .banner h1{
   margin:0 0 6px;
+
   font-size:29px;
+
   font-weight:1000;
+
+  letter-spacing:.3px;
 }
 
 .banner p{
   margin:0;
+
   color:#E8D9BA;
+
   font-size:14px;
 }
 
@@ -188,37 +226,47 @@ header{
   content:"🌭";
 
   position:absolute;
-  right:20px;
-  bottom:-10px;
 
-  font-size:75px;
+  right:20px;
+  bottom:-13px;
+
+  font-size:78px;
+
   opacity:.15;
+
+  transform:rotate(-8deg);
 }
 
 .banner:before{
   content:"";
 
   position:absolute;
+
   inset:8px;
 
-  border:1px solid #F2869D35;
+  border:
+    1px solid #F2869D35;
+
   border-radius:14px;
 
   pointer-events:none;
 }
 
 
-/* =========================
+/* =========================================================
    CATEGORY
-========================= */
+========================================================= */
 
 .categories{
   display:flex;
+
   gap:8px;
 
   overflow-x:auto;
 
-  padding:2px 0 13px;
+  padding:
+    2px 0
+    13px;
 }
 
 .categories::-webkit-scrollbar{
@@ -226,7 +274,8 @@ header{
 }
 
 .category{
-  border:2px solid var(--border);
+  border:
+    2px solid var(--border);
 
   border-radius:30px;
 
@@ -234,7 +283,8 @@ header{
 
   white-space:nowrap;
 
-  background:#EDE2C9;
+  background:#EFE4CB;
+
   color:var(--brown);
 
   font-weight:900;
@@ -244,6 +294,7 @@ header{
 
 .category.active{
   background:var(--mustard);
+
   border-color:var(--mustard);
 
   color:white;
@@ -257,19 +308,23 @@ header{
 }
 
 
-/* =========================
+/* =========================================================
    SECTION TITLE
-========================= */
+========================================================= */
 
 .section-title{
   display:flex;
+
   align-items:center;
 
-  gap:8px;
+  gap:9px;
 
-  margin:5px 0 14px;
+  margin:
+    5px 0
+    14px;
 
   font-size:22px;
+
   font-weight:1000;
 }
 
@@ -289,9 +344,9 @@ header{
 }
 
 
-/* =========================
+/* =========================================================
    FOOD GRID
-========================= */
+========================================================= */
 
 .food-grid{
   display:grid;
@@ -307,7 +362,9 @@ header{
 
   overflow:hidden;
 
-  border:2px solid var(--border);
+  border:
+    2px solid var(--border);
+
   border-radius:17px;
 
   background:var(--cream-light);
@@ -355,23 +412,29 @@ header{
 
 .food-name{
   font-size:16px;
+
   font-weight:1000;
 }
 
 .food-description{
   min-height:32px;
 
-  margin:5px 0 10px;
+  margin:
+    5px 0
+    10px;
 
   color:#796650;
 
   font-size:12px;
+
   line-height:1.35;
 }
 
 .food-bottom{
   display:flex;
+
   align-items:center;
+
   justify-content:space-between;
 
   gap:8px;
@@ -381,16 +444,19 @@ header{
   color:var(--orange);
 
   font-size:16px;
+
   font-weight:1000;
 }
 
 .add-button{
   border:0;
+
   border-radius:9px;
 
   padding:8px 11px;
 
   background:var(--orange);
+
   color:white;
 
   font-weight:1000;
@@ -401,13 +467,14 @@ header{
 
 .add-button:active{
   transform:translateY(2px);
+
   box-shadow:none;
 }
 
 
-/* =========================
+/* =========================================================
    BOTTOM CART
-========================= */
+========================================================= */
 
 .bottom-cart{
   position:fixed;
@@ -419,8 +486,7 @@ header{
   z-index:40;
 
   padding:
-    9px
-    14px
+    9px 14px
     calc(9px + env(safe-area-inset-bottom));
 
   background:var(--brown);
@@ -433,16 +499,19 @@ header{
   display:block;
 
   width:100%;
-  max-width:950px;
+
+  max-width:1000px;
 
   margin:auto;
 
   border:0;
+
   border-radius:12px;
 
   padding:13px;
 
   background:var(--orange);
+
   color:white;
 
   font-weight:1000;
@@ -452,14 +521,15 @@ header{
 }
 
 
-/* =========================
+/* =========================================================
    MODAL
-========================= */
+========================================================= */
 
 .modal{
   display:none;
 
   position:fixed;
+
   inset:0;
 
   z-index:100;
@@ -475,18 +545,22 @@ header{
 
 .modal-box{
   width:100%;
+
   max-width:720px;
 
   max-height:94vh;
+
   overflow:auto;
 
   margin:auto;
 
   padding:20px;
 
-  border:2px solid var(--border);
+  border:
+    2px solid var(--border);
 
-  border-radius:23px 23px 0 0;
+  border-radius:
+    23px 23px 0 0;
 
   background:var(--cream-light);
 }
@@ -505,10 +579,13 @@ header{
 
 .modal-header{
   display:flex;
+
   align-items:center;
+
   justify-content:space-between;
 
   margin-bottom:15px;
+
   padding-bottom:10px;
 
   border-bottom:
@@ -517,6 +594,7 @@ header{
 
 .modal-title{
   font-size:22px;
+
   font-weight:1000;
 }
 
@@ -525,6 +603,7 @@ header{
   height:35px;
 
   border:0;
+
   border-radius:50%;
 
   background:#E4D3B1;
@@ -532,18 +611,20 @@ header{
   color:var(--brown);
 
   font-size:21px;
+
   font-weight:900;
 }
 
 
-/* =========================
+/* =========================================================
    CART
-========================= */
+========================================================= */
 
 .cart-item{
   display:flex;
 
   align-items:center;
+
   justify-content:space-between;
 
   gap:10px;
@@ -572,7 +653,9 @@ header{
 
 .quantity{
   display:flex;
+
   align-items:center;
+
   gap:7px;
 }
 
@@ -581,9 +664,11 @@ header{
   height:32px;
 
   border:0;
+
   border-radius:8px;
 
   background:var(--brown);
+
   color:white;
 
   font-size:18px;
@@ -591,12 +676,15 @@ header{
 
 .total-row{
   display:flex;
+
   align-items:center;
+
   justify-content:space-between;
 
   padding:15px 0;
 
   font-size:21px;
+
   font-weight:1000;
 }
 
@@ -605,19 +693,21 @@ header{
 }
 
 
-/* =========================
+/* =========================================================
    BUTTON
-========================= */
+========================================================= */
 
 .primary{
   width:100%;
 
   border:0;
+
   border-radius:11px;
 
   padding:14px;
 
   background:var(--orange);
+
   color:white;
 
   font-weight:1000;
@@ -628,13 +718,14 @@ header{
 
 .primary:active{
   transform:translateY(2px);
+
   box-shadow:none;
 }
 
 
-/* =========================
+/* =========================================================
    FORM
-========================= */
+========================================================= */
 
 label{
   display:block;
@@ -650,7 +741,8 @@ select{
   width:100%;
 
   margin:
-    6px 0 12px;
+    6px 0
+    12px;
 
   padding:12px;
 
@@ -662,6 +754,7 @@ select{
   outline:none;
 
   background:#FFF9EA;
+
   color:var(--brown);
 }
 
@@ -672,9 +765,9 @@ select:focus{
 }
 
 
-/* =========================
+/* =========================================================
    ADMIN
-========================= */
+========================================================= */
 
 #adminScreen{
   display:none;
@@ -690,6 +783,7 @@ select:focus{
   position:sticky;
 
   top:0;
+
   z-index:60;
 
   background:var(--brown);
@@ -702,27 +796,33 @@ select:focus{
 
 .admin-header-inner{
   max-width:1000px;
+
   margin:auto;
 
   padding:12px 15px;
 
   display:flex;
+
   align-items:center;
+
   justify-content:space-between;
 }
 
 .admin-logo{
   font-size:19px;
+
   font-weight:1000;
 }
 
 .admin-actions{
   display:flex;
+
   gap:6px;
 }
 
 .admin-btn{
   border:0;
+
   border-radius:9px;
 
   padding:9px 11px;
@@ -732,16 +832,19 @@ select:focus{
 
 .customer-btn{
   background:var(--pink);
+
   color:var(--brown);
 }
 
 .logout-btn{
   background:#5A4030;
+
   color:white;
 }
 
 .admin-container{
   max-width:1000px;
+
   margin:auto;
 
   padding:15px;
@@ -749,6 +852,7 @@ select:focus{
 
 .admin-nav{
   display:flex;
+
   gap:8px;
 
   overflow-x:auto;
@@ -767,6 +871,7 @@ select:focus{
   white-space:nowrap;
 
   background:var(--cream-light);
+
   color:var(--brown);
 
   font-weight:900;
@@ -789,9 +894,9 @@ select:focus{
 }
 
 
-/* =========================
+/* =========================================================
    STATS
-========================= */
+========================================================= */
 
 .stats{
   display:grid;
@@ -830,9 +935,9 @@ select:focus{
 }
 
 
-/* =========================
+/* =========================================================
    ADMIN CARD
-========================= */
+========================================================= */
 
 .admin-card{
   margin-bottom:15px;
@@ -852,12 +957,13 @@ select:focus{
 }
 
 
-/* =========================
+/* =========================================================
    ADMIN FOOD
-========================= */
+========================================================= */
 
 .admin-food{
   display:flex;
+
   align-items:center;
 
   gap:10px;
@@ -882,6 +988,7 @@ select:focus{
 
 .admin-food-info{
   flex:1;
+
   min-width:0;
 }
 
@@ -891,21 +998,25 @@ select:focus{
 
 .admin-food-price{
   color:var(--orange);
+
   font-weight:1000;
 }
 
 .admin-food-category{
   color:#796650;
+
   font-size:12px;
 }
 
 .admin-food-actions{
   display:flex;
+
   gap:5px;
 }
 
 .small-btn{
   border:0;
+
   border-radius:8px;
 
   padding:8px 9px;
@@ -915,18 +1026,20 @@ select:focus{
 
 .edit-btn{
   background:#E9D49A;
+
   color:#60470A;
 }
 
 .delete-btn{
   background:#F3C5CD;
+
   color:#8E3044;
 }
 
 
-/* =========================
+/* =========================================================
    ORDER
-========================= */
+========================================================= */
 
 .order-card{
   margin-bottom:12px;
@@ -943,7 +1056,9 @@ select:focus{
 
 .order-head{
   display:flex;
+
   align-items:flex-start;
+
   justify-content:space-between;
 
   gap:10px;
@@ -951,6 +1066,7 @@ select:focus{
 
 .order-code{
   color:var(--orange);
+
   font-weight:1000;
 }
 
@@ -960,9 +1076,11 @@ select:focus{
   border-radius:7px;
 
   background:var(--pink);
+
   color:#63303C;
 
   font-size:12px;
+
   font-weight:900;
 }
 
@@ -982,13 +1100,14 @@ select:focus{
   color:var(--orange);
 
   font-size:18px;
+
   font-weight:1000;
 }
 
 
-/* =========================
+/* =========================================================
    EMPTY
-========================= */
+========================================================= */
 
 .empty{
   padding:35px 10px;
@@ -999,12 +1118,13 @@ select:focus{
 }
 
 
-/* =========================
+/* =========================================================
    SUCCESS
-========================= */
+========================================================= */
 
 .success{
   padding:15px;
+
   text-align:center;
 }
 
@@ -1018,13 +1138,14 @@ select:focus{
   color:var(--orange);
 
   font-size:30px;
+
   font-weight:1000;
 }
 
 
-/* =========================
-   SECRET ADMIN
-========================= */
+/* =========================================================
+   SECRET ADMIN HINT
+========================================================= */
 
 .secret-hint{
   position:fixed;
@@ -1058,14 +1179,15 @@ select:focus{
 }
 
 
-/* =========================
+/* =========================================================
    MOBILE
-========================= */
+========================================================= */
 
 @media(max-width:550px){
 
   .container{
     padding:12px;
+
     padding-bottom:105px;
   }
 
@@ -1087,6 +1209,7 @@ select:focus{
 
   .food-description{
     min-height:30px;
+
     font-size:11px;
   }
 
@@ -1096,11 +1219,39 @@ select:focus{
 
   .add-button{
     padding:7px 9px;
+
     font-size:12px;
   }
 
   .admin-food-actions{
     flex-direction:column;
+  }
+
+}
+
+
+/* =========================================================
+   VERY SMALL PHONE
+========================================================= */
+
+@media(max-width:380px){
+
+  .banner h1{
+    font-size:25px;
+  }
+
+  .food-grid{
+    grid-template-columns:1fr 1fr;
+
+    gap:7px;
+  }
+
+  .food-image{
+    height:110px;
+  }
+
+  .food-name{
+    font-size:14px;
   }
 
 }
@@ -1111,39 +1262,41 @@ select:focus{
 <body>
 
 
-<!-- =====================================================
-     CUSTOMER
-===================================================== -->
+<!-- =======================================================
+     CUSTOMER SCREEN
+======================================================= -->
 
 <div id="customerScreen">
 
 <header>
 
-<div class="header-inner">
+  <div class="header-inner">
 
-<div
-class="logo"
-onclick="secretAdminClick()">
+    <div
+      class="logo"
+      onclick="secretAdminClick()"
+    >
 
-🌭 KEITHS HOTDOG
+      🌭 KEITHS HOTDOG
 
-<small>
-GOOD FOOD • GOOD MOOD
-</small>
+      <small>
+        GOOD FOOD • GOOD MOOD
+      </small>
 
-</div>
+    </div>
 
 
-<button
-class="cart-button"
-onclick="openCart()">
+    <button
+      class="cart-button"
+      onclick="openCart()"
+    >
 
-🛒
-<span id="cartCount">0</span>
+      🛒
+      <span id="cartCount">0</span>
 
-</button>
+    </button>
 
-</div>
+  </div>
 
 </header>
 
@@ -1151,620 +1304,641 @@ onclick="openCart()">
 <main class="container">
 
 
-<div class="banner">
+  <!-- BANNER -->
 
-<h1>
-Keiths Hotdog 🌭
-</h1>
+  <div class="banner">
 
-<p>
-Hotdog • Snacks • Drinks
-</p>
+    <h1>
+      Keiths Hotdog 🌭
+    </h1>
 
-</div>
+    <p>
+      Hotdog • Snacks • Drinks
+    </p>
 
-
-<div class="categories">
-
-<button
-class="category active"
-onclick="changeCategory('all',this)">
-🍽️ Tất cả
-</button>
+  </div>
 
 
-<button
-class="category"
-onclick="changeCategory('main',this)">
-🌭 Ăn chính
-</button>
+  <!-- CATEGORY -->
+
+  <div class="categories">
+
+    <button
+      class="category active"
+      onclick="changeCategory('all',this)"
+    >
+      🍽️ Tất cả
+    </button>
 
 
-<button
-class="category"
-onclick="changeCategory('snack',this)">
-🍟 Ăn vặt
-</button>
+    <button
+      class="category"
+      onclick="changeCategory('main',this)"
+    >
+      🌭 Ăn chính
+    </button>
 
 
-<button
-class="category"
-onclick="changeCategory('extra',this)">
-🧀 Đồ ăn thêm
-</button>
+    <button
+      class="category"
+      onclick="changeCategory('snack',this)"
+    >
+      🍟 Ăn vặt
+    </button>
 
 
-<button
-class="category"
-onclick="changeCategory('drink',this)">
-🥤 Đồ uống
-</button>
-
-</div>
-
-
-<div
-class="section-title"
-id="sectionTitle">
-
-Tất cả món
-
-</div>
+    <button
+      class="category"
+      onclick="changeCategory('extra',this)"
+    >
+      🧀 Đồ ăn thêm
+    </button>
 
 
-<div
-id="foodList"
-class="food-grid">
+    <button
+      class="category"
+      onclick="changeCategory('drink',this)"
+    >
+      🥤 Đồ uống
+    </button>
 
-</div>
+  </div>
+
+
+  <div
+    class="section-title"
+    id="sectionTitle"
+  >
+    Tất cả món
+  </div>
+
+
+  <div
+    id="foodList"
+    class="food-grid"
+  ></div>
 
 
 </main>
 
 
+<!-- BOTTOM CART -->
+
 <div class="bottom-cart">
 
-<button onclick="openCart()">
+  <button onclick="openCart()">
 
-🛒 Xem giỏ hàng •
+    🛒 Xem giỏ hàng •
 
-<span id="bottomTotal">
-0đ
-</span>
+    <span id="bottomTotal">
+      0đ
+    </span>
 
-</button>
-
-</div>
+  </button>
 
 </div>
 
+</div>
 
-<!-- =====================================================
-     ADMIN
-===================================================== -->
+
+
+<!-- =======================================================
+     ADMIN SCREEN
+======================================================= -->
 
 <div id="adminScreen">
 
-<div class="admin-header">
+  <div class="admin-header">
 
-<div class="admin-header-inner">
+    <div class="admin-header-inner">
 
-<div class="admin-logo">
-⚙️ KEITHS HOTDOG ADMIN
+      <div class="admin-logo">
+        ⚙️ KEITHS HOTDOG ADMIN
+      </div>
+
+
+      <div class="admin-actions">
+
+        <button
+          class="admin-btn customer-btn"
+          onclick="showCustomer()"
+        >
+          ← Khách
+        </button>
+
+
+        <button
+          class="admin-btn logout-btn"
+          onclick="adminLogout()"
+        >
+          Thoát
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="admin-container">
+
+
+    <div class="admin-nav">
+
+      <button
+        class="admin-tab active"
+        onclick="adminTab('dashboard',this)"
+      >
+        📊 Tổng quan
+      </button>
+
+
+      <button
+        class="admin-tab"
+        onclick="adminTab('foods',this)"
+      >
+        🌭 Món ăn
+      </button>
+
+
+      <button
+        class="admin-tab"
+        onclick="adminTab('orders',this)"
+      >
+        📦 Đơn hàng
+      </button>
+
+    </div>
+
+
+    <!-- DASHBOARD -->
+
+    <div
+      id="dashboard"
+      class="admin-page active"
+    >
+
+      <div class="stats">
+
+        <div class="stat">
+
+          <small>
+            Tổng món
+          </small>
+
+          <strong id="statFoods">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="stat">
+
+          <small>
+            Tổng đơn
+          </small>
+
+          <strong id="statOrders">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="stat">
+
+          <small>
+            Đang xử lý
+          </small>
+
+          <strong id="statPending">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="stat">
+
+          <small>
+            Doanh thu
+          </small>
+
+          <strong id="statRevenue">
+            0đ
+          </strong>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- FOODS -->
+
+    <div
+      id="foods"
+      class="admin-page"
+    >
+
+
+      <div class="admin-card">
+
+        <h2>
+          ➕ Thêm món
+        </h2>
+
+
+        <label>
+          Tên món
+        </label>
+
+        <input
+          id="foodName"
+          placeholder="Classic Hotdog"
+        >
+
+
+        <label>
+          Giá
+        </label>
+
+        <input
+          id="foodPrice"
+          type="number"
+          placeholder="65000"
+        >
+
+
+        <label>
+          Danh mục
+        </label>
+
+        <select id="foodCategory">
+
+          <option value="main">
+            🌭 Ăn chính
+          </option>
+
+          <option value="snack">
+            🍟 Ăn vặt
+          </option>
+
+          <option value="extra">
+            🧀 Đồ ăn thêm
+          </option>
+
+          <option value="drink">
+            🥤 Đồ uống
+          </option>
+
+        </select>
+
+
+        <label>
+          Mô tả
+        </label>
+
+        <textarea
+          id="foodDescription"
+          rows="3"
+          placeholder="Mô tả món ăn..."
+        ></textarea>
+
+
+        <label>
+          Link ảnh
+        </label>
+
+        <input
+          id="foodImage"
+          placeholder="https://..."
+        >
+
+
+        <button
+          class="primary"
+          onclick="addFood()"
+        >
+          ➕ THÊM MÓN
+        </button>
+
+      </div>
+
+
+      <div class="admin-card">
+
+        <h2>
+          🌭 Danh sách món
+        </h2>
+
+        <div id="adminFoodList"></div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ORDERS -->
+
+    <div
+      id="orders"
+      class="admin-page"
+    >
+
+      <div class="admin-card">
+
+        <h2>
+          📦 Đơn hàng
+        </h2>
+
+        <div id="adminOrders"></div>
+
+      </div>
+
+    </div>
+
+  </div>
+
 </div>
 
 
-<div class="admin-actions">
 
-<button
-class="admin-btn customer-btn"
-onclick="showCustomer()">
-
-← Khách
-
-</button>
-
-
-<button
-class="admin-btn logout-btn"
-onclick="adminLogout()">
-
-Thoát
-
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-
-<div class="admin-container">
-
-
-<div class="admin-nav">
-
-<button
-class="admin-tab active"
-onclick="adminTab('dashboard',this)">
-
-📊 Tổng quan
-
-</button>
-
-
-<button
-class="admin-tab"
-onclick="adminTab('foods',this)">
-
-🌭 Món ăn
-
-</button>
-
-
-<button
-class="admin-tab"
-onclick="adminTab('orders',this)">
-
-📦 Đơn hàng
-
-</button>
-
-</div>
-
-
-<!-- DASHBOARD -->
-
-<div
-id="dashboard"
-class="admin-page active">
-
-<div class="stats">
-
-
-<div class="stat">
-
-<small>
-Tổng món
-</small>
-
-<strong id="statFoods">
-0
-</strong>
-
-</div>
-
-
-<div class="stat">
-
-<small>
-Tổng đơn
-</small>
-
-<strong id="statOrders">
-0
-</strong>
-
-</div>
-
-
-<div class="stat">
-
-<small>
-Đang xử lý
-</small>
-
-<strong id="statPending">
-0
-</strong>
-
-</div>
-
-
-<div class="stat">
-
-<small>
-Doanh thu
-</small>
-
-<strong id="statRevenue">
-0đ
-</strong>
-
-</div>
-
-
-</div>
-
-</div>
-
-
-<!-- FOODS -->
-
-<div
-id="foods"
-class="admin-page">
-
-
-<div class="admin-card">
-
-<h2>
-➕ Thêm món
-</h2>
-
-
-<label>
-Tên món
-</label>
-
-<input
-id="foodName"
-placeholder="Classic Hotdog">
-
-
-<label>
-Giá
-</label>
-
-<input
-id="foodPrice"
-type="number"
-placeholder="65000">
-
-
-<label>
-Danh mục
-</label>
-
-<select id="foodCategory">
-
-<option value="main">
-🌭 Ăn chính
-</option>
-
-<option value="snack">
-🍟 Ăn vặt
-</option>
-
-<option value="extra">
-🧀 Đồ ăn thêm
-</option>
-
-<option value="drink">
-🥤 Đồ uống
-</option>
-
-</select>
-
-
-<label>
-Mô tả
-</label>
-
-<textarea
-id="foodDescription"
-rows="3"
-placeholder="Mô tả món ăn...">
-</textarea>
-
-
-<label>
-Link ảnh
-</label>
-
-<input
-id="foodImage"
-placeholder="https://...">
-
-
-<button
-class="primary"
-onclick="addFood()">
-
-➕ THÊM MÓN
-
-</button>
-
-</div>
-
-
-<div class="admin-card">
-
-<h2>
-🌭 Danh sách món
-</h2>
-
-<div id="adminFoodList"></div>
-
-</div>
-
-</div>
-
-
-<!-- ORDERS -->
-
-<div
-id="orders"
-class="admin-page">
-
-<div class="admin-card">
-
-<h2>
-📦 Đơn hàng
-</h2>
-
-<div id="adminOrders"></div>
-
-</div>
-
-</div>
-
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
+<!-- =======================================================
      CART MODAL
-===================================================== -->
+======================================================= -->
 
 <div
-class="modal"
-id="cartModal">
+  class="modal"
+  id="cartModal"
+>
 
-<div class="modal-box">
+  <div class="modal-box">
 
 
-<div class="modal-header">
+    <div class="modal-header">
 
-<div class="modal-title">
-🛒 Giỏ hàng
+      <div class="modal-title">
+        🛒 Giỏ hàng
+      </div>
+
+
+      <button
+        class="close"
+        onclick="closeModal('cartModal')"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div id="cartItems"></div>
+
+
+    <div class="total-row">
+
+      <span>
+        Tổng
+      </span>
+
+      <span id="cartTotal">
+        0đ
+      </span>
+
+    </div>
+
+
+    <button
+      class="primary"
+      onclick="openCheckout()"
+    >
+      Tiếp tục đặt hàng
+    </button>
+
+  </div>
+
 </div>
 
 
-<button
-class="close"
-onclick="closeModal('cartModal')">
-×
-</button>
 
-</div>
-
-
-<div id="cartItems"></div>
-
-
-<div class="total-row">
-
-<span>
-Tổng
-</span>
-
-<span id="cartTotal">
-0đ
-</span>
-
-</div>
-
-
-<button
-class="primary"
-onclick="openCheckout()">
-
-Tiếp tục đặt hàng
-
-</button>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
+<!-- =======================================================
      CHECKOUT
-===================================================== -->
+======================================================= -->
 
 <div
-class="modal"
-id="checkoutModal">
+  class="modal"
+  id="checkoutModal"
+>
 
-<div class="modal-box">
+  <div class="modal-box">
 
 
-<div class="modal-header">
+    <div class="modal-header">
 
-<div class="modal-title">
-📦 Thông tin giao hàng
+      <div class="modal-title">
+        📦 Thông tin giao hàng
+      </div>
+
+
+      <button
+        class="close"
+        onclick="closeModal('checkoutModal')"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <label>
+      Họ tên
+    </label>
+
+    <input
+      id="customerName"
+      placeholder="Nguyễn Văn A"
+    >
+
+
+    <label>
+      Số điện thoại
+    </label>
+
+    <input
+      id="customerPhone"
+      type="tel"
+      placeholder="09xxxxxxxx"
+    >
+
+
+    <label>
+      Địa chỉ
+    </label>
+
+    <textarea
+      id="customerAddress"
+      rows="3"
+      placeholder="Địa chỉ giao hàng"
+    ></textarea>
+
+
+    <label>
+      Thanh toán
+    </label>
+
+    <select id="payment">
+
+      <option value="COD">
+        💵 Tiền mặt khi nhận
+      </option>
+
+      <option value="BANK">
+        🏦 Chuyển khoản
+      </option>
+
+    </select>
+
+
+    <button
+      class="primary"
+      onclick="placeOrder()"
+    >
+      ✅ XÁC NHẬN ĐẶT HÀNG
+    </button>
+
+  </div>
+
 </div>
 
 
-<button
-class="close"
-onclick="closeModal('checkoutModal')">
-×
-</button>
 
-</div>
-
-
-<label>
-Họ tên
-</label>
-
-<input
-id="customerName"
-placeholder="Nguyễn Văn A">
-
-
-<label>
-Số điện thoại
-</label>
-
-<input
-id="customerPhone"
-type="tel"
-placeholder="09xxxxxxxx">
-
-
-<label>
-Địa chỉ
-</label>
-
-<textarea
-id="customerAddress"
-rows="3"
-placeholder="Địa chỉ giao hàng">
-</textarea>
-
-
-<label>
-Thanh toán
-</label>
-
-<select id="payment">
-
-<option value="COD">
-💵 Tiền mặt khi nhận
-</option>
-
-<option value="BANK">
-🏦 Chuyển khoản
-</option>
-
-</select>
-
-
-<button
-class="primary"
-onclick="placeOrder()">
-
-✅ XÁC NHẬN ĐẶT HÀNG
-
-</button>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
+<!-- =======================================================
      SUCCESS
-===================================================== -->
+======================================================= -->
 
 <div
-class="modal"
-id="successModal">
+  class="modal"
+  id="successModal"
+>
 
-<div class="modal-box">
+  <div class="modal-box">
 
-<div class="success">
+    <div class="success">
 
-<div class="success-icon">
-🎉
+      <div class="success-icon">
+        🎉
+      </div>
+
+      <h2>
+        Đặt hàng thành công!
+      </h2>
+
+      <p>
+        Mã đơn hàng
+      </p>
+
+      <div
+        class="success-code"
+        id="successCode"
+      ></div>
+
+
+      <button
+        class="primary"
+        onclick="closeModal('successModal')"
+      >
+        Về trang chủ
+      </button>
+
+    </div>
+
+  </div>
+
 </div>
 
-<h2>
-Đặt hàng thành công!
-</h2>
 
-<p>
-Mã đơn hàng
-</p>
+
+<!-- =======================================================
+     ADMIN LOGIN
+======================================================= -->
 
 <div
-class="success-code"
-id="successCode">
-</div>
+  class="modal"
+  id="loginModal"
+>
 
-<button
-class="primary"
-onclick="closeModal('successModal')">
-
-Về trang chủ
-
-</button>
-
-</div>
-
-</div>
-
-</div>
+  <div class="modal-box">
 
 
-<!-- =====================================================
-     LOGIN
-===================================================== -->
+    <div class="modal-header">
 
-<div
-class="modal"
-id="loginModal">
-
-<div class="modal-box">
+      <div class="modal-title">
+        🔐 Admin
+      </div>
 
 
-<div class="modal-header">
+      <button
+        class="close"
+        onclick="closeModal('loginModal')"
+      >
+        ×
+      </button>
 
-<div class="modal-title">
-🔐 Admin
-</div>
-
-<button
-class="close"
-onclick="closeModal('loginModal')">
-×
-</button>
-
-</div>
+    </div>
 
 
-<label>
-Tài khoản
-</label>
+    <label>
+      Tài khoản
+    </label>
 
-<input
-id="loginUser"
-placeholder="admin">
-
-
-<label>
-Mật khẩu
-</label>
-
-<input
-id="loginPass"
-type="password"
-placeholder="123456">
+    <input
+      id="loginUser"
+      placeholder="admin"
+    >
 
 
-<button
-class="primary"
-onclick="adminLogin()">
+    <label>
+      Mật khẩu
+    </label>
 
-ĐĂNG NHẬP
+    <input
+      id="loginPass"
+      type="password"
+      placeholder="123456"
+    >
 
-</button>
+
+    <button
+      class="primary"
+      onclick="adminLogin()"
+    >
+      ĐĂNG NHẬP
+    </button>
+
+  </div>
 
 </div>
 
-</div>
 
 
 <div
-class="secret-hint"
-id="secretHint">
-
-🔐 Bấm logo 5 lần để vào Admin
-
+  class="secret-hint"
+  id="secretHint"
+>
+  🔐 Bấm logo 5 lần để vào Admin
 </div>
+
 
 
 <script>
 
-/* =====================================================
+/* =========================================================
    SUPABASE
-===================================================== */
+========================================================= */
 
 const SUPABASE_URL =
 "https://dcqrngutharengnanzna.supabase.co";
@@ -1779,31 +1953,39 @@ window.supabase.createClient(
 );
 
 
-/* =====================================================
+/* =========================================================
    VARIABLES
-===================================================== */
+========================================================= */
 
-let foods=[];
-let orders=[];
-let cart=[];
+let foods = [];
 
-let currentCategory="all";
+let orders = [];
 
-let secretClicks=0;
-let secretTimer=null;
+let cart = [];
+
+let currentCategory = "all";
+
+let secretClicks = 0;
+
+let secretTimer = null;
 
 
-/* =====================================================
-   HELPERS
-===================================================== */
+/* =========================================================
+   FORMAT MONEY
+========================================================= */
 
 function money(value){
 
   return Number(value || 0)
-    .toLocaleString("vi-VN")+"đ";
+    .toLocaleString("vi-VN")
+    + "đ";
 
 }
 
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
 
 function escapeHtml(value){
 
@@ -1817,13 +1999,22 @@ function escapeHtml(value){
 }
 
 
+/* =========================================================
+   CATEGORY NAME
+========================================================= */
+
 function categoryName(category){
 
-  const names={
+  const names = {
+
     main:"🌭 Ăn chính",
+
     snack:"🍟 Ăn vặt",
+
     extra:"🧀 Đồ ăn thêm",
+
     drink:"🥤 Đồ uống"
+
   };
 
   return names[category] || category;
@@ -1831,14 +2022,16 @@ function categoryName(category){
 }
 
 
-/* =====================================================
+/* =========================================================
    LOAD FOODS
-===================================================== */
+========================================================= */
 
 async function loadFoods(){
 
-  const {data,error}=
-
+  const {
+    data,
+    error
+  } =
     await db
       .from("foods")
       .select("*")
@@ -1852,15 +2045,15 @@ async function loadFoods(){
 
     document
       .getElementById("foodList")
-      .innerHTML=`
+      .innerHTML = `
 
-      <div class="empty">
+        <div class="empty">
 
-      Không tải được món ăn.<br>
+          Không tải được món ăn.<br>
 
-      Kiểm tra Supabase/RLS.
+          Kiểm tra Supabase/RLS.
 
-      </div>
+        </div>
 
       `;
 
@@ -1869,7 +2062,8 @@ async function loadFoods(){
   }
 
 
-  foods=data || [];
+  foods = data || [];
+
 
   renderFoods();
 
@@ -1880,18 +2074,23 @@ async function loadFoods(){
 }
 
 
-/* =====================================================
+/* =========================================================
    LOAD ORDERS
-===================================================== */
+========================================================= */
 
 async function loadOrders(){
 
-  const {data,error}=
-
+  const {
+    data,
+    error
+  } =
     await db
       .from("orders")
       .select("*")
-      .order("created_at",{ascending:false});
+      .order(
+        "created_at",
+        {ascending:false}
+      );
 
 
   if(error){
@@ -1903,7 +2102,8 @@ async function loadOrders(){
   }
 
 
-  orders=data || [];
+  orders = data || [];
+
 
   renderOrders();
 
@@ -1912,38 +2112,42 @@ async function loadOrders(){
 }
 
 
-/* =====================================================
-   RENDER FOODS
-===================================================== */
+/* =========================================================
+   RENDER CUSTOMER FOODS
+========================================================= */
 
 function renderFoods(){
 
-  let list=foods;
+  let list = foods;
 
 
-  if(currentCategory!=="all"){
+  if(currentCategory !== "all"){
 
-    list=foods.filter(
-      food =>
-        food.category===currentCategory
-    );
+    list =
+      foods.filter(
+        food =>
+          food.category ===
+          currentCategory
+      );
 
   }
 
 
-  const box=
-    document.getElementById("foodList");
+  const box =
+    document.getElementById(
+      "foodList"
+    );
 
 
   if(!list.length){
 
-    box.innerHTML=`
+    box.innerHTML = `
 
-    <div class="empty">
+      <div class="empty">
 
-      Chưa có món trong mục này.
+        Chưa có món trong mục này.
 
-    </div>
+      </div>
 
     `;
 
@@ -1952,40 +2156,62 @@ function renderFoods(){
   }
 
 
-  box.innerHTML=
+  box.innerHTML =
 
-    list.map(food=>`
+    list.map(food => `
 
       <div class="food-card">
 
         <img
           class="food-image"
-          src="${escapeHtml(food.image_url || "")}"
-          alt="${escapeHtml(food.name)}"
-          onerror="this.style.display='none'">
+          src="${escapeHtml(
+            food.image_url || ""
+          )}"
+          alt="${escapeHtml(
+            food.name
+          )}"
+          onerror="
+            this.style.display='none'
+          "
+        >
+
 
         <div class="food-content">
 
           <div class="food-name">
-            ${escapeHtml(food.name)}
+
+            ${escapeHtml(
+              food.name
+            )}
+
           </div>
 
+
           <div class="food-description">
-            ${escapeHtml(food.description || "")}
+
+            ${escapeHtml(
+              food.description || ""
+            )}
+
           </div>
+
 
           <div class="food-bottom">
 
             <div class="price">
+
               ${money(food.price)}
+
             </div>
+
 
             <button
               class="add-button"
-              onclick="addCart(${food.id})">
-
+              onclick="
+                addCart(${food.id})
+              "
+            >
               + Thêm
-
             </button>
 
           </div>
@@ -1999,29 +2225,35 @@ function renderFoods(){
 }
 
 
-/* =====================================================
-   CATEGORY
-===================================================== */
+/* =========================================================
+   CHANGE CATEGORY
+========================================================= */
 
 function changeCategory(
   category,
   button
 ){
 
-  currentCategory=category;
+  currentCategory =
+    category;
 
 
   document
     .querySelectorAll(".category")
-    .forEach(btn =>
-      btn.classList.remove("active")
+    .forEach(
+      btn =>
+        btn.classList.remove(
+          "active"
+        )
     );
 
 
-  button.classList.add("active");
+  button.classList.add(
+    "active"
+  );
 
 
-  const titles={
+  const titles = {
 
     all:"Tất cả món",
 
@@ -2037,8 +2269,11 @@ function changeCategory(
 
 
   document
-    .getElementById("sectionTitle")
-    .textContent=titles[category];
+    .getElementById(
+      "sectionTitle"
+    )
+    .textContent =
+      titles[category];
 
 
   renderFoods();
@@ -2046,24 +2281,26 @@ function changeCategory(
 }
 
 
-/* =====================================================
-   CART
-===================================================== */
+/* =========================================================
+   ADD CART
+========================================================= */
 
 function addCart(id){
 
-  const food=
-    foods.find(item =>
-      item.id===id
+  const food =
+    foods.find(
+      item =>
+        item.id === id
     );
 
 
   if(!food)return;
 
 
-  const item=
-    cart.find(item =>
-      item.id===id
+  const item =
+    cart.find(
+      item =>
+        item.id === id
     );
 
 
@@ -2079,7 +2316,9 @@ function addCart(id){
 
       name:food.name,
 
-      price:Number(food.price),
+      price:Number(
+        food.price
+      ),
 
       qty:1
 
@@ -2093,29 +2332,34 @@ function addCart(id){
 }
 
 
+/* =========================================================
+   CHANGE QUANTITY
+========================================================= */
+
 function changeQty(
   id,
   value
 ){
 
-  const item=
-    cart.find(x =>
-      x.id===id
+  const item =
+    cart.find(
+      x =>
+        x.id === id
     );
 
 
   if(!item)return;
 
 
-  item.qty+=value;
+  item.qty += value;
 
 
-  if(item.qty<=0){
+  if(item.qty <= 0){
 
-    cart=
+    cart =
       cart.filter(
         x =>
-          x.id!==id
+          x.id !== id
       );
 
   }
@@ -2128,40 +2372,51 @@ function changeQty(
 }
 
 
+/* =========================================================
+   UPDATE CART
+========================================================= */
+
 function updateCart(){
 
-  const count=
-
+  const count =
     cart.reduce(
       (sum,item) =>
-        sum+item.qty,
+        sum + item.qty,
       0
     );
 
 
-  const total=
-
+  const total =
     cart.reduce(
       (sum,item) =>
-        sum+
-        item.price*
+        sum +
+        item.price *
         item.qty,
       0
     );
 
 
   document
-    .getElementById("cartCount")
-    .textContent=count;
+    .getElementById(
+      "cartCount"
+    )
+    .textContent =
+      count;
 
 
   document
-    .getElementById("bottomTotal")
-    .textContent=
+    .getElementById(
+      "bottomTotal"
+    )
+    .textContent =
       money(total);
 
 }
 
+
+/* =========================================================
+   OPEN CART
+========================================================= */
 
 function openCart(){
 
@@ -2169,15 +2424,23 @@ function openCart(){
 
 
   document
-    .getElementById("cartModal")
-    .classList.add("show");
+    .getElementById(
+      "cartModal"
+    )
+    .classList.add(
+      "show"
+    );
 
 }
 
 
+/* =========================================================
+   RENDER CART
+========================================================= */
+
 function renderCart(){
 
-  const box=
+  const box =
     document.getElementById(
       "cartItems"
     );
@@ -2185,7 +2448,7 @@ function renderCart(){
 
   if(!cart.length){
 
-    box.innerHTML=`
+    box.innerHTML = `
 
       <div class="empty">
 
@@ -2197,8 +2460,11 @@ function renderCart(){
 
 
     document
-      .getElementById("cartTotal")
-      .textContent="0đ";
+      .getElementById(
+        "cartTotal"
+      )
+      .textContent =
+        "0đ";
 
 
     return;
@@ -2206,20 +2472,29 @@ function renderCart(){
   }
 
 
-  box.innerHTML=
+  box.innerHTML =
 
-    cart.map(item=>`
+    cart.map(item => `
 
       <div class="cart-item">
 
         <div class="cart-info">
 
           <div class="cart-name">
-            ${escapeHtml(item.name)}
+
+            ${escapeHtml(
+              item.name
+            )}
+
           </div>
 
+
           <div class="cart-price">
-            ${money(item.price)}
+
+            ${money(
+              item.price
+            )}
+
           </div>
 
         </div>
@@ -2228,16 +2503,30 @@ function renderCart(){
         <div class="quantity">
 
           <button
-            onclick="changeQty(${item.id},-1)">
+            onclick="
+              changeQty(
+                ${item.id},
+                -1
+              )
+            "
+          >
             −
           </button>
+
 
           <b>
             ${item.qty}
           </b>
 
+
           <button
-            onclick="changeQty(${item.id},1)">
+            onclick="
+              changeQty(
+                ${item.id},
+                1
+              )
+            "
+          >
             +
           </button>
 
@@ -2248,28 +2537,29 @@ function renderCart(){
     `).join("");
 
 
-  const total=
-
+  const total =
     cart.reduce(
       (sum,item) =>
-        sum+
-        item.price*
+        sum +
+        item.price *
         item.qty,
       0
     );
 
 
   document
-    .getElementById("cartTotal")
-    .textContent=
+    .getElementById(
+      "cartTotal"
+    )
+    .textContent =
       money(total);
 
 }
 
 
-/* =====================================================
+/* =========================================================
    CHECKOUT
-===================================================== */
+========================================================= */
 
 function openCheckout(){
 
@@ -2284,15 +2574,25 @@ function openCheckout(){
   }
 
 
-  closeModal("cartModal");
+  closeModal(
+    "cartModal"
+  );
 
 
   document
-    .getElementById("checkoutModal")
-    .classList.add("show");
+    .getElementById(
+      "checkoutModal"
+    )
+    .classList.add(
+      "show"
+    );
 
 }
 
+
+/* =========================================================
+   PLACE ORDER
+========================================================= */
 
 async function placeOrder(){
 
@@ -2307,27 +2607,38 @@ async function placeOrder(){
   }
 
 
-  const name=
+  const name =
     document
-      .getElementById("customerName")
-      .value.trim();
+      .getElementById(
+        "customerName"
+      )
+      .value
+      .trim();
 
 
-  const phone=
+  const phone =
     document
-      .getElementById("customerPhone")
-      .value.trim();
+      .getElementById(
+        "customerPhone"
+      )
+      .value
+      .trim();
 
 
-  const address=
+  const address =
     document
-      .getElementById("customerAddress")
-      .value.trim();
+      .getElementById(
+        "customerAddress"
+      )
+      .value
+      .trim();
 
 
-  const payment=
+  const payment =
     document
-      .getElementById("payment")
+      .getElementById(
+        "payment"
+      )
       .value;
 
 
@@ -2346,19 +2657,18 @@ async function placeOrder(){
   }
 
 
-  const total=
-
+  const total =
     cart.reduce(
       (sum,item) =>
-        sum+
-        item.price*
+        sum +
+        item.price *
         item.qty,
       0
     );
 
 
-  const code=
-    "OD"+
+  const code =
+    "OD" +
     Date.now()
       .toString()
       .slice(-8);
@@ -2367,8 +2677,7 @@ async function placeOrder(){
   const {
     data,
     error
-  }=
-
+  } =
     await db
       .from("orders")
       .insert({
@@ -2397,7 +2706,7 @@ async function placeOrder(){
     console.error(error);
 
     alert(
-      "Đặt hàng lỗi: "+
+      "Đặt hàng lỗi: " +
       error.message
     );
 
@@ -2406,9 +2715,8 @@ async function placeOrder(){
   }
 
 
-  const items=
-
-    cart.map(item=>({
+  const items =
+    cart.map(item => ({
 
       order_id:data.id,
 
@@ -2419,7 +2727,7 @@ async function placeOrder(){
       quantity:item.qty,
 
       subtotal:
-        item.price*
+        item.price *
         item.qty
 
     }));
@@ -2427,19 +2735,22 @@ async function placeOrder(){
 
   const {
     error:itemError
-  }=
-
+  } =
     await db
       .from("order_items")
-      .insert(items);
+      .insert(
+        items
+      );
 
 
   if(itemError){
 
-    console.error(itemError);
+    console.error(
+      itemError
+    );
 
     alert(
-      "Lưu món trong đơn lỗi: "+
+      "Lưu món trong đơn lỗi: " +
       itemError.message
     );
 
@@ -2448,74 +2759,101 @@ async function placeOrder(){
   }
 
 
-  cart=[];
+  cart = [];
+
 
   updateCart();
 
 
-  closeModal("checkoutModal");
+  closeModal(
+    "checkoutModal"
+  );
 
 
   document
-    .getElementById("successCode")
-    .textContent=code;
+    .getElementById(
+      "successCode"
+    )
+    .textContent =
+      code;
 
 
   document
-    .getElementById("successModal")
-    .classList.add("show");
+    .getElementById(
+      "successModal"
+    )
+    .classList.add(
+      "show"
+    );
 
 
   document
-    .getElementById("customerName")
-    .value="";
+    .getElementById(
+      "customerName"
+    )
+    .value = "";
 
 
   document
-    .getElementById("customerPhone")
-    .value="";
+    .getElementById(
+      "customerPhone"
+    )
+    .value = "";
 
 
   document
-    .getElementById("customerAddress")
-    .value="";
+    .getElementById(
+      "customerAddress"
+    )
+    .value = "";
 
 }
 
 
-/* =====================================================
+/* =========================================================
    SECRET ADMIN
-===================================================== */
+========================================================= */
 
 function secretAdminClick(){
 
   secretClicks++;
 
-  clearTimeout(secretTimer);
-
-
-  secretTimer=setTimeout(
-    ()=>{
-      secretClicks=0;
-    },
-    2000
+  clearTimeout(
+    secretTimer
   );
 
 
-  if(secretClicks<5){
+  secretTimer =
+    setTimeout(
+      () => {
 
-    const hint=
+        secretClicks = 0;
+
+      },
+      2000
+    );
+
+
+  if(secretClicks < 5){
+
+    const hint =
       document.getElementById(
         "secretHint"
       );
 
 
-    hint.classList.add("show");
+    hint.classList.add(
+      "show"
+    );
 
 
     setTimeout(
-      ()=>{
-        hint.classList.remove("show");
+      () => {
+
+        hint.classList.remove(
+          "show"
+        );
+
       },
       700
     );
@@ -2523,43 +2861,54 @@ function secretAdminClick(){
   }
 
 
-  if(secretClicks>=5){
+  if(secretClicks >= 5){
 
-    secretClicks=0;
+    secretClicks = 0;
 
-    clearTimeout(secretTimer);
+    clearTimeout(
+      secretTimer
+    );
 
 
     document
-      .getElementById("loginModal")
-      .classList.add("show");
+      .getElementById(
+        "loginModal"
+      )
+      .classList.add(
+        "show"
+      );
 
   }
 
 }
 
 
-/* =====================================================
+/* =========================================================
    ADMIN LOGIN
-===================================================== */
+========================================================= */
 
 function adminLogin(){
 
-  const username=
+  const username =
     document
-      .getElementById("loginUser")
-      .value.trim();
+      .getElementById(
+        "loginUser"
+      )
+      .value
+      .trim();
 
 
-  const password=
+  const password =
     document
-      .getElementById("loginPass")
+      .getElementById(
+        "loginPass"
+      )
       .value;
 
 
   if(
-    username==="admin" &&
-    password==="123456"
+    username === "admin" &&
+    password === "123456"
   ){
 
     sessionStorage.setItem(
@@ -2568,17 +2917,25 @@ function adminLogin(){
     );
 
 
-    closeModal("loginModal");
+    closeModal(
+      "loginModal"
+    );
 
 
     document
-      .getElementById("customerScreen")
-      .style.display="none";
+      .getElementById(
+        "customerScreen"
+      )
+      .style.display =
+        "none";
 
 
     document
-      .getElementById("adminScreen")
-      .style.display="block";
+      .getElementById(
+        "adminScreen"
+      )
+      .style.display =
+        "block";
 
 
     renderAdmin();
@@ -2596,34 +2953,49 @@ function adminLogin(){
 }
 
 
+/* =========================================================
+   ADMIN LOGOUT
+========================================================= */
+
 function adminLogout(){
 
   sessionStorage.removeItem(
     "food_admin"
   );
 
+
   showCustomer();
 
 }
 
 
+/* =========================================================
+   SHOW CUSTOMER
+========================================================= */
+
 function showCustomer(){
 
   document
-    .getElementById("adminScreen")
-    .style.display="none";
+    .getElementById(
+      "adminScreen"
+    )
+    .style.display =
+      "none";
 
 
   document
-    .getElementById("customerScreen")
-    .style.display="block";
+    .getElementById(
+      "customerScreen"
+    )
+    .style.display =
+      "block";
 
 }
 
 
-/* =====================================================
-   ADMIN TAB
-===================================================== */
+/* =========================================================
+   ADMIN TABS
+========================================================= */
 
 function adminTab(
   id,
@@ -2631,97 +3003,136 @@ function adminTab(
 ){
 
   document
-    .querySelectorAll(".admin-page")
-    .forEach(page =>
-      page.classList.remove("active")
+    .querySelectorAll(
+      ".admin-page"
+    )
+    .forEach(
+      page =>
+        page.classList.remove(
+          "active"
+        )
     );
 
 
   document
-    .querySelectorAll(".admin-tab")
-    .forEach(btn =>
-      btn.classList.remove("active")
+    .querySelectorAll(
+      ".admin-tab"
+    )
+    .forEach(
+      btn =>
+        btn.classList.remove(
+          "active"
+        )
     );
 
 
   document
     .getElementById(id)
-    .classList.add("active");
+    .classList.add(
+      "active"
+    );
 
 
-  button.classList.add("active");
+  button.classList.add(
+    "active"
+  );
 
 
-  if(id==="orders"){
+  if(id === "orders"){
+
     loadOrders();
+
   }
 
 
-  if(id==="foods"){
+  if(id === "foods"){
+
     renderAdminFoods();
+
   }
 
 }
 
 
-/* =====================================================
+/* =========================================================
    ADD FOOD
-===================================================== */
+========================================================= */
 
 async function addFood(){
 
-  const name=
+  const name =
     document
-      .getElementById("foodName")
-      .value.trim();
+      .getElementById(
+        "foodName"
+      )
+      .value
+      .trim();
 
 
-  const price=
+  const price =
     Number(
       document
-        .getElementById("foodPrice")
+        .getElementById(
+          "foodPrice"
+        )
         .value
     );
 
 
-  const category=
+  const category =
     document
-      .getElementById("foodCategory")
+      .getElementById(
+        "foodCategory"
+      )
       .value;
 
 
-  const description=
+  const description =
     document
-      .getElementById("foodDescription")
-      .value.trim();
+      .getElementById(
+        "foodDescription"
+      )
+      .value
+      .trim();
 
 
-  const image=
+  const image =
     document
-      .getElementById("foodImage")
-      .value.trim();
+      .getElementById(
+        "foodImage"
+      )
+      .value
+      .trim();
 
 
   if(!name){
 
-    alert("Nhập tên món!");
+    alert(
+      "Nhập tên món!"
+    );
 
     return;
 
   }
 
 
-  if(!price || price<=0){
+  if(
+    !price ||
+    price <= 0
+  ){
 
-    alert("Nhập giá hợp lệ!");
+    alert(
+      "Nhập giá hợp lệ!"
+    );
 
     return;
 
   }
 
 
-  const {error}=
-
+  const {
+    error
+  } =
     await db
       .from("foods")
       .insert({
@@ -2746,7 +3157,7 @@ async function addFood(){
     console.error(error);
 
     alert(
-      "Thêm món lỗi: "+
+      "Thêm món lỗi: " +
       error.message
     );
 
@@ -2756,40 +3167,50 @@ async function addFood(){
 
 
   document
-    .getElementById("foodName")
-    .value="";
+    .getElementById(
+      "foodName"
+    )
+    .value = "";
 
 
   document
-    .getElementById("foodPrice")
-    .value="";
+    .getElementById(
+      "foodPrice"
+    )
+    .value = "";
 
 
   document
-    .getElementById("foodDescription")
-    .value="";
+    .getElementById(
+      "foodDescription"
+    )
+    .value = "";
 
 
   document
-    .getElementById("foodImage")
-    .value="";
+    .getElementById(
+      "foodImage"
+    )
+    .value = "";
 
 
   await loadFoods();
 
 
-  alert("Đã thêm món!");
+  alert(
+    "Đã thêm món!"
+  );
 
 }
 
 
-/* =====================================================
+/* =========================================================
    ADMIN FOOD LIST
-===================================================== */
+========================================================= */
 
 function renderAdminFoods(){
 
-  const box=
+  const box =
     document.getElementById(
       "adminFoodList"
     );
@@ -2800,7 +3221,7 @@ function renderAdminFoods(){
 
   if(!foods.length){
 
-    box.innerHTML=`
+    box.innerHTML = `
 
       <div class="empty">
         Chưa có món.
@@ -2813,31 +3234,49 @@ function renderAdminFoods(){
   }
 
 
-  box.innerHTML=
+  box.innerHTML =
 
-    foods.map(food=>`
+    foods.map(food => `
 
       <div class="admin-food">
 
         <img
-          src="${escapeHtml(food.image_url || "")}"
+          src="${escapeHtml(
+            food.image_url || ""
+          )}"
+
           onerror="
             this.style.display='none'
-          ">
+          "
+        >
 
 
         <div class="admin-food-info">
 
           <div class="admin-food-name">
-            ${escapeHtml(food.name)}
+
+            ${escapeHtml(
+              food.name
+            )}
+
           </div>
+
 
           <div class="admin-food-price">
-            ${money(food.price)}
+
+            ${money(
+              food.price
+            )}
+
           </div>
 
+
           <div class="admin-food-category">
-            ${categoryName(food.category)}
+
+            ${categoryName(
+              food.category
+            )}
+
           </div>
 
         </div>
@@ -2847,19 +3286,25 @@ function renderAdminFoods(){
 
           <button
             class="small-btn edit-btn"
-            onclick="editFood(${food.id})">
-
+            onclick="
+              editFood(
+                ${food.id}
+              )
+            "
+          >
             Sửa
-
           </button>
 
 
           <button
             class="small-btn delete-btn"
-            onclick="deleteFood(${food.id})">
-
+            onclick="
+              deleteFood(
+                ${food.id}
+              )
+            "
+          >
             Xóa
-
           </button>
 
         </div>
@@ -2871,71 +3316,74 @@ function renderAdminFoods(){
 }
 
 
-/* =====================================================
+/* =========================================================
    EDIT FOOD
-===================================================== */
+========================================================= */
 
 async function editFood(id){
 
-  const food=
+  const food =
     foods.find(
       x =>
-        x.id===id
+        x.id === id
     );
 
 
   if(!food)return;
 
 
-  const name=
+  const name =
     prompt(
       "Tên món:",
       food.name
     );
 
 
-  if(name===null)return;
+  if(name === null)return;
 
 
-  const price=
+  const price =
     prompt(
       "Giá:",
       food.price
     );
 
 
-  if(price===null)return;
+  if(price === null)return;
 
 
-  const description=
+  const description =
     prompt(
       "Mô tả:",
       food.description || ""
     );
 
 
-  if(description===null)return;
+  if(description === null)return;
 
 
-  const image=
+  const image =
     prompt(
       "Link ảnh:",
       food.image_url || ""
     );
 
 
-  if(image===null)return;
+  if(image === null)return;
 
 
-  const {error}=
-
+  const {
+    error
+  } =
     await db
       .from("foods")
       .update({
 
         name:name.trim(),
 
-        price:Number(price),
+        price:Number(
+          price
+        ),
 
         description:
           description.trim(),
@@ -2944,13 +3392,16 @@ async function editFood(id){
           image.trim()
 
       })
-      .eq("id",id);
+      .eq(
+        "id",
+        id
+      );
 
 
   if(error){
 
     alert(
-      "Sửa lỗi: "+
+      "Sửa lỗi: " +
       error.message
     );
 
@@ -2964,16 +3415,16 @@ async function editFood(id){
 }
 
 
-/* =====================================================
+/* =========================================================
    DELETE FOOD
-===================================================== */
+========================================================= */
 
 async function deleteFood(id){
 
-  const food=
+  const food =
     foods.find(
       x =>
-        x.id===id
+        x.id === id
     );
 
 
@@ -2982,27 +3433,37 @@ async function deleteFood(id){
 
   if(
     !confirm(
-      'Xóa món "'+
-      food.name+
+      'Xóa món "' +
+      food.name +
       '"?'
     )
-  )return;
+  ){
+
+    return;
+
+  }
 
 
-  const {error}=
-
+  const {
+    error
+  } =
     await db
       .from("foods")
       .update({
+
         active:false
+
       })
-      .eq("id",id);
+      .eq(
+        "id",
+        id
+      );
 
 
   if(error){
 
     alert(
-      "Xóa lỗi: "+
+      "Xóa lỗi: " +
       error.message
     );
 
@@ -3016,13 +3477,13 @@ async function deleteFood(id){
 }
 
 
-/* =====================================================
-   ORDERS
-===================================================== */
+/* =========================================================
+   RENDER ORDERS
+========================================================= */
 
 async function renderOrders(){
 
-  const box=
+  const box =
     document.getElementById(
       "adminOrders"
     );
@@ -3033,10 +3494,12 @@ async function renderOrders(){
 
   if(!orders.length){
 
-    box.innerHTML=`
+    box.innerHTML = `
 
       <div class="empty">
+
         📦 Chưa có đơn hàng.
+
       </div>
 
     `;
@@ -3046,9 +3509,9 @@ async function renderOrders(){
   }
 
 
-  box.innerHTML=
+  box.innerHTML =
 
-    orders.map(order=>`
+    orders.map(order => `
 
       <div class="order-card">
 
@@ -3057,20 +3520,33 @@ async function renderOrders(){
           <div>
 
             <div class="order-code">
-              ${escapeHtml(order.order_code)}
+
+              ${escapeHtml(
+                order.order_code
+              )}
+
             </div>
 
+
             <small>
+
               ${new Date(
                 order.created_at
-              ).toLocaleString("vi-VN")}
+              ).toLocaleString(
+                "vi-VN"
+              )}
+
             </small>
 
           </div>
 
 
           <div class="order-status">
-            ${escapeHtml(order.status)}
+
+            ${escapeHtml(
+              order.status
+            )}
+
           </div>
 
         </div>
@@ -3079,27 +3555,35 @@ async function renderOrders(){
         <p>
 
           👤
+
           <b>
-            ${escapeHtml(order.customer_name)}
+            ${escapeHtml(
+              order.customer_name
+            )}
           </b>
 
           <br>
 
           📞
-          ${escapeHtml(order.customer_phone)}
+          ${escapeHtml(
+            order.customer_phone
+          )}
 
           <br>
 
           📍
-          ${escapeHtml(order.customer_address)}
+          ${escapeHtml(
+            order.customer_address
+          )}
 
           <br>
 
           💳
+
           ${
-            order.payment==="COD"
-            ?"Tiền mặt"
-            :"Chuyển khoản"
+            order.payment === "COD"
+              ? "Tiền mặt"
+              : "Chuyển khoản"
           }
 
         </p>
@@ -3107,10 +3591,9 @@ async function renderOrders(){
 
         <div
           class="order-items"
-          id="items-${order.id}">
-
+          id="items-${order.id}"
+        >
           Đang tải món...
-
         </div>
 
 
@@ -3128,70 +3611,71 @@ async function renderOrders(){
               ${order.id},
               this.value
             )
-          ">
+          "
+        >
 
           <option
             value="Chờ xác nhận"
             ${
-              order.status==="Chờ xác nhận"
-              ?"selected"
-              :""
-            }>
-
+              order.status ===
+              "Chờ xác nhận"
+                ? "selected"
+                : ""
+            }
+          >
             Chờ xác nhận
-
           </option>
 
 
           <option
             value="Đang chuẩn bị"
             ${
-              order.status==="Đang chuẩn bị"
-              ?"selected"
-              :""
-            }>
-
+              order.status ===
+              "Đang chuẩn bị"
+                ? "selected"
+                : ""
+            }
+          >
             Đang chuẩn bị
-
           </option>
 
 
           <option
             value="Đang giao"
             ${
-              order.status==="Đang giao"
-              ?"selected"
-              :""
-            }>
-
+              order.status ===
+              "Đang giao"
+                ? "selected"
+                : ""
+            }
+          >
             Đang giao
-
           </option>
 
 
           <option
             value="Hoàn thành"
             ${
-              order.status==="Hoàn thành"
-              ?"selected"
-              :""
-            }>
-
+              order.status ===
+              "Hoàn thành"
+                ? "selected"
+                : ""
+            }
+          >
             Hoàn thành
-
           </option>
 
 
           <option
             value="Đã hủy"
             ${
-              order.status==="Đã hủy"
-              ?"selected"
-              :""
-            }>
-
+              order.status ===
+              "Đã hủy"
+                ? "selected"
+                : ""
+            }
+          >
             Đã hủy
-
           </option>
 
         </select>
@@ -3214,9 +3698,9 @@ async function renderOrders(){
 }
 
 
-/* =====================================================
-   ORDER ITEMS
-===================================================== */
+/* =========================================================
+   LOAD ORDER ITEMS
+========================================================= */
 
 async function loadOrderItems(
   orderId
@@ -3225,17 +3709,20 @@ async function loadOrderItems(
   const {
     data,
     error
-  }=
-
+  } =
     await db
       .from("order_items")
       .select("*")
-      .eq("order_id",orderId);
+      .eq(
+        "order_id",
+        orderId
+      );
 
 
-  const box=
+  const box =
     document.getElementById(
-      "items-"+orderId
+      "items-" +
+      orderId
     );
 
 
@@ -3244,7 +3731,7 @@ async function loadOrderItems(
 
   if(error){
 
-    box.textContent=
+    box.textContent =
       "Không tải được món.";
 
     return;
@@ -3257,7 +3744,7 @@ async function loadOrderItems(
     !data.length
   ){
 
-    box.textContent=
+    box.textContent =
       "Không có món.";
 
     return;
@@ -3265,19 +3752,25 @@ async function loadOrderItems(
   }
 
 
-  box.innerHTML=
+  box.innerHTML =
 
-    data.map(item=>`
+    data.map(item => `
 
       <div>
 
-        ${escapeHtml(item.food_name)}
+        ${escapeHtml(
+          item.food_name
+        )}
 
         ×
+
         ${item.quantity}
 
         —
-        ${money(item.subtotal)}
+
+        ${money(
+          item.subtotal
+        )}
 
       </div>
 
@@ -3286,29 +3779,35 @@ async function loadOrderItems(
 }
 
 
-/* =====================================================
+/* =========================================================
    CHANGE ORDER STATUS
-===================================================== */
+========================================================= */
 
 async function changeOrderStatus(
   id,
   status
 ){
 
-  const {error}=
-
+  const {
+    error
+  } =
     await db
       .from("orders")
       .update({
+
         status:status
+
       })
-      .eq("id",id);
+      .eq(
+        "id",
+        id
+      );
 
 
   if(error){
 
     alert(
-      "Cập nhật lỗi: "+
+      "Cập nhật lỗi: " +
       error.message
     );
 
@@ -3322,28 +3821,31 @@ async function changeOrderStatus(
 }
 
 
-/* =====================================================
+/* =========================================================
    DASHBOARD
-===================================================== */
+========================================================= */
 
 function renderDashboard(){
 
-  const statFoods=
+  const statFoods =
     document.getElementById(
       "statFoods"
     );
 
-  const statOrders=
+
+  const statOrders =
     document.getElementById(
       "statOrders"
     );
 
-  const statPending=
+
+  const statPending =
     document.getElementById(
       "statPending"
     );
 
-  const statRevenue=
+
+  const statRevenue =
     document.getElementById(
       "statRevenue"
     );
@@ -3351,7 +3853,7 @@ function renderDashboard(){
 
   if(statFoods){
 
-    statFoods.textContent=
+    statFoods.textContent =
       foods.length;
 
   }
@@ -3359,7 +3861,7 @@ function renderDashboard(){
 
   if(statOrders){
 
-    statOrders.textContent=
+    statOrders.textContent =
       orders.length;
 
   }
@@ -3367,12 +3869,14 @@ function renderDashboard(){
 
   if(statPending){
 
-    statPending.textContent=
+    statPending.textContent =
 
       orders.filter(
         x =>
-          x.status!=="Hoàn thành" &&
-          x.status!=="Đã hủy"
+          x.status !==
+            "Hoàn thành" &&
+          x.status !==
+            "Đã hủy"
       ).length;
 
   }
@@ -3380,28 +3884,35 @@ function renderDashboard(){
 
   if(statRevenue){
 
-    const revenue=
+    const revenue =
 
       orders
         .filter(
           x =>
-            x.status==="Hoàn thành"
+            x.status ===
+            "Hoàn thành"
         )
         .reduce(
           (sum,x) =>
-            sum+
-            Number(x.total || 0),
+            sum +
+            Number(
+              x.total || 0
+            ),
           0
         );
 
 
-    statRevenue.textContent=
+    statRevenue.textContent =
       money(revenue);
 
   }
 
 }
 
+
+/* =========================================================
+   ADMIN RENDER
+========================================================= */
 
 function renderAdmin(){
 
@@ -3414,55 +3925,66 @@ function renderAdmin(){
 }
 
 
-/* =====================================================
-   MODAL
-===================================================== */
+/* =========================================================
+   CLOSE MODAL
+========================================================= */
 
 function closeModal(id){
 
   document
     .getElementById(id)
-    .classList.remove("show");
+    .classList.remove(
+      "show"
+    );
 
 }
 
 
+/* =========================================================
+   CLICK OUTSIDE MODAL
+========================================================= */
+
 document
   .querySelectorAll(".modal")
-  .forEach(modal=>{
+  .forEach(
+    modal => {
 
-    modal.addEventListener(
-      "click",
-      event=>{
+      modal.addEventListener(
+        "click",
+        event => {
 
-        if(
-          event.target===modal
-        ){
+          if(
+            event.target ===
+            modal
+          ){
 
-          modal.classList.remove(
-            "show"
-          );
+            modal.classList.remove(
+              "show"
+            );
+
+          }
 
         }
+      );
 
-      }
-    );
-
-  });
+    }
+  );
 
 
-/* =====================================================
+/* =========================================================
    ENTER LOGIN
-===================================================== */
+========================================================= */
 
 document
-  .getElementById("loginPass")
+  .getElementById(
+    "loginPass"
+  )
   .addEventListener(
     "keydown",
-    event=>{
+    event => {
 
       if(
-        event.key==="Enter"
+        event.key === "Enter"
       ){
 
         adminLogin();
@@ -3473,9 +3995,9 @@ document
   );
 
 
-/* =====================================================
+/* =========================================================
    START
-===================================================== */
+========================================================= */
 
 async function start(){
 
