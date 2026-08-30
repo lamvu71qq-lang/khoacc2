@@ -1,40 +1,27 @@
-
+```html
 <!DOCTYPE html>
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 
 <title>Keiths Hotdog</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-/* =========================================================
-   KEITHS HOTDOG
-   COLOR PALETTE
-========================================================= */
-
 :root{
   --mustard:#D7A028;
   --mustard-dark:#A87918;
-
   --orange:#DC4826;
   --orange-dark:#A93620;
-
   --pink:#F2869D;
   --pink-dark:#C96378;
-
   --cream:#E9DEC5;
   --cream-light:#F5EBD6;
-
   --brown:#2E2119;
-  --brown-light:#5B4030;
-
   --border:#C8B181;
   --white:#FFF9EA;
-
-  --green:#6F7C52;
 }
 
 *{
@@ -48,17 +35,14 @@ html{
 
 body{
   margin:0;
-
+  color:var(--brown);
   background:
     radial-gradient(
       circle at top,
-      #F2E7CF 0%,
+      #F2E7CF,
       #E9DEC5 55%,
-      #DCC9A6 100%
+      #DCC9A6
     );
-
-  color:var(--brown);
-
   font-family:
     -apple-system,
     BlinkMacSystemFont,
@@ -67,10 +51,7 @@ body{
     sans-serif;
 }
 
-button,
-input,
-textarea,
-select{
+button,input,textarea,select{
   font:inherit;
 }
 
@@ -83,30 +64,23 @@ button{
 }
 
 
-/* =========================================================
-   CUSTOMER HEADER
-========================================================= */
+/* =========================
+   CUSTOMER
+========================= */
 
 header{
   position:sticky;
   top:0;
   z-index:50;
-
   background:var(--brown);
-  color:white;
-
-  box-shadow:
-    0 4px 16px #0004;
+  color:#fff;
+  box-shadow:0 4px 16px #0004;
 }
 
 .header-inner{
-  width:100%;
   max-width:1000px;
-
   margin:auto;
-
   padding:12px 15px;
-
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -115,40 +89,26 @@ header{
 .logo{
   font-size:21px;
   font-weight:1000;
-
   letter-spacing:.7px;
-
-  user-select:none;
-
   cursor:pointer;
 }
 
 .logo small{
   display:block;
-
   margin-top:2px;
-
   color:var(--pink);
-
   font-size:9px;
-
   letter-spacing:1.5px;
 }
 
 .cart-button{
   border:2px solid var(--pink);
-
   border-radius:11px;
-
   padding:9px 13px;
-
   background:var(--orange);
   color:white;
-
   font-weight:1000;
-
-  box-shadow:
-    0 3px 0 var(--orange-dark);
+  box-shadow:0 3px 0 var(--orange-dark);
 }
 
 .cart-button:active{
@@ -156,117 +116,55 @@ header{
   box-shadow:none;
 }
 
-
-/* =========================================================
-   MAIN
-========================================================= */
-
 .container{
-  width:100%;
   max-width:1000px;
-
   margin:auto;
-
-  padding:16px;
-
-  padding-bottom:110px;
+  padding:16px 16px 110px;
 }
-
-
-/* =========================================================
-   BANNER
-========================================================= */
 
 .banner{
   position:relative;
-
   overflow:hidden;
-
   margin-bottom:15px;
-
   padding:28px 22px;
-
   border-radius:20px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #2E2119 0%,
-      #4A3326 100%
-    );
-
+  background:linear-gradient(
+    135deg,
+    #2E2119,
+    #4A3326
+  );
   color:white;
-
-  border-bottom:
-    5px solid var(--mustard);
-
-  box-shadow:
-    0 7px 18px #0003;
+  border-bottom:5px solid var(--mustard);
+  box-shadow:0 7px 18px #0003;
 }
 
 .banner h1{
   margin:0 0 6px;
-
   font-size:29px;
-
   font-weight:1000;
-
-  letter-spacing:.3px;
 }
 
 .banner p{
   margin:0;
-
   color:#E8D9BA;
-
   font-size:14px;
 }
 
 .banner:after{
   content:"🌭";
-
   position:absolute;
-
   right:20px;
   bottom:-13px;
-
   font-size:78px;
-
   opacity:.15;
-
   transform:rotate(-8deg);
 }
 
-.banner:before{
-  content:"";
-
-  position:absolute;
-
-  inset:8px;
-
-  border:
-    1px solid #F2869D35;
-
-  border-radius:14px;
-
-  pointer-events:none;
-}
-
-
-/* =========================================================
-   CATEGORY
-========================================================= */
-
 .categories{
   display:flex;
-
   gap:8px;
-
   overflow-x:auto;
-
-  padding:
-    2px 0
-    13px;
+  padding:2px 0 13px;
 }
 
 .categories::-webkit-scrollbar{
@@ -274,67 +172,35 @@ header{
 }
 
 .category{
-  border:
-    2px solid var(--border);
-
+  border:2px solid var(--border);
   border-radius:30px;
-
   padding:9px 14px;
-
   white-space:nowrap;
-
   background:#EFE4CB;
-
   color:var(--brown);
-
   font-weight:900;
-
-  transition:.2s;
 }
 
 .category.active{
   background:var(--mustard);
-
   border-color:var(--mustard);
-
   color:white;
-
-  box-shadow:
-    0 3px 0 var(--mustard-dark);
+  box-shadow:0 3px 0 var(--mustard-dark);
 }
-
-.category:active{
-  transform:scale(.96);
-}
-
-
-/* =========================================================
-   SECTION TITLE
-========================================================= */
 
 .section-title{
   display:flex;
-
   align-items:center;
-
   gap:9px;
-
-  margin:
-    5px 0
-    14px;
-
+  margin:5px 0 14px;
   font-size:22px;
-
   font-weight:1000;
 }
 
 .section-title:after{
   content:"";
-
   flex:1;
-
   height:3px;
-
   background:
     repeating-linear-gradient(
       90deg,
@@ -343,66 +209,37 @@ header{
     );
 }
 
-
-/* =========================================================
-   FOOD GRID
-========================================================= */
-
 .food-grid{
   display:grid;
-
-  grid-template-columns:
-    repeat(2,minmax(0,1fr));
-
+  grid-template-columns:repeat(2,minmax(0,1fr));
   gap:13px;
 }
 
 .food-card{
   position:relative;
-
   overflow:hidden;
-
-  border:
-    2px solid var(--border);
-
+  border:2px solid var(--border);
   border-radius:17px;
-
   background:var(--cream-light);
-
-  box-shadow:
-    0 5px 12px #3A2A1F20;
-
-  transition:.15s;
+  box-shadow:0 5px 12px #3A2A1F20;
 }
 
 .food-card:before{
   content:"";
-
   position:absolute;
-
   top:0;
   left:12px;
   right:12px;
-
   height:3px;
-
   background:var(--pink);
-
   z-index:2;
-}
-
-.food-card:active{
-  transform:scale(.985);
 }
 
 .food-image{
   display:block;
-
   width:100%;
   height:160px;
-
   object-fit:cover;
-
   background:#D5C29B;
 }
 
@@ -412,130 +249,77 @@ header{
 
 .food-name{
   font-size:16px;
-
   font-weight:1000;
 }
 
 .food-description{
   min-height:32px;
-
-  margin:
-    5px 0
-    10px;
-
+  margin:5px 0 10px;
   color:#796650;
-
   font-size:12px;
-
   line-height:1.35;
 }
 
 .food-bottom{
   display:flex;
-
   align-items:center;
-
   justify-content:space-between;
-
   gap:8px;
 }
 
 .price{
   color:var(--orange);
-
   font-size:16px;
-
   font-weight:1000;
 }
 
 .add-button{
   border:0;
-
   border-radius:9px;
-
   padding:8px 11px;
-
   background:var(--orange);
-
   color:white;
-
   font-weight:1000;
-
-  box-shadow:
-    0 3px 0 var(--orange-dark);
+  box-shadow:0 3px 0 var(--orange-dark);
 }
-
-.add-button:active{
-  transform:translateY(2px);
-
-  box-shadow:none;
-}
-
-
-/* =========================================================
-   BOTTOM CART
-========================================================= */
 
 .bottom-cart{
   position:fixed;
-
   left:0;
   right:0;
   bottom:0;
-
   z-index:40;
-
   padding:
     9px 14px
     calc(9px + env(safe-area-inset-bottom));
-
   background:var(--brown);
-
-  border-top:
-    3px solid var(--mustard);
+  border-top:3px solid var(--mustard);
 }
 
 .bottom-cart button{
   display:block;
-
   width:100%;
-
   max-width:1000px;
-
   margin:auto;
-
   border:0;
-
   border-radius:12px;
-
   padding:13px;
-
   background:var(--orange);
-
   color:white;
-
   font-weight:1000;
-
-  box-shadow:
-    0 3px 0 var(--orange-dark);
 }
 
 
-/* =========================================================
+/* =========================
    MODAL
-========================================================= */
+========================= */
 
 .modal{
   display:none;
-
   position:fixed;
-
   inset:0;
-
   z-index:100;
-
   align-items:flex-end;
-
   background:#24170DCC;
 }
 
@@ -545,25 +329,505 @@ header{
 
 .modal-box{
   width:100%;
-
   max-width:720px;
-
   max-height:94vh;
-
   overflow:auto;
-
   margin:auto;
-
   padding:20px;
-
-  border:
-    2px solid var(--border);
-
-  border-radius:
-    23px 23px 0 0;
-
+  border:2px solid var(--border);
+  border-radius:23px 23px 0 0;
   background:var(--cream-light);
 }
+
+.modal-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:15px;
+  padding-bottom:10px;
+  border-bottom:2px solid var(--border);
+}
+
+.modal-title{
+  font-size:22px;
+  font-weight:1000;
+}
+
+.close{
+  width:35px;
+  height:35px;
+  border:0;
+  border-radius:50%;
+  background:#E4D3B1;
+  color:var(--brown);
+  font-size:21px;
+  font-weight:900;
+}
+
+.primary{
+  width:100%;
+  border:0;
+  border-radius:11px;
+  padding:14px;
+  background:var(--orange);
+  color:white;
+  font-weight:1000;
+  box-shadow:0 3px 0 var(--orange-dark);
+}
+
+input,textarea,select{
+  width:100%;
+  margin:6px 0 12px;
+  padding:12px;
+  border:2px solid var(--border);
+  border-radius:10px;
+  outline:none;
+  background:#FFF9EA;
+  color:var(--brown);
+}
+
+label{
+  display:block;
+  margin-top:10px;
+  font-weight:900;
+}
+
+
+/* =========================
+   CART
+========================= */
+
+.cart-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:13px 0;
+  border-bottom:1px dashed #CDBB98;
+}
+
+.cart-info{
+  flex:1;
+}
+
+.cart-name{
+  font-weight:1000;
+}
+
+.cart-price{
+  margin-top:3px;
+  color:var(--orange);
+  font-size:13px;
+}
+
+.quantity{
+  display:flex;
+  align-items:center;
+  gap:7px;
+}
+
+.quantity button{
+  width:32px;
+  height:32px;
+  border:0;
+  border-radius:8px;
+  background:var(--brown);
+  color:white;
+  font-size:18px;
+}
+
+.total-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:15px 0;
+  font-size:21px;
+  font-weight:1000;
+}
+
+#cartTotal{
+  color:var(--orange);
+}
+
+
+/* =========================
+   ADMIN
+========================= */
+
+#adminScreen{
+  display:none;
+  min-height:100vh;
+  background:var(--cream);
+}
+
+.admin-header{
+  position:sticky;
+  top:0;
+  z-index:60;
+  background:var(--brown);
+  color:white;
+  border-bottom:4px solid var(--mustard);
+}
+
+.admin-header-inner{
+  max-width:1000px;
+  margin:auto;
+  padding:12px 15px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.admin-logo{
+  font-size:19px;
+  font-weight:1000;
+}
+
+.admin-actions{
+  display:flex;
+  gap:6px;
+}
+
+.admin-btn{
+  border:0;
+  border-radius:9px;
+  padding:9px 11px;
+  font-weight:900;
+}
+
+.customer-btn{
+  background:var(--pink);
+  color:var(--brown);
+}
+
+.logout-btn{
+  background:#5A4030;
+  color:white;
+}
+
+.admin-container{
+  max-width:1000px;
+  margin:auto;
+  padding:15px;
+}
+
+.admin-nav{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  margin-bottom:15px;
+}
+
+.admin-tab{
+  border:2px solid var(--border);
+  border-radius:10px;
+  padding:10px 14px;
+  white-space:nowrap;
+  background:var(--cream-light);
+  color:var(--brown);
+  font-weight:900;
+}
+
+.admin-tab.active{
+  border-color:var(--mustard);
+  background:var(--mustard);
+  color:white;
+}
+
+.admin-page{
+  display:none;
+}
+
+.admin-page.active{
+  display:block;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+  margin-bottom:15px;
+}
+
+.stat{
+  padding:16px;
+  border:2px solid var(--border);
+  border-radius:16px;
+  background:var(--cream-light);
+}
+
+.stat small{
+  color:#796650;
+}
+
+.stat strong{
+  display:block;
+  margin-top:5px;
+  color:var(--orange);
+  font-size:22px;
+}
+
+.admin-card{
+  margin-bottom:15px;
+  padding:18px;
+  border:2px solid var(--border);
+  border-radius:18px;
+  background:var(--cream-light);
+}
+
+.admin-card h2{
+  margin-top:0;
+}
+
+
+/* =========================
+   ADMIN FOOD
+========================= */
+
+.admin-food{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:12px 0;
+  border-bottom:1px dashed #CDBB98;
+}
+
+.admin-food img{
+  width:65px;
+  height:65px;
+  object-fit:cover;
+  border:2px solid var(--border);
+  border-radius:10px;
+}
+
+.admin-food-info{
+  flex:1;
+  min-width:0;
+}
+
+.admin-food-name{
+  font-weight:1000;
+}
+
+.admin-food-price{
+  color:var(--orange);
+  font-weight:1000;
+}
+
+.admin-food-category{
+  color:#796650;
+  font-size:12px;
+}
+
+.admin-food-actions{
+  display:flex;
+  gap:5px;
+}
+
+.small-btn{
+  border:0;
+  border-radius:8px;
+  padding:8px 9px;
+  font-weight:900;
+}
+
+.edit-btn{
+  background:#E9D49A;
+  color:#60470A;
+}
+
+.delete-btn{
+  background:#F3C5CD;
+  color:#8E3044;
+}
+
+
+/* =========================
+   COLOR SETTINGS
+========================= */
+
+.color-setting{
+  margin-bottom:22px;
+}
+
+.color-setting-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:9px;
+  font-weight:1000;
+}
+
+.color-current{
+  padding:4px 8px;
+  border-radius:7px;
+  background:#2E2119;
+  color:white;
+  font-size:12px;
+  font-family:monospace;
+}
+
+.color-presets{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:8px;
+}
+
+.color-preset{
+  position:relative;
+  height:44px;
+  border:3px solid transparent;
+  border-radius:10px;
+  overflow:hidden;
+  padding:0;
+}
+
+.color-preset.selected{
+  border-color:var(--brown);
+  box-shadow:
+    0 0 0 2px var(--cream-light),
+    0 0 0 4px var(--brown);
+}
+
+.color-preset span{
+  display:block;
+  width:100%;
+  height:100%;
+}
+
+.custom-color{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-top:10px;
+}
+
+.custom-color input[type="color"]{
+  width:54px;
+  height:44px;
+  margin:0;
+  padding:3px;
+  border-radius:10px;
+}
+
+.custom-color code{
+  font-size:13px;
+  font-weight:900;
+}
+
+.color-preview{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:15px;
+}
+
+.preview-box{
+  overflow:hidden;
+  border:2px solid var(--border);
+  border-radius:14px;
+  background:var(--cream-light);
+}
+
+.preview-top{
+  padding:12px;
+  background:var(--brown);
+  color:white;
+  font-weight:1000;
+}
+
+.preview-body{
+  padding:14px;
+}
+
+.preview-button{
+  border:0;
+  border-radius:9px;
+  padding:9px 13px;
+  background:var(--orange);
+  color:white;
+  font-weight:900;
+}
+
+.preview-tag{
+  display:inline-block;
+  margin-left:5px;
+  padding:7px 10px;
+  border-radius:8px;
+  background:var(--pink);
+  color:var(--brown);
+  font-weight:900;
+}
+
+.save-color{
+  margin-top:15px;
+}
+
+.reset-color{
+  margin-top:9px;
+  background:#5A4030;
+  box-shadow:none;
+}
+
+
+/* =========================
+   ORDER
+========================= */
+
+.order-card{
+  margin-bottom:12px;
+  padding:14px;
+  border:2px solid var(--border);
+  border-radius:15px;
+  background:var(--cream-light);
+}
+
+.order-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.order-code{
+  color:var(--orange);
+  font-weight:1000;
+}
+
+.order-status{
+  padding:5px 8px;
+  border-radius:7px;
+  background:var(--pink);
+  color:#63303C;
+  font-size:12px;
+  font-weight:900;
+}
+
+.order-items{
+  margin:10px 0;
+  padding:10px;
+  border-radius:10px;
+  background:#E9DBC0;
+  color:#5E4B39;
+}
+
+.order-total{
+  color:var(--orange);
+  font-size:18px;
+  font-weight:1000;
+}
+
+.empty{
+  padding:35px 10px;
+  text-align:center;
+  color:#8A7861;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
 
 @media(min-width:700px){
 
@@ -577,619 +841,7 @@ header{
 
 }
 
-.modal-header{
-  display:flex;
-
-  align-items:center;
-
-  justify-content:space-between;
-
-  margin-bottom:15px;
-
-  padding-bottom:10px;
-
-  border-bottom:
-    2px solid var(--border);
-}
-
-.modal-title{
-  font-size:22px;
-
-  font-weight:1000;
-}
-
-.close{
-  width:35px;
-  height:35px;
-
-  border:0;
-
-  border-radius:50%;
-
-  background:#E4D3B1;
-
-  color:var(--brown);
-
-  font-size:21px;
-
-  font-weight:900;
-}
-
-
-/* =========================================================
-   CART
-========================================================= */
-
-.cart-item{
-  display:flex;
-
-  align-items:center;
-
-  justify-content:space-between;
-
-  gap:10px;
-
-  padding:13px 0;
-
-  border-bottom:
-    1px dashed #CDBB98;
-}
-
-.cart-info{
-  flex:1;
-}
-
-.cart-name{
-  font-weight:1000;
-}
-
-.cart-price{
-  margin-top:3px;
-
-  color:var(--orange);
-
-  font-size:13px;
-}
-
-.quantity{
-  display:flex;
-
-  align-items:center;
-
-  gap:7px;
-}
-
-.quantity button{
-  width:32px;
-  height:32px;
-
-  border:0;
-
-  border-radius:8px;
-
-  background:var(--brown);
-
-  color:white;
-
-  font-size:18px;
-}
-
-.total-row{
-  display:flex;
-
-  align-items:center;
-
-  justify-content:space-between;
-
-  padding:15px 0;
-
-  font-size:21px;
-
-  font-weight:1000;
-}
-
-#cartTotal{
-  color:var(--orange);
-}
-
-
-/* =========================================================
-   BUTTON
-========================================================= */
-
-.primary{
-  width:100%;
-
-  border:0;
-
-  border-radius:11px;
-
-  padding:14px;
-
-  background:var(--orange);
-
-  color:white;
-
-  font-weight:1000;
-
-  box-shadow:
-    0 3px 0 var(--orange-dark);
-}
-
-.primary:active{
-  transform:translateY(2px);
-
-  box-shadow:none;
-}
-
-
-/* =========================================================
-   FORM
-========================================================= */
-
-label{
-  display:block;
-
-  margin-top:10px;
-
-  font-weight:900;
-}
-
-input,
-textarea,
-select{
-  width:100%;
-
-  margin:
-    6px 0
-    12px;
-
-  padding:12px;
-
-  border:
-    2px solid var(--border);
-
-  border-radius:10px;
-
-  outline:none;
-
-  background:#FFF9EA;
-
-  color:var(--brown);
-}
-
-input:focus,
-textarea:focus,
-select:focus{
-  border-color:var(--orange);
-}
-
-
-/* =========================================================
-   ADMIN
-========================================================= */
-
-#adminScreen{
-  display:none;
-
-  min-height:100vh;
-
-  background:var(--cream);
-
-  color:var(--brown);
-}
-
-.admin-header{
-  position:sticky;
-
-  top:0;
-
-  z-index:60;
-
-  background:var(--brown);
-
-  color:white;
-
-  border-bottom:
-    4px solid var(--mustard);
-}
-
-.admin-header-inner{
-  max-width:1000px;
-
-  margin:auto;
-
-  padding:12px 15px;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:space-between;
-}
-
-.admin-logo{
-  font-size:19px;
-
-  font-weight:1000;
-}
-
-.admin-actions{
-  display:flex;
-
-  gap:6px;
-}
-
-.admin-btn{
-  border:0;
-
-  border-radius:9px;
-
-  padding:9px 11px;
-
-  font-weight:900;
-}
-
-.customer-btn{
-  background:var(--pink);
-
-  color:var(--brown);
-}
-
-.logout-btn{
-  background:#5A4030;
-
-  color:white;
-}
-
-.admin-container{
-  max-width:1000px;
-
-  margin:auto;
-
-  padding:15px;
-}
-
-.admin-nav{
-  display:flex;
-
-  gap:8px;
-
-  overflow-x:auto;
-
-  margin-bottom:15px;
-}
-
-.admin-tab{
-  border:
-    2px solid var(--border);
-
-  border-radius:10px;
-
-  padding:10px 14px;
-
-  white-space:nowrap;
-
-  background:var(--cream-light);
-
-  color:var(--brown);
-
-  font-weight:900;
-}
-
-.admin-tab.active{
-  border-color:var(--mustard);
-
-  background:var(--mustard);
-
-  color:white;
-}
-
-.admin-page{
-  display:none;
-}
-
-.admin-page.active{
-  display:block;
-}
-
-
-/* =========================================================
-   STATS
-========================================================= */
-
-.stats{
-  display:grid;
-
-  grid-template-columns:
-    repeat(2,1fr);
-
-  gap:10px;
-
-  margin-bottom:15px;
-}
-
-.stat{
-  padding:16px;
-
-  border:
-    2px solid var(--border);
-
-  border-radius:16px;
-
-  background:var(--cream-light);
-}
-
-.stat small{
-  color:#796650;
-}
-
-.stat strong{
-  display:block;
-
-  margin-top:5px;
-
-  color:var(--orange);
-
-  font-size:22px;
-}
-
-
-/* =========================================================
-   ADMIN CARD
-========================================================= */
-
-.admin-card{
-  margin-bottom:15px;
-
-  padding:18px;
-
-  border:
-    2px solid var(--border);
-
-  border-radius:18px;
-
-  background:var(--cream-light);
-}
-
-.admin-card h2{
-  margin-top:0;
-}
-
-
-/* =========================================================
-   ADMIN FOOD
-========================================================= */
-
-.admin-food{
-  display:flex;
-
-  align-items:center;
-
-  gap:10px;
-
-  padding:12px 0;
-
-  border-bottom:
-    1px dashed #CDBB98;
-}
-
-.admin-food img{
-  width:65px;
-  height:65px;
-
-  object-fit:cover;
-
-  border:
-    2px solid var(--border);
-
-  border-radius:10px;
-}
-
-.admin-food-info{
-  flex:1;
-
-  min-width:0;
-}
-
-.admin-food-name{
-  font-weight:1000;
-}
-
-.admin-food-price{
-  color:var(--orange);
-
-  font-weight:1000;
-}
-
-.admin-food-category{
-  color:#796650;
-
-  font-size:12px;
-}
-
-.admin-food-actions{
-  display:flex;
-
-  gap:5px;
-}
-
-.small-btn{
-  border:0;
-
-  border-radius:8px;
-
-  padding:8px 9px;
-
-  font-weight:900;
-}
-
-.edit-btn{
-  background:#E9D49A;
-
-  color:#60470A;
-}
-
-.delete-btn{
-  background:#F3C5CD;
-
-  color:#8E3044;
-}
-
-
-/* =========================================================
-   ORDER
-========================================================= */
-
-.order-card{
-  margin-bottom:12px;
-
-  padding:14px;
-
-  border:
-    2px solid var(--border);
-
-  border-radius:15px;
-
-  background:var(--cream-light);
-}
-
-.order-head{
-  display:flex;
-
-  align-items:flex-start;
-
-  justify-content:space-between;
-
-  gap:10px;
-}
-
-.order-code{
-  color:var(--orange);
-
-  font-weight:1000;
-}
-
-.order-status{
-  padding:5px 8px;
-
-  border-radius:7px;
-
-  background:var(--pink);
-
-  color:#63303C;
-
-  font-size:12px;
-
-  font-weight:900;
-}
-
-.order-items{
-  margin:10px 0;
-
-  padding:10px;
-
-  border-radius:10px;
-
-  background:#E9DBC0;
-
-  color:#5E4B39;
-}
-
-.order-total{
-  color:var(--orange);
-
-  font-size:18px;
-
-  font-weight:1000;
-}
-
-
-/* =========================================================
-   EMPTY
-========================================================= */
-
-.empty{
-  padding:35px 10px;
-
-  text-align:center;
-
-  color:#8A7861;
-}
-
-
-/* =========================================================
-   SUCCESS
-========================================================= */
-
-.success{
-  padding:15px;
-
-  text-align:center;
-}
-
-.success-icon{
-  font-size:60px;
-}
-
-.success-code{
-  margin:15px;
-
-  color:var(--orange);
-
-  font-size:30px;
-
-  font-weight:1000;
-}
-
-
-/* =========================================================
-   SECRET ADMIN HINT
-========================================================= */
-
-.secret-hint{
-  position:fixed;
-
-  left:50%;
-  bottom:85px;
-
-  z-index:200;
-
-  transform:translateX(-50%);
-
-  padding:9px 13px;
-
-  border-radius:10px;
-
-  background:var(--brown);
-
-  color:white;
-
-  font-size:12px;
-
-  opacity:0;
-
-  pointer-events:none;
-
-  transition:.2s;
-}
-
-.secret-hint.show{
-  opacity:1;
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
 @media(max-width:550px){
-
-  .container{
-    padding:12px;
-
-    padding-bottom:105px;
-  }
 
   .food-grid{
     gap:9px;
@@ -1209,7 +861,6 @@ select:focus{
 
   .food-description{
     min-height:30px;
-
     font-size:11px;
   }
 
@@ -1219,39 +870,11 @@ select:focus{
 
   .add-button{
     padding:7px 9px;
-
     font-size:12px;
   }
 
-  .admin-food-actions{
-    flex-direction:column;
-  }
-
-}
-
-
-/* =========================================================
-   VERY SMALL PHONE
-========================================================= */
-
-@media(max-width:380px){
-
-  .banner h1{
-    font-size:25px;
-  }
-
-  .food-grid{
-    grid-template-columns:1fr 1fr;
-
-    gap:7px;
-  }
-
-  .food-image{
-    height:110px;
-  }
-
-  .food-name{
-    font-size:14px;
+  .color-presets{
+    grid-template-columns:repeat(4,1fr);
   }
 
 }
@@ -1262,139 +885,116 @@ select:focus{
 <body>
 
 
-<!-- =======================================================
-     CUSTOMER SCREEN
-======================================================= -->
+<!-- ======================================================
+     CUSTOMER
+====================================================== -->
 
 <div id="customerScreen">
 
 <header>
 
-  <div class="header-inner">
+<div class="header-inner">
 
-    <div
-      class="logo"
-      onclick="secretAdminClick()"
-    >
+<div
+class="logo"
+onclick="secretAdminClick()"
+>
+🌭 KEITHS HOTDOG
+<small>GOOD FOOD • GOOD MOOD</small>
+</div>
 
-      🌭 KEITHS HOTDOG
+<button
+class="cart-button"
+onclick="openCart()"
+>
+🛒 <span id="cartCount">0</span>
+</button>
 
-      <small>
-        GOOD FOOD • GOOD MOOD
-      </small>
-
-    </div>
-
-
-    <button
-      class="cart-button"
-      onclick="openCart()"
-    >
-
-      🛒
-      <span id="cartCount">0</span>
-
-    </button>
-
-  </div>
+</div>
 
 </header>
 
 
 <main class="container">
 
+<div class="banner">
 
-  <!-- BANNER -->
+<h1>
+Keiths Hotdog 🌭
+</h1>
 
-  <div class="banner">
+<p>
+Hotdog • Snacks • Drinks
+</p>
 
-    <h1>
-      Keiths Hotdog 🌭
-    </h1>
-
-    <p>
-      Hotdog • Snacks • Drinks
-    </p>
-
-  </div>
+</div>
 
 
-  <!-- CATEGORY -->
+<div class="categories">
 
-  <div class="categories">
+<button
+class="category active"
+onclick="changeCategory('all',this)"
+>
+🍽️ Tất cả
+</button>
 
-    <button
-      class="category active"
-      onclick="changeCategory('all',this)"
-    >
-      🍽️ Tất cả
-    </button>
+<button
+class="category"
+onclick="changeCategory('main',this)"
+>
+🌭 Ăn chính
+</button>
 
+<button
+class="category"
+onclick="changeCategory('snack',this)"
+>
+🍟 Ăn vặt
+</button>
 
-    <button
-      class="category"
-      onclick="changeCategory('main',this)"
-    >
-      🌭 Ăn chính
-    </button>
+<button
+class="category"
+onclick="changeCategory('extra',this)"
+>
+🧀 Đồ ăn thêm
+</button>
 
+<button
+class="category"
+onclick="changeCategory('drink',this)"
+>
+🥤 Đồ uống
+</button>
 
-    <button
-      class="category"
-      onclick="changeCategory('snack',this)"
-    >
-      🍟 Ăn vặt
-    </button>
-
-
-    <button
-      class="category"
-      onclick="changeCategory('extra',this)"
-    >
-      🧀 Đồ ăn thêm
-    </button>
-
-
-    <button
-      class="category"
-      onclick="changeCategory('drink',this)"
-    >
-      🥤 Đồ uống
-    </button>
-
-  </div>
+</div>
 
 
-  <div
-    class="section-title"
-    id="sectionTitle"
-  >
-    Tất cả món
-  </div>
+<div
+class="section-title"
+id="sectionTitle"
+>
+Tất cả món
+</div>
 
 
-  <div
-    id="foodList"
-    class="food-grid"
-  ></div>
-
+<div
+id="foodList"
+class="food-grid"
+></div>
 
 </main>
 
 
-<!-- BOTTOM CART -->
-
 <div class="bottom-cart">
 
-  <button onclick="openCart()">
+<button onclick="openCart()">
 
-    🛒 Xem giỏ hàng •
+🛒 Xem giỏ hàng •
 
-    <span id="bottomTotal">
-      0đ
-    </span>
+<span id="bottomTotal">0đ</span>
 
-  </button>
+</button>
 
 </div>
 
@@ -1402,543 +1002,813 @@ select:focus{
 
 
 
-<!-- =======================================================
-     ADMIN SCREEN
-======================================================= -->
+<!-- ======================================================
+     ADMIN
+====================================================== -->
 
 <div id="adminScreen">
 
-  <div class="admin-header">
+<div class="admin-header">
 
-    <div class="admin-header-inner">
+<div class="admin-header-inner">
 
-      <div class="admin-logo">
-        ⚙️ KEITHS HOTDOG ADMIN
-      </div>
+<div class="admin-logo">
+⚙️ KEITHS HOTDOG ADMIN
+</div>
 
+<div class="admin-actions">
 
-      <div class="admin-actions">
+<button
+class="admin-btn customer-btn"
+onclick="showCustomer()"
+>
+← Khách
+</button>
 
-        <button
-          class="admin-btn customer-btn"
-          onclick="showCustomer()"
-        >
-          ← Khách
-        </button>
+<button
+class="admin-btn logout-btn"
+onclick="adminLogout()"
+>
+Thoát
+</button>
 
+</div>
 
-        <button
-          class="admin-btn logout-btn"
-          onclick="adminLogout()"
-        >
-          Thoát
-        </button>
+</div>
 
-      </div>
+</div>
 
-    </div>
 
-  </div>
+<div class="admin-container">
 
 
-  <div class="admin-container">
+<div class="admin-nav">
 
+<button
+class="admin-tab active"
+onclick="adminTab('dashboard',this)"
+>
+📊 Tổng quan
+</button>
 
-    <div class="admin-nav">
+<button
+class="admin-tab"
+onclick="adminTab('foods',this)"
+>
+🌭 Món ăn
+</button>
 
-      <button
-        class="admin-tab active"
-        onclick="adminTab('dashboard',this)"
-      >
-        📊 Tổng quan
-      </button>
+<button
+class="admin-tab"
+onclick="adminTab('orders',this)"
+>
+📦 Đơn hàng
+</button>
 
+<button
+class="admin-tab"
+onclick="adminTab('appearance',this)"
+>
+🎨 Giao diện
+</button>
 
-      <button
-        class="admin-tab"
-        onclick="adminTab('foods',this)"
-      >
-        🌭 Món ăn
-      </button>
+</div>
 
 
-      <button
-        class="admin-tab"
-        onclick="adminTab('orders',this)"
-      >
-        📦 Đơn hàng
-      </button>
+<!-- DASHBOARD -->
 
-    </div>
+<div
+id="dashboard"
+class="admin-page active"
+>
 
+<div class="stats">
 
-    <!-- DASHBOARD -->
+<div class="stat">
+<small>Tổng món</small>
+<strong id="statFoods">0</strong>
+</div>
 
-    <div
-      id="dashboard"
-      class="admin-page active"
-    >
+<div class="stat">
+<small>Tổng đơn</small>
+<strong id="statOrders">0</strong>
+</div>
 
-      <div class="stats">
+<div class="stat">
+<small>Đang xử lý</small>
+<strong id="statPending">0</strong>
+</div>
 
-        <div class="stat">
+<div class="stat">
+<small>Doanh thu</small>
+<strong id="statRevenue">0đ</strong>
+</div>
 
-          <small>
-            Tổng món
-          </small>
+</div>
 
-          <strong id="statFoods">
-            0
-          </strong>
+</div>
 
-        </div>
 
+<!-- FOODS -->
 
-        <div class="stat">
+<div
+id="foods"
+class="admin-page"
+>
 
-          <small>
-            Tổng đơn
-          </small>
+<div class="admin-card">
 
-          <strong id="statOrders">
-            0
-          </strong>
+<h2>➕ Thêm món</h2>
 
-        </div>
+<label>Tên món</label>
 
+<input
+id="foodName"
+placeholder="Classic Hotdog"
+>
 
-        <div class="stat">
+<label>Giá</label>
 
-          <small>
-            Đang xử lý
-          </small>
+<input
+id="foodPrice"
+type="number"
+placeholder="65000"
+>
 
-          <strong id="statPending">
-            0
-          </strong>
+<label>Danh mục</label>
 
-        </div>
+<select id="foodCategory">
 
+<option value="main">
+🌭 Ăn chính
+</option>
 
-        <div class="stat">
+<option value="snack">
+🍟 Ăn vặt
+</option>
 
-          <small>
-            Doanh thu
-          </small>
+<option value="extra">
+🧀 Đồ ăn thêm
+</option>
 
-          <strong id="statRevenue">
-            0đ
-          </strong>
+<option value="drink">
+🥤 Đồ uống
+</option>
 
-        </div>
+</select>
 
-      </div>
+<label>Mô tả</label>
 
-    </div>
+<textarea
+id="foodDescription"
+rows="3"
+placeholder="Mô tả món ăn..."
+></textarea>
 
+<label>Link ảnh</label>
 
-    <!-- FOODS -->
+<input
+id="foodImage"
+placeholder="https://..."
+>
 
-    <div
-      id="foods"
-      class="admin-page"
-    >
+<button
+class="primary"
+onclick="addFood()"
+>
+➕ THÊM MÓN
+</button>
 
+</div>
 
-      <div class="admin-card">
 
-        <h2>
-          ➕ Thêm món
-        </h2>
+<div class="admin-card">
 
+<h2>🌭 Danh sách món</h2>
 
-        <label>
-          Tên món
-        </label>
+<div id="adminFoodList"></div>
 
-        <input
-          id="foodName"
-          placeholder="Classic Hotdog"
-        >
+</div>
 
+</div>
 
-        <label>
-          Giá
-        </label>
 
-        <input
-          id="foodPrice"
-          type="number"
-          placeholder="65000"
-        >
+<!-- ORDERS -->
 
+<div
+id="orders"
+class="admin-page"
+>
 
-        <label>
-          Danh mục
-        </label>
+<div class="admin-card">
 
-        <select id="foodCategory">
+<h2>📦 Đơn hàng</h2>
 
-          <option value="main">
-            🌭 Ăn chính
-          </option>
+<div id="adminOrders"></div>
 
-          <option value="snack">
-            🍟 Ăn vặt
-          </option>
+</div>
 
-          <option value="extra">
-            🧀 Đồ ăn thêm
-          </option>
+</div>
 
-          <option value="drink">
-            🥤 Đồ uống
-          </option>
 
-        </select>
+<!-- ======================================================
+     APPEARANCE
+====================================================== -->
 
+<div
+id="appearance"
+class="admin-page"
+>
 
-        <label>
-          Mô tả
-        </label>
+<div class="admin-card">
 
-        <textarea
-          id="foodDescription"
-          rows="3"
-          placeholder="Mô tả món ăn..."
-        ></textarea>
+<h2>🎨 Chỉnh giao diện</h2>
 
+<p style="color:#796650;margin-top:-5px;">
+Chọn màu cho giao diện quán. Thay đổi sẽ được áp dụng ngay.
+</p>
 
-        <label>
-          Link ảnh
-        </label>
 
-        <input
-          id="foodImage"
-          placeholder="https://..."
-        >
+<!-- MUSTARD -->
 
+<div class="color-setting">
 
-        <button
-          class="primary"
-          onclick="addFood()"
-        >
-          ➕ THÊM MÓN
-        </button>
+<div class="color-setting-title">
 
-      </div>
+<span>
+🟡 Màu chủ đạo
+</span>
 
+<span
+class="color-current"
+id="mustardCode"
+>
+#D7A028
+</span>
 
-      <div class="admin-card">
+</div>
 
-        <h2>
-          🌭 Danh sách món
-        </h2>
 
-        <div id="adminFoodList"></div>
+<div class="color-presets">
 
-      </div>
+<button
+class="color-preset"
+data-color="#D7A028"
+data-type="mustard"
+onclick="selectColor('mustard','#D7A028',this)"
+>
+<span style="background:#D7A028"></span>
+</button>
 
-    </div>
+<button
+class="color-preset"
+data-color="#E0A92E"
+data-type="mustard"
+onclick="selectColor('mustard','#E0A92E',this)"
+>
+<span style="background:#E0A92E"></span>
+</button>
 
+<button
+class="color-preset"
+data-color="#C99420"
+data-type="mustard"
+onclick="selectColor('mustard','#C99420',this)"
+>
+<span style="background:#C99420"></span>
+</button>
 
-    <!-- ORDERS -->
+<button
+class="color-preset"
+data-color="#B88719"
+data-type="mustard"
+onclick="selectColor('mustard','#B88719',this)"
+>
+<span style="background:#B88719"></span>
+</button>
 
-    <div
-      id="orders"
-      class="admin-page"
-    >
+<button
+class="color-preset"
+data-color="#D49B25"
+data-type="mustard"
+onclick="selectColor('mustard','#D49B25',this)"
+>
+<span style="background:#D49B25"></span>
+</button>
 
-      <div class="admin-card">
+<button
+class="color-preset"
+data-color="#E6B33A"
+data-type="mustard"
+onclick="selectColor('mustard','#E6B33A',this)"
+>
+<span style="background:#E6B33A"></span>
+</button>
 
-        <h2>
-          📦 Đơn hàng
-        </h2>
+</div>
 
-        <div id="adminOrders"></div>
 
-      </div>
+<div class="custom-color">
 
-    </div>
+<input
+type="color"
+id="mustardPicker"
+value="#D7A028"
+oninput="customColor('mustard',this.value)"
+>
 
-  </div>
+<code id="mustardCustom">
+#D7A028
+</code>
+
+</div>
 
 </div>
 
 
 
-<!-- =======================================================
+<!-- ORANGE -->
+
+<div class="color-setting">
+
+<div class="color-setting-title">
+
+<span>
+🟠 Màu cam
+</span>
+
+<span
+class="color-current"
+id="orangeCode"
+>
+#DC4826
+</span>
+
+</div>
+
+
+<div class="color-presets">
+
+<button
+class="color-preset"
+onclick="selectColor('orange','#DC4826',this)"
+>
+<span style="background:#DC4826"></span>
+</button>
+
+<button
+class="color-preset"
+onclick="selectColor('orange','#C94225',this)"
+>
+<span style="background:#C94225"></span>
+</button>
+
+<button
+class="color-preset"
+onclick="selectColor('orange','#B83B22',this)"
+>
+<span style="background:#B83B22"></span>
+</button>
+
+<button
+class="color-preset"
+onclick="selectColor('orange','#E0522C',this)"
+>
+<span style="background:#E0522C"></span>
+</button>
+
+<button
+class="color-preset"
+onclick="selectColor('orange','#D45A31',this)"
+>
+<span style="background:#D45A31"></span>
+</button>
+
+<button
+class="color-preset"
+onclick="selectColor('orange','#A83A25',this)"
+>
+<span style="background:#A83A25"></span>
+</button>
+
+</div>
+
+
+<div class="custom-color">
+
+<input
+type="color"
+id="orangePicker"
+value="#DC4826"
+oninput="customColor('orange',this.value)"
+>
+
+<code id="orangeCustom">
+#DC4826
+</code>
+
+</div>
+
+</div>
+
+
+
+<!-- PINK -->
+
+<div class="color-setting">
+
+<div class="color-setting-title">
+
+<span>
+🌸 Màu hồng
+</span>
+
+<span
+class="color-current"
+id="pinkCode"
+>
+#F2869D
+</span>
+
+</div>
+
+
+<div class="color-presets">
+
+<button
+class="color-preset"
+onclick="selectColor('pink','#F2869D',this)"
+>
+<span style="background:#F2869D"></span>
+</button>
+
+<button
+class="color-preset"
+onclick="selectColor('pink','#E97890',this)"
+>
+<span style="background:#E97890"></span>
+</button>
+
+<button
+class="color-preset"
+onclick="selectColor('pink','#D9677E',this)"
+>
+<span style="background:#D9677E"></span>
+</button>
+
+<button
+class="color-preset"
+onclick="selectColor('pink','#F09AAD',this)"
+>
+<span style="background:#F09AAD"></span>
+</button>
+
+<button
+class="color-preset"
+onclick="selectColor('pink','#E58B9F',this)"
+>
+<span style="background:#E58B9F"></span>
+</button>
+
+<button
+class="color-preset"
+onclick="selectColor('pink','#C95D76',this)"
+>
+<span style="background:#C95D76"></span>
+</button>
+
+</div>
+
+
+<div class="custom-color">
+
+<input
+type="color"
+id="pinkPicker"
+value="#F2869D"
+oninput="customColor('pink',this.value)"
+>
+
+<code id="pinkCustom">
+#F2869D
+</code>
+
+</div>
+
+</div>
+
+
+
+<!-- PREVIEW -->
+
+<div class="color-preview">
+
+<div class="preview-box">
+
+<div class="preview-top">
+Keiths Hotdog
+</div>
+
+<div class="preview-body">
+
+<button class="preview-button">
+Đặt món
+</button>
+
+<span class="preview-tag">
+HOT
+</span>
+
+</div>
+
+</div>
+
+
+<div class="preview-box">
+
+<div
+class="preview-top"
+style="background:var(--mustard)"
+>
+Màu chủ đạo
+</div>
+
+<div class="preview-body">
+
+<button
+class="preview-button"
+style="background:var(--mustard)"
+>
+Xem món
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<button
+class="primary save-color"
+onclick="saveColors()"
+>
+💾 LƯU MÀU
+</button>
+
+
+<button
+class="primary reset-color"
+onclick="resetColors()"
+>
+↩️ KHÔI PHỤC MẶC ĐỊNH
+</button>
+
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- ======================================================
      CART MODAL
-======================================================= -->
+====================================================== -->
 
 <div
-  class="modal"
-  id="cartModal"
+class="modal"
+id="cartModal"
 >
 
-  <div class="modal-box">
+<div class="modal-box">
 
+<div class="modal-header">
 
-    <div class="modal-header">
+<div class="modal-title">
+🛒 Giỏ hàng
+</div>
 
-      <div class="modal-title">
-        🛒 Giỏ hàng
-      </div>
+<button
+class="close"
+onclick="closeModal('cartModal')"
+>
+×
+</button>
 
+</div>
 
-      <button
-        class="close"
-        onclick="closeModal('cartModal')"
-      >
-        ×
-      </button>
+<div id="cartItems"></div>
 
-    </div>
+<div class="total-row">
 
+<span>Tổng</span>
 
-    <div id="cartItems"></div>
+<span id="cartTotal">0đ</span>
 
+</div>
 
-    <div class="total-row">
+<button
+class="primary"
+onclick="openCheckout()"
+>
+Tiếp tục đặt hàng
+</button>
 
-      <span>
-        Tổng
-      </span>
-
-      <span id="cartTotal">
-        0đ
-      </span>
-
-    </div>
-
-
-    <button
-      class="primary"
-      onclick="openCheckout()"
-    >
-      Tiếp tục đặt hàng
-    </button>
-
-  </div>
+</div>
 
 </div>
 
 
 
-<!-- =======================================================
+<!-- ======================================================
      CHECKOUT
-======================================================= -->
+====================================================== -->
 
 <div
-  class="modal"
-  id="checkoutModal"
+class="modal"
+id="checkoutModal"
 >
 
-  <div class="modal-box">
+<div class="modal-box">
 
+<div class="modal-header">
 
-    <div class="modal-header">
+<div class="modal-title">
+📦 Thông tin giao hàng
+</div>
 
-      <div class="modal-title">
-        📦 Thông tin giao hàng
-      </div>
+<button
+class="close"
+onclick="closeModal('checkoutModal')"
+>
+×
+</button>
 
+</div>
 
-      <button
-        class="close"
-        onclick="closeModal('checkoutModal')"
-      >
-        ×
-      </button>
+<label>Họ tên</label>
 
-    </div>
+<input
+id="customerName"
+placeholder="Nguyễn Văn A"
+>
 
+<label>Số điện thoại</label>
 
-    <label>
-      Họ tên
-    </label>
+<input
+id="customerPhone"
+type="tel"
+placeholder="09xxxxxxxx"
+>
 
-    <input
-      id="customerName"
-      placeholder="Nguyễn Văn A"
-    >
+<label>Địa chỉ</label>
 
+<textarea
+id="customerAddress"
+rows="3"
+placeholder="Địa chỉ giao hàng"
+></textarea>
 
-    <label>
-      Số điện thoại
-    </label>
+<label>Thanh toán</label>
 
-    <input
-      id="customerPhone"
-      type="tel"
-      placeholder="09xxxxxxxx"
-    >
+<select id="payment">
 
+<option value="COD">
+💵 Tiền mặt khi nhận
+</option>
 
-    <label>
-      Địa chỉ
-    </label>
+<option value="BANK">
+🏦 Chuyển khoản
+</option>
 
-    <textarea
-      id="customerAddress"
-      rows="3"
-      placeholder="Địa chỉ giao hàng"
-    ></textarea>
+</select>
 
+<button
+class="primary"
+onclick="placeOrder()"
+>
+✅ XÁC NHẬN ĐẶT HÀNG
+</button>
 
-    <label>
-      Thanh toán
-    </label>
-
-    <select id="payment">
-
-      <option value="COD">
-        💵 Tiền mặt khi nhận
-      </option>
-
-      <option value="BANK">
-        🏦 Chuyển khoản
-      </option>
-
-    </select>
-
-
-    <button
-      class="primary"
-      onclick="placeOrder()"
-    >
-      ✅ XÁC NHẬN ĐẶT HÀNG
-    </button>
-
-  </div>
+</div>
 
 </div>
 
 
 
-<!-- =======================================================
+<!-- ======================================================
      SUCCESS
-======================================================= -->
+====================================================== -->
 
 <div
-  class="modal"
-  id="successModal"
+class="modal"
+id="successModal"
 >
 
-  <div class="modal-box">
+<div class="modal-box">
 
-    <div class="success">
+<div style="text-align:center;padding:20px">
 
-      <div class="success-icon">
-        🎉
-      </div>
+<div style="font-size:60px">
+🎉
+</div>
 
-      <h2>
-        Đặt hàng thành công!
-      </h2>
+<h2>
+Đặt hàng thành công!
+</h2>
 
-      <p>
-        Mã đơn hàng
-      </p>
+<p>
+Mã đơn hàng
+</p>
 
-      <div
-        class="success-code"
-        id="successCode"
-      ></div>
+<div
+id="successCode"
+style="
+color:var(--orange);
+font-size:30px;
+font-weight:1000;
+margin:15px;
+"
+></div>
 
+<button
+class="primary"
+onclick="closeModal('successModal')"
+>
+Về trang chủ
+</button>
 
-      <button
-        class="primary"
-        onclick="closeModal('successModal')"
-      >
-        Về trang chủ
-      </button>
+</div>
 
-    </div>
-
-  </div>
+</div>
 
 </div>
 
 
 
-<!-- =======================================================
+<!-- ======================================================
      ADMIN LOGIN
-======================================================= -->
+====================================================== -->
 
 <div
-  class="modal"
-  id="loginModal"
+class="modal"
+id="loginModal"
 >
 
-  <div class="modal-box">
+<div class="modal-box">
 
+<div class="modal-header">
 
-    <div class="modal-header">
+<div class="modal-title">
+🔐 Admin
+</div>
 
-      <div class="modal-title">
-        🔐 Admin
-      </div>
-
-
-      <button
-        class="close"
-        onclick="closeModal('loginModal')"
-      >
-        ×
-      </button>
-
-    </div>
-
-
-    <label>
-      Tài khoản
-    </label>
-
-    <input
-      id="loginUser"
-      placeholder="admin"
-    >
-
-
-    <label>
-      Mật khẩu
-    </label>
-
-    <input
-      id="loginPass"
-      type="password"
-      placeholder="123456"
-    >
-
-
-    <button
-      class="primary"
-      onclick="adminLogin()"
-    >
-      ĐĂNG NHẬP
-    </button>
-
-  </div>
+<button
+class="close"
+onclick="closeModal('loginModal')"
+>
+×
+</button>
 
 </div>
 
+<label>Tài khoản</label>
 
-
-<div
-  class="secret-hint"
-  id="secretHint"
+<input
+id="loginUser"
+placeholder="admin"
 >
-  🔐 Bấm logo 5 lần để vào Admin
+
+<label>Mật khẩu</label>
+
+<input
+id="loginPass"
+type="password"
+placeholder="123456"
+>
+
+<button
+class="primary"
+onclick="adminLogin()"
+>
+ĐĂNG NHẬP
+</button>
+
+</div>
+
 </div>
 
 
 
 <script>
 
-/* =========================================================
+/* ======================================================
    SUPABASE
-========================================================= */
+====================================================== */
 
 const SUPABASE_URL =
 "https://dcqrngutharengnanzna.supabase.co";
@@ -1953,59 +1823,575 @@ window.supabase.createClient(
 );
 
 
-/* =========================================================
-   VARIABLES
-========================================================= */
+/* ======================================================
+   DATA
+====================================================== */
 
 let foods = [];
-
 let orders = [];
-
 let cart = [];
-
 let currentCategory = "all";
-
 let secretClicks = 0;
+let secretTimer;
 
-let secretTimer = null;
+
+/* ======================================================
+   COLOR SYSTEM
+====================================================== */
+
+const defaultColors = {
+
+  mustard:"#D7A028",
+
+  mustardDark:"#A87918",
+
+  orange:"#DC4826",
+
+  orangeDark:"#A93620",
+
+  pink:"#F2869D",
+
+  pinkDark:"#C96378"
+
+};
 
 
-/* =========================================================
-   FORMAT MONEY
-========================================================= */
+let colors = {
+  ...defaultColors
+};
+
+
+/* ======================================================
+   APPLY COLORS
+====================================================== */
+
+function applyColors(){
+
+  document.documentElement
+    .style
+    .setProperty(
+      "--mustard",
+      colors.mustard
+    );
+
+  document.documentElement
+    .style
+    .setProperty(
+      "--mustard-dark",
+      colors.mustardDark
+    );
+
+  document.documentElement
+    .style
+    .setProperty(
+      "--orange",
+      colors.orange
+    );
+
+  document.documentElement
+    .style
+    .setProperty(
+      "--orange-dark",
+      colors.orangeDark
+    );
+
+  document.documentElement
+    .style
+    .setProperty(
+      "--pink",
+      colors.pink
+    );
+
+  document.documentElement
+    .style
+    .setProperty(
+      "--pink-dark",
+      colors.pinkDark
+    );
+
+
+  document
+    .getElementById(
+      "mustardCode"
+    )
+    .textContent =
+      colors.mustard;
+
+
+  document
+    .getElementById(
+      "orangeCode"
+    )
+    .textContent =
+      colors.orange;
+
+
+  document
+    .getElementById(
+      "pinkCode"
+    )
+    .textContent =
+      colors.pink;
+
+
+  document
+    .getElementById(
+      "mustardCustom"
+    )
+    .textContent =
+      colors.mustard;
+
+
+  document
+    .getElementById(
+      "orangeCustom"
+    )
+    .textContent =
+      colors.orange;
+
+
+  document
+    .getElementById(
+      "pinkCustom"
+    )
+    .textContent =
+      colors.pink;
+
+
+  document
+    .getElementById(
+      "mustardPicker"
+    )
+    .value =
+      colors.mustard;
+
+
+  document
+    .getElementById(
+      "orangePicker"
+    )
+    .value =
+      colors.orange;
+
+
+  document
+    .getElementById(
+      "pinkPicker"
+    )
+    .value =
+      colors.pink;
+
+}
+
+
+/* ======================================================
+   LOAD COLORS
+====================================================== */
+
+function loadColors(){
+
+  try{
+
+    const saved =
+      localStorage.getItem(
+        "keiths_colors"
+      );
+
+
+    if(saved){
+
+      const parsed =
+        JSON.parse(saved);
+
+
+      colors = {
+        ...defaultColors,
+        ...parsed
+      };
+
+    }
+
+  }catch(error){
+
+    console.log(
+      "Không đọc được màu:",
+      error
+    );
+
+  }
+
+
+  applyColors();
+
+}
+
+
+/* ======================================================
+   SELECT PRESET
+====================================================== */
+
+function selectColor(
+  type,
+  color,
+  button
+){
+
+  colors[type] =
+    color.toUpperCase();
+
+
+  if(type === "mustard"){
+
+    document.documentElement
+      .style
+      .setProperty(
+        "--mustard",
+        colors[type]
+      );
+
+    document
+      .getElementById(
+        "mustardCustom"
+      )
+      .textContent =
+        colors[type];
+
+    document
+      .getElementById(
+        "mustardPicker"
+      )
+      .value =
+        colors[type];
+
+    document
+      .getElementById(
+        "mustardCode"
+      )
+      .textContent =
+        colors[type];
+
+  }
+
+
+  if(type === "orange"){
+
+    document.documentElement
+      .style
+      .setProperty(
+        "--orange",
+        colors[type]
+      );
+
+    document
+      .getElementById(
+        "orangeCustom"
+      )
+      .textContent =
+        colors[type];
+
+    document
+      .getElementById(
+        "orangePicker"
+      )
+      .value =
+        colors[type];
+
+    document
+      .getElementById(
+        "orangeCode"
+      )
+      .textContent =
+        colors[type];
+
+  }
+
+
+  if(type === "pink"){
+
+    document.documentElement
+      .style
+      .setProperty(
+        "--pink",
+        colors[type]
+      );
+
+    document
+      .getElementById(
+        "pinkCustom"
+      )
+      .textContent =
+        colors[type];
+
+    document
+      .getElementById(
+        "pinkPicker"
+      )
+      .value =
+        colors[type];
+
+    document
+      .getElementById(
+        "pinkCode"
+      )
+      .textContent =
+        colors[type];
+
+  }
+
+
+  if(button){
+
+    button
+      .parentElement
+      .querySelectorAll(
+        ".color-preset"
+      )
+      .forEach(
+        x =>
+          x.classList.remove(
+            "selected"
+          )
+      );
+
+
+    button.classList.add(
+      "selected"
+    );
+
+  }
+
+}
+
+
+/* ======================================================
+   CUSTOM COLOR
+====================================================== */
+
+function customColor(
+  type,
+  color
+){
+
+  color =
+    color.toUpperCase();
+
+
+  colors[type] =
+    color;
+
+
+  selectColor(
+    type,
+    color,
+    null
+  );
+
+}
+
+
+/* ======================================================
+   SAVE COLORS
+====================================================== */
+
+function saveColors(){
+
+  /* tạo màu đậm tự động gần đúng */
+
+  colors.mustardDark =
+    darken(
+      colors.mustard
+    );
+
+  colors.orangeDark =
+    darken(
+      colors.orange
+    );
+
+  colors.pinkDark =
+    darken(
+      colors.pink
+    );
+
+
+  localStorage.setItem(
+    "keiths_colors",
+    JSON.stringify(
+      colors
+    )
+  );
+
+
+  applyColors();
+
+
+  alert(
+    "✅ Đã lưu màu giao diện!"
+  );
+
+}
+
+
+/* ======================================================
+   DARKEN
+====================================================== */
+
+function darken(hex){
+
+  let c =
+    hex
+      .replace("#","");
+
+
+  let r =
+    parseInt(
+      c.substring(0,2),
+      16
+    );
+
+  let g =
+    parseInt(
+      c.substring(2,4),
+      16
+    );
+
+  let b =
+    parseInt(
+      c.substring(4,6),
+      16
+    );
+
+
+  r =
+    Math.max(
+      0,
+      Math.floor(
+        r * .72
+      )
+    );
+
+  g =
+    Math.max(
+      0,
+      Math.floor(
+        g * .72
+      )
+    );
+
+  b =
+    Math.max(
+      0,
+      Math.floor(
+        b * .72
+      )
+    );
+
+
+  return "#" +
+    [r,g,b]
+      .map(
+        x =>
+          x
+            .toString(16)
+            .padStart(
+              2,"0"
+            )
+      )
+      .join("")
+      .toUpperCase();
+
+}
+
+
+/* ======================================================
+   RESET COLORS
+====================================================== */
+
+function resetColors(){
+
+  if(
+    !confirm(
+      "Khôi phục màu mặc định?"
+    )
+  ){
+
+    return;
+
+  }
+
+
+  colors = {
+    ...defaultColors
+  };
+
+
+  localStorage.removeItem(
+    "keiths_colors"
+  );
+
+
+  applyColors();
+
+
+  document
+    .querySelectorAll(
+      ".color-preset"
+    )
+    .forEach(
+      x =>
+        x.classList.remove(
+          "selected"
+        )
+    );
+
+
+  alert(
+    "↩️ Đã khôi phục màu mặc định!"
+  );
+
+}
+
+
+/* ======================================================
+   MONEY
+====================================================== */
 
 function money(value){
 
-  return Number(value || 0)
-    .toLocaleString("vi-VN")
-    + "đ";
+  return Number(
+    value || 0
+  )
+  .toLocaleString(
+    "vi-VN"
+  ) + "đ";
 
 }
 
 
-/* =========================================================
-   ESCAPE HTML
-========================================================= */
+/* ======================================================
+   ESCAPE
+====================================================== */
 
 function escapeHtml(value){
 
-  return String(value ?? "")
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
+  return String(
+    value ?? ""
+  )
+  .replaceAll("&","&amp;")
+  .replaceAll("<","&lt;")
+  .replaceAll(">","&gt;")
+  .replaceAll('"',"&quot;")
+  .replaceAll("'","&#039;");
 
 }
 
 
-/* =========================================================
-   CATEGORY NAME
-========================================================= */
+/* ======================================================
+   CATEGORY
+====================================================== */
 
 function categoryName(category){
 
-  const names = {
+  return {
 
     main:"🌭 Ăn chính",
 
@@ -2015,16 +2401,14 @@ function categoryName(category){
 
     drink:"🥤 Đồ uống"
 
-  };
-
-  return names[category] || category;
+  }[category] || category;
 
 }
 
 
-/* =========================================================
-   LOAD FOODS
-========================================================= */
+/* ======================================================
+   FOODS
+====================================================== */
 
 async function loadFoods(){
 
@@ -2035,8 +2419,16 @@ async function loadFoods(){
     await db
       .from("foods")
       .select("*")
-      .eq("active",true)
-      .order("id",{ascending:true});
+      .eq(
+        "active",
+        true
+      )
+      .order(
+        "id",
+        {
+          ascending:true
+        }
+      );
 
 
   if(error){
@@ -2044,15 +2436,13 @@ async function loadFoods(){
     console.error(error);
 
     document
-      .getElementById("foodList")
+      .getElementById(
+        "foodList"
+      )
       .innerHTML = `
 
         <div class="empty">
-
-          Không tải được món ăn.<br>
-
-          Kiểm tra Supabase/RLS.
-
+          Không tải được món ăn.
         </div>
 
       `;
@@ -2062,7 +2452,8 @@ async function loadFoods(){
   }
 
 
-  foods = data || [];
+  foods =
+    data || [];
 
 
   renderFoods();
@@ -2074,54 +2465,20 @@ async function loadFoods(){
 }
 
 
-/* =========================================================
-   LOAD ORDERS
-========================================================= */
-
-async function loadOrders(){
-
-  const {
-    data,
-    error
-  } =
-    await db
-      .from("orders")
-      .select("*")
-      .order(
-        "created_at",
-        {ascending:false}
-      );
-
-
-  if(error){
-
-    console.error(error);
-
-    return;
-
-  }
-
-
-  orders = data || [];
-
-
-  renderOrders();
-
-  renderDashboard();
-
-}
-
-
-/* =========================================================
-   RENDER CUSTOMER FOODS
-========================================================= */
+/* ======================================================
+   RENDER FOODS
+====================================================== */
 
 function renderFoods(){
 
-  let list = foods;
+  let list =
+    foods;
 
 
-  if(currentCategory !== "all"){
+  if(
+    currentCategory !==
+    "all"
+  ){
 
     list =
       foods.filter(
@@ -2144,9 +2501,7 @@ function renderFoods(){
     box.innerHTML = `
 
       <div class="empty">
-
         Chưa có món trong mục này.
-
       </div>
 
     `;
@@ -2158,7 +2513,8 @@ function renderFoods(){
 
   box.innerHTML =
 
-    list.map(food => `
+    list.map(
+      food => `
 
       <div class="food-card">
 
@@ -2175,40 +2531,34 @@ function renderFoods(){
           "
         >
 
-
         <div class="food-content">
 
           <div class="food-name">
-
             ${escapeHtml(
               food.name
             )}
-
           </div>
 
-
           <div class="food-description">
-
             ${escapeHtml(
               food.description || ""
             )}
-
           </div>
-
 
           <div class="food-bottom">
 
             <div class="price">
-
-              ${money(food.price)}
-
+              ${money(
+                food.price
+              )}
             </div>
-
 
             <button
               class="add-button"
               onclick="
-                addCart(${food.id})
+                addCart(
+                  ${food.id}
+                )
               "
             >
               + Thêm
@@ -2220,14 +2570,15 @@ function renderFoods(){
 
       </div>
 
-    `).join("");
+    `
+    ).join("");
 
 }
 
 
-/* =========================================================
-   CHANGE CATEGORY
-========================================================= */
+/* ======================================================
+   CATEGORY
+====================================================== */
 
 function changeCategory(
   category,
@@ -2239,10 +2590,12 @@ function changeCategory(
 
 
   document
-    .querySelectorAll(".category")
+    .querySelectorAll(
+      ".category"
+    )
     .forEach(
-      btn =>
-        btn.classList.remove(
+      x =>
+        x.classList.remove(
           "active"
         )
     );
@@ -2281,16 +2634,16 @@ function changeCategory(
 }
 
 
-/* =========================================================
-   ADD CART
-========================================================= */
+/* ======================================================
+   CART
+====================================================== */
 
 function addCart(id){
 
   const food =
     foods.find(
-      item =>
-        item.id === id
+      x =>
+        x.id === id
     );
 
 
@@ -2299,8 +2652,8 @@ function addCart(id){
 
   const item =
     cart.find(
-      item =>
-        item.id === id
+      x =>
+        x.id === id
     );
 
 
@@ -2332,13 +2685,9 @@ function addCart(id){
 }
 
 
-/* =========================================================
-   CHANGE QUANTITY
-========================================================= */
-
 function changeQty(
   id,
-  value
+  amount
 ){
 
   const item =
@@ -2351,7 +2700,7 @@ function changeQty(
   if(!item)return;
 
 
-  item.qty += value;
+  item.qty += amount;
 
 
   if(item.qty <= 0){
@@ -2372,26 +2721,22 @@ function changeQty(
 }
 
 
-/* =========================================================
-   UPDATE CART
-========================================================= */
-
 function updateCart(){
 
   const count =
     cart.reduce(
-      (sum,item) =>
-        sum + item.qty,
+      (sum,x) =>
+        sum + x.qty,
       0
     );
 
 
   const total =
     cart.reduce(
-      (sum,item) =>
+      (sum,x) =>
         sum +
-        item.price *
-        item.qty,
+        x.price *
+        x.qty,
       0
     );
 
@@ -2414,10 +2759,6 @@ function updateCart(){
 }
 
 
-/* =========================================================
-   OPEN CART
-========================================================= */
-
 function openCart(){
 
   renderCart();
@@ -2434,10 +2775,6 @@ function openCart(){
 }
 
 
-/* =========================================================
-   RENDER CART
-========================================================= */
-
 function renderCart(){
 
   const box =
@@ -2451,9 +2788,7 @@ function renderCart(){
     box.innerHTML = `
 
       <div class="empty">
-
         🛒 Giỏ hàng đang trống
-
       </div>
 
     `;
@@ -2474,31 +2809,26 @@ function renderCart(){
 
   box.innerHTML =
 
-    cart.map(item => `
+    cart.map(
+      item => `
 
       <div class="cart-item">
 
         <div class="cart-info">
 
           <div class="cart-name">
-
             ${escapeHtml(
               item.name
             )}
-
           </div>
 
-
           <div class="cart-price">
-
             ${money(
               item.price
             )}
-
           </div>
 
         </div>
-
 
         <div class="quantity">
 
@@ -2513,11 +2843,9 @@ function renderCart(){
             −
           </button>
 
-
           <b>
             ${item.qty}
           </b>
-
 
           <button
             onclick="
@@ -2534,15 +2862,16 @@ function renderCart(){
 
       </div>
 
-    `).join("");
+    `
+    ).join("");
 
 
   const total =
     cart.reduce(
-      (sum,item) =>
+      (sum,x) =>
         sum +
-        item.price *
-        item.qty,
+        x.price *
+        x.qty,
       0
     );
 
@@ -2557,9 +2886,9 @@ function renderCart(){
 }
 
 
-/* =========================================================
+/* ======================================================
    CHECKOUT
-========================================================= */
+====================================================== */
 
 function openCheckout(){
 
@@ -2590,21 +2919,13 @@ function openCheckout(){
 }
 
 
-/* =========================================================
+/* ======================================================
    PLACE ORDER
-========================================================= */
+====================================================== */
 
 async function placeOrder(){
 
-  if(!cart.length){
-
-    alert(
-      "Giỏ hàng đang trống!"
-    );
-
-    return;
-
-  }
+  if(!cart.length)return;
 
 
   const name =
@@ -2659,10 +2980,10 @@ async function placeOrder(){
 
   const total =
     cart.reduce(
-      (sum,item) =>
+      (sum,x) =>
         sum +
-        item.price *
-        item.qty,
+        x.price *
+        x.qty,
       0
     );
 
@@ -2703,8 +3024,6 @@ async function placeOrder(){
 
   if(error){
 
-    console.error(error);
-
     alert(
       "Đặt hàng lỗi: " +
       error.message
@@ -2716,21 +3035,23 @@ async function placeOrder(){
 
 
   const items =
-    cart.map(item => ({
+    cart.map(
+      item => ({
 
-      order_id:data.id,
+        order_id:data.id,
 
-      food_name:item.name,
+        food_name:item.name,
 
-      price:item.price,
+        price:item.price,
 
-      quantity:item.qty,
+        quantity:item.qty,
 
-      subtotal:
-        item.price *
-        item.qty
+        subtotal:
+          item.price *
+          item.qty
 
-    }));
+      })
+    );
 
 
   const {
@@ -2745,12 +3066,8 @@ async function placeOrder(){
 
   if(itemError){
 
-    console.error(
-      itemError
-    );
-
     alert(
-      "Lưu món trong đơn lỗi: " +
+      "Lưu món lỗi: " +
       itemError.message
     );
 
@@ -2760,7 +3077,6 @@ async function placeOrder(){
 
 
   cart = [];
-
 
   updateCart();
 
@@ -2786,37 +3102,17 @@ async function placeOrder(){
       "show"
     );
 
-
-  document
-    .getElementById(
-      "customerName"
-    )
-    .value = "";
-
-
-  document
-    .getElementById(
-      "customerPhone"
-    )
-    .value = "";
-
-
-  document
-    .getElementById(
-      "customerAddress"
-    )
-    .value = "";
-
 }
 
 
-/* =========================================================
-   SECRET ADMIN
-========================================================= */
+/* ======================================================
+   ADMIN SECRET
+====================================================== */
 
 function secretAdminClick(){
 
   secretClicks++;
+
 
   clearTimeout(
     secretTimer
@@ -2826,48 +3122,17 @@ function secretAdminClick(){
   secretTimer =
     setTimeout(
       () => {
-
         secretClicks = 0;
-
       },
       2000
     );
 
 
-  if(secretClicks < 5){
-
-    const hint =
-      document.getElementById(
-        "secretHint"
-      );
-
-
-    hint.classList.add(
-      "show"
-    );
-
-
-    setTimeout(
-      () => {
-
-        hint.classList.remove(
-          "show"
-        );
-
-      },
-      700
-    );
-
-  }
-
-
-  if(secretClicks >= 5){
+  if(
+    secretClicks >= 5
+  ){
 
     secretClicks = 0;
-
-    clearTimeout(
-      secretTimer
-    );
 
 
     document
@@ -2883,9 +3148,9 @@ function secretAdminClick(){
 }
 
 
-/* =========================================================
+/* ======================================================
    ADMIN LOGIN
-========================================================= */
+====================================================== */
 
 function adminLogin(){
 
@@ -2940,8 +3205,6 @@ function adminLogin(){
 
     renderAdmin();
 
-    loadOrders();
-
   }else{
 
     alert(
@@ -2953,25 +3216,16 @@ function adminLogin(){
 }
 
 
-/* =========================================================
-   ADMIN LOGOUT
-========================================================= */
-
 function adminLogout(){
 
   sessionStorage.removeItem(
     "food_admin"
   );
 
-
   showCustomer();
 
 }
 
-
-/* =========================================================
-   SHOW CUSTOMER
-========================================================= */
 
 function showCustomer(){
 
@@ -2993,9 +3247,9 @@ function showCustomer(){
 }
 
 
-/* =========================================================
+/* ======================================================
    ADMIN TABS
-========================================================= */
+====================================================== */
 
 function adminTab(
   id,
@@ -3007,8 +3261,8 @@ function adminTab(
       ".admin-page"
     )
     .forEach(
-      page =>
-        page.classList.remove(
+      x =>
+        x.classList.remove(
           "active"
         )
     );
@@ -3019,8 +3273,8 @@ function adminTab(
       ".admin-tab"
     )
     .forEach(
-      btn =>
-        btn.classList.remove(
+      x =>
+        x.classList.remove(
           "active"
         )
     );
@@ -3039,24 +3293,15 @@ function adminTab(
 
 
   if(id === "orders"){
-
     loadOrders();
-
-  }
-
-
-  if(id === "foods"){
-
-    renderAdminFoods();
-
   }
 
 }
 
 
-/* =========================================================
+/* ======================================================
    ADD FOOD
-========================================================= */
+====================================================== */
 
 async function addFood(){
 
@@ -3105,24 +3350,13 @@ async function addFood(){
       .trim();
 
 
-  if(!name){
-
-    alert(
-      "Nhập tên món!"
-    );
-
-    return;
-
-  }
-
-
   if(
-    !price ||
-    price <= 0
+    !name ||
+    !price
   ){
 
     alert(
-      "Nhập giá hợp lệ!"
+      "Nhập đầy đủ tên và giá!"
     );
 
     return;
@@ -3137,13 +3371,13 @@ async function addFood(){
       .from("foods")
       .insert({
 
-        name:name,
+        name,
 
-        price:price,
+        price,
 
-        category:category,
+        category,
 
-        description:description,
+        description,
 
         image_url:image,
 
@@ -3153,8 +3387,6 @@ async function addFood(){
 
 
   if(error){
-
-    console.error(error);
 
     alert(
       "Thêm món lỗi: " +
@@ -3198,15 +3430,15 @@ async function addFood(){
 
 
   alert(
-    "Đã thêm món!"
+    "✅ Đã thêm món!"
   );
 
 }
 
 
-/* =========================================================
-   ADMIN FOOD LIST
-========================================================= */
+/* ======================================================
+   ADMIN FOODS
+====================================================== */
 
 function renderAdminFoods(){
 
@@ -3236,7 +3468,8 @@ function renderAdminFoods(){
 
   box.innerHTML =
 
-    foods.map(food => `
+    foods.map(
+      food => `
 
       <div class="admin-food">
 
@@ -3244,43 +3477,32 @@ function renderAdminFoods(){
           src="${escapeHtml(
             food.image_url || ""
           )}"
-
           onerror="
             this.style.display='none'
           "
         >
 
-
         <div class="admin-food-info">
 
           <div class="admin-food-name">
-
             ${escapeHtml(
               food.name
             )}
-
           </div>
 
-
           <div class="admin-food-price">
-
             ${money(
               food.price
             )}
-
           </div>
 
-
           <div class="admin-food-category">
-
             ${categoryName(
               food.category
             )}
-
           </div>
 
         </div>
-
 
         <div class="admin-food-actions">
 
@@ -3294,7 +3516,6 @@ function renderAdminFoods(){
           >
             Sửa
           </button>
-
 
           <button
             class="small-btn delete-btn"
@@ -3311,14 +3532,15 @@ function renderAdminFoods(){
 
       </div>
 
-    `).join("");
+    `
+    ).join("");
 
 }
 
 
-/* =========================================================
+/* ======================================================
    EDIT FOOD
-========================================================= */
+====================================================== */
 
 async function editFood(id){
 
@@ -3415,27 +3637,15 @@ async function editFood(id){
 }
 
 
-/* =========================================================
+/* ======================================================
    DELETE FOOD
-========================================================= */
+====================================================== */
 
 async function deleteFood(id){
 
-  const food =
-    foods.find(
-      x =>
-        x.id === id
-    );
-
-
-  if(!food)return;
-
-
   if(
     !confirm(
-      'Xóa món "' +
-      food.name +
-      '"?'
+      "Xóa món này?"
     )
   ){
 
@@ -3450,9 +3660,7 @@ async function deleteFood(id){
     await db
       .from("foods")
       .update({
-
         active:false
-
       })
       .eq(
         "id",
@@ -3477,9 +3685,46 @@ async function deleteFood(id){
 }
 
 
-/* =========================================================
-   RENDER ORDERS
-========================================================= */
+/* ======================================================
+   ORDERS
+====================================================== */
+
+async function loadOrders(){
+
+  const {
+    data,
+    error
+  } =
+    await db
+      .from("orders")
+      .select("*")
+      .order(
+        "created_at",
+        {
+          ascending:false
+        }
+      );
+
+
+  if(error){
+
+    console.error(error);
+
+    return;
+
+  }
+
+
+  orders =
+    data || [];
+
+
+  renderOrders();
+
+  renderDashboard();
+
+}
+
 
 async function renderOrders(){
 
@@ -3497,9 +3742,7 @@ async function renderOrders(){
     box.innerHTML = `
 
       <div class="empty">
-
         📦 Chưa có đơn hàng.
-
       </div>
 
     `;
@@ -3511,7 +3754,8 @@ async function renderOrders(){
 
   box.innerHTML =
 
-    orders.map(order => `
+    orders.map(
+      order => `
 
       <div class="order-card">
 
@@ -3520,33 +3764,25 @@ async function renderOrders(){
           <div>
 
             <div class="order-code">
-
               ${escapeHtml(
                 order.order_code
               )}
-
             </div>
 
-
             <small>
-
               ${new Date(
                 order.created_at
               ).toLocaleString(
                 "vi-VN"
               )}
-
             </small>
 
           </div>
 
-
           <div class="order-status">
-
             ${escapeHtml(
               order.status
             )}
-
           </div>
 
         </div>
@@ -3554,9 +3790,7 @@ async function renderOrders(){
 
         <p>
 
-          👤
-
-          <b>
+          👤 <b>
             ${escapeHtml(
               order.customer_name
             )}
@@ -3576,16 +3810,6 @@ async function renderOrders(){
             order.customer_address
           )}
 
-          <br>
-
-          💳
-
-          ${
-            order.payment === "COD"
-              ? "Tiền mặt"
-              : "Chuyển khoản"
-          }
-
         </p>
 
 
@@ -3600,7 +3824,9 @@ async function renderOrders(){
         <div class="order-total">
 
           Tổng:
-          ${money(order.total)}
+          ${money(
+            order.total
+          )}
 
         </div>
 
@@ -3614,75 +3840,39 @@ async function renderOrders(){
           "
         >
 
-          <option
-            value="Chờ xác nhận"
-            ${
-              order.status ===
-              "Chờ xác nhận"
-                ? "selected"
-                : ""
-            }
-          >
-            Chờ xác nhận
-          </option>
-
-
-          <option
-            value="Đang chuẩn bị"
-            ${
-              order.status ===
-              "Đang chuẩn bị"
-                ? "selected"
-                : ""
-            }
-          >
-            Đang chuẩn bị
-          </option>
-
-
-          <option
-            value="Đang giao"
-            ${
-              order.status ===
-              "Đang giao"
-                ? "selected"
-                : ""
-            }
-          >
-            Đang giao
-          </option>
-
-
-          <option
-            value="Hoàn thành"
-            ${
-              order.status ===
-              "Hoàn thành"
-                ? "selected"
-                : ""
-            }
-          >
-            Hoàn thành
-          </option>
-
-
-          <option
-            value="Đã hủy"
-            ${
-              order.status ===
+          ${
+            [
+              "Chờ xác nhận",
+              "Đang chuẩn bị",
+              "Đang giao",
+              "Hoàn thành",
               "Đã hủy"
-                ? "selected"
-                : ""
-            }
-          >
-            Đã hủy
-          </option>
+            ]
+            .map(
+              status => `
+
+                <option
+                  value="${status}"
+                  ${
+                    order.status === status
+                      ? "selected"
+                      : ""
+                  }
+                >
+                  ${status}
+                </option>
+
+              `
+            )
+            .join("")
+          }
 
         </select>
 
       </div>
 
-    `).join("");
+    `
+    ).join("");
 
 
   for(
@@ -3697,10 +3887,6 @@ async function renderOrders(){
 
 }
 
-
-/* =========================================================
-   LOAD ORDER ITEMS
-========================================================= */
 
 async function loadOrderItems(
   orderId
@@ -3739,49 +3925,34 @@ async function loadOrderItems(
   }
 
 
-  if(
-    !data ||
-    !data.length
-  ){
-
-    box.textContent =
-      "Không có món.";
-
-    return;
-
-  }
-
-
   box.innerHTML =
 
-    data.map(item => `
+    (data || [])
+      .map(
+        item => `
 
-      <div>
+        <div>
 
-        ${escapeHtml(
-          item.food_name
-        )}
+          ${escapeHtml(
+            item.food_name
+          )}
 
-        ×
+          ×
+          ${item.quantity}
 
-        ${item.quantity}
+          —
+          ${money(
+            item.subtotal
+          )}
 
-        —
+        </div>
 
-        ${money(
-          item.subtotal
-        )}
-
-      </div>
-
-    `).join("");
+      `
+      )
+      .join("");
 
 }
 
-
-/* =========================================================
-   CHANGE ORDER STATUS
-========================================================= */
 
 async function changeOrderStatus(
   id,
@@ -3794,9 +3965,7 @@ async function changeOrderStatus(
     await db
       .from("orders")
       .update({
-
-        status:status
-
+        status
       })
       .eq(
         "id",
@@ -3807,7 +3976,6 @@ async function changeOrderStatus(
   if(error){
 
     alert(
-      "Cập nhật lỗi: " +
       error.message
     );
 
@@ -3821,98 +3989,76 @@ async function changeOrderStatus(
 }
 
 
-/* =========================================================
+/* ======================================================
    DASHBOARD
-========================================================= */
+====================================================== */
 
 function renderDashboard(){
 
-  const statFoods =
-    document.getElementById(
+  const revenue =
+    orders
+      .filter(
+        x =>
+          x.status ===
+          "Hoàn thành"
+      )
+      .reduce(
+        (sum,x) =>
+          sum +
+          Number(
+            x.total || 0
+          ),
+        0
+      );
+
+
+  const pending =
+    orders.filter(
+      x =>
+        x.status !==
+          "Hoàn thành" &&
+        x.status !==
+          "Đã hủy"
+    ).length;
+
+
+  document
+    .getElementById(
       "statFoods"
-    );
-
-
-  const statOrders =
-    document.getElementById(
-      "statOrders"
-    );
-
-
-  const statPending =
-    document.getElementById(
-      "statPending"
-    );
-
-
-  const statRevenue =
-    document.getElementById(
-      "statRevenue"
-    );
-
-
-  if(statFoods){
-
-    statFoods.textContent =
+    )
+    .textContent =
       foods.length;
 
-  }
 
-
-  if(statOrders){
-
-    statOrders.textContent =
+  document
+    .getElementById(
+      "statOrders"
+    )
+    .textContent =
       orders.length;
 
-  }
+
+  document
+    .getElementById(
+      "statPending"
+    )
+    .textContent =
+      pending;
 
 
-  if(statPending){
-
-    statPending.textContent =
-
-      orders.filter(
-        x =>
-          x.status !==
-            "Hoàn thành" &&
-          x.status !==
-            "Đã hủy"
-      ).length;
-
-  }
-
-
-  if(statRevenue){
-
-    const revenue =
-
-      orders
-        .filter(
-          x =>
-            x.status ===
-            "Hoàn thành"
-        )
-        .reduce(
-          (sum,x) =>
-            sum +
-            Number(
-              x.total || 0
-            ),
-          0
-        );
-
-
-    statRevenue.textContent =
+  document
+    .getElementById(
+      "statRevenue"
+    )
+    .textContent =
       money(revenue);
-
-  }
 
 }
 
 
-/* =========================================================
-   ADMIN RENDER
-========================================================= */
+/* ======================================================
+   ADMIN
+====================================================== */
 
 function renderAdmin(){
 
@@ -3920,14 +4066,14 @@ function renderAdmin(){
 
   renderAdminFoods();
 
-  renderOrders();
+  loadOrders();
 
 }
 
 
-/* =========================================================
-   CLOSE MODAL
-========================================================= */
+/* ======================================================
+   MODAL
+====================================================== */
 
 function closeModal(id){
 
@@ -3940,21 +4086,19 @@ function closeModal(id){
 }
 
 
-/* =========================================================
-   CLICK OUTSIDE MODAL
-========================================================= */
-
 document
-  .querySelectorAll(".modal")
+  .querySelectorAll(
+    ".modal"
+  )
   .forEach(
     modal => {
 
       modal.addEventListener(
         "click",
-        event => {
+        e => {
 
           if(
-            event.target ===
+            e.target ===
             modal
           ){
 
@@ -3971,46 +4115,18 @@ document
   );
 
 
-/* =========================================================
-   ENTER LOGIN
-========================================================= */
-
-document
-  .getElementById(
-    "loginPass"
-  )
-  .addEventListener(
-    "keydown",
-    event => {
-
-      if(
-        event.key === "Enter"
-      ){
-
-        adminLogin();
-
-      }
-
-    }
-  );
-
-
-/* =========================================================
+/* ======================================================
    START
-========================================================= */
+====================================================== */
 
-async function start(){
+loadColors();
 
-  await loadFoods();
+loadFoods();
 
-  updateCart();
-
-}
-
-start();
+updateCart();
 
 </script>
 
 </body>
 </html>
-
+```
