@@ -3,31 +3,41 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Food Order</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>Western Food</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 :root{
-  --yellow:#F6B817;
-  --orange:#DC4826;
-  --dark:#222;
-  --white:#fff;
-  --light:#fff8df;
-  --green:#16803c;
-  --red:#b42318;
+  --mustard:#D4A72C;
+  --mustard-dark:#A97D16;
+  --cream:#F7EED8;
+  --cream-light:#FFF9EA;
+  --brown:#3A2A1F;
+  --brown-light:#634936;
+  --brick:#B84A32;
+  --olive:#68734A;
+  --border:#D8C7A5;
+  --white:#FFFFFF;
 }
 
 *{
   box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
+
+html{
+  scroll-behavior:smooth;
 }
 
 body{
   margin:0;
+  background:
+    radial-gradient(circle at top,#FFF9EA 0,#F7EED8 55%,#EADBBE 100%);
+  color:var(--brown);
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-  background:var(--yellow);
-  color:#222;
 }
 
 button,input,textarea,select{
@@ -42,21 +52,21 @@ button{
   display:none!important;
 }
 
-/* ================= HEADER ================= */
+/* HEADER */
 
 header{
-  background:var(--orange);
-  color:white;
   position:sticky;
   top:0;
   z-index:50;
-  box-shadow:0 4px 15px #0002;
+  background:var(--brown);
+  color:white;
+  box-shadow:0 3px 12px #0003;
 }
 
 .header-inner{
-  max-width:900px;
+  max-width:950px;
   margin:auto;
-  padding:13px 15px;
+  padding:12px 15px;
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -65,58 +75,77 @@ header{
 .logo{
   font-size:21px;
   font-weight:1000;
+  letter-spacing:.5px;
   user-select:none;
-  -webkit-user-select:none;
 }
 
 .logo small{
   display:block;
-  font-size:10px;
-  opacity:.8;
-  font-weight:500;
+  margin-top:2px;
+  font-size:9px;
+  color:#E5C766;
+  letter-spacing:1px;
 }
 
 .cart-button{
-  background:white;
-  color:var(--orange);
-  border:0;
+  border:2px solid #E7C95D;
   border-radius:12px;
-  padding:10px 14px;
-  font-weight:900;
+  padding:9px 13px;
+  background:var(--mustard);
+  color:var(--brown);
+  font-weight:1000;
 }
 
-/* ================= MAIN ================= */
+/* MAIN */
 
 .container{
-  max-width:900px;
+  max-width:950px;
   margin:auto;
-  padding:15px;
+  padding:16px;
+  padding-bottom:100px;
 }
 
+/* HERO */
+
 .banner{
-  background:var(--orange);
-  color:white;
-  border-radius:20px;
-  padding:23px;
+  position:relative;
+  overflow:hidden;
   margin-bottom:15px;
-  box-shadow:0 8px 25px #0002;
+  padding:25px 22px;
+  border-radius:20px;
+  background:linear-gradient(135deg,var(--brown),#4A3526);
+  color:white;
+  border-bottom:5px solid var(--mustard);
+  box-shadow:0 7px 18px #0002;
 }
 
 .banner h1{
-  margin:0 0 5px;
-  font-size:27px;
+  margin:0 0 6px;
+  font-size:28px;
 }
 
 .banner p{
   margin:0;
-  opacity:.9;
+  color:#EEDDB7;
+  font-size:14px;
 }
+
+.banner:after{
+  content:"🍔";
+  position:absolute;
+  right:20px;
+  bottom:-10px;
+  font-size:75px;
+  opacity:.15;
+}
+
+/* CATEGORY */
 
 .categories{
   display:flex;
   gap:8px;
   overflow-x:auto;
-  padding:3px 0 10px;
+  padding:2px 0 13px;
 }
 
 .categories::-webkit-scrollbar{
@@ -124,122 +153,141 @@ header{
 }
 
 .category{
-  border:0;
-  background:white;
-  color:#222;
-  padding:10px 15px;
+  border:2px solid var(--border);
   border-radius:30px;
+  padding:9px 14px;
   white-space:nowrap;
+  background:var(--cream-light);
+  color:var(--brown);
   font-weight:900;
 }
 
 .category.active{
-  background:var(--orange);
+  background:var(--mustard);
+  border-color:var(--mustard);
   color:white;
 }
 
+/* TITLE */
+
 .section-title{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin:5px 0 14px;
   font-size:22px;
   font-weight:1000;
-  margin:10px 0 13px;
 }
 
-/* ================= FOOD ================= */
+.section-title:after{
+  content:"";
+  flex:1;
+  height:3px;
+  background:repeating-linear-gradient(
+    90deg,
+    var(--mustard) 0 8px,
+    transparent 8px 14px
+  );
+}
+
+/* FOOD */
 
 .food-grid{
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:12px;
+  gap:13px;
 }
 
 .food-card{
-  background:var(--orange);
-  color:white;
-  border-radius:18px;
   overflow:hidden;
-  box-shadow:0 5px 18px #0002;
+  border:2px solid var(--border);
+  border-radius:17px;
+  background:var(--cream-light);
+  box-shadow:0 5px 12px #3A2A1F18;
 }
 
 .food-image{
-  width:100%;
-  height:155px;
-  object-fit:cover;
   display:block;
-  background:#eee;
+  width:100%;
+  height:160px;
+  object-fit:cover;
+  background:#E6D6B8;
 }
 
 .food-content{
-  padding:13px;
+  padding:12px;
 }
 
 .food-name{
-  font-size:17px;
+  font-size:16px;
   font-weight:1000;
 }
 
 .food-description{
-  font-size:13px;
-  opacity:.85;
-  margin:5px 0 10px;
   min-height:32px;
+  margin:5px 0 10px;
+  color:#7C6A56;
+  font-size:12px;
+  line-height:1.35;
 }
 
 .food-bottom{
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  gap:7px;
+  justify-content:space-between;
+  gap:8px;
 }
 
 .price{
-  font-size:17px;
+  color:var(--brick);
+  font-size:16px;
   font-weight:1000;
 }
 
 .add-button{
   border:0;
-  background:white;
-  color:var(--orange);
-  border-radius:10px;
-  padding:8px 12px;
+  border-radius:9px;
+  padding:8px 11px;
+  background:var(--mustard);
+  color:white;
   font-weight:1000;
 }
 
-/* ================= BOTTOM CART ================= */
+/* BOTTOM CART */
 
 .bottom-cart{
   position:fixed;
-  bottom:0;
   left:0;
   right:0;
-  background:white;
-  padding:10px 15px;
-  border-top:1px solid #ddd;
+  bottom:0;
   z-index:40;
+  padding:9px 14px calc(9px + env(safe-area-inset-bottom));
+  background:#3A2A1F;
+  border-top:3px solid var(--mustard);
 }
 
 .bottom-cart button{
-  width:100%;
-  max-width:900px;
   display:block;
+  width:100%;
+  max-width:950px;
   margin:auto;
-  background:var(--orange);
-  color:white;
   border:0;
-  border-radius:13px;
-  padding:14px;
+  border-radius:12px;
+  padding:13px;
+  background:var(--mustard);
+  color:white;
   font-weight:1000;
 }
 
-/* ================= MODAL ================= */
+/* MODAL */
 
 .modal{
   display:none;
   position:fixed;
   inset:0;
-  background:#0008;
   z-index:100;
   align-items:flex-end;
+  background:#24170DB8;
 }
 
 .modal.show{
@@ -247,14 +295,16 @@ header{
 }
 
 .modal-box{
-  background:white;
   width:100%;
-  max-width:700px;
+  max-width:720px;
   max-height:94vh;
   overflow:auto;
   margin:auto;
-  border-radius:23px 23px 0 0;
   padding:20px;
+  border:2px solid var(--border);
+  border-radius:23px 23px 0 0;
+  background:var(--cream-light);
+  color:var(--brown);
 }
 
 @media(min-width:700px){
@@ -269,9 +319,11 @@ header{
 
 .modal-header{
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
   margin-bottom:15px;
+  padding-bottom:10px;
+  border-bottom:2px solid var(--border);
 }
 
 .modal-title{
@@ -280,23 +332,25 @@ header{
 }
 
 .close{
-  width:36px;
-  height:36px;
+  width:35px;
+  height:35px;
   border:0;
   border-radius:50%;
-  background:#eee;
-  font-size:22px;
+  background:#E7DCC6;
+  color:var(--brown);
+  font-size:21px;
+  font-weight:900;
 }
 
-/* ================= CART ================= */
+/* CART */
 
 .cart-item{
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
   gap:10px;
   padding:13px 0;
-  border-bottom:1px solid #eee;
+  border-bottom:1px dashed #CDBB98;
 }
 
 .cart-info{
@@ -304,12 +358,13 @@ header{
 }
 
 .cart-name{
-  font-weight:900;
+  font-weight:1000;
 }
 
 .cart-price{
-  color:var(--orange);
   margin-top:3px;
+  color:var(--brick);
+  font-size:13px;
 }
 
 .quantity{
@@ -323,60 +378,77 @@ header{
   height:32px;
   border:0;
   border-radius:8px;
-  background:#eee;
+  background:var(--brown);
+  color:white;
   font-size:18px;
 }
 
 .total-row{
   display:flex;
+  align-items:center;
   justify-content:space-between;
+  padding:15px 0;
   font-size:21px;
   font-weight:1000;
-  margin:20px 0;
+}
+
+#cartTotal{
+  color:var(--brick);
 }
 
 .primary{
   width:100%;
   border:0;
-  border-radius:12px;
+  border-radius:11px;
   padding:14px;
-  background:var(--orange);
+  background:var(--mustard);
   color:white;
   font-weight:1000;
 }
 
-/* ================= FORM ================= */
+/* FORM */
 
 label{
   display:block;
-  font-weight:900;
   margin-top:10px;
+  font-weight:900;
 }
 
-input,textarea,select{
+input,
+textarea,
+select{
   width:100%;
-  padding:13px;
-  border:1px solid #ddd;
-  border-radius:10px;
   margin:6px 0 12px;
+  padding:12px;
+  border:2px solid var(--border);
+  border-radius:10px;
   outline:none;
-  background:white;
+  background:#FFFDF6;
+  color:var(--brown);
 }
 
-/* ================= ADMIN ================= */
+input:focus,
+textarea:focus,
+select:focus{
+  border-color:var(--mustard);
+}
+
+/* ADMIN */
 
 #adminScreen{
   display:none;
   min-height:100vh;
-  background:var(--yellow);
+  background:var(--cream);
+  color:var(--brown);
 }
 
 .admin-header{
-  background:#222;
-  color:white;
   position:sticky;
   top:0;
   z-index:60;
+  background:var(--brown);
+  color:white;
+  border-bottom:4px solid var(--mustard);
 }
 
 .admin-header-inner{
@@ -384,9 +456,8 @@ input,textarea,select{
   margin:auto;
   padding:12px 15px;
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  gap:8px;
+  justify-content:space-between;
 }
 
 .admin-logo{
@@ -407,12 +478,12 @@ input,textarea,select{
 }
 
 .customer-btn{
-  background:white;
-  color:#222;
+  background:var(--mustard);
+  color:white;
 }
 
 .logout-btn{
-  background:#555;
+  background:#5A4030;
   color:white;
 }
 
@@ -430,16 +501,18 @@ input,textarea,select{
 }
 
 .admin-tab{
-  border:0;
-  background:white;
-  padding:11px 15px;
+  border:2px solid var(--border);
   border-radius:10px;
-  font-weight:900;
+  padding:10px 14px;
   white-space:nowrap;
+  background:var(--cream-light);
+  color:var(--brown);
+  font-weight:900;
 }
 
 .admin-tab.active{
-  background:var(--orange);
+  border-color:var(--mustard);
+  background:var(--mustard);
   color:white;
 }
 
@@ -451,6 +524,8 @@ input,textarea,select{
   display:block;
 }
 
+/* STATS */
+
 .stats{
   display:grid;
   grid-template-columns:repeat(2,1fr);
@@ -459,47 +534,52 @@ input,textarea,select{
 }
 
 .stat{
-  background:white;
   padding:16px;
+  border:2px solid var(--border);
   border-radius:16px;
+  background:var(--cream-light);
 }
 
 .stat small{
-  color:#777;
+  color:#7C6A56;
 }
 
 .stat strong{
   display:block;
-  font-size:23px;
   margin-top:5px;
-  color:var(--orange);
+  color:var(--brick);
+  font-size:22px;
 }
 
+/* ADMIN CARD */
+
 .admin-card{
-  background:white;
-  border-radius:18px;
-  padding:18px;
   margin-bottom:15px;
+  padding:18px;
+  border:2px solid var(--border);
+  border-radius:18px;
+  background:var(--cream-light);
 }
 
 .admin-card h2{
   margin-top:0;
 }
 
-/* ================= ADMIN FOOD ================= */
+/* ADMIN FOOD */
 
 .admin-food{
   display:flex;
   align-items:center;
   gap:10px;
   padding:12px 0;
-  border-bottom:1px solid #eee;
+  border-bottom:1px dashed #CDBB98;
 }
 
 .admin-food img{
   width:65px;
   height:65px;
   object-fit:cover;
+  border:2px solid var(--border);
   border-radius:10px;
 }
 
@@ -513,12 +593,12 @@ input,textarea,select{
 }
 
 .admin-food-price{
-  color:var(--orange);
-  font-weight:900;
+  color:var(--brick);
+  font-weight:1000;
 }
 
 .admin-food-category{
-  color:#777;
+  color:#7C6A56;
   font-size:12px;
 }
 
@@ -535,65 +615,73 @@ input,textarea,select{
 }
 
 .edit-btn{
-  background:#fff0c2;
+  background:#E9D49A;
+  color:#60470A;
 }
 
 .delete-btn{
-  background:#ffe0df;
-  color:#b42318;
+  background:#F0C8BE;
+  color:#8E281A;
 }
 
-/* ================= ORDER ================= */
+/* ORDER */
 
 .order-card{
-  border:1px solid #eee;
-  border-radius:15px;
-  padding:14px;
   margin-bottom:12px;
+  padding:14px;
+  border:2px solid var(--border);
+  border-radius:15px;
+  background:var(--cream-light);
 }
 
 .order-head{
   display:flex;
+  align-items:flex-start;
   justify-content:space-between;
   gap:10px;
 }
 
 .order-code{
-  color:var(--orange);
+  color:var(--brick);
   font-weight:1000;
 }
 
 .order-status{
-  background:#fff0c2;
-  color:#7a5000;
   padding:5px 8px;
   border-radius:7px;
+  background:#E9D49A;
+  color:#654B0C;
   font-size:12px;
   font-weight:900;
 }
 
 .order-items{
-  background:#f7f7f7;
-  border-radius:10px;
-  padding:10px;
   margin:10px 0;
+  padding:10px;
+  border-radius:10px;
+  background:#F1E5CC;
+  color:#5E4B39;
 }
 
 .order-total{
-  color:var(--orange);
+  color:var(--brick);
   font-size:18px;
   font-weight:1000;
 }
 
+/* EMPTY */
+
 .empty{
-  text-align:center;
   padding:35px 10px;
-  color:#777;
+  text-align:center;
+  color:#8A7861;
 }
 
+/* SUCCESS */
+
 .success{
-  text-align:center;
   padding:15px;
+  text-align:center;
 }
 
 .success-icon{
@@ -601,18 +689,44 @@ input,textarea,select{
 }
 
 .success-code{
-  color:var(--orange);
+  margin:15px;
+  color:var(--brick);
   font-size:30px;
   font-weight:1000;
-  margin:15px;
 }
 
-/* ================= MOBILE ================= */
+/* SECRET */
+
+.secret-hint{
+  position:fixed;
+  left:50%;
+  bottom:85px;
+  z-index:200;
+  transform:translateX(-50%);
+  padding:9px 13px;
+  border-radius:10px;
+  background:var(--brown);
+  color:white;
+  font-size:12px;
+  opacity:0;
+  pointer-events:none;
+  transition:.2s;
+}
+
+.secret-hint.show{
+  opacity:1;
+}
+
+/* MOBILE */
 
 @media(max-width:550px){
 
+  .container{
+    padding:12px;
+    padding-bottom:100px;
+  }
+
   .food-grid{
-    grid-template-columns:repeat(2,minmax(0,1fr));
     gap:9px;
   }
 
@@ -629,7 +743,8 @@ input,textarea,select{
   }
 
   .food-description{
-    font-size:12px;
+    min-height:30px;
+    font-size:11px;
   }
 
   .price{
@@ -644,122 +759,108 @@ input,textarea,select{
   .admin-food-actions{
     flex-direction:column;
   }
-
-}
-
-/* ================= SECRET ================= */
-
-.secret-hint{
-  position:fixed;
-  left:50%;
-  bottom:85px;
-  transform:translateX(-50%);
-  background:#222;
-  color:white;
-  padding:9px 13px;
-  border-radius:10px;
-  font-size:12px;
-  opacity:0;
-  pointer-events:none;
-  transition:.2s;
-  z-index:200;
-}
-
-.secret-hint.show{
-  opacity:1;
 }
 </style>
 </head>
 
 <body>
 
-<!-- =====================================================
-     KHÁCH
-===================================================== -->
+<!-- ================= CUSTOMER ================= -->
 
 <div id="customerScreen">
 
 <header>
-
   <div class="header-inner">
 
-    <div class="logo" id="secretLogo" onclick="secretAdminClick()">
-      🍔 FOOD ORDER
-      <small>Đặt món nhanh chóng</small>
+    <div
+      class="logo"
+      onclick="secretAdminClick()">
+
+      🍔 WESTERN FOOD
+
+      <small>
+        GOOD FOOD • GOOD MOOD
+      </small>
+
     </div>
 
-    <button class="cart-button" onclick="openCart()">
-      🛒 <span id="cartCount">0</span>
+    <button
+      class="cart-button"
+      onclick="openCart()">
+
+      🛒
+      <span id="cartCount">0</span>
+
     </button>
 
   </div>
-
 </header>
 
-
-<div class="container">
+<main class="container">
 
   <div class="banner">
-    <h1>Đặt món ngay 🍽️</h1>
-    <p>Chọn món bạn yêu thích</p>
+    <h1>Ăn ngon kiểu Tây 🇺🇸</h1>
+    <p>Burger • Chicken • Snacks • Drinks</p>
   </div>
-
 
   <div class="categories">
 
-    <button class="category active"
+    <button
+      class="category active"
       onclick="changeCategory('all',this)">
       🍽️ Tất cả
     </button>
 
-    <button class="category"
+    <button
+      class="category"
       onclick="changeCategory('main',this)">
-      🍚 Ăn chính
+      🍔 Ăn chính
     </button>
 
-    <button class="category"
+    <button
+      class="category"
       onclick="changeCategory('snack',this)">
       🍟 Ăn vặt
     </button>
 
-    <button class="category"
+    <button
+      class="category"
       onclick="changeCategory('extra',this)">
       🧀 Đồ ăn thêm
     </button>
 
-    <button class="category"
+    <button
+      class="category"
       onclick="changeCategory('drink',this)">
       🥤 Đồ uống
     </button>
 
   </div>
 
-
-  <div class="section-title" id="sectionTitle">
+  <div
+    class="section-title"
+    id="sectionTitle">
     Tất cả món
   </div>
 
+  <div
+    id="foodList"
+    class="food-grid">
+  </div>
 
-  <div id="foodList" class="food-grid"></div>
-
-</div>
-
+</main>
 
 <div class="bottom-cart">
-
   <button onclick="openCart()">
     🛒 Xem giỏ hàng •
     <span id="bottomTotal">0đ</span>
   </button>
-
 </div>
 
 </div>
 
 
-<!-- =====================================================
-     ADMIN
-===================================================== -->
+<!-- ================= ADMIN ================= -->
 
 <div id="adminScreen">
 
@@ -768,17 +869,19 @@ input,textarea,select{
     <div class="admin-header-inner">
 
       <div class="admin-logo">
-        ⚙️ ADMIN FOOD
+        ⚙️ WESTERN FOOD ADMIN
       </div>
 
       <div class="admin-actions">
 
-        <button class="admin-btn customer-btn"
+        <button
+          class="admin-btn customer-btn"
           onclick="showCustomer()">
           ← Khách
         </button>
 
-        <button class="admin-btn logout-btn"
+        <button
+          class="admin-btn logout-btn"
           onclick="adminLogout()">
           Thoát
         </button>
@@ -789,22 +892,24 @@ input,textarea,select{
 
   </div>
 
-
   <div class="admin-container">
 
     <div class="admin-nav">
 
-      <button class="admin-tab active"
+      <button
+        class="admin-tab active"
         onclick="adminTab('dashboard',this)">
         📊 Tổng quan
       </button>
 
-      <button class="admin-tab"
+      <button
+        class="admin-tab"
         onclick="adminTab('foods',this)">
-        🍽️ Món ăn
+        🍔 Món ăn
       </button>
 
-      <button class="admin-tab"
+      <button
+        class="admin-tab"
         onclick="adminTab('orders',this)">
         📦 Đơn hàng
       </button>
@@ -814,7 +919,9 @@ input,textarea,select{
 
     <!-- DASHBOARD -->
 
-    <div id="dashboard" class="admin-page active">
+    <div
+      id="dashboard"
+      class="admin-page active">
 
       <div class="stats">
 
@@ -845,29 +952,31 @@ input,textarea,select{
 
     <!-- FOODS -->
 
-    <div id="foods" class="admin-page">
+    <div
+      id="foods"
+      class="admin-page">
 
       <div class="admin-card">
 
-        <h2>➕ Thêm món ăn</h2>
+        <h2>➕ Thêm món</h2>
 
         <label>Tên món</label>
-
-        <input id="foodName"
-          placeholder="Ví dụ: Cơm sườn">
+        <input
+          id="foodName"
+          placeholder="Classic Beef Burger">
 
         <label>Giá</label>
-
-        <input id="foodPrice"
+        <input
+          id="foodPrice"
           type="number"
-          placeholder="45000">
+          placeholder="65000">
 
         <label>Danh mục</label>
 
         <select id="foodCategory">
 
           <option value="main">
-            🍚 Ăn chính
+            🍔 Ăn chính
           </option>
 
           <option value="snack">
@@ -886,16 +995,20 @@ input,textarea,select{
 
         <label>Mô tả</label>
 
-        <textarea id="foodDescription"
+        <textarea
+          id="foodDescription"
           rows="3"
-          placeholder="Mô tả món ăn"></textarea>
+          placeholder="Burger bò, phô mai, rau...">
+        </textarea>
 
         <label>Link ảnh</label>
 
-        <input id="foodImage"
+        <input
+          id="foodImage"
           placeholder="https://...">
 
-        <button class="primary"
+        <button
+          class="primary"
           onclick="addFood()">
           ➕ THÊM MÓN
         </button>
@@ -905,7 +1018,7 @@ input,textarea,select{
 
       <div class="admin-card">
 
-        <h2>🍽️ Danh sách món</h2>
+        <h2>🍔 Danh sách món</h2>
 
         <div id="adminFoodList"></div>
 
@@ -916,7 +1029,9 @@ input,textarea,select{
 
     <!-- ORDERS -->
 
-    <div id="orders" class="admin-page">
+    <div
+      id="orders"
+      class="admin-page">
 
       <div class="admin-card">
 
@@ -929,15 +1044,14 @@ input,textarea,select{
     </div>
 
   </div>
-
 </div>
 
 
-<!-- =====================================================
-     CART MODAL
-===================================================== -->
+<!-- ================= CART ================= -->
 
-<div class="modal" id="cartModal">
+<div
+  class="modal"
+  id="cartModal">
 
   <div class="modal-box">
 
@@ -947,7 +1061,8 @@ input,textarea,select{
         🛒 Giỏ hàng
       </div>
 
-      <button class="close"
+      <button
+        class="close"
         onclick="closeModal('cartModal')">
         ×
       </button>
@@ -960,27 +1075,25 @@ input,textarea,select{
 
       <span>Tổng</span>
 
-      <span id="cartTotal">
-        0đ
-      </span>
+      <span id="cartTotal">0đ</span>
 
     </div>
 
-    <button class="primary"
+    <button
+      class="primary"
       onclick="openCheckout()">
       Tiếp tục đặt hàng
     </button>
 
   </div>
-
 </div>
 
 
-<!-- =====================================================
-     CHECKOUT
-===================================================== -->
+<!-- ================= CHECKOUT ================= -->
 
-<div class="modal" id="checkoutModal">
+<div
+  class="modal"
+  id="checkoutModal">
 
   <div class="modal-box">
 
@@ -990,33 +1103,34 @@ input,textarea,select{
         📦 Thông tin giao hàng
       </div>
 
-      <button class="close"
+      <button
+        class="close"
         onclick="closeModal('checkoutModal')">
         ×
       </button>
 
     </div>
 
-
     <label>Họ tên</label>
 
-    <input id="customerName"
+    <input
+      id="customerName"
       placeholder="Nguyễn Văn A">
-
 
     <label>Số điện thoại</label>
 
-    <input id="customerPhone"
+    <input
+      id="customerPhone"
       type="tel"
       placeholder="09xxxxxxxx">
 
-
     <label>Địa chỉ</label>
 
-    <textarea id="customerAddress"
+    <textarea
+      id="customerAddress"
       rows="3"
-      placeholder="Địa chỉ giao hàng"></textarea>
-
+      placeholder="Địa chỉ giao hàng">
+    </textarea>
 
     <label>Thanh toán</label>
 
@@ -1032,22 +1146,21 @@ input,textarea,select{
 
     </select>
 
-
-    <button class="primary"
+    <button
+      class="primary"
       onclick="placeOrder()">
       ✅ XÁC NHẬN ĐẶT HÀNG
     </button>
 
   </div>
-
 </div>
 
 
-<!-- =====================================================
-     SUCCESS
-===================================================== -->
+<!-- ================= SUCCESS ================= -->
 
-<div class="modal" id="successModal">
+<div
+  class="modal"
+  id="successModal">
 
   <div class="modal-box">
 
@@ -1059,13 +1172,15 @@ input,textarea,select{
 
       <h2>Đặt hàng thành công!</h2>
 
-      <p>Mã đơn hàng:</p>
+      <p>Mã đơn hàng</p>
 
-      <div class="success-code"
+      <div
+        class="success-code"
         id="successCode">
       </div>
 
-      <button class="primary"
+      <button
+        class="primary"
         onclick="closeModal('successModal')">
         Về trang chủ
       </button>
@@ -1073,15 +1188,14 @@ input,textarea,select{
     </div>
 
   </div>
-
 </div>
 
 
-<!-- =====================================================
-     ADMIN LOGIN
-===================================================== -->
+<!-- ================= LOGIN ================= -->
 
-<div class="modal" id="loginModal">
+<div
+  class="modal"
+  id="loginModal">
 
   <div class="modal-box">
 
@@ -1091,38 +1205,40 @@ input,textarea,select{
         🔐 Admin
       </div>
 
-      <button class="close"
+      <button
+        class="close"
         onclick="closeModal('loginModal')">
         ×
       </button>
 
     </div>
 
-
     <label>Tài khoản</label>
 
-    <input id="loginUser"
+    <input
+      id="loginUser"
       placeholder="admin">
-
 
     <label>Mật khẩu</label>
 
-    <input id="loginPass"
+    <input
+      id="loginPass"
       type="password"
       placeholder="123456">
 
-
-    <button class="primary"
+    <button
+      class="primary"
       onclick="adminLogin()">
       ĐĂNG NHẬP
     </button>
 
   </div>
-
 </div>
 
 
-<div class="secret-hint" id="secretHint">
+<div
+  class="secret-hint"
+  id="secretHint">
   🔐 Bấm logo 5 lần để vào Admin
 </div>
 
@@ -1134,39 +1250,39 @@ input,textarea,select{
 ===================================================== */
 
 const SUPABASE_URL =
-  "https://dcqrngutharengnanzna.supabase.co";
+"https://dcqrngutharengnanzna.supabase.co";
 
 const SUPABASE_KEY =
-  "sb_publishable_xVIoO1TUlPpsj1-f9Th31g_Ytb_eaH_";
+"sb_publishable_xVIoO1TUlPpsj1-f9Th31g_Ytb_eaH_";
 
 const db =
-  window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-  );
+window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
 
 
 /* =====================================================
-   DATA
+   VARIABLES
 ===================================================== */
 
-let foods = [];
+let foods=[];
+let orders=[];
+let cart=[];
+let currentCategory="all";
 
-let orders = [];
-
-let cart = [];
-
-let currentCategory = "all";
+let secretClicks=0;
+let secretTimer=null;
 
 
 /* =====================================================
-   FORMAT
+   HELPERS
 ===================================================== */
 
 function money(value){
 
   return Number(value || 0)
-    .toLocaleString("vi-VN") + "đ";
+    .toLocaleString("vi-VN")+"đ";
 
 }
 
@@ -1185,13 +1301,11 @@ function escapeHtml(value){
 
 function categoryName(category){
 
-  const names = {
-
-    main:"🍚 Ăn chính",
+  const names={
+    main:"🍔 Ăn chính",
     snack:"🍟 Ăn vặt",
     extra:"🧀 Đồ ăn thêm",
     drink:"🥤 Đồ uống"
-
   };
 
   return names[category] || category;
@@ -1216,23 +1330,19 @@ async function loadFoods(){
 
     console.error(error);
 
-    document.getElementById("foodList")
-      .innerHTML =
+    document.getElementById("foodList").innerHTML=
       `<div class="empty">
         Không tải được món ăn.<br>
-        Kiểm tra RLS hoặc Supabase.
+        Kiểm tra Supabase/RLS.
       </div>`;
 
     return;
-
   }
 
-  foods = data || [];
+  foods=data || [];
 
   renderFoods();
-
   renderAdminFoods();
-
   renderDashboard();
 
 }
@@ -1253,15 +1363,13 @@ async function loadOrders(){
   if(error){
 
     console.error(error);
-
     return;
 
   }
 
-  orders = data || [];
+  orders=data || [];
 
   renderOrders();
-
   renderDashboard();
 
 }
@@ -1273,24 +1381,23 @@ async function loadOrders(){
 
 function renderFoods(){
 
-  let list = foods;
+  let list=foods;
 
-  if(currentCategory !== "all"){
+  if(currentCategory!=="all"){
 
-    list =
-      foods.filter(
-        food =>
-          food.category === currentCategory
-      );
+    list=foods.filter(
+      food =>
+        food.category===currentCategory
+    );
 
   }
 
-  const box =
+  const box=
     document.getElementById("foodList");
 
   if(!list.length){
 
-    box.innerHTML =
+    box.innerHTML=
       `<div class="empty">
         Chưa có món trong mục này.
       </div>`;
@@ -1299,9 +1406,9 @@ function renderFoods(){
 
   }
 
+  box.innerHTML=
 
-  box.innerHTML =
-    list.map(food => `
+    list.map(food=>`
 
       <div class="food-card">
 
@@ -1350,29 +1457,27 @@ function renderFoods(){
 
 function changeCategory(category,button){
 
-  currentCategory = category;
+  currentCategory=category;
 
-  document.querySelectorAll(".category")
+  document
+    .querySelectorAll(".category")
     .forEach(btn =>
       btn.classList.remove("active")
     );
 
   button.classList.add("active");
 
-
-  const titles = {
-
+  const titles={
     all:"Tất cả món",
-    main:"🍚 Ăn chính",
+    main:"🍔 Ăn chính",
     snack:"🍟 Ăn vặt",
     extra:"🧀 Đồ ăn thêm",
     drink:"🥤 Đồ uống"
-
   };
 
-  document.getElementById("sectionTitle")
-    .textContent =
-    titles[category];
+  document
+    .getElementById("sectionTitle")
+    .textContent=titles[category];
 
   renderFoods();
 
@@ -1385,19 +1490,13 @@ function changeCategory(category,button){
 
 function addCart(id){
 
-  const food =
-    foods.find(
-      item => item.id === id
-    );
+  const food=
+    foods.find(item => item.id===id);
 
-  if(!food) return;
+  if(!food)return;
 
-
-  const item =
-    cart.find(
-      item => item.id === id
-    );
-
+  const item=
+    cart.find(item => item.id===id);
 
   if(item){
 
@@ -1406,12 +1505,10 @@ function addCart(id){
   }else{
 
     cart.push({
-
       id:food.id,
       name:food.name,
       price:Number(food.price),
       qty:1
-
     });
 
   }
@@ -1423,26 +1520,21 @@ function addCart(id){
 
 function changeQty(id,value){
 
-  const item =
-    cart.find(
-      x => x.id === id
-    );
+  const item=
+    cart.find(x => x.id===id);
 
-  if(!item) return;
+  if(!item)return;
 
-  item.qty += value;
+  item.qty+=value;
 
-  if(item.qty <= 0){
+  if(item.qty<=0){
 
-    cart =
-      cart.filter(
-        x => x.id !== id
-      );
+    cart=
+      cart.filter(x => x.id!==id);
 
   }
 
   updateCart();
-
   renderCart();
 
 }
@@ -1450,26 +1542,27 @@ function changeQty(id,value){
 
 function updateCart(){
 
-  const count =
+  const count=
     cart.reduce(
       (sum,item) =>
-        sum + item.qty,
+        sum+item.qty,
       0
     );
 
-  const total =
+  const total=
     cart.reduce(
       (sum,item) =>
-        sum + item.price * item.qty,
+        sum+(item.price*item.qty),
       0
     );
 
+  document
+    .getElementById("cartCount")
+    .textContent=count;
 
-  document.getElementById("cartCount")
-    .textContent = count;
-
-  document.getElementById("bottomTotal")
-    .textContent = money(total);
+  document
+    .getElementById("bottomTotal")
+    .textContent=money(total);
 
 }
 
@@ -1478,7 +1571,8 @@ function openCart(){
 
   renderCart();
 
-  document.getElementById("cartModal")
+  document
+    .getElementById("cartModal")
     .classList.add("show");
 
 }
@@ -1486,27 +1580,27 @@ function openCart(){
 
 function renderCart(){
 
-  const box =
+  const box=
     document.getElementById("cartItems");
-
 
   if(!cart.length){
 
-    box.innerHTML =
+    box.innerHTML=
       `<div class="empty">
         🛒 Giỏ hàng đang trống
       </div>`;
 
-    document.getElementById("cartTotal")
-      .textContent = "0đ";
+    document
+      .getElementById("cartTotal")
+      .textContent="0đ";
 
     return;
 
   }
 
+  box.innerHTML=
 
-  box.innerHTML =
-    cart.map(item => `
+    cart.map(item=>`
 
       <div class="cart-item">
 
@@ -1542,18 +1636,16 @@ function renderCart(){
 
     `).join("");
 
-
-  const total =
+  const total=
     cart.reduce(
       (sum,item) =>
-        sum + item.price * item.qty,
+        sum+(item.price*item.qty),
       0
     );
 
-
-  document.getElementById("cartTotal")
-    .textContent =
-    money(total);
+  document
+    .getElementById("cartTotal")
+    .textContent=money(total);
 
 }
 
@@ -1567,14 +1659,14 @@ function openCheckout(){
   if(!cart.length){
 
     alert("Giỏ hàng đang trống!");
-
     return;
 
   }
 
   closeModal("cartModal");
 
-  document.getElementById("checkoutModal")
+  document
+    .getElementById("checkoutModal")
     .classList.add("show");
 
 }
@@ -1585,83 +1677,71 @@ async function placeOrder(){
   if(!cart.length){
 
     alert("Giỏ hàng đang trống!");
-
     return;
 
   }
 
-
-  const name =
-    document.getElementById("customerName")
+  const name=
+    document
+      .getElementById("customerName")
       .value.trim();
 
-  const phone =
-    document.getElementById("customerPhone")
+  const phone=
+    document
+      .getElementById("customerPhone")
       .value.trim();
 
-  const address =
-    document.getElementById("customerAddress")
+  const address=
+    document
+      .getElementById("customerAddress")
       .value.trim();
 
-  const payment =
-    document.getElementById("payment")
+  const payment=
+    document
+      .getElementById("payment")
       .value;
-
 
   if(!name || !phone || !address){
 
     alert("Vui lòng nhập đầy đủ thông tin!");
-
     return;
 
   }
 
-
-  const total =
+  const total=
     cart.reduce(
       (sum,item) =>
-        sum + item.price * item.qty,
+        sum+(item.price*item.qty),
       0
     );
 
-
-  const code =
-    "OD" +
+  const code=
+    "OD"+
     Date.now()
       .toString()
       .slice(-8);
 
-
-  const {data,error} =
+  const {data,error}=
     await db
       .from("orders")
       .insert({
-
         order_code:code,
-
         customer_name:name,
-
         customer_phone:phone,
-
         customer_address:address,
-
         payment:payment,
-
         total:total,
-
         status:"Chờ xác nhận"
-
       })
       .select()
       .single();
-
 
   if(error){
 
     console.error(error);
 
     alert(
-      "Đặt hàng lỗi: " +
+      "Đặt hàng lỗi: "+
       error.message
     );
 
@@ -1669,40 +1749,28 @@ async function placeOrder(){
 
   }
 
+  const items=
+    cart.map(item=>({
 
-  const orderId =
-    data.id;
-
-
-  const items =
-    cart.map(item => ({
-
-      order_id:orderId,
-
+      order_id:data.id,
       food_name:item.name,
-
       price:item.price,
-
       quantity:item.qty,
-
-      subtotal:
-        item.price * item.qty
+      subtotal:item.price*item.qty
 
     }));
 
-
-  const {error:itemError} =
+  const {error:itemError}=
     await db
       .from("order_items")
       .insert(items);
-
 
   if(itemError){
 
     console.error(itemError);
 
     alert(
-      "Lưu món trong đơn lỗi: " +
+      "Lưu món trong đơn lỗi: "+
       itemError.message
     );
 
@@ -1710,39 +1778,37 @@ async function placeOrder(){
 
   }
 
-
-  cart = [];
+  cart=[];
 
   updateCart();
 
   closeModal("checkoutModal");
 
+  document
+    .getElementById("successCode")
+    .textContent=code;
 
-  document.getElementById("successCode")
-    .textContent = code;
-
-
-  document.getElementById("successModal")
+  document
+    .getElementById("successModal")
     .classList.add("show");
 
+  document
+    .getElementById("customerName")
+    .value="";
 
-  document.getElementById("customerName")
-    .value = "";
+  document
+    .getElementById("customerPhone")
+    .value="";
 
-  document.getElementById("customerPhone")
-    .value = "";
-
-  document.getElementById("customerAddress")
-    .value = "";
-
-
-  loadOrders();
+  document
+    .getElementById("customerAddress")
+    .value="";
 
 }
 
 
 /* =====================================================
-   ADMIN LOGIN
+   SECRET ADMIN
 ===================================================== */
 
 function secretAdminClick(){
@@ -1751,38 +1817,32 @@ function secretAdminClick(){
 
   clearTimeout(secretTimer);
 
-
-  secretTimer =
-    setTimeout(() => {
-
-      secretClicks = 0;
-
+  secretTimer=
+    setTimeout(()=>{
+      secretClicks=0;
     },2000);
 
+  if(secretClicks<5){
 
-  if(secretClicks < 5){
-
-    const hint =
+    const hint=
       document.getElementById("secretHint");
 
     hint.classList.add("show");
 
-    setTimeout(() => {
-
+    setTimeout(()=>{
       hint.classList.remove("show");
-
     },700);
 
   }
 
+  if(secretClicks>=5){
 
-  if(secretClicks >= 5){
-
-    secretClicks = 0;
+    secretClicks=0;
 
     clearTimeout(secretTimer);
 
-    document.getElementById("loginModal")
+    document
+      .getElementById("loginModal")
       .classList.add("show");
 
   }
@@ -1790,25 +1850,25 @@ function secretAdminClick(){
 }
 
 
-let secretClicks = 0;
-
-let secretTimer = null;
-
+/* =====================================================
+   ADMIN LOGIN
+===================================================== */
 
 function adminLogin(){
 
-  const username =
-    document.getElementById("loginUser")
+  const username=
+    document
+      .getElementById("loginUser")
       .value.trim();
 
-  const password =
-    document.getElementById("loginPass")
+  const password=
+    document
+      .getElementById("loginPass")
       .value;
 
-
   if(
-    username === "admin" &&
-    password === "123456"
+    username==="admin" &&
+    password==="123456"
   ){
 
     sessionStorage.setItem(
@@ -1816,20 +1876,18 @@ function adminLogin(){
       "1"
     );
 
-
     closeModal("loginModal");
 
-    document.getElementById("customerScreen")
-      .style.display = "none";
+    document
+      .getElementById("customerScreen")
+      .style.display="none";
 
-    document.getElementById("adminScreen")
-      .style.display = "block";
-
+    document
+      .getElementById("adminScreen")
+      .style.display="block";
 
     renderAdmin();
-
     loadOrders();
-
 
   }else{
 
@@ -1853,128 +1911,117 @@ function adminLogout(){
 
 function showCustomer(){
 
-  document.getElementById("adminScreen")
-    .style.display = "none";
+  document
+    .getElementById("adminScreen")
+    .style.display="none";
 
-  document.getElementById("customerScreen")
-    .style.display = "block";
+  document
+    .getElementById("customerScreen")
+    .style.display="block";
 
 }
 
 
 /* =====================================================
-   ADMIN TABS
+   ADMIN TAB
 ===================================================== */
 
 function adminTab(id,button){
 
-  document.querySelectorAll(".admin-page")
+  document
+    .querySelectorAll(".admin-page")
     .forEach(page =>
       page.classList.remove("active")
     );
 
-  document.querySelectorAll(".admin-tab")
+  document
+    .querySelectorAll(".admin-tab")
     .forEach(btn =>
       btn.classList.remove("active")
     );
 
-
-  document.getElementById(id)
+  document
+    .getElementById(id)
     .classList.add("active");
 
   button.classList.add("active");
 
-
-  if(id === "orders"){
-
+  if(id==="orders"){
     loadOrders();
-
   }
 
-
-  if(id === "foods"){
-
+  if(id==="foods"){
     renderAdminFoods();
-
   }
 
 }
 
 
 /* =====================================================
-   ADMIN ADD FOOD
+   ADD FOOD
 ===================================================== */
 
 async function addFood(){
 
-  const name =
-    document.getElementById("foodName")
+  const name=
+    document
+      .getElementById("foodName")
       .value.trim();
 
-  const price =
+  const price=
     Number(
-      document.getElementById("foodPrice")
+      document
+        .getElementById("foodPrice")
         .value
     );
 
-  const category =
-    document.getElementById("foodCategory")
+  const category=
+    document
+      .getElementById("foodCategory")
       .value;
 
-  const description =
-    document.getElementById("foodDescription")
+  const description=
+    document
+      .getElementById("foodDescription")
       .value.trim();
 
-  const image =
-    document.getElementById("foodImage")
+  const image=
+    document
+      .getElementById("foodImage")
       .value.trim();
-
 
   if(!name){
 
     alert("Nhập tên món!");
-
     return;
 
   }
 
-
-  if(!price || price <= 0){
+  if(!price || price<=0){
 
     alert("Nhập giá hợp lệ!");
-
     return;
 
   }
 
-
-  const {error} =
+  const {error}=
     await db
       .from("foods")
       .insert({
-
         name:name,
-
         price:price,
-
         category:category,
-
-        description:
-          description,
-
+        description:description,
         image_url:image,
-
         active:true
-
       });
-
 
   if(error){
 
     console.error(error);
 
     alert(
-      "Thêm món lỗi: " +
+      "Thêm món lỗi: "+
       error.message
     );
 
@@ -1982,19 +2029,10 @@ async function addFood(){
 
   }
 
-
-  document.getElementById("foodName")
-    .value = "";
-
-  document.getElementById("foodPrice")
-    .value = "";
-
-  document.getElementById("foodDescription")
-    .value = "";
-
-  document.getElementById("foodImage")
-    .value = "";
-
+  document.getElementById("foodName").value="";
+  document.getElementById("foodPrice").value="";
+  document.getElementById("foodDescription").value="";
+  document.getElementById("foodImage").value="";
 
   await loadFoods();
 
@@ -2009,24 +2047,25 @@ async function addFood(){
 
 function renderAdminFoods(){
 
-  const box =
+  const box=
     document.getElementById("adminFoodList");
 
+  if(!box)return;
 
   if(!foods.length){
 
-    box.innerHTML =
+    box.innerHTML=
       `<div class="empty">
-        Chưa có món ăn.
+        Chưa có món.
       </div>`;
 
     return;
 
   }
 
+  box.innerHTML=
 
-  box.innerHTML =
-    foods.map(food => `
+    foods.map(food=>`
 
       <div class="admin-food">
 
@@ -2079,79 +2118,58 @@ function renderAdminFoods(){
 
 async function editFood(id){
 
-  const food =
-    foods.find(
-      x => x.id === id
-    );
+  const food=
+    foods.find(x => x.id===id);
 
-  if(!food) return;
+  if(!food)return;
 
+  const name=
+    prompt("Tên món:",food.name);
 
-  const name =
-    prompt(
-      "Tên món:",
-      food.name
-    );
+  if(name===null)return;
 
-  if(name === null) return;
+  const price=
+    prompt("Giá:",food.price);
 
+  if(price===null)return;
 
-  const price =
-    prompt(
-      "Giá:",
-      food.price
-    );
-
-  if(price === null) return;
-
-
-  const description =
+  const description=
     prompt(
       "Mô tả:",
       food.description || ""
     );
 
-  if(description === null) return;
+  if(description===null)return;
 
-
-  const image =
+  const image=
     prompt(
       "Link ảnh:",
       food.image_url || ""
     );
 
-  if(image === null) return;
+  if(image===null)return;
 
-
-  const {error} =
+  const {error}=
     await db
       .from("foods")
       .update({
-
         name:name.trim(),
-
         price:Number(price),
-
-        description:
-          description.trim(),
-
+        description:description.trim(),
         image_url:image.trim()
-
       })
       .eq("id",id);
-
 
   if(error){
 
     alert(
-      "Sửa lỗi: " +
+      "Sửa lỗi: "+
       error.message
     );
 
     return;
 
   }
-
 
   await loadFoods();
 
@@ -2164,28 +2182,20 @@ async function editFood(id){
 
 async function deleteFood(id){
 
-  const food =
-    foods.find(
-      x => x.id === id
-    );
+  const food=
+    foods.find(x => x.id===id);
 
-  if(!food) return;
-
+  if(!food)return;
 
   if(
     !confirm(
-      'Xóa món "' +
-      food.name +
+      'Xóa món "'+
+      food.name+
       '"?'
     )
-  ){
+  )return;
 
-    return;
-
-  }
-
-
-  const {error} =
+  const {error}=
     await db
       .from("foods")
       .update({
@@ -2193,11 +2203,10 @@ async function deleteFood(id){
       })
       .eq("id",id);
 
-
   if(error){
 
     alert(
-      "Xóa lỗi: " +
+      "Xóa lỗi: "+
       error.message
     );
 
@@ -2205,25 +2214,25 @@ async function deleteFood(id){
 
   }
 
-
   await loadFoods();
 
 }
 
 
 /* =====================================================
-   ADMIN ORDERS
+   ORDERS
 ===================================================== */
 
 async function renderOrders(){
 
-  const box =
+  const box=
     document.getElementById("adminOrders");
 
+  if(!box)return;
 
   if(!orders.length){
 
-    box.innerHTML =
+    box.innerHTML=
       `<div class="empty">
         📦 Chưa có đơn hàng.
       </div>`;
@@ -2232,9 +2241,9 @@ async function renderOrders(){
 
   }
 
+  box.innerHTML=
 
-  box.innerHTML =
-    orders.map(order => `
+    orders.map(order=>`
 
       <div class="order-card">
 
@@ -2259,10 +2268,10 @@ async function renderOrders(){
 
         </div>
 
-
         <p>
 
-          👤 <b>
+          👤
+          <b>
             ${escapeHtml(order.customer_name)}
           </b>
 
@@ -2280,13 +2289,12 @@ async function renderOrders(){
 
           💳
           ${
-            order.payment === "COD"
-              ? "Tiền mặt"
-              : "Chuyển khoản"
+            order.payment==="COD"
+            ?"Tiền mặt"
+            :"Chuyển khoản"
           }
 
         </p>
-
 
         <div
           class="order-items"
@@ -2294,17 +2302,12 @@ async function renderOrders(){
           Đang tải món...
         </div>
 
-
         <div class="order-total">
           Tổng: ${money(order.total)}
         </div>
 
-
         <select
-          onchange="changeOrderStatus(
-            ${order.id},
-            this.value
-          )">
+          onchange="changeOrderStatus(${order.id},this.value)">
 
           <option
             value="Chờ xác nhận"
@@ -2342,60 +2345,53 @@ async function renderOrders(){
 
     `).join("");
 
-
   for(const order of orders){
-
     loadOrderItems(order.id);
-
   }
 
 }
 
 
 /* =====================================================
-   LOAD ORDER ITEMS
+   ORDER ITEMS
 ===================================================== */
 
 async function loadOrderItems(orderId){
 
-  const {data,error} =
+  const {data,error}=
     await db
       .from("order_items")
       .select("*")
       .eq("order_id",orderId);
 
-
-  const box =
+  const box=
     document.getElementById(
-      "items-" + orderId
+      "items-"+orderId
     );
 
-
-  if(!box) return;
-
+  if(!box)return;
 
   if(error){
 
-    box.textContent =
+    box.textContent=
       "Không tải được món.";
 
     return;
 
   }
 
-
   if(!data || !data.length){
 
-    box.textContent =
+    box.textContent=
       "Không có món.";
 
     return;
 
   }
 
+  box.innerHTML=
 
-  box.innerHTML =
-    data.map(item => `
+    data.map(item=>`
 
       <div>
         ${escapeHtml(item.food_name)}
@@ -2413,12 +2409,9 @@ async function loadOrderItems(orderId){
    CHANGE ORDER STATUS
 ===================================================== */
 
-async function changeOrderStatus(
-  id,
-  status
-){
+async function changeOrderStatus(id,status){
 
-  const {error} =
+  const {error}=
     await db
       .from("orders")
       .update({
@@ -2426,18 +2419,16 @@ async function changeOrderStatus(
       })
       .eq("id",id);
 
-
   if(error){
 
     alert(
-      "Cập nhật lỗi: " +
+      "Cập nhật lỗi: "+
       error.message
     );
 
     return;
 
   }
-
 
   await loadOrders();
 
@@ -2450,41 +2441,57 @@ async function changeOrderStatus(
 
 function renderDashboard(){
 
-  document.getElementById("statFoods")
-    .textContent =
-    foods.length;
+  const statFoods=
+    document.getElementById("statFoods");
 
+  const statOrders=
+    document.getElementById("statOrders");
 
-  document.getElementById("statOrders")
-    .textContent =
-    orders.length;
+  const statPending=
+    document.getElementById("statPending");
 
+  const statRevenue=
+    document.getElementById("statRevenue");
 
-  document.getElementById("statPending")
-    .textContent =
-    orders.filter(
-      x =>
-        x.status !== "Hoàn thành" &&
-        x.status !== "Đã hủy"
-    ).length;
+  if(statFoods){
+    statFoods.textContent=foods.length;
+  }
 
+  if(statOrders){
+    statOrders.textContent=orders.length;
+  }
 
-  const revenue =
-    orders
-      .filter(
+  if(statPending){
+
+    statPending.textContent=
+
+      orders.filter(
         x =>
-          x.status === "Hoàn thành"
-      )
-      .reduce(
-        (sum,x) =>
-          sum + Number(x.total || 0),
-        0
-      );
+          x.status!=="Hoàn thành" &&
+          x.status!=="Đã hủy"
+      ).length;
 
+  }
 
-  document.getElementById("statRevenue")
-    .textContent =
-    money(revenue);
+  if(statRevenue){
+
+    const revenue=
+
+      orders
+        .filter(
+          x =>
+            x.status==="Hoàn thành"
+        )
+        .reduce(
+          (sum,x) =>
+            sum+Number(x.total || 0),
+          0
+        );
+
+    statRevenue.textContent=
+      money(revenue);
+
+  }
 
 }
 
@@ -2492,9 +2499,7 @@ function renderDashboard(){
 function renderAdmin(){
 
   renderDashboard();
-
   renderAdminFoods();
-
   renderOrders();
 
 }
@@ -2506,20 +2511,22 @@ function renderAdmin(){
 
 function closeModal(id){
 
-  document.getElementById(id)
+  document
+    .getElementById(id)
     .classList.remove("show");
 
 }
 
 
-document.querySelectorAll(".modal")
-  .forEach(modal => {
+document
+  .querySelectorAll(".modal")
+  .forEach(modal=>{
 
     modal.addEventListener(
       "click",
-      event => {
+      event=>{
 
-        if(event.target === modal){
+        if(event.target===modal){
 
           modal.classList.remove("show");
 
@@ -2532,18 +2539,17 @@ document.querySelectorAll(".modal")
 
 
 /* =====================================================
-   LOGIN ENTER
+   ENTER LOGIN
 ===================================================== */
 
-document.getElementById("loginPass")
+document
+  .getElementById("loginPass")
   .addEventListener(
     "keydown",
-    event => {
+    event=>{
 
-      if(event.key === "Enter"){
-
+      if(event.key==="Enter"){
         adminLogin();
-
       }
 
     }
