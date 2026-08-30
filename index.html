@@ -1,10 +1,10 @@
-```html
+````html
 <!DOCTYPE html>
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>Food Order</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Food Order Test + Admin</title>
 
 <style>
 *{box-sizing:border-box}
@@ -12,7 +12,7 @@
 body{
     margin:0;
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-    background:#f6f6f6;
+    background:#f5f5f5;
     color:#222;
     padding-bottom:90px;
 }
@@ -30,23 +30,22 @@ header{
     max-width:700px;
     margin:auto;
     display:flex;
-    align-items:center;
     justify-content:space-between;
+    align-items:center;
 }
 
 .logo{
     font-size:21px;
-    font-weight:800;
+    font-weight:900;
 }
 
-.cart-button{
+.header button{
     border:0;
     background:white;
     color:#ff5722;
-    border-radius:12px;
-    padding:10px 14px;
+    padding:10px 13px;
+    border-radius:11px;
     font-weight:800;
-    cursor:pointer;
 }
 
 .container{
@@ -58,28 +57,20 @@ header{
 .banner{
     background:linear-gradient(135deg,#ff5722,#ff9800);
     color:white;
-    border-radius:20px;
     padding:22px;
+    border-radius:20px;
     margin-bottom:18px;
-    box-shadow:0 8px 25px #ff572233;
 }
 
 .banner h1{
     margin:0 0 5px;
-    font-size:25px;
-}
-
-.banner p{
-    margin:0;
-    opacity:.9;
 }
 
 .categories{
     display:flex;
     gap:8px;
     overflow-x:auto;
-    padding-bottom:8px;
-    margin-bottom:15px;
+    padding-bottom:7px;
 }
 
 .categories::-webkit-scrollbar{
@@ -89,11 +80,10 @@ header{
 .cat{
     border:0;
     background:white;
-    padding:10px 16px;
-    border-radius:25px;
+    padding:10px 15px;
+    border-radius:22px;
     white-space:nowrap;
     font-weight:700;
-    box-shadow:0 2px 8px #00000010;
 }
 
 .cat.active{
@@ -103,15 +93,15 @@ header{
 
 .section-title{
     font-size:20px;
-    font-weight:800;
-    margin:15px 0;
+    font-weight:900;
+    margin:18px 0 12px;
 }
 
 .food{
     background:white;
     border-radius:18px;
-    margin-bottom:14px;
     overflow:hidden;
+    margin-bottom:14px;
     box-shadow:0 3px 15px #0000000d;
 }
 
@@ -128,7 +118,7 @@ header{
 
 .food-name{
     font-size:18px;
-    font-weight:800;
+    font-weight:900;
 }
 
 .food-desc{
@@ -149,30 +139,48 @@ header{
     font-weight:900;
 }
 
-.add-btn{
+.add{
     border:0;
     background:#ff5722;
     color:white;
-    padding:10px 17px;
-    border-radius:11px;
+    padding:10px 16px;
+    border-radius:10px;
     font-weight:800;
-    cursor:pointer;
 }
 
-.empty{
-    text-align:center;
-    color:#777;
-    padding:30px 10px;
+.bottom-cart{
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    background:white;
+    padding:10px 15px;
+    border-top:1px solid #ddd;
+    z-index:40;
 }
 
-/* CART */
+.bottom-cart button{
+    width:100%;
+    max-width:700px;
+    display:block;
+    margin:auto;
+    border:0;
+    background:#ff5722;
+    color:white;
+    padding:14px;
+    border-radius:13px;
+    font-size:16px;
+    font-weight:900;
+}
+
+/* MODAL */
 
 .modal{
     position:fixed;
     inset:0;
     background:#0008;
-    z-index:100;
     display:none;
+    z-index:100;
     align-items:flex-end;
 }
 
@@ -181,14 +189,24 @@ header{
 }
 
 .modal-box{
+    background:white;
     width:100%;
     max-width:700px;
     margin:auto;
-    background:white;
-    border-radius:24px 24px 0 0;
     max-height:92vh;
     overflow:auto;
+    border-radius:23px 23px 0 0;
     padding:20px;
+}
+
+@media(min-width:700px){
+    .modal{
+        align-items:center;
+    }
+
+    .modal-box{
+        border-radius:22px;
+    }
 }
 
 .modal-head{
@@ -214,13 +232,11 @@ header{
 
 .cart-item{
     display:flex;
+    justify-content:space-between;
+    align-items:center;
     gap:10px;
     padding:13px 0;
     border-bottom:1px solid #eee;
-}
-
-.cart-info{
-    flex:1;
 }
 
 .cart-name{
@@ -229,21 +245,20 @@ header{
 
 .cart-price{
     color:#ff5722;
-    font-weight:700;
     margin-top:4px;
 }
 
-.quantity{
+.qty{
     display:flex;
     align-items:center;
     gap:8px;
 }
 
-.quantity button{
+.qty button{
     width:32px;
     height:32px;
     border:0;
-    border-radius:9px;
+    border-radius:8px;
     background:#eee;
     font-size:18px;
 }
@@ -253,99 +268,137 @@ header{
     justify-content:space-between;
     font-size:21px;
     font-weight:900;
-    padding:18px 0;
+    margin:20px 0;
 }
 
-.checkout-btn{
-    width:100%;
-    border:0;
-    background:#ff5722;
-    color:white;
-    padding:15px;
-    border-radius:13px;
-    font-size:17px;
-    font-weight:900;
-}
-
-/* FORM */
-
-label{
-    display:block;
-    font-weight:700;
-    margin-top:10px;
-}
-
-input,
-textarea,
-select{
-    width:100%;
-    border:1px solid #ddd;
-    border-radius:11px;
-    padding:13px;
-    font-size:16px;
-    margin-top:6px;
-    outline:none;
-}
-
-textarea{
-    resize:none;
-}
-
-/* SUCCESS */
-
-.success{
-    text-align:center;
-    padding:25px 5px;
-}
-
-.success-icon{
-    font-size:65px;
-}
-
-.order-code{
-    color:#ff5722;
-    font-size:30px;
-    font-weight:900;
-    margin:12px 0;
-}
-
-/* BOTTOM CART */
-
-.bottom-cart{
-    position:fixed;
-    left:0;
-    right:0;
-    bottom:0;
-    z-index:40;
-    padding:10px 15px;
-    background:#fff;
-    border-top:1px solid #ddd;
-}
-
-.bottom-cart-inner{
-    max-width:700px;
-    margin:auto;
-}
-
-.bottom-cart button{
+.primary{
     width:100%;
     border:0;
     background:#ff5722;
     color:white;
     padding:14px;
-    border-radius:13px;
+    border-radius:12px;
     font-size:16px;
     font-weight:900;
 }
 
-@media(min-width:700px){
-    .modal{
-        align-items:center;
-    }
+input,textarea,select{
+    width:100%;
+    border:1px solid #ddd;
+    border-radius:10px;
+    padding:13px;
+    font-size:16px;
+    margin:6px 0 12px;
+}
 
-    .modal-box{
-        border-radius:22px;
-    }
+label{
+    display:block;
+    font-weight:700;
+}
+
+.empty{
+    text-align:center;
+    color:#777;
+    padding:30px 10px;
+}
+
+/* ADMIN */
+
+.admin-page{
+    display:none;
+}
+
+.admin-page.show{
+    display:block;
+}
+
+.admin-card{
+    background:white;
+    border-radius:18px;
+    padding:18px;
+    margin-bottom:15px;
+    box-shadow:0 3px 15px #0000000d;
+}
+
+.admin-title{
+    font-size:23px;
+    font-weight:900;
+    margin-bottom:5px;
+}
+
+.admin-sub{
+    color:#777;
+    font-size:14px;
+    margin-bottom:18px;
+}
+
+.product-admin{
+    display:flex;
+    gap:12px;
+    padding:12px 0;
+    border-bottom:1px solid #eee;
+}
+
+.product-admin img{
+    width:75px;
+    height:75px;
+    border-radius:10px;
+    object-fit:cover;
+}
+
+.product-admin-info{
+    flex:1;
+}
+
+.product-admin-name{
+    font-weight:800;
+}
+
+.product-admin-price{
+    color:#ff5722;
+    font-weight:800;
+    margin:4px 0;
+}
+
+.delete{
+    border:0;
+    background:#ffe5e5;
+    color:#d00;
+    padding:8px 10px;
+    border-radius:9px;
+    font-weight:700;
+}
+
+.admin-nav{
+    display:flex;
+    gap:8px;
+    margin-bottom:15px;
+}
+
+.admin-nav button{
+    flex:1;
+    border:0;
+    padding:11px;
+    border-radius:10px;
+    background:#eee;
+    font-weight:800;
+}
+
+.admin-nav button.active{
+    background:#ff5722;
+    color:white;
+}
+
+.success{
+    text-align:center;
+    padding:20px;
+}
+
+.order-code{
+    color:#ff5722;
+    font-size:28px;
+    font-weight:900;
+    margin:15px 0;
 }
 </style>
 </head>
@@ -354,20 +407,34 @@ textarea{
 
 <header>
     <div class="header">
-        <div class="logo">🍔 FOOD ORDER</div>
 
-        <button class="cart-button" onclick="openCart()">
-            🛒 Giỏ hàng
-            <span id="cartCount">0</span>
-        </button>
+        <div class="logo">
+            🍔 FOOD ORDER
+        </div>
+
+        <div>
+            <button onclick="openCart()">
+                🛒 <span id="cartCount">0</span>
+            </button>
+
+            <button onclick="openAdmin()">
+                ⚙️ Admin
+            </button>
+        </div>
+
     </div>
 </header>
+
+
+<!-- ================= KHÁCH ================= -->
+
+<div id="customerPage">
 
 <div class="container">
 
     <div class="banner">
         <h1>Đặt món ngay 🍽️</h1>
-        <p>Ngon - nhanh - tiện lợi</p>
+        <div>Ngon - nhanh - tiện lợi</div>
     </div>
 
     <div class="categories">
@@ -407,340 +474,373 @@ textarea{
 
 </div>
 
-<div class="bottom-cart">
-    <div class="bottom-cart-inner">
-        <button onclick="openCart()">
-            🛒 Xem giỏ hàng •
-            <span id="bottomTotal">0đ</span>
-        </button>
-    </div>
 </div>
 
 
-<!-- CART MODAL -->
+<!-- ================= ADMIN ================= -->
 
-<div class="modal" id="cartModal">
+<div id="adminPage" class="admin-page">
 
-    <div class="modal-box">
+<div class="container">
 
-        <div class="modal-head">
+    <div class="admin-card">
 
-            <div class="modal-title">
-                🛒 Giỏ hàng
-            </div>
-
-            <button class="close"
-                    onclick="closeModal('cartModal')">
-                ×
-            </button>
-
+        <div class="admin-title">
+            ⚙️ Quản lý món ăn
         </div>
 
-        <div id="cartItems"></div>
-
-        <div class="total">
-            <span>Tổng cộng</span>
-            <span id="cartTotal">0đ</span>
+        <div class="admin-sub">
+            Thêm món mới để hiển thị cho khách.
         </div>
 
-        <button class="checkout-btn"
-                onclick="openCheckout()">
-            Tiếp tục đặt hàng
-        </button>
-
-    </div>
-
-</div>
-
-
-<!-- CHECKOUT MODAL -->
-
-<div class="modal" id="checkoutModal">
-
-    <div class="modal-box">
-
-        <div class="modal-head">
-
-            <div class="modal-title">
-                📦 Thông tin giao hàng
-            </div>
-
-            <button class="close"
-                    onclick="closeModal('checkoutModal')">
-                ×
-            </button>
-
-        </div>
-
-        <label>Họ tên</label>
+        <label>Tên món</label>
 
         <input
-            id="customerName"
-            placeholder="Nguyễn Văn A"
-        >
+            id="adminName"
+            placeholder="Ví dụ: Cơm sườn">
 
-        <label>Số điện thoại</label>
+        <label>Giá</label>
 
         <input
-            id="customerPhone"
-            type="tel"
-            placeholder="09xxxxxxxx"
-        >
+            id="adminPrice"
+            type="number"
+            placeholder="45000">
 
-        <label>Địa chỉ</label>
+        <label>Danh mục</label>
 
-        <textarea
-            id="customerAddress"
-            rows="3"
-            placeholder="Nhập địa chỉ giao hàng..."
-        ></textarea>
+        <select id="adminCategory">
 
-        <label>Phương thức thanh toán</label>
-
-        <select id="payment">
-
-            <option value="COD">
-                💵 Tiền mặt khi nhận hàng
+            <option value="main">
+                🍚 Ăn chính
             </option>
 
-            <option value="BANK">
-                🏦 Chuyển khoản
+            <option value="snack">
+                🍟 Ăn vặt
+            </option>
+
+            <option value="extra">
+                🧀 Đồ ăn thêm
+            </option>
+
+            <option value="drink">
+                🥤 Đồ uống
             </option>
 
         </select>
 
-        <button
-            class="checkout-btn"
-            onclick="placeOrder()"
-            style="margin-top:15px">
+        <label>Mô tả</label>
 
-            ✅ XÁC NHẬN ĐẶT HÀNG
+        <textarea
+            id="adminDesc"
+            rows="3"
+            placeholder="Mô tả món ăn..."></textarea>
+
+        <label>Link ảnh món ăn</label>
+
+        <input
+            id="adminImg"
+            placeholder="https://...">
+
+        <button class="primary"
+                onclick="addFood()">
+
+            ➕ THÊM MÓN
+
+        </button>
+
+    </div>
+
+
+    <div class="admin-card">
+
+        <div class="admin-title">
+            📋 Danh sách món
+        </div>
+
+        <div id="adminFoodList"></div>
+
+    </div>
+
+
+    <button
+        class="primary"
+        onclick="closeAdmin()">
+
+        ← Quay lại trang khách
+
+    </button>
+
+</div>
+
+</div>
+
+
+<!-- ================= CART ================= -->
+
+<div class="modal" id="cartModal">
+
+<div class="modal-box">
+
+    <div class="modal-head">
+
+        <div class="modal-title">
+            🛒 Giỏ hàng
+        </div>
+
+        <button class="close"
+                onclick="closeModal('cartModal')">
+            ×
+        </button>
+
+    </div>
+
+    <div id="cartItems"></div>
+
+    <div class="total">
+
+        <span>Tổng</span>
+
+        <span id="cartTotal">
+            0đ
+        </span>
+
+    </div>
+
+    <button
+        class="primary"
+        onclick="openCheckout()">
+
+        Tiếp tục đặt hàng
+
+    </button>
+
+</div>
+
+</div>
+
+
+<!-- ================= CHECKOUT ================= -->
+
+<div class="modal" id="checkoutModal">
+
+<div class="modal-box">
+
+    <div class="modal-head">
+
+        <div class="modal-title">
+            📦 Thông tin giao hàng
+        </div>
+
+        <button class="close"
+                onclick="closeModal('checkoutModal')">
+            ×
+        </button>
+
+    </div>
+
+    <label>Họ tên</label>
+
+    <input
+        id="customerName"
+        placeholder="Nguyễn Văn A">
+
+    <label>Số điện thoại</label>
+
+    <input
+        id="customerPhone"
+        type="tel"
+        placeholder="09xxxxxxxx">
+
+    <label>Địa chỉ</label>
+
+    <textarea
+        id="customerAddress"
+        rows="3"
+        placeholder="Địa chỉ giao hàng"></textarea>
+
+    <label>Thanh toán</label>
+
+    <select id="payment">
+
+        <option value="COD">
+            💵 Tiền mặt
+        </option>
+
+        <option value="BANK">
+            🏦 Chuyển khoản
+        </option>
+
+    </select>
+
+    <button
+        class="primary"
+        onclick="placeOrder()">
+
+        ✅ XÁC NHẬN ĐẶT HÀNG
+
+    </button>
+
+</div>
+
+</div>
+
+
+<!-- ================= SUCCESS ================= -->
+
+<div class="modal" id="successModal">
+
+<div class="modal-box">
+
+    <div class="success">
+
+        <div style="font-size:60px">
+            🎉
+        </div>
+
+        <h2>
+            Đặt hàng thành công!
+        </h2>
+
+        <div>
+            Mã đơn:
+        </div>
+
+        <div class="order-code"
+             id="orderCode">
+        </div>
+
+        <button
+            class="primary"
+            onclick="location.reload()">
+
+            Về trang chủ
 
         </button>
 
     </div>
 
 </div>
-
-
-<!-- SUCCESS -->
-
-<div class="modal" id="successModal">
-
-    <div class="modal-box">
-
-        <div class="success">
-
-            <div class="success-icon">
-                🎉
-            </div>
-
-            <h2>Đặt hàng thành công!</h2>
-
-            <p>Mã đơn hàng:</p>
-
-            <div class="order-code"
-                 id="orderCode">
-            </div>
-
-            <p>
-                Đơn hàng đã được lưu trên thiết bị.
-            </p>
-
-            <button
-                class="checkout-btn"
-                onclick="location.reload()">
-
-                Về trang chủ
-
-            </button>
-
-        </div>
-
-    </div>
 
 </div>
 
 
 <script>
 
-const foods = [
+/* ================= MÓN MẶC ĐỊNH ================= */
 
-    /* ĂN CHÍNH */
+const defaultFoods = [
 
-    {
-        id:1,
-        name:"Cơm Gà Chiên",
-        price:45000,
-        category:"main",
-        desc:"Cơm trắng + gà chiên giòn + rau",
-        img:"https://images.unsplash.com/photo-1512058564366-18510be2db19?w=900"
-    },
+{
+    id:1,
+    name:"Cơm Gà Chiên",
+    price:45000,
+    category:"main",
+    desc:"Cơm trắng + gà chiên giòn",
+    img:"https://images.unsplash.com/photo-1512058564366-18510be2db19?w=900"
+},
 
-    {
-        id:2,
-        name:"Mì Xào Bò",
-        price:50000,
-        category:"main",
-        desc:"Mì xào cùng thịt bò và rau củ",
-        img:"https://images.unsplash.com/photo-1557872943-16a5ac26437e?w=900"
-    },
+{
+    id:2,
+    name:"Mì Xào Bò",
+    price:50000,
+    category:"main",
+    desc:"Mì xào bò và rau củ",
+    img:"https://images.unsplash.com/photo-1557872943-16a5ac26437e?w=900"
+},
 
-    {
-        id:3,
-        name:"Bún Bò",
-        price:55000,
-        category:"main",
-        desc:"Bún bò thơm ngon, nước dùng đậm đà",
-        img:"https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?w=900"
-    },
+{
+    id:3,
+    name:"Khoai Tây Chiên",
+    price:25000,
+    category:"snack",
+    desc:"Khoai tây chiên giòn",
+    img:"https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=900"
+},
 
-    {
-        id:4,
-        name:"Phở Bò",
-        price:55000,
-        category:"main",
-        desc:"Phở bò truyền thống",
-        img:"https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?w=900"
-    },
+{
+    id:4,
+    name:"Xúc Xích",
+    price:20000,
+    category:"snack",
+    desc:"Xúc xích chiên",
+    img:"https://images.unsplash.com/photo-1612392062631-94dd858cba88?w=900"
+},
 
-    /* ĂN VẶT */
+{
+    id:5,
+    name:"Trứng Ốp La",
+    price:10000,
+    category:"extra",
+    desc:"Thêm 1 trứng ốp la",
+    img:"https://images.unsplash.com/photo-1525351484163-7529414344d8?w=900"
+},
 
-    {
-        id:5,
-        name:"Khoai Tây Chiên",
-        price:25000,
-        category:"snack",
-        desc:"Khoai tây chiên giòn",
-        img:"https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=900"
-    },
+{
+    id:6,
+    name:"Thêm Phô Mai",
+    price:15000,
+    category:"extra",
+    desc:"Thêm phô mai",
+    img:"https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?w=900"
+},
 
-    {
-        id:6,
-        name:"Xúc Xích",
-        price:20000,
-        category:"snack",
-        desc:"Xúc xích chiên thơm ngon",
-        img:"https://images.unsplash.com/photo-1612392062631-94dd858cba88?w=900"
-    },
+{
+    id:7,
+    name:"Coca Cola",
+    price:15000,
+    category:"drink",
+    desc:"Coca Cola mát lạnh",
+    img:"https://images.unsplash.com/photo-1629203851122-3726ecdf080e?w=900"
+},
 
-    {
-        id:7,
-        name:"Cá Viên Chiên",
-        price:25000,
-        category:"snack",
-        desc:"Cá viên chiên giòn",
-        img:"https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=900"
-    },
-
-    {
-        id:8,
-        name:"Gà Viên",
-        price:30000,
-        category:"snack",
-        desc:"Gà viên chiên giòn",
-        img:"https://images.unsplash.com/photo-1562967914-608f82629710?w=900"
-    },
-
-    /* ĐỒ ĂN THÊM */
-
-    {
-        id:9,
-        name:"Trứng Ốp La",
-        price:10000,
-        category:"extra",
-        desc:"Thêm 1 trứng ốp la",
-        img:"https://images.unsplash.com/photo-1525351484163-7529414344d8?w=900"
-    },
-
-    {
-        id:10,
-        name:"Thêm Phô Mai",
-        price:15000,
-        category:"extra",
-        desc:"Phô mai lát",
-        img:"https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?w=900"
-    },
-
-    {
-        id:11,
-        name:"Thêm Thịt Bò",
-        price:25000,
-        category:"extra",
-        desc:"Thêm phần thịt bò",
-        img:"https://images.unsplash.com/photo-1544025162-d76694265947?w=900"
-    },
-
-    {
-        id:12,
-        name:"Thêm Trứng Luộc",
-        price:10000,
-        category:"extra",
-        desc:"Trứng luộc",
-        img:"https://images.unsplash.com/photo-1506976785307-8732e854ad03?w=900"
-    },
-
-    /* ĐỒ UỐNG */
-
-    {
-        id:13,
-        name:"Coca Cola",
-        price:15000,
-        category:"drink",
-        desc:"Coca Cola mát lạnh",
-        img:"https://images.unsplash.com/photo-1629203851122-3726ecdf080e?w=900"
-    },
-
-    {
-        id:14,
-        name:"Trà Đào",
-        price:25000,
-        category:"drink",
-        desc:"Trà đào thơm mát",
-        img:"https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=900"
-    },
-
-    {
-        id:15,
-        name:"Trà Chanh",
-        price20000,
-        category:"drink",
-        desc:"Trà chanh giải khát",
-        img:"https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=900"
-    },
-
-    {
-        id:16,
-        name:"Nước Suối",
-        price:10000,
-        category:"drink",
-        desc:"Nước suối đóng chai",
-        img:"https://images.unsplash.com/photo-1564419320461-6870880221ad?w=900"
-    }
+{
+    id:8,
+    name:"Trà Đào",
+    price:25000,
+    category:"drink",
+    desc:"Trà đào thơm mát",
+    img:"https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=900"
+}
 
 ];
 
 
-/* SỬA LỖI GIÁ TRÀ CHANH */
+/* ================= LOAD DATA ================= */
 
-foods[14].price = 20000;
+let foods =
+    JSON.parse(
+        localStorage.getItem("foods")
+    ) || defaultFoods;
 
 
-/* CART */
+/* ================= CART ================= */
 
 let cart = [];
 
 
-/* MONEY */
+/* ================= MONEY ================= */
 
 function money(number){
 
-    return number.toLocaleString("vi-VN")+"đ";
+    return Number(number)
+        .toLocaleString("vi-VN") + "đ";
 
 }
 
 
-/* RENDER FOOD */
+/* ================= SAVE FOOD ================= */
+
+function saveFoods(){
+
+    localStorage.setItem(
+        "foods",
+        JSON.stringify(foods)
+    );
+
+}
+
+
+/* ================= RENDER FOOD ================= */
 
 function renderFoods(category="all"){
 
@@ -758,36 +858,36 @@ function renderFoods(category="all"){
 
     }
 
-    if(list.length === 0){
+    if(!list.length){
 
         box.innerHTML =
             `<div class="empty">
-                Không có món nào.
+                Chưa có món trong mục này.
              </div>`;
 
         return;
 
     }
 
-    box.innerHTML = list.map(food => `
+    box.innerHTML =
+        list.map(food => `
 
         <div class="food">
 
             <img
                 class="food-img"
                 src="${food.img}"
-                alt="${food.name}"
                 onerror="this.style.display='none'"
             >
 
             <div class="food-content">
 
                 <div class="food-name">
-                    ${food.name}
+                    ${escapeHtml(food.name)}
                 </div>
 
                 <div class="food-desc">
-                    ${food.desc}
+                    ${escapeHtml(food.desc || "")}
                 </div>
 
                 <div class="food-bottom">
@@ -797,7 +897,7 @@ function renderFoods(category="all"){
                     </div>
 
                     <button
-                        class="add-btn"
+                        class="add"
                         onclick="addToCart(${food.id})">
 
                         + Thêm
@@ -815,14 +915,14 @@ function renderFoods(category="all"){
 }
 
 
-/* CATEGORY */
+/* ================= CATEGORY ================= */
 
-function changeCategory(category, button){
+function changeCategory(category,button){
 
     document
         .querySelectorAll(".cat")
         .forEach(
-            b => b.classList.remove("active")
+            x => x.classList.remove("active")
         );
 
     button.classList.add("active");
@@ -845,17 +945,21 @@ function changeCategory(category, button){
 }
 
 
-/* ADD CART */
+/* ================= ADD CART ================= */
 
 function addToCart(id){
 
     const food =
-        foods.find(item => item.id === id);
+        foods.find(
+            item => item.id === id
+        );
 
     if(!food) return;
 
     const item =
-        cart.find(item => item.id === id);
+        cart.find(
+            item => item.id === id
+        );
 
     if(item){
 
@@ -875,13 +979,13 @@ function addToCart(id){
 }
 
 
-/* UPDATE CART */
+/* ================= CART ================= */
 
 function updateCart(){
 
     const count =
         cart.reduce(
-            (total,item)=>total+item.qty,
+            (sum,item)=>sum+item.qty,
             0
         );
 
@@ -896,12 +1000,10 @@ function updateCart(){
         .textContent = count;
 
     document.getElementById("bottomTotal")
-        .textContent = money(total);
+        ?.remove();
 
 }
 
-
-/* OPEN CART */
 
 function openCart(){
 
@@ -914,22 +1016,20 @@ function openCart(){
 }
 
 
-/* RENDER CART */
-
 function renderCart(){
 
     const box =
         document.getElementById("cartItems");
 
-    if(cart.length === 0){
+    if(!cart.length){
 
         box.innerHTML =
             `<div class="empty">
-                🛒 Giỏ hàng đang trống
+                🛒 Giỏ hàng trống
              </div>`;
 
         document.getElementById("cartTotal")
-            .textContent = "0đ";
+            .textContent="0đ";
 
         return;
 
@@ -938,41 +1038,41 @@ function renderCart(){
     box.innerHTML =
         cart.map(item => `
 
-            <div class="cart-item">
+        <div class="cart-item">
 
-                <div class="cart-info">
+            <div>
 
-                    <div class="cart-name">
-                        ${item.name}
-                    </div>
-
-                    <div class="cart-price">
-                        ${money(item.price)}
-                    </div>
-
+                <div class="cart-name">
+                    ${escapeHtml(item.name)}
                 </div>
 
-                <div class="quantity">
-
-                    <button
-                        onclick="changeQty(${item.id},-1)">
-                        −
-                    </button>
-
-                    <b>
-                        ${item.qty}
-                    </b>
-
-                    <button
-                        onclick="changeQty(${item.id},1)">
-                        +
-                    </button>
-
+                <div class="cart-price">
+                    ${money(item.price)}
                 </div>
 
             </div>
 
-        `).join("");
+            <div class="qty">
+
+                <button
+                    onclick="changeQty(${item.id},-1)">
+                    −
+                </button>
+
+                <b>
+                    ${item.qty}
+                </b>
+
+                <button
+                    onclick="changeQty(${item.id},1)">
+                    +
+                </button>
+
+            </div>
+
+        </div>
+
+    `).join("");
 
     const total =
         cart.reduce(
@@ -987,12 +1087,12 @@ function renderCart(){
 }
 
 
-/* CHANGE QUANTITY */
-
-function changeQty(id, amount){
+function changeQty(id,amount){
 
     const item =
-        cart.find(item => item.id === id);
+        cart.find(
+            x => x.id === id
+        );
 
     if(!item) return;
 
@@ -1001,7 +1101,9 @@ function changeQty(id, amount){
     if(item.qty <= 0){
 
         cart =
-            cart.filter(item => item.id !== id);
+            cart.filter(
+                x => x.id !== id
+            );
 
     }
 
@@ -1012,11 +1114,11 @@ function changeQty(id, amount){
 }
 
 
-/* OPEN CHECKOUT */
+/* ================= CHECKOUT ================= */
 
 function openCheckout(){
 
-    if(cart.length === 0){
+    if(!cart.length){
 
         alert("Giỏ hàng đang trống!");
 
@@ -1032,8 +1134,6 @@ function openCheckout(){
 
 }
 
-
-/* PLACE ORDER */
 
 function placeOrder(){
 
@@ -1057,38 +1157,13 @@ function placeOrder(){
             .getElementById("payment")
             .value;
 
-    if(!name){
+    if(!name || !phone || !address){
 
-        alert("Vui lòng nhập họ tên!");
-
-        return;
-
-    }
-
-    if(!phone){
-
-        alert("Vui lòng nhập số điện thoại!");
+        alert("Vui lòng nhập đầy đủ thông tin!");
 
         return;
 
     }
-
-    if(!address){
-
-        alert("Vui lòng nhập địa chỉ!");
-
-        return;
-
-    }
-
-    if(!cart.length){
-
-        alert("Giỏ hàng đang trống!");
-
-        return;
-
-    }
-
 
     const total =
         cart.reduce(
@@ -1096,7 +1171,6 @@ function placeOrder(){
                 sum + item.price * item.qty,
             0
         );
-
 
     const order = {
 
@@ -1107,20 +1181,18 @@ function placeOrder(){
                 .slice(-7),
 
         customer:{
-
-            name:name,
-            phone:phone,
-            address:address
-
+            name,
+            phone,
+            address
         },
 
-        payment:payment,
+        payment,
 
         items:JSON.parse(
             JSON.stringify(cart)
         ),
 
-        total:total,
+        total,
 
         status:"Chờ xác nhận",
 
@@ -1130,43 +1202,282 @@ function placeOrder(){
 
     };
 
-
     const orders =
         JSON.parse(
-            localStorage.getItem("orders") ||
-            "[]"
+            localStorage.getItem("orders") || "[]"
         );
 
-
     orders.push(order);
-
 
     localStorage.setItem(
         "orders",
         JSON.stringify(orders)
     );
 
-
     document.getElementById("orderCode")
         .textContent = order.id;
 
-
     closeModal("checkoutModal");
-
 
     document
         .getElementById("successModal")
         .classList.add("show");
 
-
-    cart = [];
+    cart=[];
 
     updateCart();
 
 }
 
 
-/* CLOSE */
+/* ================= ADMIN ================= */
+
+function openAdmin(){
+
+    document
+        .getElementById("customerPage")
+        .style.display="none";
+
+    document
+        .getElementById("adminPage")
+        .classList.add("show");
+
+    renderAdminFoods();
+
+}
+
+
+function closeAdmin(){
+
+    document
+        .getElementById("adminPage")
+        .classList.remove("show");
+
+    document
+        .getElementById("customerPage")
+        .style.display="block";
+
+    renderFoods();
+
+}
+
+
+/* ================= ADD FOOD ================= */
+
+function addFood(){
+
+    const name =
+        document
+            .getElementById("adminName")
+            .value.trim();
+
+    const price =
+        Number(
+            document
+                .getElementById("adminPrice")
+                .value
+        );
+
+    const category =
+        document
+            .getElementById("adminCategory")
+            .value;
+
+    const desc =
+        document
+            .getElementById("adminDesc")
+            .value.trim();
+
+    const img =
+        document
+            .getElementById("adminImg")
+            .value.trim();
+
+
+    if(!name){
+
+        alert("Nhập tên món!");
+
+        return;
+
+    }
+
+    if(!price || price <= 0){
+
+        alert("Nhập giá hợp lệ!");
+
+        return;
+
+    }
+
+
+    const newFood = {
+
+        id:
+            Date.now(),
+
+        name:name,
+
+        price:price,
+
+        category:category,
+
+        desc:desc || "Món ăn ngon",
+
+        img:
+            img ||
+            "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=900"
+
+    };
+
+
+    foods.push(newFood);
+
+    saveFoods();
+
+    document.getElementById("adminName")
+        .value="";
+
+    document.getElementById("adminPrice")
+        .value="";
+
+    document.getElementById("adminDesc")
+        .value="";
+
+    document.getElementById("adminImg")
+        .value="";
+
+
+    renderAdminFoods();
+
+    renderFoods();
+
+    alert("Đã thêm món!");
+
+}
+
+
+/* ================= ADMIN LIST ================= */
+
+function renderAdminFoods(){
+
+    const box =
+        document.getElementById("adminFoodList");
+
+    if(!foods.length){
+
+        box.innerHTML =
+            `<div class="empty">
+                Chưa có món.
+             </div>`;
+
+        return;
+
+    }
+
+    box.innerHTML =
+        foods.map(food => `
+
+        <div class="product-admin">
+
+            <img
+                src="${food.img}"
+                onerror="this.style.display='none'"
+            >
+
+            <div class="product-admin-info">
+
+                <div class="product-admin-name">
+                    ${escapeHtml(food.name)}
+                </div>
+
+                <div class="product-admin-price">
+                    ${money(food.price)}
+                </div>
+
+                <div style="font-size:13px;color:#777">
+                    ${categoryName(food.category)}
+                </div>
+
+            </div>
+
+            <button
+                class="delete"
+                onclick="deleteFood(${food.id})">
+
+                Xóa
+
+            </button>
+
+        </div>
+
+    `).join("");
+
+}
+
+
+/* ================= DELETE ================= */
+
+function deleteFood(id){
+
+    const food =
+        foods.find(
+            item => item.id === id
+        );
+
+    if(!food) return;
+
+    if(!confirm(
+        `Xóa món "${food.name}"?`
+    )) return;
+
+    foods =
+        foods.filter(
+            item => item.id !== id
+        );
+
+    saveFoods();
+
+    renderAdminFoods();
+
+    renderFoods();
+
+}
+
+
+/* ================= CATEGORY NAME ================= */
+
+function categoryName(category){
+
+    const names = {
+
+        main:"🍚 Ăn chính",
+        snack:"🍟 Ăn vặt",
+        extra:"🧀 Đồ ăn thêm",
+        drink:"🥤 Đồ uống"
+
+    };
+
+    return names[category] || category;
+
+}
+
+
+/* ================= ESCAPE ================= */
+
+function escapeHtml(text){
+
+    return String(text)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+
+}
+
+
+/* ================= MODAL ================= */
 
 function closeModal(id){
 
@@ -1177,25 +1488,27 @@ function closeModal(id){
 }
 
 
-/* CLICK OUTSIDE */
-
-document.querySelectorAll(".modal")
+document
+    .querySelectorAll(".modal")
     .forEach(modal => {
 
-        modal.addEventListener("click",function(e){
+        modal.addEventListener(
+            "click",
+            function(e){
 
-            if(e.target === modal){
+                if(e.target === modal){
 
-                modal.classList.remove("show");
+                    modal.classList.remove("show");
+
+                }
 
             }
-
-        });
+        );
 
     });
 
 
-/* START */
+/* ================= START ================= */
 
 renderFoods();
 
