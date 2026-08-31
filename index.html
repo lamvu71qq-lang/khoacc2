@@ -21,7 +21,14 @@
  --white:#FFF9EC;
 }
 
-*{box-sizing:border-box}
+*{
+ box-sizing:border-box;
+ -webkit-tap-highlight-color:transparent;
+}
+
+html{
+ scroll-behavior:smooth;
+}
 
 body{
  margin:0;
@@ -30,11 +37,22 @@ body{
  background:linear-gradient(145deg,#F0E4CA,#E2D2AE);
 }
 
-button,input,textarea,select{font:inherit}
-button{cursor:pointer}
-.hidden{display:none!important}
+button,input,textarea,select{
+ font:inherit;
+}
 
-header,.admin-header{
+button{
+ cursor:pointer;
+}
+
+.hidden{
+ display:none!important;
+}
+
+/* HEADER */
+
+header,
+.admin-header{
  position:sticky;
  top:0;
  z-index:50;
@@ -43,13 +61,15 @@ header,.admin-header{
  border-bottom:4px solid var(--mustard);
 }
 
-.header-inner,.admin-header-inner{
+.header-inner,
+.admin-header-inner{
  max-width:1050px;
  margin:auto;
  padding:12px 15px;
  display:flex;
  align-items:center;
  justify-content:space-between;
+ gap:10px;
 }
 
 .logo{
@@ -64,9 +84,12 @@ header,.admin-header{
  color:var(--pink);
  font-size:9px;
  letter-spacing:2px;
+ margin-top:2px;
 }
 
-.cart-btn,.primary,.add-btn{
+.cart-btn,
+.primary,
+.add-btn{
  border:0;
  border-radius:10px;
  background:var(--orange);
@@ -75,13 +98,18 @@ header,.admin-header{
  box-shadow:0 3px 0 var(--orange-dark);
 }
 
-.cart-btn{padding:9px 13px}
+.cart-btn{
+ padding:9px 13px;
+}
 
-.container,.admin-container{
+.container,
+.admin-container{
  max-width:1050px;
  margin:auto;
- padding:16px 15px 90px;
+ padding:16px 15px 105px;
 }
+
+/* BANNER */
 
 .banner{
  padding:28px 22px;
@@ -103,14 +131,18 @@ header,.admin-header{
  color:#E9DCC0;
 }
 
+/* CATEGORY */
+
 .categories{
  display:flex;
  gap:8px;
  overflow-x:auto;
- padding:2px 0 14px;
+ padding:2px 0 10px;
 }
 
-.categories::-webkit-scrollbar{display:none}
+.categories::-webkit-scrollbar{
+ display:none;
+}
 
 .category{
  border:2px solid var(--line);
@@ -128,11 +160,48 @@ header,.admin-header{
  color:#fff;
 }
 
+/* SUB CATEGORY */
+
+.subcategories{
+ display:none;
+ gap:7px;
+ overflow-x:auto;
+ padding:0 0 13px;
+}
+
+.subcategories.show{
+ display:flex;
+}
+
+.subcategories::-webkit-scrollbar{
+ display:none;
+}
+
+.subcategory{
+ border:2px solid var(--orange);
+ border-radius:25px;
+ padding:7px 12px;
+ white-space:nowrap;
+ background:#FFF2DE;
+ color:var(--orange);
+ font-size:13px;
+ font-weight:900;
+}
+
+.subcategory.active{
+ background:var(--orange);
+ color:#fff;
+}
+
+/* TITLE */
+
 .section-title{
  font-size:22px;
  font-weight:1000;
  margin:5px 0 14px;
 }
+
+/* FOOD */
 
 .food-grid{
  display:grid;
@@ -156,7 +225,19 @@ header,.admin-header{
  background:#D4C096;
 }
 
-.food-content{padding:12px}
+.food-placeholder{
+ width:100%;
+ height:160px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ font-size:55px;
+ background:#D4C096;
+}
+
+.food-content{
+ padding:12px;
+}
 
 .food-name{
  font-weight:1000;
@@ -168,6 +249,7 @@ header,.admin-header{
  margin:5px 0 10px;
  color:#796650;
  font-size:12px;
+ line-height:1.35;
 }
 
 .food-bottom{
@@ -216,7 +298,9 @@ header,.admin-header{
  align-items:flex-end;
 }
 
-.modal.show{display:flex}
+.modal.show{
+ display:flex;
+}
 
 .modal-box{
  width:100%;
@@ -259,7 +343,9 @@ label{
  font-weight:900;
 }
 
-input,textarea,select{
+input,
+textarea,
+select{
  width:100%;
  margin:6px 0 12px;
  padding:12px;
@@ -270,10 +356,18 @@ input,textarea,select{
  outline:none;
 }
 
+input:focus,
+textarea:focus,
+select:focus{
+ border-color:var(--orange);
+}
+
 .primary{
  width:100%;
  padding:14px;
 }
+
+/* CART */
 
 .cart-item{
  display:flex;
@@ -284,11 +378,18 @@ input,textarea,select{
  border-bottom:1px dashed #CBB994;
 }
 
-.cart-info{flex:1}
-.cart-name{font-weight:1000}
+.cart-info{
+ flex:1;
+}
+
+.cart-name{
+ font-weight:1000;
+}
+
 .cart-price{
  color:var(--orange);
  font-size:13px;
+ margin-top:3px;
 }
 
 .qty{
@@ -315,7 +416,9 @@ input,textarea,select{
  font-weight:1000;
 }
 
-#cartTotal{color:var(--orange)}
+#cartTotal{
+ color:var(--orange);
+}
 
 .empty{
  text-align:center;
@@ -325,68 +428,43 @@ input,textarea,select{
 
 /* BANK */
 
-.bank-info{
- margin:8px 0 15px;
+.bank-box{
+ margin:15px 0;
  padding:16px;
- border:2px solid var(--line);
+ border:2px solid var(--mustard);
  border-radius:15px;
  background:#F1E1C4;
- text-align:center;
 }
 
 .bank-title{
- font-size:19px;
+ font-size:18px;
  font-weight:1000;
- margin-bottom:12px;
+ margin-bottom:10px;
 }
 
-.bank-detail{
- text-align:left;
- line-height:1.9;
- background:#FFF9EC;
- border-radius:10px;
- padding:10px 12px;
+.bank-line{
+ margin:7px 0;
 }
 
-.bank-number{
+.bank-value{
+ font-weight:1000;
  color:var(--orange);
- font-size:19px;
- font-weight:1000;
-}
-
-.bank-name{
- font-weight:1000;
 }
 
 .bank-qr{
- width:260px;
- height:260px;
+ width:230px;
  max-width:100%;
- object-fit:contain;
  display:block;
- margin:15px auto 8px;
- padding:8px;
+ margin:15px auto 5px;
  border-radius:12px;
+ border:2px solid var(--line);
  background:#fff;
- border:1px solid #ddd;
-}
-
-.bank-amount{
- padding:10px;
- border-radius:10px;
- background:#E7D6B3;
- font-weight:900;
-}
-
-.bank-amount strong{
- color:var(--orange);
- font-size:18px;
 }
 
 .bank-note{
- margin-top:9px;
- font-size:12px;
+ text-align:center;
  color:#796650;
+ font-size:12px;
 }
 
 /* ADMIN */
@@ -397,21 +475,28 @@ input,textarea,select{
  background:var(--cream);
 }
 
-.admin-logo{font-weight:1000}
+.admin-logo{
+ font-weight:1000;
+}
 
 .admin-actions{
  display:flex;
  gap:6px;
 }
 
-.admin-btn,.small-btn,.admin-tab{
+.admin-btn,
+.small-btn,
+.admin-tab{
  border:0;
  border-radius:9px;
  padding:9px 11px;
  font-weight:900;
 }
 
-.customer-btn{background:var(--pink)}
+.customer-btn{
+ background:var(--pink);
+}
+
 .logout-btn{
  background:#5A4030;
  color:#fff;
@@ -436,8 +521,15 @@ input,textarea,select{
  border-color:var(--mustard);
 }
 
-.admin-page{display:none}
-.admin-page.active{display:block}
+.admin-page{
+ display:none;
+}
+
+.admin-page.active{
+ display:block;
+}
+
+/* STATS */
 
 .stats{
  display:grid;
@@ -445,7 +537,7 @@ input,textarea,select{
  gap:10px;
 }
 
-.stat,.admin-card{
+.stat{
  padding:16px;
  border:2px solid var(--line);
  border-radius:16px;
@@ -453,7 +545,9 @@ input,textarea,select{
  margin-bottom:15px;
 }
 
-.stat small{color:#796650}
+.stat small{
+ color:#796650;
+}
 
 .stat strong{
  display:block;
@@ -461,6 +555,22 @@ input,textarea,select{
  font-size:22px;
  margin-top:5px;
 }
+
+/* ADMIN CARD */
+
+.admin-card{
+ padding:16px;
+ border:2px solid var(--line);
+ border-radius:16px;
+ background:var(--paper);
+ margin-bottom:15px;
+}
+
+.admin-card h2{
+ margin-top:0;
+}
+
+/* UPLOAD */
 
 .upload-box{
  padding:15px;
@@ -479,7 +589,9 @@ input,textarea,select{
  font-weight:1000;
 }
 
-.upload-label input{display:none}
+.upload-label input{
+ display:none;
+}
 
 .image-preview{
  display:none;
@@ -490,7 +602,11 @@ input,textarea,select{
  border-radius:12px;
 }
 
-.image-preview.show{display:block}
+.image-preview.show{
+ display:block;
+}
+
+/* ADMIN FOOD */
 
 .admin-food{
  display:flex;
@@ -500,7 +616,8 @@ input,textarea,select{
  border-bottom:1px dashed #CBB994;
 }
 
-.admin-food img,.no-img{
+.admin-food img,
+.no-img{
  width:65px;
  height:65px;
  object-fit:cover;
@@ -522,7 +639,9 @@ input,textarea,select{
  min-width:0;
 }
 
-.admin-food-name{font-weight:1000}
+.admin-food-name{
+ font-weight:1000;
+}
 
 .admin-food-price{
  color:var(--orange);
@@ -539,12 +658,16 @@ input,textarea,select{
  gap:5px;
 }
 
-.edit-btn{background:#E9D49A}
+.edit-btn{
+ background:#E9D49A;
+}
 
 .delete-btn{
  background:#F3C5CD;
  color:#8D3043;
 }
+
+/* ORDERS */
 
 .order-card{
  margin-bottom:12px;
@@ -597,6 +720,8 @@ input,textarea,select{
  font-weight:1000;
 }
 
+/* COLORS */
+
 .color-row{
  display:flex;
  align-items:center;
@@ -619,6 +744,8 @@ input,textarea,select{
  font-family:monospace;
 }
 
+/* TELEGRAM */
+
 .telegram-box{
  padding:14px;
  border:2px solid var(--line);
@@ -634,20 +761,45 @@ input,textarea,select{
  font-weight:900;
 }
 
+/* RESPONSIVE */
+
 @media(min-width:700px){
- .modal{align-items:center}
- .modal-box{border-radius:22px}
+ .modal{
+  align-items:center;
+ }
+
+ .modal-box{
+  border-radius:22px;
+ }
 }
 
 @media(max-width:550px){
- .food-image{height:125px}
- .food-content{padding:10px}
- .food-name{font-size:15px}
- .food-description{font-size:11px}
+ .food-grid{
+  gap:9px;
+ }
+
+ .food-image,
+ .food-placeholder{
+  height:125px;
+ }
+
+ .food-content{
+  padding:10px;
+ }
+
+ .food-name{
+  font-size:15px;
+ }
+
+ .food-description{
+  font-size:11px;
+ }
+
  .add-btn{
   font-size:12px;
   padding:7px 9px;
  }
+
  .admin-food-actions{
   flex-direction:column;
  }
@@ -658,7 +810,7 @@ input,textarea,select{
 <body>
 
 <!-- =====================================================
-     CUSTOMER
+ CUSTOMER
 ===================================================== -->
 
 <div id="customerScreen">
@@ -682,7 +834,7 @@ input,textarea,select{
 
 <div class="banner">
 <h1>Keiths Hotdog 🌭</h1>
-<p>Hotdog • Snacks • Drinks</p>
+<p>Hotdog • Burger • Sandwich • Snacks • Drinks</p>
 </div>
 
 <div class="categories">
@@ -714,6 +866,32 @@ onclick="changeCategory('drink',this)">
 
 </div>
 
+<!-- SUBCATEGORY -->
+
+<div id="mainSubcategories" class="subcategories">
+
+<button class="subcategory active"
+onclick="changeSubcategory('all',this)">
+🍽️ Tất cả
+</button>
+
+<button class="subcategory"
+onclick="changeSubcategory('hotdog',this)">
+🌭 Hotdog
+</button>
+
+<button class="subcategory"
+onclick="changeSubcategory('burger',this)">
+🍔 Burger
+</button>
+
+<button class="subcategory"
+onclick="changeSubcategory('sandwich',this)">
+🥪 Sandwich
+</button>
+
+</div>
+
 <div class="section-title" id="sectionTitle">
 Tất cả món
 </div>
@@ -723,17 +901,19 @@ Tất cả món
 </main>
 
 <div class="bottom-cart">
+
 <button onclick="openCart()">
 🛒 Xem giỏ hàng •
 <span id="bottomTotal">0đ</span>
 </button>
+
 </div>
 
 </div>
 
 
 <!-- =====================================================
-     ADMIN
+ ADMIN
 ===================================================== -->
 
 <div id="adminScreen">
@@ -761,8 +941,8 @@ onclick="adminLogout()">
 </div>
 
 </div>
-
 </div>
+
 
 <div class="admin-container">
 
@@ -837,18 +1017,23 @@ onclick="adminTab('telegram',this)">
 
 <label>Tên món</label>
 
-<input id="foodName"
+<input
+id="foodName"
 placeholder="Keiths Classic Hotdog">
+
 
 <label>Giá</label>
 
-<input id="foodPrice"
+<input
+id="foodPrice"
 type="number"
 placeholder="65000">
 
+
 <label>Danh mục</label>
 
-<select id="foodCategory">
+<select id="foodCategory"
+onchange="toggleSubcategoryAdmin()">
 
 <option value="main">
 🌭 Ăn chính
@@ -868,10 +1053,38 @@ placeholder="65000">
 
 </select>
 
+
+<div id="adminSubcategoryBox">
+
+<label>Phân loại ăn chính</label>
+
+<select id="foodSubcategory">
+
+<option value="hotdog">
+🌭 Hotdog
+</option>
+
+<option value="burger">
+🍔 Burger
+</option>
+
+<option value="sandwich">
+🥪 Sandwich
+</option>
+
+</select>
+
+</div>
+
+
 <label>Mô tả</label>
 
-<textarea id="foodDescription"
-rows="3"></textarea>
+<textarea
+id="foodDescription"
+rows="3"
+placeholder="Mô tả món">
+</textarea>
+
 
 <label>Ảnh món</label>
 
@@ -885,15 +1098,13 @@ rows="3"></textarea>
 id="foodImageFile"
 type="file"
 accept="image/*"
-onchange="previewFoodImage(event)"
->
+onchange="previewFoodImage(event)">
 
 </label>
 
 <img
 id="foodImagePreview"
-class="image-preview"
->
+class="image-preview">
 
 <div id="uploadStatus">
 Chưa chọn ảnh
@@ -901,11 +1112,14 @@ Chưa chọn ảnh
 
 </div>
 
+
 <button
 class="primary"
 style="margin-top:12px"
 onclick="addFood()">
+
 ➕ THÊM MÓN
+
 </button>
 
 </div>
@@ -953,15 +1167,16 @@ onclick="addFood()">
 id="mustardPicker"
 type="color"
 value="#E7B338"
-oninput="setColor('mustard',this.value)"
->
+oninput="setColor('mustard',this.value)">
 
-<span id="mustardCode"
+<span
+id="mustardCode"
 class="color-code">
 #E7B338
 </span>
 
 </div>
+
 
 <div class="color-row">
 
@@ -971,15 +1186,16 @@ class="color-code">
 id="orangePicker"
 type="color"
 value="#C94A2A"
-oninput="setColor('orange',this.value)"
->
+oninput="setColor('orange',this.value)">
 
-<span id="orangeCode"
+<span
+id="orangeCode"
 class="color-code">
 #C94A2A
 </span>
 
 </div>
+
 
 <div class="color-row">
 
@@ -989,27 +1205,33 @@ class="color-code">
 id="pinkPicker"
 type="color"
 value="#F2869D"
-oninput="setColor('pink',this.value)"
->
+oninput="setColor('pink',this.value)">
 
-<span id="pinkCode"
+<span
+id="pinkCode"
 class="color-code">
 #F2869D
 </span>
 
 </div>
 
+
 <button
 class="primary"
 onclick="saveColors()">
+
 💾 LƯU MÀU
+
 </button>
+
 
 <button
 class="primary"
 style="margin-top:9px;background:#5A4030;box-shadow:none"
 onclick="resetColors()">
+
 ↩️ MÀU MẶC ĐỊNH
+
 </button>
 
 </div>
@@ -1030,48 +1252,62 @@ onclick="resetColors()">
 <div
 class="telegram-status"
 id="telegramStatus">
+
 ⚪ Chưa cấu hình
+
 </div>
+
 
 <label>Bot Token</label>
 
 <input
 id="telegramToken"
 type="password"
-placeholder="8860239685:AAHwDp_Ejh1c7dKOZsycwl9mmZJSs9JpgDY"
->
+autocomplete="off"
+placeholder="Nhập Bot Token mới">
+
 
 <label>Chat ID</label>
 
 <input
 id="telegramChatId"
-value="-5516393735"
-placeholder="-100xxxxxxxxxx"
->
+placeholder="-100xxxxxxxxxx">
+
 
 <button
 class="primary"
 onclick="saveTelegram()">
+
 💾 LƯU TRONG TRÌNH DUYỆT
+
 </button>
+
 
 <button
 class="primary"
 style="margin-top:9px"
 onclick="testTelegram()">
+
 🧪 TEST TELEGRAM
+
 </button>
+
 
 <button
 class="primary"
 style="margin-top:9px;background:#5A4030;box-shadow:none"
 onclick="clearTelegram()">
+
 🗑️ XÓA CẤU HÌNH
+
 </button>
 
+
 <p style="font-size:12px;color:#796650">
-Token chỉ được lưu trong sessionStorage của trình duyệt,
-không ghi vào Supabase.
+
+Token chỉ lưu trong sessionStorage của trình duyệt.
+Không lưu vào Supabase.
+
 </p>
 
 </div>
@@ -1081,12 +1317,11 @@ không ghi vào Supabase.
 </div>
 
 </div>
-
 </div>
 
 
 <!-- =====================================================
-     CART
+ CART
 ===================================================== -->
 
 <div class="modal" id="cartModal">
@@ -1113,25 +1348,24 @@ onclick="closeModal('cartModal')">
 
 <span>Tổng</span>
 
-<span id="cartTotal">
-0đ
-</span>
+<span id="cartTotal">0đ</span>
 
 </div>
 
 <button
 class="primary"
 onclick="openCheckout()">
+
 Tiếp tục đặt hàng
+
 </button>
 
 </div>
-
 </div>
 
 
 <!-- =====================================================
-     CHECKOUT
+ CHECKOUT
 ===================================================== -->
 
 <div class="modal" id="checkoutModal">
@@ -1174,8 +1408,7 @@ onchange="toggleAddress()">
 
 <input
 id="customerName"
-placeholder="Nguyễn Văn A"
->
+placeholder="Nguyễn Văn A">
 
 
 <label>Số điện thoại</label>
@@ -1183,8 +1416,7 @@ placeholder="Nguyễn Văn A"
 <input
 id="customerPhone"
 type="tel"
-placeholder="09xxxxxxxx"
->
+placeholder="09xxxxxxxx">
 
 
 <div id="addressBox" class="hidden">
@@ -1194,7 +1426,7 @@ placeholder="09xxxxxxxx"
 <textarea
 id="customerAddress"
 rows="3"
-placeholder="Nhập địa chỉ giao hàng">
+placeholder="Địa chỉ giao hàng">
 </textarea>
 
 </div>
@@ -1219,56 +1451,48 @@ onchange="toggleBankInfo()">
 
 <!-- BANK INFO -->
 
-<div
-id="bankInfo"
-class="bank-info hidden">
+<div id="bankInfo" class="bank-box hidden">
 
 <div class="bank-title">
-🏦 THÔNG TIN CHUYỂN KHOẢN
+🏦 Thông tin chuyển khoản
 </div>
 
-<div class="bank-detail">
-
-<div>
-<b>Ngân hàng:</b>
-Vietcombank
+<div class="bank-line">
+👤 Chủ tài khoản:
+<span class="bank-value">
+Huỳnh Yến Phương
+</span>
 </div>
 
-<div>
-<b>Số tài khoản:</b>
-<span class="bank-number">
+<div class="bank-line">
+💳 Số tài khoản:
+<span class="bank-value">
 1066613219
 </span>
 </div>
 
-<div>
-<b>Chủ tài khoản:</b>
-<span class="bank-name">
-HUỲNH YẾN PHƯƠNG
-</span>
-</div>
-
-</div>
-
+<!--
+  Nếu có ảnh QR thật:
+  đổi đường dẫn bên dưới thành link ảnh QR
+-->
 
 <img
 id="bankQr"
 class="bank-qr"
-alt="QR Vietcombank"
->
+src=""
+alt="QR chuyển khoản"
+onerror="this.style.display='none'">
 
+<div
+id="qrEmpty"
+class="bank-note">
 
-<div class="bank-amount">
-
-💰 Số tiền cần chuyển:
-<strong id="bankAmount">
-0đ
-</strong>
+QR sẽ hiển thị khi cấu hình ảnh QR.
 
 </div>
 
 <div class="bank-note">
-Quét mã QR để chuyển khoản đúng số tiền đơn hàng.
+Vui lòng kiểm tra đúng số tiền trước khi chuyển.
 </div>
 
 </div>
@@ -1277,16 +1501,17 @@ Quét mã QR để chuyển khoản đúng số tiền đơn hàng.
 <button
 class="primary"
 onclick="placeOrder()">
+
 ✅ XÁC NHẬN ĐẶT HÀNG
+
 </button>
 
 </div>
-
 </div>
 
 
 <!-- =====================================================
-     SUCCESS
+ SUCCESS
 ===================================================== -->
 
 <div class="modal" id="successModal">
@@ -1314,23 +1539,25 @@ color:var(--orange);
 font-size:30px;
 font-weight:1000;
 margin:15px">
+
 </div>
 
 <button
 class="primary"
 onclick="closeModal('successModal')">
+
 Về trang chủ
+
 </button>
 
 </div>
 
 </div>
-
 </div>
 
 
 <!-- =====================================================
-     LOGIN
+ LOGIN
 ===================================================== -->
 
 <div class="modal" id="loginModal">
@@ -1351,43 +1578,51 @@ onclick="closeModal('loginModal')">
 
 </div>
 
+
 <label>Email</label>
 
 <input
 id="loginEmail"
 type="email"
-placeholder="Email admin"
->
+placeholder="Email admin">
+
 
 <label>Mật khẩu</label>
 
 <input
 id="loginPassword"
-type="password"
->
+type="password">
+
 
 <button
 class="primary"
 onclick="adminLogin()">
+
 ĐĂNG NHẬP
+
 </button>
+
 
 <div
 id="loginStatus"
 style="
 margin-top:10px;
 text-align:center">
-</div>
 
 </div>
 
 </div>
+</div>
 
+
+<!-- =====================================================
+ SCRIPT
+===================================================== -->
 
 <script>
 
 /* =====================================================
-   SUPABASE
+ SUPABASE
 ===================================================== */
 
 const SUPABASE_URL =
@@ -1406,7 +1641,29 @@ const BUCKET="food-images";
 
 
 /* =====================================================
-   STATE
+ BANK
+===================================================== */
+
+const BANK_NAME=
+"Huỳnh Yến Phương";
+
+const BANK_ACCOUNT=
+"1066613219";
+
+/*
+ Nếu có link ảnh QR thật thì dán vào đây.
+
+ Ví dụ:
+ const BANK_QR_URL="https://.../qr.png";
+
+ Hiện để rỗng để không hiện QR giả.
+*/
+
+const BANK_QR_URL="";
+
+
+/* =====================================================
+ STATE
 ===================================================== */
 
 let foods=[];
@@ -1414,13 +1671,14 @@ let orders=[];
 let cart=[];
 
 let currentCategory="all";
+let currentSubcategory="all";
 
 let secretClicks=0;
 let secretTimer=null;
 
 
 /* =====================================================
-   COLORS
+ COLORS
 ===================================================== */
 
 const defaultColors={
@@ -1428,15 +1686,16 @@ const defaultColors={
  mustardDark:"#B98218",
  orange:"#C94A2A",
  orangeDark:"#96351F",
- pink:"#F2869D",
- pinkDark:"#C76378"
+ pink:"#F2869D"
 };
 
-let colors={...defaultColors};
+let colors={
+ ...defaultColors
+};
 
 
 /* =====================================================
-   HELPERS
+ HELPERS
 ===================================================== */
 
 function money(v){
@@ -1494,13 +1753,27 @@ function categoryName(c){
 }
 
 
+function subcategoryName(c){
+
+ return {
+
+  hotdog:"🌭 Hotdog",
+  burger:"🍔 Burger",
+  sandwich:"🥪 Sandwich"
+
+ }[c]||"";
+
+}
+
+
 /* =====================================================
-   COLORS
+ COLORS
 ===================================================== */
 
 function applyColors(){
 
- const root=document.documentElement;
+ const root=
+ document.documentElement;
 
  root.style.setProperty(
   "--mustard",
@@ -1527,66 +1800,69 @@ function applyColors(){
   colors.pink
  );
 
- root.style.setProperty(
-  "--pink-dark",
-  colors.pinkDark
- );
 
-
- const ids={
-
+ const map={
   mustardCode:colors.mustard,
   orangeCode:colors.orange,
   pinkCode:colors.pink
-
  };
 
+ for(
+  const [id,value]
+  of Object.entries(map)
+ ){
 
- for(const [id,val] of Object.entries(ids)){
+  const el=
+  document.getElementById(id);
 
-  const el=document.getElementById(id);
-
-  if(el){
-   el.textContent=val;
-  }
+  if(el)
+  el.textContent=value;
 
  }
 
 
- const mustard=
- document.getElementById("mustardPicker");
+ const mustardPicker=
+ document.getElementById(
+  "mustardPicker"
+ );
 
- const orange=
- document.getElementById("orangePicker");
+ const orangePicker=
+ document.getElementById(
+  "orangePicker"
+ );
 
- const pink=
- document.getElementById("pinkPicker");
+ const pinkPicker=
+ document.getElementById(
+  "pinkPicker"
+ );
 
+ if(mustardPicker)
+ mustardPicker.value=
+ colors.mustard;
 
- if(mustard)
-  mustard.value=colors.mustard;
+ if(orangePicker)
+ orangePicker.value=
+ colors.orange;
 
- if(orange)
-  orange.value=colors.orange;
-
- if(pink)
-  pink.value=colors.pink;
+ if(pinkPicker)
+ pinkPicker.value=
+ colors.pink;
 
 }
 
 
 function setColor(type,value){
 
- colors[type]=value.toUpperCase();
+ colors[type]=
+ value.toUpperCase();
 
  if(type==="mustard")
-  colors.mustardDark=darken(value);
+ colors.mustardDark=
+ darken(value);
 
  if(type==="orange")
-  colors.orangeDark=darken(value);
-
- if(type==="pink")
-  colors.pinkDark=darken(value);
+ colors.orangeDark=
+ darken(value);
 
  applyColors();
 
@@ -1602,7 +1878,7 @@ async function loadColors(){
  .eq("key","theme_colors")
  .maybeSingle();
 
- if(!error && data?.value){
+ if(!error&&data?.value){
 
   colors={
    ...defaultColors,
@@ -1622,21 +1898,22 @@ async function saveColors(){
  await db
  .from("settings")
  .upsert({
-
   key:"theme_colors",
   value:colors,
-  updated_at:new Date().toISOString()
-
+  updated_at:
+   new Date().toISOString()
  },{
   onConflict:"key"
  });
 
  if(error){
 
-  return alert(
+  alert(
    "❌ Lưu màu lỗi:\n"+
    error.message
   );
+
+  return;
 
  }
 
@@ -1647,7 +1924,9 @@ async function saveColors(){
 
 async function resetColors(){
 
- colors={...defaultColors};
+ colors={
+  ...defaultColors
+ };
 
  applyColors();
 
@@ -1657,7 +1936,7 @@ async function resetColors(){
 
 
 /* =====================================================
-   FOODS
+ FOODS
 ===================================================== */
 
 async function loadFoods(){
@@ -1671,10 +1950,21 @@ async function loadFoods(){
 
  if(error){
 
-  document.getElementById("foodList").innerHTML=
-  `<div class="empty">
-   ❌ ${escapeHtml(error.message)}
-  </div>`;
+  console.error(error);
+
+  document
+   .getElementById("foodList")
+   .innerHTML=`
+
+   <div class="empty">
+
+   ❌ Không tải được món.<br><br>
+
+   ${escapeHtml(error.message)}
+
+   </div>
+
+   `;
 
   return;
 
@@ -1689,17 +1979,46 @@ async function loadFoods(){
 }
 
 
+/* =====================================================
+ RENDER FOODS
+===================================================== */
+
 function renderFoods(){
 
- let list=
- currentCategory==="all"
- ?foods
- :foods.filter(
-   x=>x.category===currentCategory
- );
+ let list=foods;
+
+
+ if(currentCategory!=="all"){
+
+  list=
+   foods.filter(
+    food=>
+     food.category===
+     currentCategory
+   );
+
+ }
+
+
+ if(
+  currentCategory==="main" &&
+  currentSubcategory!=="all"
+ ){
+
+  list=
+   list.filter(
+    food=>
+     food.subcategory===
+     currentSubcategory
+   );
+
+ }
+
 
  const box=
- document.getElementById("foodList");
+ document.getElementById(
+  "foodList"
+ );
 
 
  if(!list.length){
@@ -1707,7 +2026,7 @@ function renderFoods(){
   box.innerHTML=
   `<div class="empty">
    Chưa có món trong mục này.
-  </div>`;
+   </div>`;
 
   return;
 
@@ -1716,55 +2035,57 @@ function renderFoods(){
 
  box.innerHTML=
 
- list.map(f=>`
+ list.map(food=>`
 
  <div class="food-card">
 
  ${
-  f.image_url
-
+  food.image_url
   ?
 
   `<img
-    class="food-image"
-    src="${escapeHtml(f.image_url)}"
-    alt="${escapeHtml(f.name)}"
-    onerror="this.style.display='none'"
-  >`
+   class="food-image"
+   src="${escapeHtml(food.image_url)}"
+   alt="${escapeHtml(food.name)}"
+   onerror="this.style.display='none'">`
 
   :
 
-  `<div
-   class="food-image"
-   style="
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:45px">
-   🌭
-  </div>`
+  `<div class="food-placeholder">
+   ${
+    food.subcategory==="burger"
+    ?"🍔"
+    :
+    food.subcategory==="sandwich"
+    ?"🥪"
+    :
+    "🌭"
+   }
+   </div>`
  }
 
  <div class="food-content">
 
  <div class="food-name">
- ${escapeHtml(f.name)}
+ ${escapeHtml(food.name)}
  </div>
 
  <div class="food-description">
- ${escapeHtml(f.description||"")}
+ ${escapeHtml(food.description||"")}
  </div>
 
  <div class="food-bottom">
 
  <div class="price">
- ${money(f.price)}
+ ${money(food.price)}
  </div>
 
  <button
  class="add-btn"
- onclick="addCart(${f.id})">
+ onclick="addCart(${food.id})">
+
  + Thêm
+
  </button>
 
  </div>
@@ -1778,20 +2099,50 @@ function renderFoods(){
 }
 
 
-function changeCategory(category,button){
+/* =====================================================
+ CATEGORY
+===================================================== */
 
- currentCategory=category;
+function changeCategory(
+ category,
+ button
+){
+
+ currentCategory=
+ category;
+
+ currentSubcategory=
+ "all";
+
 
  document
  .querySelectorAll(".category")
- .forEach(
-  x=>x.classList.remove("active")
+ .forEach(x=>
+  x.classList.remove("active")
  );
+
 
  button.classList.add("active");
 
- document.getElementById("sectionTitle")
- .textContent={
+
+ const sub=
+ document.getElementById(
+  "mainSubcategories"
+ );
+
+
+ if(category==="main"){
+
+  sub.classList.add("show");
+
+ }else{
+
+  sub.classList.remove("show");
+
+ }
+
+
+ const titles={
 
   all:"Tất cả món",
   main:"🌭 Ăn chính",
@@ -1799,7 +2150,30 @@ function changeCategory(category,button){
   extra:"🧀 Đồ ăn thêm",
   drink:"🥤 Đồ uống"
 
- }[category];
+ };
+
+
+ document
+ .getElementById("sectionTitle")
+ .textContent=
+ titles[category];
+
+
+ document
+ .querySelectorAll(".subcategory")
+ .forEach(x=>
+  x.classList.remove("active")
+ );
+
+
+ const firstSub=
+ document.querySelector(
+  ".subcategory"
+ );
+
+ if(firstSub)
+ firstSub.classList.add("active");
+
 
  renderFoods();
 
@@ -1807,18 +2181,71 @@ function changeCategory(category,button){
 
 
 /* =====================================================
-   CART
+ SUBCATEGORY
+===================================================== */
+
+function changeSubcategory(
+ subcategory,
+ button
+){
+
+ currentSubcategory=
+ subcategory;
+
+
+ document
+ .querySelectorAll(".subcategory")
+ .forEach(x=>
+  x.classList.remove("active")
+ );
+
+
+ button.classList.add("active");
+
+
+ if(subcategory==="all"){
+
+  document
+   .getElementById("sectionTitle")
+   .textContent=
+   "🌭 Ăn chính";
+
+ }else{
+
+  document
+   .getElementById("sectionTitle")
+   .textContent=
+   subcategoryName(
+    subcategory
+   );
+
+ }
+
+
+ renderFoods();
+
+}
+
+
+/* =====================================================
+ CART
 ===================================================== */
 
 function addCart(id){
 
- const f=
- foods.find(x=>x.id===id);
+ const food=
+ foods.find(
+  x=>x.id===id
+ );
 
- if(!f)return;
+ if(!food)return;
+
 
  const item=
- cart.find(x=>x.id===id);
+ cart.find(
+  x=>x.id===id
+ );
+
 
  if(item){
 
@@ -1828,14 +2255,18 @@ function addCart(id){
 
   cart.push({
 
-   id:f.id,
-   name:f.name,
-   price:Number(f.price),
+   id:food.id,
+
+   name:food.name,
+
+   price:Number(food.price),
+
    qty:1
 
   });
 
  }
+
 
  updateCart();
 
@@ -1845,25 +2276,29 @@ function addCart(id){
 function changeQty(id,n){
 
  const item=
- cart.find(x=>x.id===id);
+ cart.find(
+  x=>x.id===id
+ );
 
  if(!item)return;
 
+
  item.qty+=n;
+
 
  if(item.qty<=0){
 
   cart=
-  cart.filter(
-   x=>x.id!==id
-  );
+   cart.filter(
+    x=>x.id!==id
+   );
 
  }
 
- updateCart();
- renderCart();
 
- updateBankQr();
+ updateCart();
+
+ renderCart();
 
 }
 
@@ -1872,21 +2307,30 @@ function updateCart(){
 
  const count=
  cart.reduce(
-  (s,x)=>s+x.qty,
+  (s,x)=>
+   s+x.qty,
   0
  );
+
 
  const total=
  cart.reduce(
-  (s,x)=>s+x.price*x.qty,
+  (s,x)=>
+   s+x.price*x.qty,
   0
  );
 
- document.getElementById("cartCount")
- .textContent=count;
 
- document.getElementById("bottomTotal")
- .textContent=money(total);
+ document
+ .getElementById("cartCount")
+ .textContent=
+ count;
+
+
+ document
+ .getElementById("bottomTotal")
+ .textContent=
+ money(total);
 
 }
 
@@ -1895,7 +2339,8 @@ function openCart(){
 
  renderCart();
 
- document.getElementById("cartModal")
+ document
+ .getElementById("cartModal")
  .classList.add("show");
 
 }
@@ -1904,7 +2349,9 @@ function openCart(){
 function renderCart(){
 
  const box=
- document.getElementById("cartItems");
+ document.getElementById(
+  "cartItems"
+ );
 
 
  if(!cart.length){
@@ -1912,10 +2359,12 @@ function renderCart(){
   box.innerHTML=
   `<div class="empty">
    🛒 Giỏ hàng đang trống
-  </div>`;
+   </div>`;
 
-  document.getElementById("cartTotal")
-  .textContent="0đ";
+  document
+   .getElementById("cartTotal")
+   .textContent=
+   "0đ";
 
   return;
 
@@ -1947,7 +2396,9 @@ function renderCart(){
  −
  </button>
 
- <b>${x.qty}</b>
+ <b>
+ ${x.qty}
+ </b>
 
  <button
  onclick="changeQty(${x.id},1)">
@@ -1961,11 +2412,13 @@ function renderCart(){
  `).join("");
 
 
- document.getElementById("cartTotal")
+ document
+ .getElementById("cartTotal")
  .textContent=
  money(
   cart.reduce(
-   (s,x)=>s+x.price*x.qty,
+   (s,x)=>
+    s+x.price*x.qty,
    0
   )
  );
@@ -1974,36 +2427,31 @@ function renderCart(){
 
 
 /* =====================================================
-   CHECKOUT
+ CHECKOUT
 ===================================================== */
-
-function getOrderTotal(){
-
- return cart.reduce(
-  (sum,item)=>
-   sum+
-   Number(item.price||0)*
-   Number(item.qty||0),
-  0
- );
-
-}
-
 
 function openCheckout(){
 
  if(!cart.length){
 
-  return alert(
+  alert(
    "Giỏ hàng đang trống!"
   );
 
+  return;
+
  }
+
 
  closeModal("cartModal");
 
- document.getElementById("checkoutModal")
+
+ document
+ .getElementById(
+  "checkoutModal"
+ )
  .classList.add("show");
+
 
  toggleAddress();
  toggleBankInfo();
@@ -2014,10 +2462,15 @@ function openCheckout(){
 function toggleAddress(){
 
  const delivery=
- document.getElementById("orderType")
- .value==="delivery";
+ document.getElementById(
+  "orderType"
+ ).value==="delivery";
 
- document.getElementById("addressBox")
+
+ document
+ .getElementById(
+  "addressBox"
+ )
  .classList.toggle(
   "hidden",
   !delivery
@@ -2026,100 +2479,80 @@ function toggleAddress(){
 }
 
 
-function updateBankQr(){
-
- const bankInfo=
- document.getElementById("bankInfo");
-
- if(
-  !bankInfo ||
-  bankInfo.classList.contains("hidden")
- ){
-  return;
- }
-
- const amount=
- getOrderTotal();
-
- document.getElementById("bankAmount")
- .textContent=money(amount);
-
-
- /*
-   Vietcombank
-   STK: 1066613219
-
-   Không truyền addInfo nên QR
-   không có nội dung chuyển khoản.
- */
-
- const qrUrl=
- "https://img.vietqr.io/image/" +
- "VCB-1066613219-compact2.png" +
- "?amount=" +
- encodeURIComponent(amount);
-
- document.getElementById("bankQr")
- .src=qrUrl;
-
-}
-
-
 function toggleBankInfo(){
 
- const payment=
- document.getElementById("payment").value;
+ const bank=
+ document.getElementById(
+  "payment"
+ ).value==="BANK";
 
- const bankInfo=
- document.getElementById("bankInfo");
 
-
- if(payment==="BANK"){
-
-  bankInfo.classList.remove("hidden");
-
-  updateBankQr();
-
- }else{
-
-  bankInfo.classList.add("hidden");
-
- }
+ document
+ .getElementById(
+  "bankInfo"
+ )
+ .classList.toggle(
+  "hidden",
+  !bank
+ );
 
 }
 
+
+/* =====================================================
+ PLACE ORDER
+===================================================== */
 
 async function placeOrder(){
 
- if(!cart.length)return;
+ if(!cart.length){
+
+  alert(
+   "Giỏ hàng đang trống!"
+  );
+
+  return;
+
+ }
 
 
  const type=
- document.getElementById("orderType")
- .value;
+ document.getElementById(
+  "orderType"
+ ).value;
+
 
  const name=
- document.getElementById("customerName")
- .value.trim();
+ document.getElementById(
+  "customerName"
+ ).value.trim();
+
 
  const phone=
- document.getElementById("customerPhone")
- .value.trim();
+ document.getElementById(
+  "customerPhone"
+ ).value.trim();
+
 
  const address=
- document.getElementById("customerAddress")
- .value.trim();
+ document.getElementById(
+  "customerAddress"
+ ).value.trim();
+
 
  const payment=
- document.getElementById("payment")
- .value;
+ document.getElementById(
+  "payment"
+ ).value;
 
 
- if(!name || !phone){
+ if(!name||!phone){
 
-  return alert(
+  alert(
    "Vui lòng nhập họ tên và số điện thoại!"
   );
+
+  return;
 
  }
 
@@ -2129,15 +2562,22 @@ async function placeOrder(){
   !address
  ){
 
-  return alert(
+  alert(
    "Vui lòng nhập địa chỉ giao hàng!"
   );
+
+  return;
 
  }
 
 
  const total=
- getOrderTotal();
+ cart.reduce(
+  (s,x)=>
+   s+x.price*x.qty,
+  0
+ );
+
 
  const code=
  "KH"+
@@ -2145,10 +2585,6 @@ async function placeOrder(){
  .toString()
  .slice(-8);
 
-
- /*
-   Tạo đơn
- */
 
  const {data,error}=
  await db
@@ -2179,17 +2615,15 @@ async function placeOrder(){
 
  if(error){
 
-  return alert(
+  alert(
    "❌ Đặt hàng lỗi:\n"+
    error.message
   );
 
+  return;
+
  }
 
-
- /*
-   Lưu món trong đơn
- */
 
  const items=
  cart.map(x=>({
@@ -2216,17 +2650,15 @@ async function placeOrder(){
 
  if(itemError){
 
-  return alert(
+  alert(
    "❌ Lưu món lỗi:\n"+
    itemError.message
   );
 
+  return;
+
  }
 
-
- /*
-   Gửi Telegram
- */
 
  await sendNewOrderTelegram({
 
@@ -2242,41 +2674,72 @@ async function placeOrder(){
  });
 
 
- /*
-   Reset
- */
-
  cart=[];
 
  updateCart();
 
- closeModal("checkoutModal");
 
- document.getElementById("successCode")
- .textContent=code;
+ closeModal(
+  "checkoutModal"
+ );
 
- document.getElementById("successModal")
+
+ document
+ .getElementById(
+  "successCode"
+ )
+ .textContent=
+ code;
+
+
+ document
+ .getElementById(
+  "successModal"
+ )
  .classList.add("show");
+
+
+ document
+ .getElementById(
+  "customerName"
+ )
+ .value="";
+
+
+ document
+ .getElementById(
+  "customerPhone"
+ )
+ .value="";
+
+
+ document
+ .getElementById(
+  "customerAddress"
+ )
+ .value="";
 
 }
 
 
 /* =====================================================
-   TELEGRAM
+ TELEGRAM
 ===================================================== */
 
 function telegramToken(){
 
- return sessionStorage
- .getItem("kh_telegram_token")||"";
+ return sessionStorage.getItem(
+  "kh_telegram_token"
+ )||"";
 
 }
 
 
 function telegramChat(){
 
- return sessionStorage
- .getItem("kh_telegram_chat")||"";
+ return sessionStorage.getItem(
+  "kh_telegram_chat"
+ )||"";
 
 }
 
@@ -2289,14 +2752,27 @@ function loadTelegramUI(){
  const chat=
  telegramChat();
 
- document.getElementById("telegramToken")
- .value=token;
 
- document.getElementById("telegramChatId")
+ document
+ .getElementById(
+  "telegramToken"
+ )
  .value=
- chat||"-5516393735";
+ token;
 
- document.getElementById("telegramStatus")
+
+ document
+ .getElementById(
+  "telegramChatId"
+ )
+ .value=
+ chat;
+
+
+ document
+ .getElementById(
+  "telegramStatus"
+ )
  .textContent=
  token&&chat
  ?"🟢 Telegram đã cấu hình"
@@ -2308,19 +2784,28 @@ function loadTelegramUI(){
 function saveTelegram(){
 
  const token=
- document.getElementById("telegramToken")
+ document
+ .getElementById(
+  "telegramToken"
+ )
  .value.trim();
 
+
  const chat=
- document.getElementById("telegramChatId")
+ document
+ .getElementById(
+  "telegramChatId"
+ )
  .value.trim();
 
 
  if(!token||!chat){
 
-  return alert(
+  alert(
    "Nhập Bot Token và Chat ID!"
   );
+
+  return;
 
  }
 
@@ -2330,6 +2815,7 @@ function saveTelegram(){
   token
  );
 
+
  sessionStorage.setItem(
   "kh_telegram_chat",
   chat
@@ -2338,8 +2824,9 @@ function saveTelegram(){
 
  loadTelegramUI();
 
+
  alert(
-  "✅ Đã lưu Telegram trên trình duyệt!"
+  "✅ Đã lưu Telegram!"
  );
 
 }
@@ -2381,11 +2868,9 @@ async function telegramSend(text){
 
  const response=
  await fetch(
-
   "https://api.telegram.org/bot"+
   encodeURIComponent(token)+
   "/sendMessage",
-
   {
 
    method:"POST",
@@ -2399,14 +2884,13 @@ async function telegramSend(text){
 
     chat_id:chat,
 
-    text,
+    text:text,
 
     parse_mode:"HTML"
 
    })
 
   }
-
  );
 
 
@@ -2418,19 +2902,28 @@ async function telegramSend(text){
 async function testTelegram(){
 
  const token=
- document.getElementById("telegramToken")
+ document
+ .getElementById(
+  "telegramToken"
+ )
  .value.trim();
 
+
  const chat=
- document.getElementById("telegramChatId")
+ document
+ .getElementById(
+  "telegramChatId"
+ )
  .value.trim();
 
 
  if(!token||!chat){
 
-  return alert(
+  alert(
    "Nhập Bot Token và Chat ID trước!"
   );
+
+  return;
 
  }
 
@@ -2450,10 +2943,8 @@ async function testTelegram(){
 
   const result=
   await telegramSend(
-
    "🧪 <b>TEST KEITHS HOTDOG</b>\n\n"+
    "Telegram đang hoạt động!"
-
   );
 
 
@@ -2469,10 +2960,8 @@ async function testTelegram(){
 
    alert(
     "❌ Telegram lỗi:\n"+
-    (
-     result.description||
-     "Không xác định"
-    )
+    (result.description||
+    "Không xác định")
    );
 
   }
@@ -2495,7 +2984,9 @@ async function sendNewOrderTelegram(o){
   !telegramToken()||
   !telegramChat()
  ){
+
   return;
+
  }
 
 
@@ -2506,41 +2997,36 @@ async function sendNewOrderTelegram(o){
 
 
  const items=
- o.items.map(x=>
-
+ o.items
+ .map(x=>
   `• ${escapeHtml(x.name)} × ${x.qty} — ${money(x.price*x.qty)}`
-
- ).join("\n");
+ )
+ .join("\n");
 
 
  const address=
  o.type==="delivery"
-
  ?`\n📍 <b>Địa chỉ:</b> ${escapeHtml(o.address)}`
-
  :"";
 
 
- const payment=
- o.payment==="BANK"
- ?"🏦 Chuyển khoản"
- :"💵 Tiền mặt";
-
-
  const text=
-
  `🌭 <b>KEITHS HOTDOG - ĐƠN MỚI</b>
 
-🔖 <b>Mã đơn:</b> ${escapeHtml(o.code)}
+🔖 <b>Mã đơn:</b> ${o.code}
+
 ${type}
 
 👤 <b>Khách:</b> ${escapeHtml(o.name)}
-📞 <b>SĐT:</b> ${escapeHtml(o.phone)}${address}
+
+📞 <b>SĐT:</b> ${escapeHtml(o.phone)}
+${address}
 
 🛒 <b>Món:</b>
 ${items}
 
-💳 <b>Thanh toán:</b> ${payment}
+💳 <b>Thanh toán:</b> ${escapeHtml(o.payment)}
+
 💰 <b>Tổng:</b> ${money(o.total)}
 
 ⏰ ${new Date().toLocaleString("vi-VN")}`;
@@ -2563,19 +3049,22 @@ ${items}
 
 
 /* =====================================================
-   SECRET ADMIN
-   Bấm logo 5 lần trong 2 giây
+ SECRET ADMIN
 ===================================================== */
 
 function secretAdminClick(){
 
  secretClicks++;
 
- clearTimeout(secretTimer);
+ clearTimeout(
+  secretTimer
+ );
 
  secretTimer=
  setTimeout(
-  ()=>secretClicks=0,
+  ()=>{
+   secretClicks=0;
+  },
   2000
  );
 
@@ -2584,8 +3073,11 @@ function secretAdminClick(){
 
   secretClicks=0;
 
-  document.getElementById("loginModal")
-  .classList.add("show");
+  document
+   .getElementById(
+    "loginModal"
+   )
+   .classList.add("show");
 
  }
 
@@ -2593,21 +3085,32 @@ function secretAdminClick(){
 
 
 /* =====================================================
-   ADMIN AUTH
+ ADMIN LOGIN
 ===================================================== */
 
 async function adminLogin(){
 
  const email=
- document.getElementById("loginEmail")
+ document
+ .getElementById(
+  "loginEmail"
+ )
  .value.trim();
 
+
  const password=
- document.getElementById("loginPassword")
+ document
+ .getElementById(
+  "loginPassword"
+ )
  .value;
 
+
  const status=
- document.getElementById("loginStatus");
+ document
+ .getElementById(
+  "loginStatus"
+ );
 
 
  if(!email||!password){
@@ -2644,7 +3147,7 @@ async function adminLogin(){
 
 
  /*
-   CHỈ EMAIL NÀY LÀ ADMIN
+  ĐỔI EMAIL ADMIN TẠI ĐÂY
  */
 
  if(
@@ -2662,7 +3165,10 @@ async function adminLogin(){
  }
 
 
- closeModal("loginModal");
+ closeModal(
+  "loginModal"
+ );
+
 
  showAdmin();
 
@@ -2680,13 +3186,19 @@ async function adminLogout(){
 
 function showAdmin(){
 
- document.getElementById(
+ document
+ .getElementById(
   "customerScreen"
- ).style.display="none";
+ )
+ .style.display="none";
 
- document.getElementById(
+
+ document
+ .getElementById(
   "adminScreen"
- ).style.display="block";
+ )
+ .style.display="block";
+
 
  loadTelegramUI();
 
@@ -2697,60 +3209,107 @@ function showAdmin(){
 
 function showCustomer(){
 
- document.getElementById(
+ document
+ .getElementById(
   "adminScreen"
- ).style.display="none";
+ )
+ .style.display="none";
 
- document.getElementById(
+
+ document
+ .getElementById(
   "customerScreen"
- ).style.display="block";
+ )
+ .style.display="block";
 
 }
 
 
 /* =====================================================
-   ADMIN TAB
+ ADMIN TAB
 ===================================================== */
 
-function adminTab(id,button){
+function adminTab(
+ id,
+ button
+){
 
  document
- .querySelectorAll(".admin-page")
- .forEach(
-  x=>x.classList.remove("active")
+ .querySelectorAll(
+  ".admin-page"
+ )
+ .forEach(x=>
+  x.classList.remove(
+   "active"
+  )
  );
+
 
  document
- .querySelectorAll(".admin-tab")
- .forEach(
-  x=>x.classList.remove("active")
+ .querySelectorAll(
+  ".admin-tab"
+ )
+ .forEach(x=>
+  x.classList.remove(
+   "active"
+  )
  );
 
 
- document.getElementById(id)
- .classList.add("active");
-
- button.classList.add("active");
-
-
- if(id==="orders"){
-
-  loadOrders();
-
- }
+ document
+ .getElementById(id)
+ .classList.add(
+  "active"
+ );
 
 
- if(id==="telegram"){
+ button.classList.add(
+  "active"
+ );
 
-  loadTelegramUI();
 
- }
+ if(id==="orders")
+ loadOrders();
+
+
+ if(id==="telegram")
+ loadTelegramUI();
+
+
+ if(id==="foods")
+ renderAdminFoods();
 
 }
 
 
 /* =====================================================
-   UPLOAD IMAGE
+ ADMIN SUBCATEGORY
+===================================================== */
+
+function toggleSubcategoryAdmin(){
+
+ const category=
+ document
+ .getElementById(
+  "foodCategory"
+ )
+ .value;
+
+
+ document
+ .getElementById(
+  "adminSubcategoryBox"
+ )
+ .classList.toggle(
+  "hidden",
+  category!=="main"
+ );
+
+}
+
+
+/* =====================================================
+ IMAGE PREVIEW
 ===================================================== */
 
 function previewFoodImage(e){
@@ -2758,10 +3317,12 @@ function previewFoodImage(e){
  const file=
  e.target.files[0];
 
+
  const preview=
  document.getElementById(
   "foodImagePreview"
  );
+
 
  const status=
  document.getElementById(
@@ -2771,7 +3332,9 @@ function previewFoodImage(e){
 
  if(!file){
 
-  preview.classList.remove("show");
+  preview.classList.remove(
+   "show"
+  );
 
   status.textContent=
   "Chưa chọn ảnh";
@@ -2785,9 +3348,11 @@ function previewFoodImage(e){
   !file.type.startsWith("image/")
  ){
 
-  return alert(
+  alert(
    "File không phải ảnh!"
   );
+
+  return;
 
  }
 
@@ -2796,9 +3361,11 @@ function previewFoodImage(e){
   file.size>8*1024*1024
  ){
 
-  return alert(
+  alert(
    "Ảnh tối đa 8MB!"
   );
+
+  return;
 
  }
 
@@ -2806,13 +3373,21 @@ function previewFoodImage(e){
  preview.src=
  URL.createObjectURL(file);
 
- preview.classList.add("show");
+
+ preview.classList.add(
+  "show"
+ );
+
 
  status.textContent=
  file.name;
 
 }
 
+
+/* =====================================================
+ UPLOAD IMAGE
+===================================================== */
 
 async function uploadFoodImage(file){
 
@@ -2834,9 +3409,11 @@ async function uploadFoodImage(file){
  ext;
 
 
- document.getElementById(
+ document
+ .getElementById(
   "uploadStatus"
- ).textContent=
+ )
+ .textContent=
  "⏳ Đang upload...";
 
 
@@ -2855,7 +3432,8 @@ async function uploadFoodImage(file){
  );
 
 
- if(error)throw error;
+ if(error)
+ throw error;
 
 
  const {data}=
@@ -2865,9 +3443,11 @@ async function uploadFoodImage(file){
  .getPublicUrl(path);
 
 
- document.getElementById(
+ document
+ .getElementById(
   "uploadStatus"
- ).textContent=
+ )
+ .textContent=
  "✅ Upload thành công";
 
 
@@ -2877,48 +3457,70 @@ async function uploadFoodImage(file){
 
 
 /* =====================================================
-   ADD FOOD
+ ADD FOOD
 ===================================================== */
 
 async function addFood(){
 
  const name=
- document.getElementById(
+ document
+ .getElementById(
   "foodName"
- ).value.trim();
+ )
+ .value.trim();
 
 
  const price=
  Number(
-  document.getElementById(
+  document
+  .getElementById(
    "foodPrice"
-  ).value
+  )
+  .value
  );
 
 
  const category=
- document.getElementById(
+ document
+ .getElementById(
   "foodCategory"
- ).value;
+ )
+ .value;
+
+
+ const subcategory=
+ category==="main"
+ ?document
+  .getElementById(
+   "foodSubcategory"
+  )
+  .value
+ :null;
 
 
  const description=
- document.getElementById(
+ document
+ .getElementById(
   "foodDescription"
- ).value.trim();
+ )
+ .value.trim();
 
 
  const file=
- document.getElementById(
+ document
+ .getElementById(
   "foodImageFile"
- ).files[0];
+ )
+ .files[0];
 
 
  if(!name||!price){
 
-  return alert(
+  alert(
    "Nhập tên và giá!"
   );
+
+  return;
 
  }
 
@@ -2931,7 +3533,9 @@ async function addFood(){
   if(file){
 
    image_url=
-   await uploadFoodImage(file);
+   await uploadFoodImage(
+    file
+   );
 
   }
 
@@ -2942,50 +3546,77 @@ async function addFood(){
   .insert({
 
    name,
+
    price,
+
    category,
+
+   subcategory,
+
    description,
+
    image_url,
+
    active:true
 
   });
 
 
-  if(error)throw error;
+  if(error)
+  throw error;
 
 
-  document.getElementById(
+  document
+  .getElementById(
    "foodName"
-  ).value="";
+  )
+  .value="";
 
-  document.getElementById(
+
+  document
+  .getElementById(
    "foodPrice"
-  ).value="";
+  )
+  .value="";
 
-  document.getElementById(
+
+  document
+  .getElementById(
    "foodDescription"
-  ).value="";
+  )
+  .value="";
 
-  document.getElementById(
+
+  document
+  .getElementById(
    "foodImageFile"
-  ).value="";
+  )
+  .value="";
 
-  document.getElementById(
+
+  document
+  .getElementById(
    "foodImagePreview"
-  ).classList.remove("show");
+  )
+  .classList.remove(
+   "show"
+  );
 
-  document.getElementById(
+
+  document
+  .getElementById(
    "uploadStatus"
-  ).textContent=
+  )
+  .textContent=
   "Chưa chọn ảnh";
 
 
   await loadFoods();
 
+
   alert(
    "✅ Đã thêm món!"
   );
-
 
  }catch(e){
 
@@ -3000,7 +3631,7 @@ async function addFood(){
 
 
 /* =====================================================
-   ADMIN FOOD LIST
+ ADMIN FOOD LIST
 ===================================================== */
 
 function renderAdminFoods(){
@@ -3011,12 +3642,15 @@ function renderAdminFoods(){
  );
 
 
+ if(!box)return;
+
+
  if(!foods.length){
 
   box.innerHTML=
   `<div class="empty">
    Chưa có món.
-  </div>`;
+   </div>`;
 
   return;
 
@@ -3035,29 +3669,49 @@ function renderAdminFoods(){
   ?
 
   `<img
-    src="${escapeHtml(f.image_url)}"
-    onerror="this.style.display='none'"
-  >`
+   src="${escapeHtml(f.image_url)}"
+   onerror="this.style.display='none'">`
 
   :
 
   `<div class="no-img">
-   🌭
-  </div>`
+   ${
+    f.subcategory==="burger"
+    ?"🍔"
+    :
+    f.subcategory==="sandwich"
+    ?"🥪"
+    :
+    "🌭"
+   }
+   </div>`
  }
 
  <div class="admin-food-info">
 
  <div class="admin-food-name">
+
  ${escapeHtml(f.name)}
+
  </div>
 
  <div class="admin-food-price">
+
  ${money(f.price)}
+
  </div>
 
  <div class="admin-food-cat">
+
  ${categoryName(f.category)}
+
+ ${
+  f.category==="main"&&
+  f.subcategory
+  ? " • "+subcategoryName(f.subcategory)
+  : ""
+ }
+
  </div>
 
  </div>
@@ -3067,13 +3721,17 @@ function renderAdminFoods(){
  <button
  class="small-btn edit-btn"
  onclick="editFood(${f.id})">
+
  Sửa
+
  </button>
 
  <button
  class="small-btn delete-btn"
  onclick="deleteFood(${f.id})">
+
  Ẩn
+
  </button>
 
  </div>
@@ -3086,13 +3744,16 @@ function renderAdminFoods(){
 
 
 /* =====================================================
-   EDIT FOOD
+ EDIT FOOD
 ===================================================== */
 
 async function editFood(id){
 
  const f=
- foods.find(x=>x.id===id);
+ foods.find(
+  x=>x.id===id
+ );
+
 
  if(!f)return;
 
@@ -3103,6 +3764,7 @@ async function editFood(id){
   f.name
  );
 
+
  if(name===null)return;
 
 
@@ -3111,6 +3773,7 @@ async function editFood(id){
   "Giá:",
   f.price
  );
+
 
  if(price===null)return;
 
@@ -3121,18 +3784,50 @@ async function editFood(id){
   f.description||""
  );
 
- if(description===null)return;
+
+ if(description===null)
+ return;
 
 
- if(
-  !name.trim()||
-  !Number(price)||
-  Number(price)<=0
- ){
+ let subcategory=
+ f.subcategory||null;
 
-  return alert(
-   "Tên hoặc giá không hợp lệ!"
+
+ if(f.category==="main"){
+
+  const answer=
+  prompt(
+   "Phân loại: hotdog / burger / sandwich",
+   subcategory||"hotdog"
   );
+
+
+  if(answer===null)
+  return;
+
+
+  const value=
+  answer.trim().toLowerCase();
+
+
+  if(
+   ![
+    "hotdog",
+    "burger",
+    "sandwich"
+   ].includes(value)
+  ){
+
+   alert(
+    "Phân loại không hợp lệ!"
+   );
+
+   return;
+
+  }
+
+
+  subcategory=value;
 
  }
 
@@ -3147,17 +3842,25 @@ async function editFood(id){
   price:Number(price),
 
   description:
-   description.trim()
+   description.trim(),
+
+  subcategory
 
  })
- .eq("id",id);
+ .eq(
+  "id",
+  id
+ );
 
 
  if(error){
 
-  return alert(
-   "❌ "+error.message
+  alert(
+   "❌ Sửa lỗi:\n"+
+   error.message
   );
+
+  return;
 
  }
 
@@ -3168,16 +3871,28 @@ async function editFood(id){
 
 
 /* =====================================================
-   DELETE / HIDE FOOD
+ DELETE FOOD
 ===================================================== */
 
 async function deleteFood(id){
 
+ const f=
+ foods.find(
+  x=>x.id===id
+ );
+
+
+ if(!f)return;
+
+
  if(
   !confirm(
-   "Ẩn món này khỏi menu?"
+   'Ẩn món "'+
+   f.name+
+   '" khỏi menu?'
   )
- )return;
+ )
+ return;
 
 
  const {error}=
@@ -3186,15 +3901,20 @@ async function deleteFood(id){
  .update({
   active:false
  })
- .eq("id",id);
+ .eq(
+  "id",
+  id
+ );
 
 
  if(error){
 
-  return alert(
-   "❌ Không thể ẩn món:\n"+
+  alert(
+   "❌ Xóa lỗi:\n"+
    error.message
   );
+
+  return;
 
  }
 
@@ -3205,7 +3925,7 @@ async function deleteFood(id){
 
 
 /* =====================================================
-   ORDERS
+ ORDERS
 ===================================================== */
 
 async function loadOrders(){
@@ -3216,7 +3936,9 @@ async function loadOrders(){
  .select("*")
  .order(
   "created_at",
-  {ascending:false}
+  {
+   ascending:false
+  }
  );
 
 
@@ -3231,7 +3953,7 @@ async function loadOrders(){
 
  orders=data||[];
 
- await renderOrders();
+ renderOrders();
 
  renderDashboard();
 
@@ -3246,12 +3968,15 @@ async function renderOrders(){
  );
 
 
+ if(!box)return;
+
+
  if(!orders.length){
 
   box.innerHTML=
   `<div class="empty">
    📦 Chưa có đơn.
-  </div>`;
+   </div>`;
 
   return;
 
@@ -3269,22 +3994,37 @@ async function renderOrders(){
  <div>
 
  <div class="order-code">
- ${escapeHtml(o.order_code)}
+
+ ${escapeHtml(
+  o.order_code
+ )}
+
  </div>
 
  <small>
+
  ${
   o.created_at
-  ?new Date(o.created_at)
-   .toLocaleString("vi-VN")
-  :""
+  ?
+  new Date(
+   o.created_at
+  ).toLocaleString(
+   "vi-VN"
+  )
+  :
+  ""
  }
+
  </small>
 
  </div>
 
  <div class="order-status">
- ${escapeHtml(o.status)}
+
+ ${escapeHtml(
+  o.status
+ )}
+
  </div>
 
  </div>
@@ -3293,12 +4033,16 @@ async function renderOrders(){
  <div class="order-type">
 
  ${
-  o.customer_address==="Ăn tại chỗ"
+  o.customer_address===
+  "Ăn tại chỗ"
 
-  ?"🍽️ Ăn tại chỗ"
+  ?
 
-  :"🚚 Đặt về nhà"
+  "🍽️ Ăn tại chỗ"
 
+  :
+
+  "🚚 Đặt về nhà"
  }
 
  </div>
@@ -3307,13 +4051,20 @@ async function renderOrders(){
  <p>
 
  👤 <b>
- ${escapeHtml(o.customer_name)}
+
+ ${escapeHtml(
+  o.customer_name
+ )}
+
  </b>
 
  <br>
 
  📞
- ${escapeHtml(o.customer_phone)}
+
+ ${escapeHtml(
+  o.customer_phone
+ )}
 
  <br>
 
@@ -3322,20 +4073,23 @@ async function renderOrders(){
 
   ?
 
-  `📍 ${escapeHtml(o.customer_address)}<br>`
+  `📍 ${escapeHtml(
+   o.customer_address
+  )}<br>`
 
-  :""
+  :
+
+  ""
  }
 
  💳
 
  ${
   o.payment==="BANK"
-
-  ?"🏦 Chuyển khoản"
-
-  :"💵 Tiền mặt"
-
+  ?
+  "🏦 Chuyển khoản"
+  :
+  "💵 Tiền mặt"
  }
 
  </p>
@@ -3344,17 +4098,26 @@ async function renderOrders(){
  <div
  class="order-items"
  id="items-${o.id}">
+
  Đang tải...
+
  </div>
 
 
  <div class="order-total">
- Tổng: ${money(o.total)}
+
+ Tổng:
+ ${money(o.total)}
+
  </div>
 
 
  <select
- onchange="changeOrderStatus(${o.id},this.value)">
+ onchange="
+ changeOrderStatus(
+  ${o.id},
+  this.value
+ )">
 
  ${
   [
@@ -3364,17 +4127,22 @@ async function renderOrders(){
    "Hoàn thành",
    "Đã hủy"
   ]
+  .map(s=>`
 
-  .map(s=>
+   <option
+   value="${s}"
+   ${
+    o.status===s
+    ?"selected"
+    :""
+   }>
 
-   `<option
-    value="${escapeHtml(s)}"
-    ${o.status===s?"selected":""}>
-    ${escapeHtml(s)}
-   </option>`
+   ${s}
 
-  ).join("")
+   </option>
 
+  `)
+  .join("")
  }
 
  </select>
@@ -3388,12 +4156,18 @@ async function renderOrders(){
   const o of orders
  ){
 
-  await loadOrderItems(o.id);
+  await loadOrderItems(
+   o.id
+  );
 
  }
 
 }
 
+
+/* =====================================================
+ ORDER ITEMS
+===================================================== */
 
 async function loadOrderItems(id){
 
@@ -3401,7 +4175,10 @@ async function loadOrderItems(id){
  await db
  .from("order_items")
  .select("*")
- .eq("order_id",id);
+ .eq(
+  "order_id",
+  id
+ );
 
 
  const box=
@@ -3423,23 +4200,48 @@ async function loadOrderItems(id){
  }
 
 
+ if(!data||!data.length){
+
+  box.textContent=
+  "Không có món.";
+
+  return;
+
+ }
+
+
  box.innerHTML=
 
- (data||[]).map(x=>
+ data.map(x=>`
 
-  `<div>
-   ${escapeHtml(x.food_name)}
-   × ${x.quantity}
-   —
-   ${money(x.subtotal)}
-  </div>`
+ <div>
 
- ).join("");
+ ${escapeHtml(
+  x.food_name
+ )}
+
+ × ${x.quantity}
+
+ —
+ ${money(
+  x.subtotal
+ )}
+
+ </div>
+
+ `).join("");
 
 }
 
 
-async function changeOrderStatus(id,status){
+/* =====================================================
+ CHANGE STATUS
+===================================================== */
+
+async function changeOrderStatus(
+ id,
+ status
+){
 
  const {error}=
  await db
@@ -3447,14 +4249,20 @@ async function changeOrderStatus(id,status){
  .update({
   status
  })
- .eq("id",id);
+ .eq(
+  "id",
+  id
+ );
 
 
  if(error){
 
-  return alert(
-   "❌ "+error.message
+  alert(
+   "❌ Cập nhật lỗi:\n"+
+   error.message
   );
+
+  return;
 
  }
 
@@ -3465,60 +4273,86 @@ async function changeOrderStatus(id,status){
 
 
 /* =====================================================
-   DASHBOARD
+ DASHBOARD
 ===================================================== */
 
 function renderDashboard(){
 
- const revenue=
-
- orders
- .filter(
-  x=>x.status==="Hoàn thành"
- )
- .reduce(
-  (s,x)=>
-   s+Number(x.total||0),
-  0
+ const statFoods=
+ document.getElementById(
+  "statFoods"
  );
 
 
- const pending=
-
- orders
- .filter(
-  x=>
-   x.status!=="Hoàn thành"&&
-   x.status!=="Đã hủy"
- )
- .length;
-
-
+ const statOrders=
  document.getElementById(
-  "statFoods"
- ).textContent=
+  "statOrders"
+ );
+
+
+ const statPending=
+ document.getElementById(
+  "statPending"
+ );
+
+
+ const statRevenue=
+ document.getElementById(
+  "statRevenue"
+ );
+
+
+ if(statFoods)
+ statFoods.textContent=
  foods.length;
 
 
- document.getElementById(
-  "statOrders"
- ).textContent=
+ if(statOrders)
+ statOrders.textContent=
  orders.length;
 
 
- document.getElementById(
-  "statPending"
- ).textContent=
- pending;
+ if(statPending){
+
+  statPending.textContent=
+
+  orders.filter(
+   x=>
+    x.status!=="Hoàn thành" &&
+    x.status!=="Đã hủy"
+  ).length;
+
+ }
 
 
- document.getElementById(
-  "statRevenue"
- ).textContent=
- money(revenue);
+ if(statRevenue){
+
+  const revenue=
+  orders
+  .filter(
+   x=>
+    x.status==="Hoàn thành"
+  )
+  .reduce(
+   (s,x)=>
+    s+Number(
+     x.total||0
+    ),
+   0
+  );
+
+
+  statRevenue.textContent=
+  money(revenue);
+
+ }
 
 }
 
+
+/* =====================================================
+ ADMIN RENDER
+===================================================== */
 
 async function renderAdmin(){
 
@@ -3532,7 +4366,7 @@ async function renderAdmin(){
 
 
 /* =====================================================
-   MODAL
+ MODAL
 ===================================================== */
 
 function closeModal(id){
@@ -3540,11 +4374,8 @@ function closeModal(id){
  const el=
  document.getElementById(id);
 
- if(el){
-
-  el.classList.remove("show");
-
- }
+ if(el)
+ el.classList.remove("show");
 
 }
 
@@ -3572,45 +4403,53 @@ document
 
 
 /* =====================================================
-   ENTER LOGIN
+ ENTER LOGIN
 ===================================================== */
 
 document
-.getElementById("loginPassword")
+.getElementById(
+ "loginPassword"
+)
 .addEventListener(
  "keydown",
  e=>{
 
-  if(e.key==="Enter"){
-
-   adminLogin();
-
-  }
+  if(e.key==="Enter")
+  adminLogin();
 
  }
 );
 
 
 /* =====================================================
-   AUTH STATE
+ AUTH
 ===================================================== */
 
 db.auth.onAuthStateChange(
  (event,session)=>{
 
+  const email=
+  session?.user?.email
+  ?.toLowerCase();
+
+
   if(
-   session?.user?.email
-   ?.toLowerCase()===
+   email===
    "gcxt334@gmail.com"
   ){
 
-   document.getElementById(
+   document
+   .getElementById(
     "customerScreen"
-   ).style.display="none";
+   )
+   .style.display="none";
 
-   document.getElementById(
+
+   document
+   .getElementById(
     "adminScreen"
-   ).style.display="block";
+   )
+   .style.display="block";
 
   }
 
@@ -3619,10 +4458,12 @@ db.auth.onAuthStateChange(
 
 
 /* =====================================================
-   START
+ START
 ===================================================== */
 
-(async()=>{
+async function start(){
+
+ applyColors();
 
  await loadColors();
 
@@ -3630,9 +4471,54 @@ db.auth.onAuthStateChange(
 
  updateCart();
 
+ toggleSubcategoryAdmin();
+
+
+ /*
+  QR
+ */
+
+ const qr=
+ document.getElementById(
+  "bankQr"
+ );
+
+ const qrEmpty=
+ document.getElementById(
+  "qrEmpty"
+ );
+
+
+ if(BANK_QR_URL){
+
+  qr.src=
+  BANK_QR_URL;
+
+  qr.style.display=
+  "block";
+
+  qrEmpty.style.display=
+  "none";
+
+ }else{
+
+  qr.style.display=
+  "none";
+
+  qrEmpty.style.display=
+  "block";
+
+ }
+
+
+ /*
+  AUTH SESSION
+ */
 
  const {
-  data:{session}
+  data:{
+   session
+  }
  }=
  await db.auth.getSession();
 
@@ -3651,7 +4537,10 @@ db.auth.onAuthStateChange(
 
  }
 
-})();
+}
+
+
+start();
 
 </script>
 
